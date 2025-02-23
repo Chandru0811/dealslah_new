@@ -2205,7 +2205,7 @@ function updateCartUI(cartItems) {
                     ${cartItems.product.name}
                 </p>
                 <p class="px-1 text_size" style="color: #EF4444">
-                    ₹ ${cartItems.discount.toLocaleString()}
+                    $${cartItems.discount.toLocaleString()}
                 </p>
             </div>
         </div>
@@ -2349,13 +2349,13 @@ $(document).ready(function () {
 
                 if (response.updatedCart) {
                     $(".subtotal").text(
-                        "₹" + response.updatedCart.subtotal.toLocaleString()
+                        `$${response.updatedCart.subtotal.toFixed(2)}`
                     );
                     $(".discount").text(
-                        "₹" + response.updatedCart.discount.toLocaleString()
+                        `$${response.updatedCart.discount.toFixed(2)}`
                     );
                     $(".total").text(
-                        "₹" + response.updatedCart.grand_total.toLocaleString()
+                        `$${response.updatedCart.grand_total.toFixed(2)}`
                     );
                     $(".quantity-value").text(response.updatedCart.quantity);
                 }
@@ -2464,18 +2464,10 @@ $(document).ready(function () {
                                     }</p>
                                     <div class="ms-0">
                                         <span style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
-                                            ₹${Math.round(
-                                                response.deal.original_price
-                                            ).toLocaleString("en-IN", {
-                                                maximumFractionDigits: 0,
-                                            })}
+                                            $${response.deal.original_price}
                                         </span>
                                         <span class="ms-1" style="font-size:18px;font-weight:500;color:#EF4444">
-                                             ₹${Math.round(
-                                                 response.deal.discounted_price
-                                             ).toLocaleString("en-IN", {
-                                                 maximumFractionDigits: 0,
-                                             })}
+                                            $${response.deal.discounted_price}
                                         </span>
                                         <span class="ms-1" style="font-size:18px;font-weight:500; color:#28A745">
                                             - ${discountPercentage}% Off
@@ -2573,13 +2565,13 @@ $(document).ready(function () {
 
                 if (response.updatedCart) {
                     $(".subtotal").text(
-                        "₹" + response.updatedCart.subtotal.toLocaleString()
+                        `$${response.updatedCart.subtotal.toFixed(2)}`
                     );
                     $(".discount").text(
-                        "₹" + response.updatedCart.discount.toLocaleString()
+                        `$${response.updatedCart.discount.toFixed(2)}`
                     );
                     $(".total").text(
-                        "₹" + response.updatedCart.grand_total.toLocaleString()
+                        `$${response.updatedCart.grand_total.toFixed(2)}`
                     );
                     $(".quantity-value").text(response.updatedCart.quantity);
                 }
@@ -2662,13 +2654,13 @@ $(document).ready(function () {
 
                 if (response.updatedCart) {
                     $(".subtotal").text(
-                        "₹" + response.updatedCart.subtotal.toLocaleString()
+                        `$${response.updatedCart.subtotal.toFixed(2)}`
                     );
                     $(".discount").text(
-                        "₹" + response.updatedCart.discount.toLocaleString()
+                        `$${response.updatedCart.discount.toFixed(2)}`
                     );
                     $(".total").text(
-                        "₹" + response.updatedCart.grand_total.toLocaleString()
+                        `$${response.updatedCart.grand_total.toFixed(2)}`
                     );
                     $(".quantity-value").text(response.updatedCart.quantity);
                 }
@@ -2753,9 +2745,7 @@ $(document).ready(function () {
                 </span>
             </div>
             <span class="ms-1" style="font-size:18px;font-weight:500;color:#EF4444">
-                ₹${Math.round(
-                    response.item.product.discounted_price
-                ).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                $${response.item.product.discounted_price}
             </span>
             `
                     : `
@@ -2772,14 +2762,10 @@ $(document).ready(function () {
             </div>
             <div class="ms-0">
                 <span style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
-                    ₹${Math.round(
-                        response.item.product.original_price
-                    ).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                    $${response.item.product.original_price}
                 </span>
                 <span class="ms-1" style="font-size:18px;font-weight:500;color:#EF4444">
-                    ₹${Math.round(
-                        response.item.product.discounted_price
-                    ).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                    $${response.item.product.discounted_price}
                 </span>
                 <span class="ms-1" style="font-size:18px;font-weight:500;color:#28A745">
                     - ${discountPercentage}% Off
@@ -2927,14 +2913,6 @@ $(document).ready(function () {
                             data: JSON.stringify(data),
                             success: function (data) {
                                 if (data.status === "success") {
-                                    const indianCurrencyFormatter =
-                                        new Intl.NumberFormat("en-IN", {
-                                            style: "currency",
-                                            currency: "INR",
-                                            minimumFractionDigits: 0,
-                                            maximumFractionDigits: 0,
-                                        });
-
                                     $(".quantity-value").each(function () {
                                         $(this).text(data.updatedCart.quantity);
                                     });
