@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DealsMachi | Reset Password</title>
-    <link rel="canonical" href="https://dealsmachi.com/reset-password" />
-    <meta name="description" content="DealsMachi Shop Smart, Save Big!" />
+    <title>Dealslah | Reset Password</title>
+    <link rel="canonical" href="https://dealslah.com/reset-password" />
+    <meta name="description" content="Dealslah Shop Smart, Save Big!" />
     <link rel="icon" href="{{ asset('assets/images/home/favicon.ico') }}" />
 
     <!-- Vendor CSS Files -->
@@ -131,7 +131,7 @@
 
                         <div class="mb-3 mt-5 text-center">
                             <button type="submit" class="btn btn-light w-100"
-                                style="background-color: #ff0060; color: #fff;" id="submitButton">
+                                style="background-color: #ef4444; color: #fff;" id="submitButton">
                                 Reset Password
                             </button>
                         </div>

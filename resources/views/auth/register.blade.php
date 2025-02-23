@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deaslmachi | Register </title>
-    <link rel="canonical" href="https://dealsmachi.com/register" />
-    <meta name="description" content="DealsMachi Shop Smart, Save Big!" />
+    <title>Dealslah | Register </title>
+    <link rel="canonical" href="https://dealslah.com/register" />
+    <meta name="description" content="Dealslah Shop Smart, Save Big!" />
     <link rel="icon" href="{{ asset('assets/images/home/favicon.ico') }}" />
 
     <!-- Vendor CSS Files -->
@@ -80,7 +80,7 @@
             <div class="col-md-6 col-12 d-flex flex-column justify-content-center align-items-center pt-5 bg_login login-text-container text-center"
                 style="background: #ffcbde">
                 <div class="px-5 pt-5">
-                    <h5 class="py-4" style="color: #CC004D">Register to your account</h5>
+                    <h5 class="py-4" style="color: #ec2020">Register to your account</h5>
                     <p class="login-text">You're just one step away from securing your awesome purchase!
                         Sign up or log in now to complete your order effortlessly</p>
                 </div>
@@ -138,7 +138,7 @@
 
                         <div class="mb-3">
                             <button type="submit" class="btn btn-light login-btn w-100"
-                                style="color: #fff; background:#ff0060">Register</button>
+                                style="color: #fff; background:#ef4444">Register</button>
                         </div>
                         <div class="d-flex justify-content-center align-items-center mb-3 line-divider-container">
                             <hr class="line-divider" />
@@ -167,7 +167,7 @@
                         </div>
                         <div class="text-center">
                             <p class="mb-4 mt-1" style="font-size:12px;">Already have an account? &nbsp; <a
-                                    href="{{ url('login') }}" style="color: #FF0060;font-size:12px;">Login</a></p>
+                                    href="{{ url('login') }}" style="color: #ef4444;font-size:12px;">Login</a></p>
                         </div>
                     </form>
                 </div>

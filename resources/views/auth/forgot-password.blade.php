@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DealsMachi | Forgot Password </title>
-    <link rel="canonical" href="https://dealsmachi.com/forgot-password" />
-    <meta name="description" content="DealsMachi Shop Smart, Save Big!" />
+    <title>Dealslah | Forgot Password </title>
+    <link rel="canonical" href="https://dealslah.com/forgot-password" />
+    <meta name="description" content="Dealslah Shop Smart, Save Big!" />
     <link rel="icon" href="{{ asset('assets/images/home/favicon.ico') }}" />
 
     <!-- Vendor CSS Files -->
@@ -101,11 +101,11 @@
                         </div>
                         <div class="mb-3 text-center">
                             <button type="submit" class="btn login-btn w-100"
-                                style="color: #fff; background:#FF0060;">Reset Password</button>
+                                style="color: #fff; background:#ef4444;">Reset Password</button>
                         </div>
                         <div class="text-end">
                             <p style="font-size: 12px">Go Back to <a href="{{ url('login') }}"
-                                    style="color: #FF0060;font-size:12px">Login</a></p>
+                                    style="color: #ef4444;font-size:12px">Login</a></p>
                         </div>
                     </form>
 
