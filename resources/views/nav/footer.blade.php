@@ -7,26 +7,36 @@
                     <div class="col-md-3 text-md-start text-center mb-4 mb-md-0">
                         <div class="dealsmachi-text">
                             <p class="text-light fw-medium" style="font-size: 1.5rem">
-                                DEALSMACHI !
+                                DEALSLAH !
                             </p>
                         </div>
                         <div class="social-icons">
-                            <a href="https://www.facebook.com/profile.php?id=61566743978973"
-                                class="text-decoration-none me-2" target='_blank'><i class="fab fa-facebook"
-                                    style="font-size: 15px"></i></a>
-                            <a href="https://www.instagram.com/dealsmachi/" target='_blank'
-                                class="text-decoration-none me-2"><i class="fab fa-instagram"
-                                    style="font-size: 15px"></i></a>
-                            <a href="https://www.linkedin.com/in/deals-machi-2b4944331" target='_blank'
-                                class="text-decoration-none me-2"><i class="fab fa-linkedin"
-                                    style="font-size: 15px"></i></a>
-                            <a href="https://www.youtube.com/channel/UCAyH2wQ2srJE8WqvII8JNrQ" target='_blank'
-                                class="text-decoration-none me-2"><i class="fab fa-youtube"
-                                    style="font-size: 15px"></i></a>
-                            <a href="https://chat.whatsapp.com/Ef23qGMU1d6EXYpRvomaLx" class="text-decoration-none me-2"
-                                target='_blank'><i class="fab fa-whatsapp" style="font-size: 15px"></i></a>
-                            <a href="https://x.com/dealsmachi_in" target='_blank' class="text-decoration-none"><i
-                                    class="fab fa-x-twitter" style="font-size: 15px"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=61567112492283" target="_blank"
+                                class="text-decoration-none me-2">
+                                <i class="fab fa-facebook" style="font-size: 15px"></i>
+                            </a>
+                            <a href="https://www.instagram.com/dealslah/" target="_blank"
+                                class="text-decoration-none me-2">
+                                <i class="fab fa-instagram" style="font-size: 15px"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/dealslah-singapore-a5b95632a/" target="_blank"
+                                class="text-decoration-none me-2">
+                                <i class="fab fa-linkedin" style="font-size: 15px"></i>
+                            </a>
+                            <a href="https://www.youtube.com/@DEALSLAH" target="_blank"
+                                class="text-decoration-none me-2">
+                                <i class="fab fa-youtube" style="font-size: 15px"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@ecsaio" target="_blank" class="text-decoration-none me-2">
+                                <i class="fab fa-tiktok" style="font-size: 15px"></i>
+                            </a>
+                            <a href="https://chat.whatsapp.com/KR2syYEj3Eo3JwsClx5Zws" target="_blank"
+                                class="text-decoration-none me-2">
+                                <i class="fab fa-whatsapp" style="font-size: 15px"></i>
+                            </a>
+                            <a href="https://x.com/dealslahasia" target="_blank" class="text-decoration-none">
+                                <i class="fab fa-x-twitter" style="font-size: 15px"></i>
+                            </a>
                         </div>
                     </div>
                     <!-- Footer Columns -->
@@ -49,7 +59,7 @@
                                 <a href="{{ url('/contactus') }}" class="text-light text-decoration-none">Contact Us</a>
                             </li>
                             <li>
-                                <a href="https://dealsmachi.com/dealsmachiVendor/"
+                                <a href="https://dealslah.com/dealslahVendor/"
                                     class="text-light text-decoration-none">Post your deal</a>
                             </li>
                         </ul>
@@ -128,7 +138,8 @@
                 <p class="d-flex justify-content-center termsfooter px-1" style="font-weight: 300">
                     <a href="{{ url('/terms_conditions') }}" class="text-light text-decoration-none me-1">Terms and
                         Conditions | </a>
-                    <a href="{{ url('/privacyPolicy') }}" class="text-light text-decoration-none me-1">Privacy Policy |
+                    <a href="{{ url('/privacyPolicy') }}" class="text-light text-decoration-none me-1">Privacy Policy
+                        |
                     </a>
                     2024 - 2025 &copy; Copyright
                     Cloud ECS Infotech Pvt. Ltd. All Rights Reserved.

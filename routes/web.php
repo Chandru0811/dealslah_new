@@ -24,7 +24,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('hotpick/{slug}', [HomeController::class, 'dealcategorybasedproducts'])->name('deals.categorybased');
 Route::get('categories/{slug}', [HomeController::class, 'subcategorybasedproducts'])->name('deals.subcategorybased');
 Route::get('deal/{id}', [HomeController::class, 'productdescription']);
-Route::get('favourites', [BookmarkController::class, 'index'])->name('bookmarks.index');
+Route::get('bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.index');
 Route::post('bookmark/{deal_id}/add', [BookmarkController::class, 'add'])->name('bookmarks.add');
 Route::delete('bookmark/{deal_id}/remove', [BookmarkController::class, 'remove'])->name('bookmarks.remove');
 Route::get('totalbookmark', [BookmarkController::class, 'totalItems'])->name('bookmarks.totalItems');

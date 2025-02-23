@@ -14,7 +14,7 @@
                 </a>
                 <div class="d-flex align-items-center mb-1">
                     {{-- <span class="navbar-text d-xl-none align-items-center justify-content-end">
-                        <a href="https://dealsmachi.com/dealsmachiVendor/" style="text-decoration: none">
+                        <a href=""https://dealslah.com/dealslahVendor/" style="text-decoration: none">
                             <button
                                 class="btn btn-button userlogin-button py-1 px-2 d-flex justify-content-center align-items-center text-nowrap"
                                 type="submit">
@@ -24,10 +24,10 @@
                     </span> --}}
                     &nbsp;&nbsp;&nbsp;
                     {{-- <button class="btn btn-button " style="border: none; position: relative;" data-bs-toggle="tooltip"
-                        data-bs-placement="bottom" title="Favourites">
-                        <a href="{{ url('/favourites') }}" class="text-decoration-none d-xl-none"
+                        data-bs-placement="bottom" title="Bookmarks">
+                        <a href="{{ url('/bookmarks') }}" class="text-decoration-none d-xl-none"
                             style="text-decoration: none;">
-                            <i class="fa-regular fa-heart fa-xl icon_size" style="color: #ff0060;"></i>
+                            <i class="fa-regular fa-bookmark fa-xl icon_size" style="color: #ef4444;"></i>
                             <span class="totalItemsCount total-count translate-middle d-xl-none"
                                 style="position: absolute;top: 16px;right:5px">
                             </span>
@@ -37,7 +37,7 @@
                     <button class="btn btn-button ps-0" style="border: none; position: relative;">
                         <a href="{{ route('cart.index') }}" class="text-decoration-none d-xl-none"
                             style="text-decoration: none;">
-                            <i class="fa-regular fa-cart-shopping fa-xl icon_size " style="color: #ff0060;"></i>
+                            <i class="fa-regular fa-cart-shopping fa-xl icon_size " style="color: #ef4444;"></i>
                         </a>
                         <div class="dropdown-menu dropdown_cart custom-dropdown shadow-lg border-0"
                             style="left: 0%; top:35px; transform: translate(-60%, 0);">
@@ -109,8 +109,8 @@
                         </form>
                     </div>
                     <button class="btn btn-button" style="border: none; position: relative;" data-bs-toggle="tooltip"
-                        data-bs-placement="bottom" title="Favourites" id="favbutton">
-                        <i class="fa-regular fa-heart fa-xl icon_size" style="color: #ff0060;"></i>
+                        data-bs-placement="bottom" title="Bookmark" id="favbutton">
+                        <i class="fa-regular fa-bookmark fa-xl icon_size" style="color: #ef4444;"></i>
                         <span class="totalItemsCount total-count translate-middle d-none d-xl-block"
                             style="position: absolute;top: 16px;">
                         </span>
@@ -118,7 +118,7 @@
                     <div class="dropdown d-none d-xl-inline">
                         <button class="btn btn-button ps-0" style="border: none; position: relative;" id="cartButton"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-regular fa-cart-shopping fa-xl icon_size cart-screen" style="color: #ff0060;"></i>
+                            <i class="fa-regular fa-cart-shopping fa-xl icon_size cart-screen" style="color: #ef4444;"></i>
                             <span id="cart-count" class="total-counts translate-middle d-xl-block"
                                 style="position: absolute; top: 16px; right: 5px;">
                             </span>
@@ -133,7 +133,7 @@
                         <a href="#" class="text-decoration-none" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="">
-                                <i class="fa-regular fa-circle-user fa-xl icon_size" style="color: #ff0060;"></i>
+                                <i class="fa-regular fa-circle-user fa-xl icon_size" style="color: #ef4444;"></i>
                             </span>
                         </a>
                         <div class="dropdown-menu user-dropdown_cart custom-dropdown shadow-lg border-0"
@@ -175,7 +175,7 @@
                     @endauth
                     <span class="navbar-text align-items-center justify-content-end"
                         style="margin-left: 10px">
-                        <a href="https://dealsmachi.com/dealsmachiVendor/" style="text-decoration: none">
+                        <a href=""https://dealslah.com/dealslahVendor/" style="text-decoration: none">
                             <button
                                 class="btn btn-button mt-2 login-button userlogin-button-large py-2 px-4 d-flex justify-content-center align-items-center text-nowrap"
                                 type="submit">

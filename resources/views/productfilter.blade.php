@@ -1,14 +1,15 @@
 @extends('layouts.master')
 @php
-   function formatIndianCurrency($num) {
-    $num = intval($num);
-    $lastThree = substr($num, -3);
-    $rest = substr($num, 0, -3);
-    if ($rest != '') {
-        $rest = preg_replace("/\B(?=(\d{2})+(?!\d))/", ",", $rest) . ',';
+    function formatIndianCurrency($num)
+    {
+        $num = intval($num);
+        $lastThree = substr($num, -3);
+        $rest = substr($num, 0, -3);
+        if ($rest != '') {
+            $rest = preg_replace('/\B(?=(\d{2})+(?!\d))/', ',', $rest) . ',';
+        }
+        return "$" . $rest . $lastThree;
     }
-    return "₹" . $rest . $lastThree;
-}
 
 @endphp
 
@@ -88,7 +89,7 @@
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <div class="card border-0 h-100">
-                            <a href="https://www.facebook.com/profile.php?id=61566743978973" target="_blank"
+                            <a href="https://www.facebook.com/profile.php?id=61567112492283" target="_blank"
                                 style="text-decoration: none;">
                                 <div class="qr-code">
                                     <img src="{{ asset('assets/images/home/facebook_qr_code.webp') }}" alt="Facebook QR"
@@ -105,7 +106,7 @@
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <div class="card border-0 h-100">
-                            <a href="https://www.instagram.com/dealsmachi/" target="_blank" style="text-decoration: none;">
+                            <a href="https://www.instagram.com/dealslah/" target="_blank" style="text-decoration: none;">
                                 <div class="qr-code">
                                     <img src="{{ asset('assets/images/home/instagram_qr_code.webp') }}" alt="Facebook QR"
                                         class="img-fluid">
@@ -121,7 +122,7 @@
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <div class="card border-0 h-100">
-                            <a href="https://www.youtube.com/channel/UCAyH2wQ2srJE8WqvII8JNrQ" target="_blank"
+                            <a href="https://www.youtube.com/@DEALSLAH" target="_blank"
                                 style="text-decoration: none;">
                                 <div class="qr-code">
                                     <img src="{{ asset('assets/images/home/youtube_qr_code.webp') }}" alt="Facebook QR"
@@ -138,7 +139,7 @@
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <div class="card border-0 h-100">
-                            <a href="https://chat.whatsapp.com/Ef23qGMU1d6EXYpRvomaLx" target="_blank"
+                            <a href="https://chat.whatsapp.com/KR2syYEj3Eo3JwsClx5Zws" target="_blank"
                                 style="text-decoration: none;">
                                 <div class="qr-code">
                                     <img src="{{ asset('assets/images/home/whatsapp_qr_code.webp') }}" alt="Facebook QR"
@@ -155,7 +156,7 @@
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <div class="card border-0 h-100">
-                            <a href="https://t.me/+UTD7rFen3K4zNDFl" target="_blank" style="text-decoration: none;">
+                            <a href="https://t.me/dealslah" target="_blank" style="text-decoration: none;">
                                 <div class="qr-code">
                                     <img src="{{ asset('assets/images/home/telegram_qr_code.webp') }}" alt="Facebook QR"
                                         class="img-fluid">
@@ -593,9 +594,9 @@
                                                                             style="border: none; background: none;">
                                                                             <p style="height:fit-content;cursor:pointer"
                                                                                 class="p-1 px-2" data-bs-toggle="tooltip"
-                                                                                data-bs-placement="top" title="Favourite">
-                                                                                <i class="fa-solid fa-heart bookmark-icon"
-                                                                                    style="color: #ff0060;"></i>
+                                                                                data-bs-placement="top" title="Bookmark">
+                                                                                <i class="fa-regular fa-bookmark fa-xl icon_size"
+                                                                                    style="color: #ef4444;"></i>
                                                                             </p>
                                                                         </button>
                                                                     @else
@@ -605,9 +606,9 @@
                                                                             style="border: none; background: none;">
                                                                             <p style="height:fit-content;cursor:pointer"
                                                                                 class="p-1 px-2" data-bs-toggle="tooltip"
-                                                                                data-bs-placement="top" title="Favourite">
-                                                                                <i class="fa-regular fa-heart bookmark-icon"
-                                                                                    style="color: #ff0060;"></i>
+                                                                                data-bs-placement="top" title="Bookmark">
+                                                                                <i class="fa-regular fa-bookmark fa-xl icon_size"
+                                                                                    style="color: #ef4444;"></i>
                                                                             </p>
                                                                         </button>
                                                                     @endif
@@ -644,7 +645,7 @@
                                                         <div>
                                                             <div class="card-divider"></div>
                                                             <p class="ps-3 fw-medium d-flex align-items-center justify-content-between"
-                                                                style="color: #ff0060">
+                                                                style="color: #ef4444">
                                                                 <span>{{ formatIndianCurrency($product->discounted_price) }}</span>
                                                                 @if (!empty($product->coupon_code))
                                                                     <span id="mySpan" class="mx-3 px-2 couponBadge"
@@ -674,7 +675,7 @@
                                                                         <span style="color: #22cb00ab !important">Standard
                                                                             Rates</span>
                                                                     @else
-                                                                        <span><s>{{ formatIndianCurrency($product->original_price) }}</s>
+                                                                        <span><s>{{ number_format($product->original_price, 2) }}</s>
                                                                         </span>
                                                                     @endif
                                                                 </div>
@@ -688,9 +689,9 @@
                                                             </div>
                                                             <div class="card-divider"></div>
                                                             <p class="ps-3 fw-medium"
-                                                                style="color: #ff0060; font-weight: 400 !important;">
+                                                                style="color: #ef4444; font-weight: 400 !important;">
                                                                 <i
-                                                                    class="fa-solid fa-location-dot"></i>&nbsp;{{ $product->shop->city }}
+                                                                    class="fa-solid fa-location-dot"></i>&nbsp;{{ $product->shop->country }}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -703,7 +704,7 @@
                                             .pagination .page-link {
                                                 background-color: white;
                                                 color: lightcoral;
-                                                border: 1px solid #ff0060;
+                                                border: 1px solid #ef4444;
                                             }
 
                                             .pagination .page-link:hover {
@@ -712,9 +713,9 @@
                                             }
 
                                             .pagination .active .page-link {
-                                                background-color: #ff0060;
+                                                background-color: #ef4444;
                                                 color: white;
-                                                border-color: #ff0060;
+                                                border-color: #ef4444;
                                             }
                                         </style>
 
@@ -1121,9 +1122,9 @@
                                                                                         class="p-1 px-2"
                                                                                         data-bs-toggle="tooltip"
                                                                                         data-bs-placement="top"
-                                                                                        title="Favourite">
-                                                                                        <i class="fa-solid fa-heart bookmark-icon"
-                                                                                            style="color: #ff0060;"></i>
+                                                                                        title="Bookmark">
+                                                                                        <i class="fa-regular fa-bookmark fa-xl icon_size"
+                                                                                            style="color: #ef4444;"></i>
                                                                                     </p>
                                                                                 </button>
                                                                             @else
@@ -1135,9 +1136,9 @@
                                                                                         class="p-1 px-2"
                                                                                         data-bs-toggle="tooltip"
                                                                                         data-bs-placement="top"
-                                                                                        title="Favourite">
-                                                                                        <i class="fa-regular fa-heart bookmark-icon"
-                                                                                            style="color: #ff0060;"></i>
+                                                                                        title="Bookmark">
+                                                                                        <i class="fa-regular fa-bookmark fa-xl icon_size"
+                                                                                            style="color: #ef4444;"></i>
                                                                                     </p>
                                                                                 </button>
                                                                             @endif
@@ -1179,7 +1180,7 @@
                                                                 <div>
                                                                     <div class="card-divider"></div>
                                                                     <p class="ps-3 fw-medium d-flex align-items-center justify-content-between"
-                                                                        style="color: #ff0060">
+                                                                        style="color: #ef4444">
                                                                         <span>{{ formatIndianCurrency($product->discounted_price) }}</span>
                                                                         @if (!empty($product->coupon_code))
                                                                             <span id="mySpan"
@@ -1212,7 +1213,7 @@
                                                                                     style="color: #22cb00ab !important">Standard
                                                                                     Rates</span>
                                                                             @else
-                                                                                <span><s>{{ formatIndianCurrency($product->original_price) }}</s>
+                                                                                <span><s>{{ number_format($product->original_price, 2) }}</s>
                                                                                 </span>
                                                                             @endif
                                                                         </div>
@@ -1225,9 +1226,9 @@
                                                                     </div>
                                                                     <div class="card-divider"></div>
                                                                     <p class="ps-3 fw-medium"
-                                                                        style="color: #ff0060; font-weight: 400 !important;">
+                                                                        style="color: #ef4444; font-weight: 400 !important;">
                                                                         <i
-                                                                            class="fa-solid fa-location-dot"></i>&nbsp;{{ $product->shop->city }}
+                                                                            class="fa-solid fa-location-dot"></i>&nbsp;{{ $product->shop->country }}
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -1240,7 +1241,7 @@
                                                     .pagination .page-link {
                                                         background-color: white;
                                                         color: lightcoral;
-                                                        border: 1px solid #ff0060;
+                                                        border: 1px solid #ef4444;
                                                     }
 
                                                     .pagination .page-link:hover {
@@ -1249,9 +1250,9 @@
                                                     }
 
                                                     .pagination .active .page-link {
-                                                        background-color: #ff0060;
+                                                        background-color: #ef4444;
                                                         color: white;
-                                                        border-color: #ff0060;
+                                                        border-color: #ef4444;
                                                     }
                                                 </style>
 

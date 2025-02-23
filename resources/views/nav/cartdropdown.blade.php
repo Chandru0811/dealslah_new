@@ -17,7 +17,7 @@
                 <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
                     {{ \Illuminate\Support\Str::limit($item->product->name, 20) }}
                 </p>
-                <p class="px-1 text_size" style="color: #ff0060">
+                <p class="px-1 text_size" style="color: #ef4444">
                     ₹ {{ number_format($item->discount, 0) }}
                 </p>
             </div>

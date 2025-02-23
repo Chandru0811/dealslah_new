@@ -70,9 +70,9 @@
                 <!-- Display "Your Bookmark" heading only if there are bookmarks -->
                 @if ($bookmarks->total() > 0)
                     <span class="d-flex">
-                        <h5 class="pt-0 pb-2">Your Favourites</h5>
+                        <h5 class="pt-0 pb-2">Your Bookmarks</h5>
                         &nbsp;&nbsp;
-                        <p class="d-flex" style="color: #ff0060;" id="bookmarkCountDisplay">
+                        <p class="d-flex" style="color: #ef4444;" id="bookmarkCountDisplay">
                             (<span class="totalItemsCount">{{ $bookmarks->total() }}</span>)
                         </p>
                     </span>
@@ -107,13 +107,13 @@
                                                 <div class="mt-3 d-flex align-items-center justify-content-between">
                                                     <h5 class="card-title ps-3">{{ $deal->name }}</h5>
                                                     <span class="badge mx-3 p-0 trending-bookmark-badge"
-                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Favourite">
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Bookmark">
                                                         <button type="button" data-deal-id="{{ $deal->id }}"
                                                             class="bookmark-button" style="border: none; background: none;">
                                                             @if (count($deal->bookmark) === 0)
-                                                                <i class="fa-regular fa-heart" style="color: #ff0060;"></i>
+                                                                <i class="fa-regular fa-heart" style="color: #ef4444;"></i>
                                                             @else
-                                                                <i class="fa-solid fa-heart" style="color: #ff0060;"></i>
+                                                                <i class="fa-solid fa-heart" style="color: #ef4444;"></i>
                                                             @endif
                                                         </button>
                                                     </span>
@@ -139,7 +139,7 @@
                                             <div>
                                                 <div class="card-divider"></div>
                                                 <p class="ps-3 fw-medium d-flex align-items-center justify-content-between"
-                                                    style="color: #ff0060">
+                                                    style="color: #ef4444">
                                                     <span>{{ formatIndianCurrency($deal->discounted_price) }}</span>
                                                     @if (!empty($deal->coupon_code))
                                                         <span id="mySpan" class="mx-3 px-2 couponBadge"
@@ -179,8 +179,8 @@
                                                 </div>
                                                 <div class="card-divider"></div>
                                                 <p class="ps-3 fw-medium"
-                                                    style="color: #ff0060; font-weight: 400 !important;">
-                                                    <i class="fa-solid fa-location-dot"></i>&nbsp;{{ $deal->shop->city }}
+                                                    style="color: #ef4444; font-weight: 400 !important;">
+                                                    <i class="fa-solid fa-location-dot"></i>&nbsp;{{ $deal->shop->country }}
                                                 </p>
                                             </div>
                                         </div>
@@ -194,9 +194,9 @@
                 <!-- Empty bookmark section -->
                 <div class="col-12 text-center d-flex flex-column align-items-center justify-content-center"
                     style="min-height: 60vh">
-                    <img src="{{ asset('assets/images/home/empty_bookmark.webp') }}" alt="Empty Favourite"
+                    <img src="{{ asset('assets/images/home/empty_bookmark.webp') }}" alt="Empty Bookmark"
                         class="img-fluid">
-                    <h2 class="mt-5 mb-3" style="color: #ff0060">Your favourites is waiting to be filled with treasures!
+                    <h2 class="mt-5 mb-3" style="color: #ef4444">Your Bookmarks is waiting to be filled with treasures!
                     </h2>
                 </div>
             @endif
@@ -286,13 +286,13 @@
                             if (response.total_items == 0) {
                                 let emptyBookmarkHtml = `
                                 <div class="col-12 text-center d-flex flex-column align-items-center justify-content-center" style="min-height: 60vh">
-                                    <img src="{{ asset('assets/images/home/empty_bookmark.webp') }}" alt="Empty Favourite" class="img-fluid">
-                                    <h2 class="mt-5" style="color: #ff0060">Your bookmark is waiting to be filled with treasures!</h2>
+                                    <img src="{{ asset('assets/images/home/empty_bookmark.webp') }}" alt="Empty Bookmark" class="img-fluid">
+                                    <h2 class="mt-5" style="color: #ef4444">Your bookmark is waiting to be filled with treasures!</h2>
                                 </div>
                             `;
                                 $('.row.pb-4').html(emptyBookmarkHtml);
                                 $("#bookmarkCountDisplay").remove();
-                                $("h5:contains('Your Favourite')").parent()
+                                $("h5:contains('Your Bookmark')").parent()
                                     .remove(); // Remove heading if no bookmarks
                             }
                         },
