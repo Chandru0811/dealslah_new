@@ -13,7 +13,7 @@
     ];
 @endphp
 
-<div class="container pt-3 categorySection" style="margin-top: 100px">
+<div class="container pt-3 categorySection">
     <div class="row mx-lg-5 justify-content-center">
         @foreach ($categoryGroups as $index => $categoryGroup)
             @php

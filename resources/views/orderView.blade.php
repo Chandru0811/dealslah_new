@@ -93,7 +93,7 @@
                                     Order Item ID: <span>{{ $order->items[0]->item_number ?? 'N/A' }}</span>
                                 </h4>
                             </div>
-                            <div class="d-flex gap-2">
+                            <div class="d-flex gap-2 mt-2">
                                 <p class="text-nowrap">
                                     <span class="badge_warning me-2">
                                         {{ $order->payment_status === '1'

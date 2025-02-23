@@ -39,7 +39,7 @@
                                         {{-- <p class="text-nowrap mb-1">Order Id: {{ $order->order_number ?? 'N/A' }},</p> --}}
                                         <p class="text-nowrap mb-1">Order Id : {{ $item->item_number ?? 'N/A' }}</p>
                                     </div>
-                                    <div class="batch_code">
+                                    <div class="batch_code mt-1">
                                         <p class="text-nowrap mb-1"><span
                                                 class="badge_payment">{{ $order->status === '1'
                                                     ? 'Created'

@@ -49,21 +49,7 @@ class CartController extends Controller
 
         $user_id = Auth::check() ? Auth::user()->id : null;
 
-        if (!$user_id) {
-            $savedItems = SavedItem::where('ip_address', request()->ip())
-                ->whereHas('deal', function ($query) {
-                    $query->where('active', 1)->whereNull('deleted_at');
-                })
-                ->with('deal.productMedia:id,resize_path,order,type,imageable_id', 'deal.shop')
-                ->get();
-        } else {
-            $savedItems = SavedItem::where('user_id', $user_id)
-                ->whereHas('deal', function ($query) {
-                    $query->where('active', 1)->whereNull('deleted_at');
-                })
-                ->with('deal.productMedia:id,resize_path,order,type,imageable_id', 'deal.shop')
-                ->get();
-        }
+       
 
         return view('cart', compact('cart', 'bookmarkedProducts', 'savedItems'));
     }
@@ -300,14 +286,21 @@ class CartController extends Controller
 
     public function saveForLater(Request $request)
     {
+        $cartnumber = $request->input('cartnumber');
+        if($cartnumber == null)
+        {
+            $cartnumber = session()->get('cartnumber');
+        }
         $customer_id = Auth::check() ? Auth::user()->id : null;
 
-        $cart = Cart::where('ip_address', request()->ip());
+        $cart = Cart::where('cart_number', $cartnumber);
 
         if (Auth::guard()->check()) {
             $cart = $cart->orWhere('customer_id', Auth::guard()->user()->id);
         }
         $cart = $cart->first();
+        
+       
 
         $cartItem = null;
 
@@ -323,6 +316,7 @@ class CartController extends Controller
                 'user_id' => $customer_id,
                 'ip_address' => $request->ip(),
                 'deal_id' => $cartItem->product_id,
+                'cart_number' => $cartnumber,
             ]);
 
             $deal = Product::with(['productMedia:id,resize_path,order,type,imageable_id', 'shop'])->find($cartItem->product_id);
@@ -363,6 +357,11 @@ class CartController extends Controller
 
     public function moveToCart(Request $request)
     {
+        $cartnumber = $request->input('cartnumber');
+        if($cartnumber == null)
+        {
+            $cartnumber = session()->get('cartnumber');
+        }
         $product_id = $request->input('product_id');
 
         $product = Product::where('id', $product_id)->first();
@@ -376,11 +375,11 @@ class CartController extends Controller
         $user_id = Auth::check() ? Auth::user()->id : null;
 
         if (!$user_id) {
-            $savedItem = SavedItem::where('ip_address', $request->ip())
+            $savedItem = SavedItem::where('cart_number', $cartnumber)
                 ->where('deal_id', $request->product_id)
                 ->first();
 
-            $cart = Cart::whereNull('customer_id')->where('ip_address', $request->ip())->first();
+            $cart = Cart::whereNull('customer_id')->where('cart_number', $cartnumber)->first();
         } else {
             $savedItem = SavedItem::where('user_id', $user_id)
                 ->where('deal_id', $request->product_id)
@@ -396,6 +395,7 @@ class CartController extends Controller
             $cart = new Cart();
             $cart->customer_id  = Auth::user()->id;
             $cart->ip_address = $request->ip();
+            $cart->cart_number = $cartnumber;
             $cart->item_count = 1;
             $cart->quantity = $qtt;
             $cart->total = $product->original_price * $qtt;
@@ -539,7 +539,7 @@ class CartController extends Controller
 
         $user = Auth::user();
         $carts = Cart::where('id', $cart_id)->with(['items.product'])->first();
-
+        
         if (!$carts) {
             return redirect()->route('cart')->with('error', 'Cart not found.');
         }

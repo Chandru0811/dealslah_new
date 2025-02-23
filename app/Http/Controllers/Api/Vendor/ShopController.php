@@ -41,6 +41,7 @@ class ShopController extends Controller
         if (!$shop) {
             return $this->error('Shop Not Found.', ['error' => 'Shop Not Found']);
         }
+        // dd($request->all());
 
         $validator = Validator::make($request->all(), [
             'name' => 'sometimes|required|string|unique:shops,name,' . $id,
@@ -83,6 +84,7 @@ class ShopController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 422);
         }
+        
 
         $updateData = array_filter($request->only([
             'name',

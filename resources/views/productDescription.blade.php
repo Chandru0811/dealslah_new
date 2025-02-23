@@ -65,119 +65,7 @@
             </div>
         </div>
     @endif
-    {{-- @php
-        $reviewData = [
-            [
-                'productId' => '1',
-                'reviews' => [
-                    [
-                        'reviewerName' => 'Sangeetha',
-                        'review' =>
-                            'Thank you Trucklah for the wonderful job. I am very much happy with your service. I got track updates regularly and everything went well!',
-                        'rating' => 4.3,
-                        'reviewDate' => '2024-09-10',
-                        'advertisement' => 'assets/images/product_view/trucklah_add.png',
-                    ],
-                    [
-                        'reviewerName' => 'Mari Muthu',
-                        'review' =>
-                            'Thank you Trucklah for your prompt service. We were in difficulty with lack of space in our apartment. Thankfully, Trucklah managed it well and were on time and budget friendly.',
-                        'rating' => 5,
-                        'reviewDate' => '2024-09-12',
-                        'advertisement' => 'assets/images/product_view/trucklah_add.png',
-                    ],
-                ],
-            ],
-            [
-                'productId' => '3',
-                'reviews' => [
-                    [
-                        'reviewerName' => 'Chandru',
-                        'review' =>
-                            'I did an item move last week with Trucklah. The service was excellent. I recommend their service, they are professional in approach.',
-                        'rating' => 4,
-                        'reviewDate' => '2024-09-15',
-                        'advertisement' => 'assets/images/product_view/trucklah_add.png',
-                    ],
-                    [
-                        'reviewerName' => 'Leela',
-                        'review' =>
-                            'Trucklah helped us to move our office last week. Their service was really appreciable. The best thing I noted is that they were professional in approach and they did really well to relocate our office. I am really thankful for their effort!',
-                        'rating' => 5,
-                        'reviewDate' => '2024-09-17',
-                        'advertisement' => 'assets/images/product_view/trucklah_add.png',
-                    ],
-                ],
-            ],
-            [
-                'productId' => '4',
-                'reviews' => [
-                    [
-                        'reviewerName' => 'Suriya',
-                        'review' =>
-                            'We were in a hurry and there was no one we trust. Thanks to Trucklah, for helping us on time like a friend. Their delivery experts handled everything without errors.',
-                        'rating' => 5,
-                        'reviewDate' => '2024-09-20',
-                        'advertisement' => 'assets/images/product_view/trucklah_add.png',
-                    ],
-                    [
-                        'reviewerName' => 'Kishore',
-                        'review' =>
-                            'As a business, we never rely much on third party services. But Trucklah changed us. We are full partnership with Trucklah now. Complete peace of mind.',
-                        'rating' => 5,
-                        'reviewDate' => '2024-09-22',
-                        'advertisement' => 'assets/images/product_view/trucklah_add.png',
-                    ],
-                ],
-            ],
-            [
-                'productId' => '6',
-                'reviews' => [
-                    [
-                        'reviewerName' => 'Manikandan',
-                        'review' =>
-                            'E-commerce is tricky. But if you have a logistics partner like Trucklah, life is more easy than we expect. Timely delivery, on schedule, all the time.',
-                        'rating' => 4,
-                        'reviewDate' => '2024-09-25',
-                        'advertisement' => 'assets/images/product_view/trucklah_add.png',
-                    ],
-                    [
-                        'reviewerName' => 'Saravanan',
-                        'review' =>
-                            'We never thought moving would be this easy. Not until we had our move scheduled with Trucklah. App booking, online payment, everything went well.',
-                        'rating' => 5,
-                        'reviewDate' => '2024-09-27',
-                        'advertisement' => 'assets/images/product_view/trucklah_add.png',
-                    ],
-                ],
-            ],
-            [
-                'productId' => '11',
-                'reviews' => [
-                    [
-                        'reviewerName' => 'Manoj',
-                        'review' =>
-                            'Space issues were too much for us. Until Trucklah cleared it for us without any headaches. For any moving work, I recommend Trucklah.',
-                        'rating' => 4,
-                        'reviewDate' => '2024-09-30',
-                        'advertisement' => 'assets/images/product_view/trucklah_add.png',
-                    ],
-                    [
-                        'reviewerName' => 'Siva',
-                        'review' =>
-                            'Moving is not easy in India. But with Trucklah by your side, nothing is impossible. Faster, reliable and safe delivery from Trucklah has changed the scene.',
-                        'rating' => 5,
-                        'reviewDate' => '2024-10-02',
-                        'advertisement' => 'assets/images/product_view/trucklah_add.png',
-                    ],
-                ],
-            ],
-        ];
-    @endphp --}}
-
-
-
-
+    
     <section class="categoryIcons container-fluid p-0">
 
         <div class="productContainer">
@@ -397,20 +285,18 @@
                                         <i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;Add to Cart
                                     </button>
 
-                                    <form action="{{ route('cart.add', ['slug' => $product->slug]) }}" method="POST">
-                                        @csrf
+                                       <form action="{{ route('cart.add', ['slug' => $product->slug]) }}" method="POST">
+                                        @csrf 
                                         @if ($product->deal_type == 1)
-                                            <input type="hidden" name="saveoption" id="saveoption" value="buy now">
-                                            <button type="submit" class="Buy_btn media_fonts_conent text-nowrap">
+                                            <button type="submit" class="Buy_btn media_fonts_conent text-nowrap buy-now-direct-btn" data-slug="{{ $product->slug }}">
                                                 <i class="fa-thin fa-bag-shopping"></i>&nbsp;&nbsp;Buy Now
                                             </button>
                                         @elseif ($product->deal_type == 2)
-                                            <input type="hidden" name="saveoption" id="saveoption" value="buy now">
-                                            <button type="submit" class="Buy_btn media_fonts_conent text-nowrap">
+                                            <button type="submit" class="Buy_btn media_fonts_conent text-nowrap buy-now-direct-btn" data-slug="{{ $product->slug }}">
                                                 <i class="fa-thin fa-bag-shopping"></i>&nbsp;&nbsp;Book Now
                                             </button>
                                         @endif
-                                    </form>
+                                    </form> 
                                 </div>
                             </div>
                         </div>

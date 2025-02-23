@@ -101,6 +101,7 @@
                     <h3 class="login-title text-center mb-4">Login/Register</h3>
                     <form id="loginForm" class="w-75" method="POST" action="{{ route('login') }}">
                         @csrf
+                        <input type="hidden" name="cartnumber" id="cart_number" value="">
                         <div class="mb-3 email-container">
                             <input type="email" class="form-control" id="email" name="email" value=""
                                 placeholder="Email" />
@@ -166,31 +167,79 @@
 
         </div>
     </section>
+    <!-- jQuery Library -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
+    
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
+    
+    <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/5b8838406b.js" crossorigin="anonymous"></script>
+    
+    <!-- ✅ Add jQuery Validation Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 
-    <!-- Custom JS -->
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
     <script>
-        document.getElementById('togglePassword').addEventListener('click', function() {
-            const passwordField = document.getElementById('password');
-            const eyeIcon = document.getElementById('eyeIconPassword');
+        $(document).ready(function() {
+            let cartnumber = localStorage.getItem('cartnumber') || null;
+            $('#cart_number').val(cartnumber);
+        
+            $('#togglePassword').on('click', function() {
+            const passwordField = $('#password');
+            const eyeIcon = $('#eyeIconPassword');
 
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text'; // Show password
-                eyeIcon.classList.remove('fa-eye');
-                eyeIcon.classList.add('fa-eye-slash');
-            } else {
-                passwordField.type = 'password'; // Hide password
-                eyeIcon.classList.remove('fa-eye-slash');
-                eyeIcon.classList.add('fa-eye');
+            if (passwordField.attr('type') === 'password') {
+                passwordField.attr('type', 'text'); // Show password
+                eyeIcon.removeClass('fa-eye').addClass('fa-eye-slash');
+            }
+            else {
+                passwordField.attr('type', 'password'); // Hide password
+                eyeIcon.removeClass('fa-eye-slash').addClass('fa-eye');
             }
         });
+        
+            // Form Validation
+                $("#loginForm").on("submit", function(e) {
+                    e.preventDefault();
+    
+                    let email = $("#email").val().trim();
+                    let password = $("#password").val().trim();
+                    let isValid = true;
+    
+                    // Validate Email
+                    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                        $("#emailError").text("Enter a valid email address.").show();
+                        isValid = false;
+                    }
+    
+                    // Validate Password
+                    if (password.length < 8) {
+                        $("#passwordError").text("Password must be at least 8 characters.").show();
+                        isValid = false;
+                    }
+    
+                    if (!isValid) return;
+    
+                    // Disable Button & Show Loading
+                    let submitButton = $("button[type='submit']");
+                    submitButton.prop("disabled", true).html(
+                        `<span class="spinner-border spinner-border-sm me-2"></span> Logging in...`
+                    );
+    
+                    this.submit();
+                });
+    
+                $("#email").on("input", function() {
+                    $("#emailError").hide();
+                });
+    
+                $("#password").on("input", function() {
+                    $("#passwordError").hide();
+                });
+        });
+        
     </script>
 </body>
 

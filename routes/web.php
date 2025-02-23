@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NewCartController;
 
 Route::fallback(function () {
     return redirect()->route('home');
@@ -51,12 +52,14 @@ Route::middleware('auth')->group(function () {
     Route::put('/updateUser', [HomeController::class, 'updateUser'])->name('user.update');
     Route::post('/review', [HomeController::class, 'createReview'])->name('review.create');
 });
+Route::get('cart/details', [NewCartController::class, 'cartdetails'])->name('cart.details');
+Route::post('addtocart/{slug}', [NewCartController::class, 'addToCart'])->name('cart.add');
+Route::get('cart', [NewCartController::class, 'index'])->name('cart.index');
+
 Route::get('get/cartitems', [CartController::class, 'getCartItem'])->name('cartitems.get');
-Route::post('addtocart/{slug}', [CartController::class, 'addToCart'])->name('cart.add');
-Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 Route::Post('cart/remove', [CartController::class, 'removeItem'])->name('cart.remove');
 Route::post('cart/update', [CartController::class, 'updateCart'])->name('cart.update');
-Route::get('cart/dropdown', [CartController::class, 'getCartDropdown'])->name('cart.dropdown');
+// Route::get('cart/dropdown', [CartController::class, 'getCartDropdown'])->name('cart.dropdown');
 Route::post('saveforlater/add', [CartController::class, 'saveForLater'])->name('savelater.add');
 // Route::post('saveforlater/multiple', [CartController::class, 'multipleMoveToCart'])->name('savelater.multiple');
 Route::post('saveforlater/toCart', [CartController::class, 'moveToCart'])->name('movetocart');

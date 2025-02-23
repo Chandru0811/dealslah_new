@@ -13,7 +13,7 @@
                         class="mx-2 img-fluid header-logo" width="200" />
                 </a>
                 <div class="d-flex align-items-center mb-1">
-                    <span class="navbar-text d-xl-none align-items-center justify-content-end">
+                    {{-- <span class="navbar-text d-xl-none align-items-center justify-content-end">
                         <a href="https://dealsmachi.com/dealsmachiVendor/" style="text-decoration: none">
                             <button
                                 class="btn btn-button userlogin-button py-1 px-2 d-flex justify-content-center align-items-center text-nowrap"
@@ -21,9 +21,9 @@
                                 Post your Deal
                             </button>
                         </a>
-                    </span>
+                    </span> --}}
                     &nbsp;&nbsp;&nbsp;
-                    <button class="btn btn-button " style="border: none; position: relative;" data-bs-toggle="tooltip"
+                    {{-- <button class="btn btn-button " style="border: none; position: relative;" data-bs-toggle="tooltip"
                         data-bs-placement="bottom" title="Favourites">
                         <a href="{{ url('/favourites') }}" class="text-decoration-none d-xl-none"
                             style="text-decoration: none;">
@@ -33,7 +33,7 @@
                             </span>
                         </a>
 
-                    </button>
+                    </button> --}}
                     <button class="btn btn-button ps-0" style="border: none; position: relative;">
                         <a href="{{ route('cart.index') }}" class="text-decoration-none d-xl-none"
                             style="text-decoration: none;">
@@ -68,56 +68,7 @@
                             </div>
                         </div>
                     </button>
-                    @auth
-                    {{-- small screen --}}
-                    <div class="dropdown d-xl-none">
-                        <a href="#" class="text-decoration-none d-xl-none" id="userDropdownBtn" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false" data-bs-toggle="tooltip"
-                            data-bs-placement="top" title="Profile">
-                            <span class="d-xl-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasProfile"
-                                aria-controls="offcanvasProfile">
-                                <i class="fa-regular fa-circle-user fa-xl icon_size" style="color: #ff0060;"></i>
-                            </span>
-                        </a>
-                        <div class="dropdown-menu user-dropdown_cart custom-dropdown shadow-lg border-0">
-                            <div class="dropdown_child p-2">
-                                <div class="d-flex justify-content-start align-items-start mb-2">
-                                    <a class="dropdown-item user_list" href="#" data-bs-toggle="modal"
-                                        data-bs-target="#profileModal">
-                                        <i class="user_list_icon fa-light fa-user"></i>
-                                        &nbsp;&nbsp;&nbsp;Profile
-                                    </a>
-                                </div>
-                                <div class="d-flex justify-content-start align-items-start mb-2">
-                                    <a class="dropdown-item user_list" href="{{ url('orders') }}"><i
-                                            class="user_list_icon fa-light fa-bags-shopping"></i>
-                                        &nbsp;&nbsp;Orders</a>
-                                </div>
-                                <div class="d-flex justify-content-start align-items-start mb-2">
-                                    <a class="dropdown-item user_list" href="{{ route('savelater.index') }}"><i
-                                            class="user_list_icon fa-light fa-basket-shopping"></i>
-                                        &nbsp;&nbsp;Buy later</a>
-                                </div>
-                                <div class="d-flex justify-content-start align-items-start mb-2">
-                                    <a class="dropdown-item user_list" href="{{ url('logout') }}"
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-                                            class="user_list_icon fa-light fa-power-off"></i>
-                                        &nbsp;&nbsp;&nbsp;Log Out</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Hidden logout form -->
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                    @else
-                    <a href="{{ url('login') }}" class="text-decoration-none d-xl-none">
-                        <span class="d-xl-none" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Login">
-                            <i class="fa-regular fa-circle-user fa-xl icon_size text-muted"></i>
-                        </span>
-                    </a>
-                    @endauth
+
                     &nbsp;&nbsp;&nbsp;
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
@@ -158,11 +109,8 @@
                         </form>
                     </div>
                     <button class="btn btn-button" style="border: none; position: relative;" data-bs-toggle="tooltip"
-                        data-bs-placement="bottom" title="Favourites">
-                        <a href="{{ url('/favourites') }}" class="text-decoration-none px-1 py-1 d-none d-xl-inline"
-                            style="text-decoration: none; position: relative;">
-                            <i class="fa-regular fa-heart fa-xl icon_size" style="color: #ff0060;"></i>
-                        </a>
+                        data-bs-placement="bottom" title="Favourites" id="favbutton">
+                        <i class="fa-regular fa-heart fa-xl icon_size" style="color: #ff0060;"></i>
                         <span class="totalItemsCount total-count translate-middle d-none d-xl-block"
                             style="position: absolute;top: 16px;">
                         </span>
@@ -170,10 +118,9 @@
                     <div class="dropdown d-none d-xl-inline">
                         <button class="btn btn-button ps-0" style="border: none; position: relative;" id="cartButton"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-regular fa-cart-shopping fa-xl icon_size" style="color: #ff0060;"></i>
+                            <i class="fa-regular fa-cart-shopping fa-xl icon_size cart-screen" style="color: #ff0060;"></i>
                             <span id="cart-count" class="total-counts translate-middle d-xl-block"
-                                style="position: absolute; top: 16px; right: 5px; {{ isset($cartItemCount) && $cartItemCount > 0 ? '' : 'display: none !important;' }}">
-                                {{ $cartItemCount ?? 0 }}
+                                style="position: absolute; top: 16px; right: 5px;">
                             </span>
                         </button>
                         <div class="dropdown_cart dropdown-menu shadow-lg" aria-labelledby="cartButton"
@@ -182,10 +129,10 @@
                         </div>
                     </div>
                     @auth
-                    <div class="dropdown d-none d-xl-inline">
-                        <a href="#" class="text-decoration-none d-none d-xl-inline" role="button"
+                    <div class="dropdown">
+                        <a href="#" class="text-decoration-none" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="d-none d-xl-block">
+                            <span class="">
                                 <i class="fa-regular fa-circle-user fa-xl icon_size" style="color: #ff0060;"></i>
                             </span>
                         </a>
@@ -219,18 +166,18 @@
                         </div>
                     </div>
                     @else
-                    <a href="{{ url('login') }}" class="text-decoration-none d-none d-xl-inline">
-                        <span class="d-none d-xl-block" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    <a href="{{ url('login') }}" class="text-decoration-none">
+                        <span class="" data-bs-toggle="tooltip" data-bs-placement="bottom"
                             title="Login">
                             <i class="fa-regular fa-circle-user fa-xl icon_size text-muted"></i>
                         </span>
                     </a>
                     @endauth
-                    <span class="navbar-text d-none d-xl-inline align-items-center justify-content-end"
+                    <span class="navbar-text align-items-center justify-content-end"
                         style="margin-left: 10px">
                         <a href="https://dealsmachi.com/dealsmachiVendor/" style="text-decoration: none">
                             <button
-                                class="btn btn-button login-button userlogin-button-large py-2 px-4 d-flex justify-content-center align-items-center text-nowrap"
+                                class="btn btn-button mt-2 login-button userlogin-button-large py-2 px-4 d-flex justify-content-center align-items-center text-nowrap"
                                 type="submit">
                                 Post your Deal
                             </button>
@@ -717,46 +664,6 @@
                 </div>
             </div>
         </div>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const dropdownBtn = document.getElementById("toggleDropdown");
-                const dropdownMenu = document.querySelector(".dropdown-menu");
 
-                dropdownBtn.addEventListener("click", function(event) {
-                    event.stopPropagation();
-                    dropdownMenu.classList.toggle("show");
-                });
-
-                document.addEventListener("click", function(event) {
-                    if (!dropdownMenu.contains(event.target) && !dropdownBtn.contains(event.target)) {
-                        dropdownMenu.classList.remove("show");
-                    }
-                });
-            });
-
-            document.getElementById('cartButton').addEventListener('click', function(event) {
-                const dropdownMenu = document.querySelector('.dropdown_cart');
-                if (!dropdownMenu.classList.contains('show')) {
-                    window.location.href = "{{ route('cart.index') }}";
-                }
-            });
-
-            // Function to check if user has address data and open modal
-            function checkAddressAndOpenModal() {
-                fetch('/addresses')
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.length === 0) {
-                            $('#defaultAddressCheckbox').prop('checked', true);
-                            $('#defaultAddressCheckbox').prop('disabled', true);
-                        } else {
-                            $('#defaultAddressCheckbox').prop('checked', false);
-                            $('#defaultAddressCheckbox').prop('disabled', false);
-                        }
-                        $('#newAddressModal').modal('show');
-                    })
-                    .catch(error => console.error('Error fetching address:', error));
-            }
-        </script>
     </section>
     <!-- Header End  -->

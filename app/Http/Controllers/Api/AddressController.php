@@ -70,7 +70,6 @@ class AddressController extends Controller
 
         $addressData = $request->all();
         $addressData['user_id'] = Auth::id();
-        $addressData['default'] = $request->has('default') ? 1 : 0;
 
         $address = Address::create($addressData);
 

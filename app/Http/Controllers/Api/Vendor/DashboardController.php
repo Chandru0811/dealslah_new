@@ -193,6 +193,7 @@ class DashboardController extends Controller
 
     public function referrerDashboard(Request $request)
     {
+        // dd($request->all());
         $user = Auth::id();
         $month = $request->input('month');
 

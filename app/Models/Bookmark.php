@@ -11,6 +11,7 @@ class Bookmark extends Model
 
     protected $fillable = [
         'ip_address',
+        'bookmark_number',
         'user_id', 
         'deal_id',
     ];

@@ -29,12 +29,14 @@ class ReferrerDetailController extends Controller
             'vendor_name'    => 'required|string|max:255',
             'date'          => 'required|string',
             'amount'        => 'required|numeric|min:0',
+            'commission_rate' => 'required|numeric|min:0',
         ], [
             'referrer_id.required'   => 'Referrer ID is required.',
             'referrer_id.integer'    => 'Referrer ID must be a valid number.',
             'referrer_id.exists'     => 'Referrer ID must exist in users table.',
             'vendor_id.exists'       => 'Vendor ID must exist in vendors table.',
             'amount.numeric'         => 'Amount must be a valid number.',
+            'commission_rate.numeric'=> 'Commission Rate must be a valid number.',
             'date.date'              => 'Please enter a valid date format.',
         ]);
 
@@ -78,6 +80,7 @@ class ReferrerDetailController extends Controller
             'vendor_name'    => 'sometimes|string|max:255',
             'date'          => 'sometimes|string',
             'amount'        => 'sometimes|numeric|min:0',
+            'commission_rate' => 'required|numeric|min:0',
         ]);
 
         if ($validator->fails()) {
@@ -111,4 +114,5 @@ class ReferrerDetailController extends Controller
 
         return $this->success('Referrers and Referrer Vendors retrieved successfully.', $users);
     }
+
 }

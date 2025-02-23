@@ -17,5 +17,6 @@ class ReferrerDetail extends Model
         'vendor_name',
         'date',
         'amount',
+        'commission_rate'
     ];
 }

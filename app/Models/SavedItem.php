@@ -9,7 +9,7 @@ class SavedItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'deal_id','ip_address'];
+    protected $fillable = ['user_id', 'deal_id','ip_address','cart_number'];
 
     public function deal()
     {

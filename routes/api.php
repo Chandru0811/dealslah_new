@@ -180,6 +180,7 @@ Route::middleware('auth:api')->group(function () {
         // All Referral Vendor
         Route::get('referrals/{userId}', [ShopController::class, 'getReferralsByUserId']);
         Route::get('referrerDashboard', [DashboardController::class, 'referrerDashboard']);
+        Route::get('referrer/commission', [DashboardController::class, 'getAllVendorCommission']);
     });
 
     //Customer
