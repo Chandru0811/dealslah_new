@@ -1970,6 +1970,50 @@ function showMessage(message, type) {
     }, 5000);
 }
 // Loading initializeEventListeners Data
+// function initializeEventListeners() {
+//     $(".add-to-cart-btn")
+//         .off("click")
+//         .on("click", function (e) {
+//             e.preventDefault();
+
+//             let slug = $(this).data("slug");
+
+//             $.ajax({
+//                 url: `/addtocart/${slug}`,
+//                 type: "POST",
+//                 data: {
+//                     quantity: 1,
+//                     saveoption: "add to cart",
+//                 },
+//                 success: function (response) {
+//                     if (response.cartItemCount !== undefined) {
+//                         const cartCountElement = $("#cart-count");
+
+//                         if (response.cartItemCount > 0) {
+//                             cartCountElement.text(response.cartItemCount);
+//                             cartCountElement.css("display", "inline");
+//                         } else {
+//                             cartCountElement.css("display", "none");
+//                         }
+//                     }
+
+//                     fetchCartDropdown();
+//                     showMessage(
+//                         response.status || "Deal added to cart!",
+//                         "success"
+//                     );
+//                 },
+//                 error: function (xhr) {
+//                     const errorMessage =
+//                         xhr.responseJSON?.error || "Something went wrong!";
+//                     showMessage(errorMessage, "error");
+//                 },
+//             });
+//         });
+// }
+
+//localStorage.clear();
+
 function initializeEventListeners() {
     $(".add-to-cart-btn")
         .off("click")
@@ -1977,16 +2021,24 @@ function initializeEventListeners() {
             e.preventDefault();
 
             let slug = $(this).data("slug");
-
+            let cartnumber = localStorage.getItem('cartnumber') || null;
+            console.log(cartnumber);
+            if(cartnumber == null)
+            {
+                cartnumber = getCartNumber();
+                console.log(cartnumber);
+            }
             $.ajax({
                 url: `/addtocart/${slug}`,
-                type: "POST",
+                type: "post",
                 data: {
                     quantity: 1,
                     saveoption: "add to cart",
+                    cartnumber: cartnumber
                 },
                 success: function (response) {
-                    if (response.cartItemCount !== undefined) {
+                    console.log(response);
+                    if (!cartnumber && response.cart_number) {
                         const cartCountElement = $("#cart-count");
 
                         if (response.cartItemCount > 0) {
@@ -1995,22 +2047,82 @@ function initializeEventListeners() {
                         } else {
                             cartCountElement.css("display", "none");
                         }
+                        localStorage.setItem("cartnumber", response.cart_number);
                     }
 
-                    fetchCartDropdown();
-                    showMessage(
-                        response.status || "Deal added to cart!",
-                        "success"
-                    );
+                    saveCartNumber(response.cart_number);
+                    showMessage(response.status || "Deal added to cart!","success");
+                    
                 },
                 error: function (xhr) {
-                    const errorMessage =
-                        xhr.responseJSON?.error || "Something went wrong!";
-                    showMessage(errorMessage, "error");
-                },
+                                        const errorMessage =
+                                            xhr.responseJSON?.error || "Something went wrong!";
+                                        showMessage(errorMessage, "error");
+                                    },
             });
         });
 }
+
+
+
+    $('#cart-link').on('click', function (event) {
+        event.preventDefault(); // Prevent default navigation
+
+        let cartNumber = localStorage.getItem('cart_number'); // Get from localStorage
+        let cartUrl = $(this).attr('href');
+
+        if (cartNumber) {
+            // Navigate with cart number in session
+            $.ajax({
+                url: cartUrl,
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Cart-Number': cartNumber  // Pass cart number in headers
+                },
+                success: function () {
+                    window.location.href = cartUrl; // Redirect after request
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        } else {
+            window.location.href = cartUrl; // Proceed normally if no cartNumber
+        }
+    });
+
+
+function isLocalStorageAvailable() {
+    try {
+        localStorage.setItem("test", "test");
+        localStorage.removeItem("test");
+        return true;
+    } catch (e) {
+        return false; // Local Storage is disabled (Incognito Mode)
+    }
+}
+
+function saveCartNumber(cartNumber) {
+    if (isLocalStorageAvailable()) {
+        localStorage.setItem("cartnumber", cartNumber);
+    } else {
+        document.cookie = `cartnumber=${cartNumber}; path=/; max-age=86400`; // Fallback to cookies (1 day)
+    }
+}
+
+function getCartNumber() {
+    if (isLocalStorageAvailable()) {
+        return localStorage.getItem("cartnumber");
+    } else {
+        let match = document.cookie.match(/(^| )cartnumber=([^;]+)/);
+        return match ? match[2] : null;
+    }
+}
+
+
+
+
 // Loading Data
 document.addEventListener("DOMContentLoaded", function () {
     let loading = false;
