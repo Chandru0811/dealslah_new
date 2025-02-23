@@ -37,7 +37,7 @@
                                         data-deal-id="{{ $product->id }}"
                                         style="border: none; background: none;">
                                         <p style="height:fit-content;cursor:pointer" class="p-1 px-2"
-                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Favourite">
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Bookmark">
                                             <i class="fa-solid fa-bookmark bookmark-icon"
                                                 style="color: #ef4444;"></i>
                                         </p>
@@ -47,7 +47,7 @@
                                         data-deal-id="{{ $product->id }}"
                                         style="border: none; background: none;">
                                         <p style="height:fit-content;cursor:pointer" class="p-1 px-2"
-                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Favourite">
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Bookmark">
                                             <i class="fa-regular fa-bookmark bookmark-icon"
                                                 style="color: #ef4444;"></i>
                                         </p>

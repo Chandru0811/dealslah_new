@@ -330,43 +330,43 @@
                             <div class="textline2"></div>
                         </div>
                         <div class="form-check pt-3">
-                            <input class="form-check-input" type="checkbox" name="price_range[]" value="₹0-₹50"
+                            <input class="form-check-input" type="checkbox" name="price_range[]" value="$0-$50"
                                 id="price_0_50"
-                                {{ in_array('₹0-₹50', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                {{ in_array('$0-$50', request()->get('price_range', [])) ? 'checked' : '' }}>
                             <label class="form-check-label categoryLable" for="price_0_50">
-                                Under ₹50
+                                Under $50
                             </label>
                         </div>
                         <div class="form-check pt-3">
                             <input class="form-check-input" type="checkbox" name="price_range[]"
-                                value="₹50-₹150" id="price_50_150"
-                                {{ in_array('₹50-₹150', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                value="$50-$150" id="price_50_150"
+                                {{ in_array('$50-$150', request()->get('price_range', [])) ? 'checked' : '' }}>
                             <label class="form-check-label categoryLable" for="price_50_150">
-                                ₹50 - ₹150
+                                $50 - $150
                             </label>
                         </div>
                         <div class="form-check pt-3">
                             <input class="form-check-input" type="checkbox" name="price_range[]"
-                                value="₹150-₹500" id="price_150_500"
-                                {{ in_array('₹150-₹500', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                value="$150-$500" id="price_150_500"
+                                {{ in_array('$150-$500', request()->get('price_range', [])) ? 'checked' : '' }}>
                             <label class="form-check-label categoryLable" for="price_150_500">
-                                ₹150 - ₹500
+                                $150 - $500
                             </label>
                         </div>
                         <div class="form-check pt-3">
                             <input class="form-check-input" type="checkbox" name="price_range[]"
-                                value="₹500-₹1000" id="price_500_1000"
-                                {{ in_array('₹500-₹1000', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                value="$500-$1000" id="price_500_1000"
+                                {{ in_array('$500-$1000', request()->get('price_range', [])) ? 'checked' : '' }}>
                             <label class="form-check-label categoryLable" for="price_500_1000">
-                                ₹500 - ₹1000
+                                $500 - $1000
                             </label>
                         </div>
                         <div class="form-check pt-3">
                             <input class="form-check-input" type="checkbox" name="price_range[]"
-                                value="₹1000-₹10000" id="price_1000_10000"
-                                {{ in_array(' ₹1000-₹10000', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                value="$1000-$10000" id="price_1000_10000"
+                                {{ in_array(' $1000-$10000', request()->get('price_range', [])) ? 'checked' : '' }}>
                             <label class="form-check-label categoryLable" for="price_1000_10000">
-                                Above ₹1000
+                                Above $1000
                             </label>
                         </div>
                     </div>
@@ -470,25 +470,25 @@
                         <div class="form-check pt-3">
                             <input class="form-check-input" type="checkbox" name="price_range[]"
                                 value="$0-$50" id="price_0_to_50"
-                                {{ in_array('₹0-₹50', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                {{ in_array('$0-$50', request()->get('price_range', [])) ? 'checked' : '' }}>
                             <label class="form-check-label categoryLable" for="price_0_to_50">
-                                Under ₹50
+                                Under $50
                             </label>
                         </div>
                         <div class="form-check pt-3">
                             <input class="form-check-input" type="checkbox" name="price_range[]"
-                                value="₹50-₹150" id="price_50_to_150"
-                                {{ in_array('₹50-₹150', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                value="$50-$150" id="price_50_to_150"
+                                {{ in_array('$50-$150', request()->get('price_range', [])) ? 'checked' : '' }}>
                             <label class="form-check-label categoryLable" for="price_50_to_150">
-                                ₹50 - ₹150
+                                $50 - $150
                             </label>
                         </div>
                         <div class="form-check pt-3">
                             <input class="form-check-input" type="checkbox" name="price_range[]"
-                                value="₹150-₹500" id="price_150_to_500"
-                                {{ in_array('₹150-₹500', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                value="$150-$500" id="price_150_to_500"
+                                {{ in_array('$150-$500', request()->get('price_range', [])) ? 'checked' : '' }}>
                             <label class="form-check-label categoryLable" for="price_150_to_500">
-                                ₹150 - ₹500
+                                $150 - $500
                             </label>
                         </div>
                         <div class="form-check pt-3">
@@ -496,15 +496,15 @@
                                 value="$500-$1000" id="price_500_to_1000"
                                 {{ in_array('$500-$1000', request()->get('price_range', [])) ? 'checked' : '' }}>
                             <label class="form-check-label categoryLable" for="price_500_to_1000">
-                                ₹500 - ₹1000
+                                $500 - $1000
                             </label>
                         </div>
                         <div class="form-check pt-3">
                             <input class="form-check-input" type="checkbox" name="price_range[]"
-                                value="₹1000-₹10000" id="price_1000_to_10000"
-                                {{ in_array('₹1000-₹10000', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                value="$1000-$10000" id="price_1000_to_10000"
+                                {{ in_array('$1000-$10000', request()->get('price_range', [])) ? 'checked' : '' }}>
                             <label class="form-check-label categoryLable" for="price_1000_to_10000">
-                                Above ₹1000
+                                Above $1000
                             </label>
                         </div>
                     </div>
@@ -844,42 +844,42 @@
                             </div>
                             <div class="form-check pt-3">
                                 <input class="form-check-input" type="checkbox" name="price_range[]"
-                                    value="₹0-₹50" id="price_0_50"
-                                    {{ in_array('₹0-₹50', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                    value="$0-$50" id="price_0_50"
+                                    {{ in_array('$0-$50', request()->get('price_range', [])) ? 'checked' : '' }}>
                                 <label class="form-check-label categoryLable" for="price_0_50">
-                                    Under ₹50
+                                    Under $50
                                 </label>
                             </div>
                             <div class="form-check pt-3">
                                 <input class="form-check-input" type="checkbox" name="price_range[]"
-                                    value="₹50-₹150" id="price_50_150"
-                                    {{ in_array('₹50-₹150', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                    value="$50-$150" id="price_50_150"
+                                    {{ in_array('$50-$150', request()->get('price_range', [])) ? 'checked' : '' }}>
                                 <label class="form-check-label categoryLable" for="price_50_150">
-                                    ₹50 - ₹150
+                                    $50 - $150
                                 </label>
                             </div>
                             <div class="form-check pt-3">
                                 <input class="form-check-input" type="checkbox" name="price_range[]"
-                                    value="₹150-₹500" id="price_150_500"
-                                    {{ in_array('₹150-₹500', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                    value="$150-$500" id="price_150_500"
+                                    {{ in_array('$150-$500', request()->get('price_range', [])) ? 'checked' : '' }}>
                                 <label class="form-check-label categoryLable" for="price_150_500">
-                                    ₹150 - ₹500
+                                    $150 - $500
                                 </label>
                             </div>
                             <div class="form-check pt-3">
                                 <input class="form-check-input" type="checkbox" name="price_range[]"
-                                    value="₹500-₹1000" id="price_500_1000"
-                                    {{ in_array('₹500-₹1000', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                    value="$500-$1000" id="price_500_1000"
+                                    {{ in_array('$500-$1000', request()->get('price_range', [])) ? 'checked' : '' }}>
                                 <label class="form-check-label categoryLable" for="price_500_1000">
-                                    ₹500 - ₹1000
+                                    $500 - $1000
                                 </label>
                             </div>
                             <div class="form-check pt-3">
                                 <input class="form-check-input" type="checkbox" name="price_range[]"
-                                    value="₹1000-₹10000" id="price_1000_10000"
-                                    {{ in_array(' ₹1000-₹10000', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                    value="$1000-$10000" id="price_1000_10000"
+                                    {{ in_array(' $1000-$10000', request()->get('price_range', [])) ? 'checked' : '' }}>
                                 <label class="form-check-label categoryLable" for="price_1000_10000">
-                                    Above ₹1000
+                                    Above $1000
                                 </label>
                             </div>
                         </div>
@@ -991,25 +991,25 @@
                             <div class="form-check pt-3">
                                 <input class="form-check-input" type="checkbox" name="price_range[]"
                                     value="$0-$50" id="price_0_to_50"
-                                    {{ in_array('₹0-₹50', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                    {{ in_array('$0-$50', request()->get('price_range', [])) ? 'checked' : '' }}>
                                 <label class="form-check-label categoryLable" for="price_0_to_50">
-                                    Under ₹50
+                                    Under $50
                                 </label>
                             </div>
                             <div class="form-check pt-3">
                                 <input class="form-check-input" type="checkbox" name="price_range[]"
-                                    value="₹50-₹150" id="price_50_to_150"
-                                    {{ in_array('₹50-₹150', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                    value="$50-$150" id="price_50_to_150"
+                                    {{ in_array('$50-$150', request()->get('price_range', [])) ? 'checked' : '' }}>
                                 <label class="form-check-label categoryLable" for="price_50_to_150">
-                                    ₹50 - ₹150
+                                    $50 - $150
                                 </label>
                             </div>
                             <div class="form-check pt-3">
                                 <input class="form-check-input" type="checkbox" name="price_range[]"
-                                    value="₹150-₹500" id="price_150_to_500"
-                                    {{ in_array('₹150-₹500', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                    value="$150-$500" id="price_150_to_500"
+                                    {{ in_array('$150-$500', request()->get('price_range', [])) ? 'checked' : '' }}>
                                 <label class="form-check-label categoryLable" for="price_150_to_500">
-                                    ₹150 - ₹500
+                                    $150 - $500
                                 </label>
                             </div>
                             <div class="form-check pt-3">
@@ -1017,15 +1017,15 @@
                                     value="$500-$1000" id="price_500_to_1000"
                                     {{ in_array('$500-$1000', request()->get('price_range', [])) ? 'checked' : '' }}>
                                 <label class="form-check-label categoryLable" for="price_500_to_1000">
-                                    ₹500 - ₹1000
+                                    $500 - $1000
                                 </label>
                             </div>
                             <div class="form-check pt-3">
                                 <input class="form-check-input" type="checkbox" name="price_range[]"
-                                    value="₹1000-₹10000" id="price_1000_to_10000"
-                                    {{ in_array('₹1000-₹10000', request()->get('price_range', [])) ? 'checked' : '' }}>
+                                    value="$1000-$10000" id="price_1000_to_10000"
+                                    {{ in_array('$1000-$10000', request()->get('price_range', [])) ? 'checked' : '' }}>
                                 <label class="form-check-label categoryLable" for="price_1000_to_10000">
-                                    Above ₹1000
+                                    Above $1000
                                 </label>
                             </div>
                         </div>
