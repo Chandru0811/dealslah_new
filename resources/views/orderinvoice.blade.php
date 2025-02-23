@@ -106,7 +106,7 @@
             <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
                 <tr>
                     <td align="left" style="vertical-align: middle;">
-                        <img src="{{ $logo }}" alt="DealsMachi" width="200">
+                        <img src="{{ $logo }}" alt="Dealslah" width="200">
                     </td>
                     <td align="right" style="vertical-align: middle;" class="headerText">
                         <h1>Invoice</h1>
@@ -214,8 +214,8 @@
             </table>
         </div>
         <div class="footer">
-            <h6>Thank you for shopping with <span style="color: #ef4444;">DealsMachi</span>! For assistance, contact us at info@dealsmachi.com.</h6>
-            <p>2024 © Copyright DealsMachi. All Rights Reserved.</p>
+            <h6>Thank you for shopping with <span style="color: #ef4444;">Dealslah</span>! For assistance, contact us at info@dealslah.com.</h6>
+            <p>2024 © Copyright Dealslah. All Rights Reserved.</p>
         </div>
     </div>
 </body>

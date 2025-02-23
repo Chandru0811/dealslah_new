@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @section('head_links')
-        <title>DealsMachi | Support and Contact</title>
-        <link rel="canonical" href="https://dealsmachi.com/support" />
+        <title>Dealslah | Support and Contact</title>
+        <link rel="canonical" href="https://dealslah.com/support" />
         <link rel="icon" href="{{ asset('assets/images/home/favicon.ico') }}" />
 
         <!-- Google Fonts -->
@@ -42,13 +42,13 @@
                         <p class="h5 mb-2">Support Contact Information:</p>
                         <div class="mb-3">
                             <p class="mt-3 mb-0">Phone:</p>
-                            <p class="phone-number h3 text-success"><a href="tel:+919150150687"
-                                    class="text-decoration-none pinkColor"><b>+91 91501 50687</b></a></p>
+                            <p class="phone-number h3 text-success"><a href="tel:+6588941306"
+                                    class="text-decoration-none pinkColor"><b>+65 88941306</b></a></p>
                         </div>
                         <div>
                             <p class="mt-3 mb-0">Email:</p>
-                            <p class="h5"><a href="mailto:info@dealsmachi.com"
-                                    class="text-decoration-none pinkColor">info@dealsmachi.com</a></p>
+                            <p class="h5"><a href="mailto:info@dealslah.com"
+                                    class="text-decoration-none pinkColor">info@dealslah.com</a></p>
                         </div>
                     </div>
                 </div>

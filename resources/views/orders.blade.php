@@ -148,7 +148,7 @@
                                             <div>
                                                 <div class="rating mt-3 mb-3">
                                                     <span style="color: #22cb00">Currently Services are free through
-                                                        DealsMachi</span>
+                                                        Dealslah</span>
                                                 </div>
                                                 <p>
                                                     <span style="color: #ef4444; font-size:24px">

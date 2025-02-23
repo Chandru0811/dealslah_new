@@ -9,7 +9,7 @@
                         aria-expanded="false" style="cursor: pointer;">
                         <div class="icons">
                             <i class="fa-duotone fa-solid fa-laptop"
-                                style="--fa-primary-color: #ff0060; --fa-secondary-color: #ff0060;"></i>
+                                style="--fa-primary-color: #ef4444; --fa-secondary-color: #ef4444;"></i>
                         </div>
                         {{ $categoryGroup->name }}
                     </a>

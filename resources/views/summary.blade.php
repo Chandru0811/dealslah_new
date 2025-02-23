@@ -82,7 +82,7 @@ $default_address = $addresses->firstWhere('id', $selectedAddressId) ?? ($address
                             @if ($default_address)
                             <p style="font-weight: 500; font-size: 16px; color: #6C6C6C">
                                 {{ $default_address->first_name ?? '' }}
-                                {{ $default_address->last_name ?? '' }} (+91)
+                                {{ $default_address->last_name ?? '' }} (+65)
                                 {{ $default_address->phone ?? '' }}&nbsp;&nbsp;<br>
                                 {{ $default_address->address ?? '' }}
                                 {{ $default_address->city ?? '' }},
@@ -151,7 +151,7 @@ $default_address = $addresses->firstWhere('id', $selectedAddressId) ?? ($address
                             @if ($product->deal_type == 2)
                             <div class="rating mt-3 mb-3">
                                 <span style="color: #22cb00">Currently Services are free through
-                                    DealsMachi</span>
+                                    Dealslah</span>
                             </div>
                             @else
                             <div class="d-flex mt-4">
@@ -404,7 +404,7 @@ $default_address = $addresses->firstWhere('id', $selectedAddressId) ?? ($address
                     </span>
                     <span class="total ms-1" style="font-size:12px; color:#00DD21;white-space: nowrap;"
                         id="deal-discount">
-                        DealsMachi Discount
+                        Dealslah Discount
                         &nbsp;-<span
                             class="discount">₹{{ number_format($product->original_price - $product->discounted_price, 0, '.', ',') }}</span>
                     </span>

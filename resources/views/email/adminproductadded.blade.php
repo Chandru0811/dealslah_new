@@ -127,18 +127,18 @@
             <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
                 <tr>
                     <td align="left" style="vertical-align: middle;">
-                        <img src="https://dealsmachi.com/assets/images/home/email_logo.png" alt="Deals Machi" style="max-width: 150px; height: auto;">
+                        <img src="https://dealslah.com/assets/images/home/email_logo.png" alt="Deals Machi" style="max-width: 150px; height: auto;">
                     </td>
                     <td align="right" style="vertical-align: middle;">
                         <div class="headerText" style="font-size: 14px; color: #333;">
-                            <a href="https://dealsmachi.com/" target="_blank" style="text-decoration: none; color: #333;">
-                                Your <span style="color: #ef4444;">dealsmachi.com</span>
+                            <a href="https://dealslah.com/" target="_blank" style="text-decoration: none; color: #333;">
+                                Your <span style="color: #ef4444;">dealslah.com</span>
                             </a> |
                             <a href="tel:919150150687 " target="_blank" style="text-decoration: none; color: #333;">
-                                +91 9150150687
+                                +65 88941306
                             </a> |
-                            <a href="https://play.google.com/store/apps/details?id=com.dealsmachi.dealsmachi" target="_blank" style="text-decoration: none; color: #333;">
-                                Get <span style="color: #ef4444;">DealsMachi</span> App
+                            <a href="https://play.google.com/store/apps/details?id=com.dealslah.dealslah" target="_blank" style="text-decoration: none; color: #333;">
+                                Get <span style="color: #ef4444;">Dealslah</span> App
                             </a>
                         </div>
                     </td>
@@ -149,7 +149,7 @@
         <!-- Warming Message -->
         <div class="message">
             <p>Hello Admin!</p>
-            <p>We are excited to inform you that a new vendor, <a href="https://dealsmachi.com/dealsmachiVendor/"
+            <p>We are excited to inform you that a new vendor, <a href="https://dealslah.com/dealslahVendor/"
                     target="_blank">{{ $user->legal_name }}</a> has registered on our platform. Please review and
                 approve this vendor to make their products available to our customers.</p>
         </div>
@@ -161,14 +161,14 @@
             <div class="vendor-details">
                 <h2>{{ $user->legal_name }}</h2>
                 <p class="sub-heading">Email : <span>{{ $user->email }}</span></p>
-                <p class="sub-heading">Phone Number : <span>+91 {{ $user->mobile }}</span></p>
+                <p class="sub-heading">Phone Number : <span>+65 {{ $user->mobile }}</span></p>
                 <!--<p class="sub-heading">Comapny Type : <span>Product</span></p>-->
                 <p class="sub-heading">Description : <span>{{ $user->description }}</span></p>
                 <p class="sub-heading">Address : <span>{{ $user->address }}</span></p>
             </div>
 
             <div class="cta-button">
-                <a href="https://dealsmachi.com/dealsmachiVendor/" target="_blank">Go to Admin Panel</a>
+                <a href="https://dealslah.com/dealslahVendor/" target="_blank">Go to Admin Panel</a>
             </div>
             <p style="border-bottom: 1px solid #c2c2c2; margin-bottom: 0px;"></p>
         </div>
@@ -178,11 +178,11 @@
             <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
                 <tr>
                     <td align="left" style="vertical-align: middle;">
-                        <img src="https://dealsmachi.com/assets/images/home/email_logo.png" alt="dealsmachi" style="max-width: 150px; height: auto; margin-bottom: 10px;">
+                        <img src="https://dealslah.com/assets/images/home/email_logo.png" alt="dealslah" style="max-width: 150px; height: auto; margin-bottom: 10px;">
                     </td>
                     <td align="right" style="vertical-align: middle;">
                         <p style="font-size: 12px; color: #333; margin: 0;">
-                            Connect with <a href="https://dealsmachi.com/" target="_blank" style="color: #ef4444; text-decoration: none;">dealsmachi</a> India
+                            Connect with <a href="https://dealslah.com/" target="_blank" style="color: #ef4444; text-decoration: none;">dealslah</a> India
                         </p>
                     </td>
                 </tr>

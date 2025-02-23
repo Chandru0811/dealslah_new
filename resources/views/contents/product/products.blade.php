@@ -21,7 +21,7 @@
                                                     @csrf
                                                     <button type="submit" class="bookmark-icon"
                                                         style="border: none; background: none;">
-                                                        <i class="fa-regular fa-heart" style="color: #ff0060;"></i>
+                                                        <i class="fa-regular fa-heart" style="color: #ef4444;"></i>
                                                     </button>
                                                 </form>
                                             @else
@@ -31,7 +31,7 @@
                                                     @method('DELETE')
                                                     <button type="submit" class="bookmark-icon"
                                                         style="border: none; background: none;">
-                                                        <i class="fa-solid fa-heart" style="color: #ff0060;"></i>
+                                                        <i class="fa-solid fa-heart" style="color: #ef4444;"></i>
                                                     </button>
                                                 </form>
                                             @endif
@@ -51,10 +51,10 @@
                                 <div>
                                     <div class="card-divider"></div>
                                     <p class="ps-3 fw-medium d-flex align-items-center justify-content-between"
-                                        style="color: #ff0060">
+                                        style="color: #ef4444">
                                         <span>₹{{ $product->discounted_price }}</span>
                                         <span
-                                            class="mx-3 px-2 couponBadge">DEALSMACHI{{ round($product->discount_percentage) }}</span>
+                                            class="mx-3 px-2 couponBadge">DEALSLAH{{ round($product->discount_percentage) }}</span>
                                     </p>
                                     <div class="card-divider"></div>
                                     <div class="ps-3">
@@ -62,7 +62,7 @@
                                         <p><s>₹{{ $product->original_price }}</s></p>
                                     </div>
                                     <div class="card-divider"></div>
-                                    <p class="ps-3 fw-medium" style="color: #ff0060; font-weight: 400 !important;">
+                                    <p class="ps-3 fw-medium" style="color: #ef4444; font-weight: 400 !important;">
                                         <i class="fa-solid fa-location-dot"></i>&nbsp;Chennai
                                     </p>
                                 </div>

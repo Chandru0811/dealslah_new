@@ -223,7 +223,7 @@
                                 <hr />
                                 <p><strong>Email :</strong> {{ $user->email ?? '' }}</p>
                                 <p><strong>Phone :</strong>
-                                    {{ $default_address && $default_address->phone ? '(+91) ' . $default_address->phone : '--' }}
+                                    {{ $default_address && $default_address->phone ? '(+65) ' . $default_address->phone : '--' }}
                                 </p>
                                 <hr />
                                 <div class="d-flex justify-content-between align-items-center defaultAddress">
@@ -244,7 +244,7 @@
                                         @if ($default_address)
                                         <p>
                                             <strong>{{ $default_address->first_name ?? '' }}
-                                                {{ $default_address->last_name ?? '' }} (+91)
+                                                {{ $default_address->last_name ?? '' }} (+65)
                                                 {{ $default_address->phone ?? '' }}</strong>&nbsp;&nbsp;<br>
                                             {{ $default_address->address ?? '' }},
                                             {{ $default_address->city ?? '' }},
@@ -297,7 +297,7 @@
                                             <p class="text-turncate fs_common">
                                                 <span class="px-2">
                                                     {{ $addr->first_name }} {{ $addr->last_name ?? '' }} |
-                                                    <span style="color: #c7c7c7;">&nbsp;+91
+                                                    <span style="color: #c7c7c7;">&nbsp;+65
                                                         {{ $addr->phone }}</span>
                                                 </span><br>
                                                 <span class="px-2" style="color: #c7c7c7">{{ $addr->address }},

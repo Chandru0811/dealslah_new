@@ -9,7 +9,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
 
-  <title>DealsMachi | Reset Password</title>
+  <title>Dealslah | Reset Password</title>
   <style>
     body {
       background-color: #f7f9fc;
@@ -100,22 +100,22 @@
       <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse: collapse">
         <tr>
           <td align="left" style="vertical-align: middle">
-            <img src="https://dealsmachi.com/assets/images/home/email_logo.png" alt="Deals Machi"
+            <img src="https://dealslah.com/assets/images/home/email_logo.png" alt="Deals Machi"
               style="max-width: 150px; height: auto" />
           </td>
           <td align="right" style="vertical-align: middle">
             <div class="headerText" style="font-size: 14px; color: #333">
-              <a href="https://dealsmachi.com/" target="_blank" style="text-decoration: none; color: #333">
-                Your <span style="color: #ef4444">dealsmachi.com</span>
+              <a href="https://dealslah.com/" target="_blank" style="text-decoration: none; color: #333">
+                Your <span style="color: #ef4444">dealslah.com</span>
               </a>
               |
               <a href="tel:919150150687 " target="_blank" style="text-decoration: none; color: #333">
-                +91 9150150687
+                +65 88941306
               </a>
               |
-              <a href="https://play.google.com/store/apps/details?id=com.dealsmachi.dealsmachi" target="_blank"
+              <a href="https://play.google.com/store/apps/details?id=com.dealslah.dealslah" target="_blank"
                 style="text-decoration: none; color: #333">
-                Get <span style="color: #ef4444">DealsMachi</span> App
+                Get <span style="color: #ef4444">Dealslah</span> App
               </a>
             </div>
           </td>
@@ -151,7 +151,7 @@
       <p style="border-bottom: 1px solid #c2c2c2;"></p>
       <p class="mt-3">
         If your are having trouble clicking the "Reset Password" button, copy
-        and paste the URL below into your web browser: <a href="./a">https://dealsmachi.com/reset-password/e1b2d
+        and paste the URL below into your web browser: <a href="./a">https://dealslah.com/reset-password/e1b2d
           ed4906c830196ea1c24521d7f55d69b4f101205bf6f7e1fdf7a520625eb?email=moh
           itsudhanecs%40gmail.com</a>
       </p>
@@ -162,14 +162,14 @@
       <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse: collapse">
         <tr>
           <td align="left" style="vertical-align: middle">
-            <img src="https://dealsmachi.com/assets/images/home/email_logo.png" alt="dealsmachi"
+            <img src="https://dealslah.com/assets/images/home/email_logo.png" alt="dealslah"
               style="max-width: 150px; height: auto; margin-bottom: 10px" />
           </td>
           <td align="right" style="vertical-align: middle">
             <p style="font-size: 12px; color: #333; margin: 0">
               Connect with
-              <a href="https://dealsmachi.com/" target="_blank"
-                style="color: #ef4444; text-decoration: none">DealsMachi</a>
+              <a href="https://dealslah.com/" target="_blank"
+                style="color: #ef4444; text-decoration: none">Dealslah</a>
               India
             </p>
           </td>

@@ -5,7 +5,7 @@
                 <div class="row justify-content-between">
                     <!-- Logo and Social Media Icons -->
                     <div class="col-md-3 text-md-start text-center mb-4 mb-md-0">
-                        <div class="dealsmachi-text">
+                        <div class="dealslah-text">
                             <p class="text-light fw-medium" style="font-size: 1.5rem">
                                 DEALSLAH !
                             </p>
@@ -142,7 +142,7 @@
                         |
                     </a>
                     2024 - 2025 &copy; Copyright
-                    Cloud ECS Infotech Pvt. Ltd. All Rights Reserved.
+                    Dealslah Pte Ltd. All Rights Reserved.
                 </p>
             </div>
         </footer>

@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @section('head_links')
-        <title>DealsMachi | Terms And Conditions</title>
-        <meta name="description" content="Terms And Conditions for DealsMachi." />
-        <link rel="canonical" href="https://dealsmachi.com/terms_conditions" />
+        <title>Dealslah | Terms And Conditions</title>
+        <meta name="description" content="Terms And Conditions for Dealslah." />
+        <link rel="canonical" href="https://dealslah.com/terms_conditions" />
         <link rel="icon" href="{{ asset('assets/images/home/favicon.ico') }}" />
 
-        <!-- Google Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+           <!-- Google Fonts -->
+           <link rel="preconnect" href="https://fonts.googleapis.com">
+           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+           <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
 
         <!-- Vendor CSS Files -->
         {{-- Boostrap css  --}}
@@ -28,57 +28,36 @@
     <section class="home-section">
         @include('nav.header')
         <div class="container home-content" style="margin-top: 100px">
-            <h1>Terms and Conditions for dealsmachi.com</h1>
-            <p class="fw-bold">Welcome to dealsmachi.com!</p>
-            <p>These Terms and Conditions ("Terms") govern your access to and use of the dealsmachi.com website (the
-                "Website") and its services (the "Services") offered by [DealsMachi] ("we," "us," or "our"). By
-                accessing or using the Website or Services, you agree to be bound by these Terms. If you disagree with
-                any part of these Terms, you may not access or use the Website or Services.</p>
+            <h1>Terms and Conditions for Dealslah</h1>
             <div class="mt-5">
-                <h2>1. Use of the Website and Services</h2>
+                <h2>1. Introduction</h2>
                 <ul>
                     <li>
-                        You must be at least 18 years old or of legal age to enter into a contract to use the Website or
-                        Services.
+                        <span class="fw-regular">Agreement: </span>This agreement governs your use of Dealslah, a website
+                        that
+                        provides deals and offers from various merchants.
                     </li>
                     <li>
-                        You are responsible for maintaining the confidentiality of your account information, including
-                        your login credentials.
+                        <span class="fw-regular">Acceptance: </span> By using Dealslah, you agree to these terms and
+                        conditions.
                     </li>
-                    <li>
-                        You are responsible for all activities that occur under your account. </li>
-                    <li>
-                        You agree to use the Website and Services only for lawful purposes and in accordance with these
-                        Terms. </li>
-                    <li>
-                        You agree not to use the Website or Services in any way that could damage, disable, overburden,
-                        or impair the Website or Services. </li>
-                    <li>
-                        You agree not to use the Website or Services to collect or harvest any personal information of
-                        other users. </li>
-
                 </ul>
             </div>
             <div>
-                <h2>2. User Content</h2>
+                <h2>2. User Account</h2>
                 <ul>
                     <li>
-                        You may submit content (text, images, videos, etc.) to the Website ("User Content").
+                        <span class="fw-regular">Registration: </span>You may need to create an account to access certain
+                        features of Dealslah.
                     </li>
                     <li>
-                        You retain all ownership rights to your User Content.
+                        <span class="fw-regular">Account Information: </span> You agree to provide accurate and up-to-date
+                        information.
                     </li>
                     <li>
-                        By submitting User Content, you grant us a non-exclusive, royalty-free, worldwide license to
-                        use, reproduce, modify, publish, and distribute your User Content on the Website and in
-                        connection with the Services.
-                    </li>
-                    <li>
-                        You warrant that your User Content does not violate any third-party rights, including
-                        intellectual property rights.
-                    </li>
-                    <li>
-                        You are responsible for the accuracy and completeness of your User Content.
+                        <span class="fw-regular">Password Security: </span>You are responsible for maintaining the
+                        confidentiality
+                        of your password
                     </li>
                 </ul>
             </div>
@@ -86,31 +65,40 @@
                 <h2>3. Deals and Offers</h2>
                 <ul>
                     <li>
-                        The Website may display deals and offers from various merchants.
+                        <span class="fw-regular">Accuracy: </span>While we strive for accuracy, we cannot guarantee the
+                        accuracy or completeness of the deals and offers listed on Dealslah
                     </li>
                     <li>
-                        We are not responsible for the accuracy, availability, or quality of the deals and offers.
+                        <span class="fw-regular">Merchant Responsibility: </span>Dealslah is not responsible for the
+                        quality,
+                        availability, or delivery of products or services offered by merchants.
                     </li>
                     <li>
-                        You are responsible for reviewing the terms and conditions of any deal or offer before using it.
+                        <span class="fw-regular">Changes: </span>Merchants may modify or cancel deals without notice.
                     </li>
-                    <li>
-                        We are not responsible for any disputes between you and a merchant. </li>
                 </ul>
             </div>
             <div>
-                <h2>4. Disclaimers</h2>
+                <h2>4. User Conduct</h2>
                 <ul>
                     <li>
-                        The Website and Services are provided "as is" and without warranties of any kind, express or
-                        implied.
+                        <span class="fw-regular">Prohibited Conduct: </span>You agree not to:
+                        <ul>
+                            <li>
+                                Use Dealslah for any unlawful or harmful purpose.
+                            </li>
+                            <li>
+                                Post or transmit any offensive, harmful, or misleading content.
+                            </li>
+                            <li>
+                                Violate any applicable laws or regulations.
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        We disclaim all warranties, including but not limited to, warranties of merchantability, fitness
-                        for a particular purpose, and non-infringement.
-                    </li>
-                    <li>
-                        We do not warrant that the Website or Services will be uninterrupted, error-free, or virus-free.
+                        <span class="fw-regular">Intellectual Property: </span>
+                        You acknowledge that Dealslah and its content are
+                        protected by intellectual property rights.
                     </li>
                 </ul>
             </div>
@@ -118,63 +106,83 @@
                 <h2>5. Limitation of Liability</h2>
                 <ul>
                     <li>
-                        We shall not be liable for any direct, indirect, incidental, consequential, or special damages
-                        arising out of or in any way connected with your use of the Website or Services.
+                        <span class="fw-regular">No Warranty: </span>
+                        Dealslah provides the website on an "as is" basis without
+                        warranties.
                     </li>
-
-                </ul>
-            </div>
-            <div>
-                <h2>6. Termination</h2>
-                <ul>
                     <li>
-                        We may terminate your access to the Website or Services for any reason, at any time, without
-                        notice.
-                    </li>
-                    <li>You may terminate your use of the Website or Services at any time.</li>
-                </ul>
-            </div>
-            <div>
-                <h2>7. Governing Law</h2>
-                <ul>
-                    <li>
-                        These Terms shall be governed by and construed in accordance with the laws of India.
+                        <span class="fw-regular">Liability: </span>
+                        Dealslah shall not be liable for any indirect, incidental, or
+                        consequential damages arising from your use of the website.
                     </li>
                 </ul>
             </div>
             <div>
-                <h2>8. Entire Agreement</h2>
+                <h2>6. Indemnification</h2>
                 <ul>
                     <li>
-                        These Terms constitute the entire agreement between you and us regarding your use of the Website
-                        and Services.
+                        <span class="fw-regular">Indemnify: </span>
+                        You agree to indemnify and hold Dealslah harmless from any
+                        claims arising from your use of the website.
                     </li>
                 </ul>
             </div>
             <div>
-                <h2>9. Changes to the Terms</h2>
+                <h2>7. Governing</h2>
                 <ul>
                     <li>
-                        We may update these Terms at any time. We will notify you of any changes by posting the new
-                        Terms on the Website.
-                    </li>
-                    <li>
-                        Your continued use of the Website or Services after the posting of the revised Terms constitutes
-                        your acceptance of the revised Terms.
+                        <span class="fw-regular">Singapore Law: </span>
+                        This agreement shall be governed by and construed in
+                        accordance with the laws of Singapore.
                     </li>
                 </ul>
-
             </div>
             <div>
-                <h2>9. Contact Us</h2>
+                <h2>8. Changes</h2>
                 <ul>
                     <li>
-                        If you have any questions about these Terms, please contact us at
-                        <a href="mailto:info.dealsmachi@gmail.com">info.dealsmachi@gmail.com</a>
+                        <span class="fw-regular">Modifications: </span>
+                        Dealslah may modify these terms and conditions from
+                        time to time.
                     </li>
-
+                    <li>
+                        <span class="fw-regular">Notice: </span>
+                        We will provide notice of any material changes.
+                    </li>
                 </ul>
-
+            </div>
+            <div>
+                <h2>9. Contact Information</h2>
+                <ul>
+                    <li>
+                        <span class="fw-regular">Contact: </span>
+                        For inquiries or concerns, please contact us at
+                        info@dealslah.com
+                    </li>
+                </ul>
+                <h2>Additional Considerations: </h2>
+                <ul>
+                    <li>
+                        <span class="fw-regular">Privacy Policy: </span>
+                        Ensure a clear and comprehensive privacy policy that
+                        outlines how you collect, use, and protect user data.
+                    </li>
+                    <li>
+                        <span class="fw-regular">Dispute Resolution: </span>
+                        Consider including a dispute resolution clause, such
+                        as arbitration or mediation.
+                    </li>
+                    <li>
+                        <span class="fw-regular">Cookies and Tracking: </span>
+                        Address your use of cookies and other tracking
+                        technologies.
+                    </li>
+                    <li>
+                        <span class="fw-regular">Affiliate Marketing: </span>
+                        If applicable, outline your affiliate marketing program
+                        or partnerships.
+                    </li>
+                </ul>
             </div>
         </div>
         @include('nav.footer')
@@ -182,13 +190,13 @@
     </section>
 
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+   <!-- Bootstrap JS -->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+   integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+</script>
 
-    <!-- Fontawesome -->
-    <script src="https://kit.fontawesome.com/5b8838406b.js" crossorigin="anonymous"></script>
+<!-- Fontawesome -->
+<script src="https://kit.fontawesome.com/5b8838406b.js" crossorigin="anonymous"></script>
     <!-- Page Scripts -->
     @stack('scripts')
 </body>

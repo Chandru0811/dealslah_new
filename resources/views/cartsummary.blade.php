@@ -95,7 +95,7 @@ function formatIndianCurrency($num) {
                             @if ($default_address)
                             <p>
                                 <strong>{{ $default_address->first_name ?? '' }}
-                                    {{ $default_address->last_name ?? '' }} (+91)
+                                    {{ $default_address->last_name ?? '' }} (+65)
                                     {{ $default_address->phone ?? '' }}</strong>&nbsp;&nbsp;<br>
                                 {{ $default_address->address ?? '' }},
                                 {{ $default_address->city ?? '' }},
@@ -157,7 +157,7 @@ function formatIndianCurrency($num) {
                             @else
                             <div class="rating mt-3 mb-3">
                                 <span style="color: #22cb00">Currently Services are free through
-                                    DealsMachi</span>
+                                    Dealslah</span>
                             </div>
                             @endif
 
@@ -226,7 +226,7 @@ function formatIndianCurrency($num) {
                             {{ formatIndianCurrency($carts->grand_total) }}</span>
                         &nbsp;&nbsp;
                         <span class="ms-1" style="font-size:12px; color:#00DD21;white-space: nowrap;">
-                            DealsMachi Discount
+                            Dealslah Discount
                             &nbsp;<span class="discount">- {{ formatIndianCurrency($carts->discount) }}</span>
                         </span>
                     </h4>

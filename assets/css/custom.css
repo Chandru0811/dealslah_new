@@ -6,8 +6,7 @@
 }
 
 /* Category & Banner Start  */
-.categorySection {    
-    margin-top: 100px;
+.categorySection {
     margin-bottom: 1rem;
 }
 
@@ -29,12 +28,6 @@
     }
 }
 
-@media (min-width: 320px) and (max-width: 500px) {
-     .categoryIcons {
-        margin-top: 50px !important;
-    }
-}
-
 .categoryTitle {
     color: #000000;
     font-weight: 300;
@@ -43,7 +36,7 @@
 }
 
 .categoryTitle:hover {
-    color: #ff0060;
+    color: #ef4444;
 }
 
 .img-container {
@@ -164,7 +157,6 @@
     }
 
     .categorySection {
-        margin-top: 50px;
         margin-bottom: 2rem;
     }
 }
@@ -293,7 +285,7 @@
 /* App & PlayStore Start */
 .app-store-btn {
     border: none;
-    background: #ff0060;
+    background: #ef4444;
     border-radius: 5px;
     padding: 10px 14px;
     color: #fff;
@@ -304,7 +296,7 @@
 
 /* Product Card Start  */
 .couponBadge {
-    background-color: #ff0060;
+    background-color: #ef4444;
     color: #fff;
     border-radius: 4px;
     font-size: 12px;
@@ -321,7 +313,7 @@
 .topCard:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0);
-    border: 1px solid #ff0060;
+    border: 1px solid #ef4444;
     cursor: pointer;
 }
 
@@ -333,14 +325,14 @@
 }
 
 .sub_topCard {
-    border: 1px solid #ff0060;
+    border: 1px solid #ef4444;
     max-width: 305px !important;
 }
 
 .sub_topCard:hover {
     transform: translateY(-2px);
-    box-shadow: 2px 2px 5px #ff006041;
-    border: 1px solid #ff0060;
+    box-shadow: 2px 2px 5px #ef444441;
+    border: 1px solid #ef4444;
     cursor: pointer;
 }
 
@@ -360,7 +352,7 @@
     top: 15px;
     left: 10px;
     width: 6rem;
-    background-color: #ff0060;
+    background-color: #ef4444;
     color: #fff;
     z-index: 2;
     border: 1px solid #fff;
@@ -368,7 +360,7 @@
 }
 
 .trending-bookmark-badge {
-    color: #ff0060;
+    color: #ef4444;
     font-weight: 400;
     font-size: larger;
 }
@@ -399,12 +391,12 @@
 }
 
 .dropdown-menu li a:hover {
-    background-color: #ff0060;
+    background-color: #ef4444;
     color: #fff;
 }
 
 .dropdown-menu li a:active {
-    background-color: #ff0060;
+    background-color: #ef4444;
     color: #fff;
 }
 
@@ -463,7 +455,7 @@
 
 /* Footer Start  */
 footer {
-    background-color: #ff0060 !important;
+    background-color: #ef4444 !important;
     padding: 20px 0;
 }
 
@@ -521,14 +513,10 @@ footer hr {
     width: 34%;
     border-radius: 50%;
     text-align: center;
-    /*border: 1px solid #ff0060;*/
+    border: 1px solid #ef4444;
     background-color: #fff;
-    color: #ff0060;
+    color: #ef4444;
     margin-left: 45%;
-}
-
-.cart-border {
-    border: 1px solid #ff0060 !important;
 }
 
 @media screen and (max-width: 1199px) and (min-width: 320px) {
@@ -537,9 +525,9 @@ footer hr {
         width: 32%;
         border-radius: 50%;
         text-align: center;
-        border: 1px solid #ff0060;
+        border: 1px solid #ef4444;
         background-color: #fff;
-        color: #ff0060;
+        color: #ef4444;
         margin-left: 8%;
     }
 }
@@ -549,9 +537,9 @@ footer hr {
     width: 25%;
     border-radius: 100%;
     text-align: center;
-    border: 1px solid #ff0060;
+    border: 1px solid #ef4444;
     background-color: #fff;
-    color: #ff0060;
+    color: #ef4444;
     margin-left: 45%;
 }
 
@@ -561,23 +549,23 @@ footer hr {
         width: 25%;
         border-radius: 100%;
         text-align: center;
-        border: 1px solid #ff0060;
+        border: 1px solid #ef4444;
         background-color: #fff;
-        color: #ff0060;
+        color: #ef4444;
         margin-left: 8%;
     }
 }
 
 .header .userlogin-button {
-    background-color: #ff0060;
+    background-color: #ef4444;
     color: #fff;
     font-size: 24px;
     font-family: "Kanit", system-ui;
 }
 
 .header .userlogin-button-large {
-    border: 2px solid #ff0060;
-    background-color: #ff0060;
+    border: 2px solid #ef4444;
+    background-color: #ef4444;
     color: #fff;
     font-size: 14px;
     font-family: "Kanit", system-ui;
@@ -587,8 +575,8 @@ footer hr {
 
 @media screen and (max-width: 450px) {
     .header .userlogin-button-large {
-        border: 2px solid #ff0060;
-        background-color: #ff0060;
+        border: 2px solid #ef4444;
+        background-color: #ef4444;
         color: #fff;
         font-size: 10px;
         font-family: "Kanit", system-ui;
@@ -610,9 +598,9 @@ footer hr {
 }
 
 .header .userlogin-button-large:hover {
-    border: 2px solid #ff0060;
+    border: 2px solid #ef4444;
     background-color: #fff;
-    color: #ff0060;
+    color: #ef4444;
     font-size: 14px;
     font-family: "Kanit", system-ui;
 }
@@ -634,7 +622,7 @@ footer hr {
     }
 
     .header-logo {
-        max-width: 115px;
+        max-width: 60px;
         padding-left: 0 !important;
     }
 
@@ -650,13 +638,13 @@ footer hr {
 .icon-input {
     position: absolute;
     left: 10px;
-    color: #ff0060;
+    color: #ef4444;
 }
 
 .search-input {
     height: 50px;
     padding-left: 35px;
-    border: 1px solid #ff0060;
+    border: 1px solid #ef4444;
     border-radius: 20px !important;
     border-radius: 4px;
     font-size: 16px;
@@ -667,7 +655,7 @@ footer hr {
 .search-input-large {
     height: 50px;
     padding-left: 32px;
-    border: 1px solid #ff0060;
+    border: 1px solid #ef4444;
     border-radius: 20px !important;
     border-radius: 4px;
     font-size: 16px;
@@ -679,7 +667,7 @@ footer hr {
     .search-input-large {
         height: 50px;
         padding-left: 30px;
-        border: 1px solid #ff0060;
+        border: 1px solid #ef4444;
         border-radius: 20px !important;
         border-radius: 4px;
         font-size: 16px;
@@ -692,7 +680,7 @@ footer hr {
     .search-input-large {
         height: 50px;
         padding-left: 30px;
-        border: 1px solid #ff0060;
+        border: 1px solid #ef4444;
         border-radius: 20px !important;
         border-radius: 4px;
         font-size: 16px;
@@ -721,9 +709,9 @@ footer hr {
 
     .header .userlogin-button:hover {
         font-size: 10px;
-        border: 2px solid #ff0060;
+        border: 2px solid #ef4444;
         background-color: #fff;
-        color: #ff0060;
+        color: #ef4444;
     }
 }
 
@@ -734,9 +722,9 @@ footer hr {
 
     .header .userlogin-button:hover {
         font-size: 12px;
-        border: 2px solid #ff0060;
+        border: 2px solid #ef4444;
         background-color: #fff;
-        color: #ff0060;
+        color: #ef4444;
     }
 }
 
@@ -747,9 +735,9 @@ footer hr {
 
     .header .userlogin-button:hover {
         font-size: 14px;
-        border: 2px solid #ff0060;
+        border: 2px solid #ef4444;
         background-color: #fff;
-        color: #ff0060;
+        color: #ef4444;
     }
 }
 
@@ -760,20 +748,20 @@ footer hr {
 
     .header .userlogin-button:hover {
         font-size: 15px;
-        border: 2px solid #ff0060;
+        border: 2px solid #ef4444;
         background-color: #fff;
-        color: #ff0060;
+        color: #ef4444;
     }
 }
 
 .search-button {
-    background-color: #ff0060;
+    background-color: #ef4444;
     height: 50px;
     display: flex;
 }
 
 .search-button:hover {
-    background-color: #ff0060;
+    background-color: #ef4444;
 }
 
 .input-wrapper {
@@ -865,7 +853,7 @@ footer hr {
 
 .productViewTabs .nav-tabs .nav-link {
     background-color: #f8b4b4;
-    color: #ff0060;
+    color: #ef4444;
     border: 1px solid#f8b4b4;
     border-radius: 5px;
     margin-right: 10px;
@@ -889,27 +877,27 @@ footer hr {
 
 .productViewTabs .nav-tabs .nav-link.active {
     background-color: white;
-    border-color: #ff0060;
-    color: #ff0060;
+    border-color: #ef4444;
+    color: #ef4444;
 }
 
 .filterlarge {
-    border-right: 1px solid #ff0060;
+    border-right: 1px solid #ef4444;
 }
 
 .productViewTabs .nav-tabs .nav-link:hover {
     background-color: white;
-    border-color: #ff0060;
-    color: #ff0060;
+    border-color: #ef4444;
+    color: #ef4444;
 }
 
 .productViewTabs .tab-content {
     padding: 20px;
     background-color: #fff;
-    border: 1px solid #ff0060;
+    border: 1px solid #ef4444;
     border-top: none;
     margin-top: 20px;
-    border-top: 1px solid #ff0060;
+    border-top: 1px solid #ef4444;
 }
 
 .add_photos {
@@ -938,7 +926,7 @@ footer hr {
 
 .contactCard {
     text-decoration: none;
-    color: #ff0060;
+    color: #ef4444;
     font-size: 14px;
 }
 
@@ -949,8 +937,8 @@ footer hr {
 
 .enquiryBtn {
     width: 100%;
-    background-color: #ff0060;
-    border: 2px solid #ff0060;
+    background-color: #ef4444;
+    border: 2px solid #ef4444;
     color: #fff;
     font-weight: 500;
     border-radius: 5px;
@@ -959,13 +947,13 @@ footer hr {
 .enquiryBtn:hover,
 .enquiryBtn.active {
     background-color: #fff !important;
-    border: 2px solid #ff0060 !important;
-    color: #ff0060 !important;
+    border: 2px solid #ef4444 !important;
+    color: #ef4444 !important;
 }
 
 .productViewCard {
     background-color: #fff;
-    border-color: #ff0060;
+    border-color: #ef4444;
 }
 
 .info {
@@ -975,16 +963,16 @@ footer hr {
 
 .showNumBtn {
     color: #fff;
-    background-color: #ff0060;
-    border: 1px solid #ff0060;
+    background-color: #ef4444;
+    border: 1px solid #ef4444;
     font-size: 14px;
 }
 
 @media screen and (max-width: 440px) {
     .showNumBtn {
         color: #fff;
-        background-color: #ff0060;
-        border: 1px solid #ff0060;
+        background-color: #ef4444;
+        border: 1px solid #ef4444;
         font-size: 10px;
     }
 }
@@ -997,39 +985,39 @@ footer hr {
 
 .showNumBtn:hover,
 .showNumBtn.active {
-    color: #ff0060 !important;
+    color: #ef4444 !important;
     background-color: #fff !important;
-    border: 1px solid #ff0060 !important;
+    border: 1px solid #ef4444 !important;
 }
 
 .sendEnqBtn {
-    color: #ff0060;
+    color: #ef4444;
     background-color: #fff;
-    border: 1px solid #ff0060;
+    border: 1px solid #ef4444;
     font-size: 12px;
 }
 
 .sendEnqBtn:hover,
 .sendEnqBtn.active {
-    background-color: #ff0060 !important;
-    border: 1px solid #ff0060 !important;
+    background-color: #ef4444 !important;
+    border: 1px solid #ef4444 !important;
     color: #fff !important;
 }
 
 @media screen and (max-width: 400px) and (min-width: 367px) {
     .sendEnqBtn {
-        color: #ff0060;
+        color: #ef4444;
         background-color: #fff;
-        border: 1px solid #ff0060;
+        border: 1px solid #ef4444;
         font-size: 10px !important;
     }
 }
 
 @media screen and (max-width: 992px) {
     .sendEnqBtn {
-        color: #ff0060;
+        color: #ef4444;
         background-color: #fff;
-        border: 1px solid #ff0060;
+        border: 1px solid #ef4444;
         width: 100%;
     }
 
@@ -1040,15 +1028,15 @@ footer hr {
 
 .chatBtn {
     background-color: #f8b4b4;
-    color: #ff0060;
-    border: 2px solid #ff0060;
+    color: #ef4444;
+    border: 2px solid #ef4444;
     font-size: 14px;
 }
 
 .chatBtn:hover {
     background-color: #f8b4b4;
-    color: #ff0060;
-    border: 2px solid #ff0060;
+    color: #ef4444;
+    border: 2px solid #ef4444;
     font-size: 14px;
 }
 
@@ -1144,7 +1132,7 @@ footer hr {
 
 .selectText {
     font-size: 26px;
-    color: #ff0060;
+    color: #ef4444;
     cursor: pointer;
     text-wrap: nowrap;
 }
@@ -1156,7 +1144,7 @@ footer hr {
 
 .canvas_selectText2 {
     font-size: 15px;
-    color: #ff0060;
+    color: #ef4444;
 }
 
 @media (min-width: 320px) and (max-width: 476px) {
@@ -1168,7 +1156,7 @@ footer hr {
 
     .selectText {
         font-size: 18px;
-        color: #ff0060;
+        color: #ef4444;
         cursor: pointer;
     }
 
@@ -1194,7 +1182,7 @@ footer hr {
 
     .selectText {
         font-size: 20px;
-        color: #ff0060;
+        color: #ef4444;
         cursor: pointer;
     }
 
@@ -1220,7 +1208,7 @@ footer hr {
 
     .selectText {
         font-size: 16px;
-        color: #ff0060;
+        color: #ef4444;
         cursor: pointer;
     }
 
@@ -1255,7 +1243,7 @@ footer hr {
 }
 
 .dropdownproduct option:checked {
-    background-color: #ff0060;
+    background-color: #ef4444;
     color: white;
 }
 
@@ -1286,7 +1274,7 @@ footer hr {
 
 .selectText2 {
     font-size: 18px;
-    color: #ff0060;
+    color: #ef4444;
 }
 
 .topText3 {
@@ -1327,7 +1315,7 @@ footer hr {
 }
 
 .filterdropdown:checked {
-    background-color: #ff0060;
+    background-color: #ef4444;
     color: #fff;
 }
 
@@ -1355,36 +1343,36 @@ footer hr {
 }
 
 .clear-button {
-    border-color: #ff0060;
-    color: #ff0060;
+    border-color: #ef4444;
+    color: #ef4444;
     font-size: 14px;
     width: 100px;
 }
 
 .filter-button {
-    background-color: #ff0060;
+    background-color: #ef4444;
     border-radius: 5px;
     width: 40px;
     text-align: center;
 }
 
 .apply-button {
-    background-color: #ff0060;
+    background-color: #ef4444;
     color: #fff;
     font-size: 14px;
     width: 100px;
 }
 
 .clear-button:hover {
-    border-color: #ff0060;
-    color: #ff0060 !important;
+    border-color: #ef4444;
+    color: #ef4444 !important;
     font-size: 14px;
 }
 
 .apply-button:hover,
 .apply-button.active,
 .apply-button:focus {
-    background-color: #ff0060 !important;
+    background-color: #ef4444 !important;
     color: #fff !important;
     font-size: 14px !important;
 }
@@ -1444,7 +1432,7 @@ footer hr {
 
 /* Login */
 .login-container .login-title {
-    color: #ff0060;
+    color: #ef4444;
     text-align: center;
     font-weight: 400;
     cursor: pointer;
@@ -1465,7 +1453,7 @@ footer hr {
 }
 
 .login-container .login-btn {
-    color: #ff0060;
+    color: #ef4444;
     width: 100%;
     background-color: #fff;
 }
@@ -1484,17 +1472,17 @@ footer hr {
 
 .login-container .login-btn:hover,
 .login-container .login-btn.active {
-    color: #ff0060;
+    color: #ef4444;
     border-color: #fff;
     background-color: #fff;
 }
 
 .password-container .form-label {
-    color: #ff0060 !important;
+    color: #ef4444 !important;
 }
 
 .email-container .form-label {
-    color: #ff0060 !important;
+    color: #ef4444 !important;
 }
 
 .line-divider-container {
@@ -1547,8 +1535,8 @@ footer hr {
 
 /* Register */
 .register-container .register-title {
-    color: #ff0060;
-    border-bottom: 2px solid #ff0060;
+    color: #ef4444;
+    border-bottom: 2px solid #ef4444;
     width: 100%;
     text-align: center;
     font-weight: 400;
@@ -1557,14 +1545,14 @@ footer hr {
 
 .register-container .register-btn {
     color: #fff;
-    background-color: #ff0060;
+    background-color: #ef4444;
     width: 100%;
 }
 
 .register-container .register-btn:hover,
 .register-container .register-btn.active {
     color: #fff;
-    background-color: #ff0060;
+    background-color: #ef4444;
     width: 100%;
 }
 
@@ -1587,8 +1575,8 @@ footer hr {
 
 /* Forgot */
 .forgot-container .forgot-title {
-    color: #ff0060;
-    border-bottom: 2px solid #ff0060;
+    color: #ef4444;
+    border-bottom: 2px solid #ef4444;
     width: 100%;
     text-align: center;
     font-weight: 400;
@@ -1597,14 +1585,14 @@ footer hr {
 
 .forgot-container .forgot-btn {
     color: #fff;
-    background-color: #ff0060;
+    background-color: #ef4444;
     width: 100%;
 }
 
 .forgot-container .forgot-btn:hover,
 .forgot-container .forgot-btn.active {
     color: #fff;
-    background-color: #ff0060;
+    background-color: #ef4444;
     width: 100%;
 }
 
@@ -1612,8 +1600,8 @@ footer hr {
 
 /* Reset */
 .reset-container .reset-title {
-    color: #ff0060;
-    border-bottom: 2px solid #ff0060;
+    color: #ef4444;
+    border-bottom: 2px solid #ef4444;
     width: 100%;
     text-align: center;
     font-weight: 400;
@@ -1622,14 +1610,14 @@ footer hr {
 
 .reset-container .reset-btn {
     color: #fff;
-    background-color: #ff0060;
+    background-color: #ef4444;
     width: 100%;
 }
 
 .reset-container .reset-btn:hover,
 .reset-container .reset-btn.active {
     color: #fff;
-    background-color: #ff0060;
+    background-color: #ef4444;
     width: 100%;
 }
 
@@ -1707,7 +1695,7 @@ footer hr {
 } */
 
 .social-media-card {
-    border: 1px solid #ff0060;
+    border: 1px solid #ef4444;
     position: sticky;
     top: 85px;
 }
@@ -1731,7 +1719,7 @@ footer hr {
 }
 
 .filter-social-media-card {
-    border: 1px solid #ff0060;
+    border: 1px solid #ef4444;
     position: sticky;
     top: 85px;
 }
@@ -2248,11 +2236,11 @@ footer hr {
     padding: 14px;
     /* width: 40px;
     height: 40px; */
-    background: #ff0060;
+    background: #ef4444;
 }
 
 .mediaIconBgIcon:hover {
-    background: #ff0060;
+    background: #ef4444;
 }
 
 .socialicons a {
@@ -2262,7 +2250,7 @@ footer hr {
 .mediaIconBgIcon {
     width: 50px;
     height: 50px;
-    background-color: #ff0060;
+    background-color: #ef4444;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2323,12 +2311,12 @@ footer hr {
 }
 
 .contact-button {
-    background-color: #ff0060;
+    background-color: #ef4444;
     color: #fff;
 }
 
 .contact-button:hover {
-    background-color: #ff0060 !important;
+    background-color: #ef4444 !important;
     color: #fff !important;
 }
 
@@ -2424,7 +2412,7 @@ footer hr {
 }
 
 .topBar .btn.active {
-    color: #ff0060;
+    color: #ef4444;
     border: none;
     position: relative;
 }
@@ -2436,12 +2424,12 @@ footer hr {
     left: 0;
     right: 0;
     height: 2.5px;
-    background-color: #ff0060;
+    background-color: #ef4444;
 }
 
 .topBar .btn:hover {
     background-color: #eaa7a726;
-    color: #ff0060;
+    color: #ef4444;
     border-radius: 20px;
 }
 
@@ -2498,7 +2486,7 @@ footer hr {
     top: 50%;
     transform: translateY(-50%);
     background-color: #fff;
-    border: 2px solid #ff0060;
+    border: 2px solid #ef4444;
     padding: 2px 7px;
     border-radius: 50%;
     cursor: pointer;
@@ -2516,12 +2504,12 @@ footer hr {
 
 .left-arrow {
     left: -25px;
-    color: #ff0060;
+    color: #ef4444;
 }
 
 .right-arrow {
     right: -25px;
-    color: #ff0060;
+    color: #ef4444;
 }
 
 .error {
@@ -2537,7 +2525,7 @@ footer hr {
 }
 
 .card.payment-option:hover {
-    border-color: #ff0060;
+    border-color: #ef4444;
 }
 
 .card.payment-option.selected {
@@ -2552,21 +2540,21 @@ footer hr {
 }
 
 .placeOrderBtn {
-    background-color: #ff0060;
-    border: 2px solid #ff0060;
+    background-color: #ef4444;
+    border: 2px solid #ef4444;
     color: #fff;
 }
 
 .placeOrderBtn:hover,
 .placeOrderBtn.active {
     background-color: #fff !important;
-    border: 2px solid #ff0060 !important;
-    color: #ff0060 !important;
+    border: 2px solid #ef4444 !important;
+    color: #ef4444 !important;
 }
 
 .placeOrderBtn:disabled {
-    background-color: #ff0060;
-    border: 1px solid #ff0060;
+    background-color: #ef4444;
+    border: 1px solid #ef4444;
     color: #fff;
     opacity: 0.6;
 }
@@ -2584,8 +2572,8 @@ footer hr {
 /* / Checkout / */
 
 .showmoreBtn {
-    background-color: #ff0060;
-    border: 2px solid #ff0060;
+    background-color: #ef4444;
+    border: 2px solid #ef4444;
     color: #fff;
     border-radius: 4px;
 }
@@ -2593,8 +2581,8 @@ footer hr {
 .showmoreBtn:hover,
 .showmoreBtn.active {
     background-color: #fff !important;
-    border: 2px solid #ff0060 !important;
-    color: #ff0060 !important;
+    border: 2px solid #ef4444 !important;
+    color: #ef4444 !important;
     border-radius: 4px;
 }
 
@@ -2644,9 +2632,9 @@ footer hr {
 }
 
 .badge_outline_dark {
-    color: #ff0060;
+    color: #ef4444;
     background: #fff;
-    border: 1px solid #ff0060;
+    border: 1px solid #ef4444;
     font-size: 14px;
     padding: 1.6px 5px;
     border-radius: 5px;
@@ -2656,12 +2644,12 @@ footer hr {
 }
 
 .order_id {
-    color: #ff0060 !important;
+    color: #ef4444 !important;
 }
 
 .badge_outline_dark:hover {
     color: #fff;
-    background: #ff0060;
+    background: #ef4444;
     border: 1px solid #fff;
     font-size: 14px;
     padding: 1.6px 5px;
@@ -2673,8 +2661,8 @@ footer hr {
 
 .badge_outline_pink {
     color: #fff;
-    background: #ff0060;
-    border: 1px solid #ff0060;
+    background: #ef4444;
+    border: 1px solid #ef4444;
     font-size: 14px;
     padding: 1.6px 5px;
     border-radius: 5px;
@@ -2684,9 +2672,9 @@ footer hr {
 }
 
 .badge_outline_pink:hover {
-    color: #ff0060;
+    color: #ef4444;
     background: #fff;
-    border: 1px solid #ff0060;
+    border: 1px solid #ef4444;
     font-size: 14px;
     padding: 1.6px 5px;
     border-radius: 5px;
@@ -2697,25 +2685,25 @@ footer hr {
 
 .invoiceBtn {
     background-color: #fff;
-    border: 2px solid #ff0060;
-    color: #ff0060;
+    border: 2px solid #ef4444;
+    color: #ef4444;
 }
 
 .invoiceBtn:hover,
 .invoiceBtn.active {
-    background-color: #ff0060 !important;
-    border: 2px solid #ff0060 !important;
+    background-color: #ef4444 !important;
+    border: 2px solid #ef4444 !important;
     color: #fff !important;
 }
 
 .orderCard {
-    border: 1px solid #ff0060;
+    border: 1px solid #ef4444;
 }
 
 .orderCard:hover {
     transform: translateY(-2px);
-    box-shadow: 2px 2px 5px #ff006041;
-    border: 1px solid #ff0060;
+    box-shadow: 2px 2px 5px #ef444441;
+    border: 1px solid #ef4444;
     cursor: pointer;
 }
 
@@ -2861,7 +2849,7 @@ footer hr {
 }
 
 .deal-badge {
-    background-color: #ff0060;
+    background-color: #ef4444;
     border-radius: 4px;
     padding: 2px 4px;
     font-size: x-small;
@@ -2897,7 +2885,7 @@ footer hr {
 }
 
 .nav-tabs .nav-link.active {
-    color: #ff0060;
+    color: #ef4444;
 }
 
 .tab_options {
@@ -2906,7 +2894,7 @@ footer hr {
 
 .modal_links {
     text-decoration: none;
-    color: #ff0060;
+    color: #ef4444;
     padding: 0 5px;
     font-size: small;
 }
@@ -3268,11 +3256,11 @@ footer hr {
 }
 
 #default_address:checked {
-    accent-color: #ff0060;
+    accent-color: #ef4444;
 }
 
 .default_address:checked {
-    accent-color: #ff0060;
+    accent-color: #ef4444;
 }
 
 .card.card_style {
@@ -3285,13 +3273,13 @@ footer hr {
 }
 
 .card.card_style:hover {
-    border-color: #ff0060;
+    border-color: #ef4444;
 }
 
 .card.card_style .form-check-input:checked~div,
 .card.card_style .form-check-input:checked+label {
-    border-color: #ff0060;
-    color: #ff0060;
+    border-color: #ef4444;
+    color: #ef4444;
 }
 
 .card.card_style .form-check-input {
@@ -3299,9 +3287,9 @@ footer hr {
 }
 
 .badge_infos {
-    color: #ff0060;
+    color: #ef4444;
     background: #fff;
-    border: 1px solid #ff0060;
+    border: 1px solid #ef4444;
     font-size: 10px;
     border-radius: 10px;
     padding: 0 8px;
@@ -3399,7 +3387,7 @@ footer hr {
 }
 
 .thumbnail img.active {
-    border-color: #ff0060;
+    border-color: #ef4444;
 }
 
 /* .text-center button {
@@ -3540,7 +3528,7 @@ footer hr {
     font-size: 10px !important;
     border-radius: 4px;
     align-items: center;
-    background-color: #ff0060;
+    background-color: #ef4444;
     color: white;
 }
 
@@ -3551,17 +3539,17 @@ footer hr {
 
 .outline_primary_btn {
     background: #fff;
-    color: #ff0060;
-    border: 2px solid #ff0060;
+    color: #ef4444;
+    border: 2px solid #ef4444;
     font-size: 12px;
     padding: 2px 8px;
     border-radius: 4px !important;
 }
 
 .outline_primary_btn:hover {
-    background: #ff0060;
+    background: #ef4444;
     color: #fff;
-    border: 2px solid #ff0060;
+    border: 2px solid #ef4444;
     padding: 2px 8px;
     border-radius: 4px !important;
 }
@@ -3663,23 +3651,23 @@ footer hr {
 
 .btn-orange {
     background-color: #fff;
-    color: #ff0060;
-    border: 1px solid #ff0060;
+    color: #ef4444;
+    border: 1px solid #ef4444;
     font-size: 12px;
     border-radius: 3px;
 }
 
 .btn-orange:hover {
-    background-color: #ff0060;
+    background-color: #ef4444;
     color: #fff;
-    border: 1px solid #ff0060;
+    border: 1px solid #ef4444;
     font-size: 12px;
     border-radius: 3px;
 }
 
 .user_list:hover {
     color: #fff;
-    background: #ff0060;
+    background: #ef4444;
     border-radius: 4px;
 }
 
@@ -3741,8 +3729,8 @@ footer hr {
 
 /* .owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev, .owl-carousel button.owl-dot {
     background-color: #fff;
-    border: 2px solid #ff0060;
-    color: #ff0060;
+    border: 2px solid #ef4444;
+    color: #ef4444;
     border-radius: 100%;
     font-weight: 700;
     padding: 0 4px !important;
@@ -3753,7 +3741,7 @@ footer hr {
 }
 
 /* .carousel_content {
-    border: 1px solid #ff0060;
+    border: 1px solid #ef4444;
     border-radius: 5px;
     padding: 10px;
 } */
@@ -3781,16 +3769,16 @@ footer hr {
 
 .card_cart {
     background-color: #fff !important;
-    border: 1px solid #ff0060 !important;
-    color: #ff0060 !important;
+    border: 1px solid #ef4444 !important;
+    color: #ef4444 !important;
     font-size: 10px !important;
 }
 
 .card_cart:hover,
 .card_cart.active {
-    background-color: #ff0060 !important;
+    background-color: #ef4444 !important;
     color: #fff !important;
-    border: 1px solid #ff0060;
+    border: 1px solid #ef4444;
     font-size: 10px;
 }
 
@@ -3867,17 +3855,17 @@ footer hr {
 }
 
 .remove-btn {
-    border: 1px solid #ff0060 !important;
+    border: 1px solid #ef4444 !important;
     background-color: white !important;
-    color: #ff0060 !important;
+    color: #ef4444 !important;
     padding: 4px 15px;
     border-radius: 5px !important;
 }
 
 .remove-btn:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.06);
-    border: 1px solid #ff0060 !important;
-    color: #ff0060 !important;
+    border: 1px solid #ef4444 !important;
+    color: #ef4444 !important;
     padding: 4px 15px;
 }
 
@@ -3888,17 +3876,17 @@ footer hr {
 
 @media screen and (max-width: 424px) {
     .remove-btn {
-        border: 1px solid #ff0060 !important;
+        border: 1px solid #ef4444 !important;
         background-color: white !important;
-        color: #ff0060 !important;
+        color: #ef4444 !important;
         padding: 4px 15px;
         border-radius: 5px !important;
     }
 
     .remove-btn:hover {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.06);
-        border: 1px solid #ff0060 !important;
-        color: #ff0060 !important;
+        border: 1px solid #ef4444 !important;
+        color: #ef4444 !important;
         padding: 4px 15px;
     }
 
@@ -3916,8 +3904,8 @@ footer hr {
 
 .cancel-btn {
     border-radius: 2px !important;
-    border: 1px solid #ff0060 !important;
-    color: #ff0060 !important;
+    border: 1px solid #ef4444 !important;
+    color: #ef4444 !important;
     font-size: 16px;
     padding: 6px 7px;
 }
@@ -3925,8 +3913,8 @@ footer hr {
 .cancel-btn:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.06);
     border-radius: 2px !important;
-    border: 1px solid #ff0060 !important;
-    color: #ff0060 !important;
+    border: 1px solid #ef4444 !important;
+    color: #ef4444 !important;
     font-size: 16px;
     padding: 6px 7px;
 }
@@ -4013,7 +4001,7 @@ footer hr {
     margin-left: 8px;
     width: 16px;
     height: 16px;
-    border: 2px solid #ff0060;
+    border: 2px solid #ef4444;
     border-radius: 50%;
     border-top-color: transparent;
     animation: spin 1s linear infinite;
@@ -4217,7 +4205,7 @@ footer hr {
 
 .save-for-later-btn:hover {
     text-decoration: underline;
-    text-decoration-color: #ff0060 !important;
+    text-decoration-color: #ef4444 !important;
     font-size: 16px;
 }
 
@@ -4229,12 +4217,12 @@ footer hr {
 }
 
 .decrease-btn:hover {
-    background: #ff0060;
+    background: #ef4444;
     color: #000;
     border-color: #eeeeee;
     border-radius: 2px !important;
     padding: 5px 10px;
-    border: 1px solid #ff0060 !important;
+    border: 1px solid #ef4444 !important;
 }
 
 .increase-btn {
@@ -4245,12 +4233,12 @@ footer hr {
 }
 
 .increase-btn:hover {
-    background: #ff0060;
+    background: #ef4444;
     color: #000;
     border-color: #eeeeee;
     border-radius: 2px !important;
     padding: 5px 10px;
-    border: 1px solid #ff0060 !important;
+    border: 1px solid #ef4444 !important;
 }
 
 .order_summary_card {
@@ -4263,7 +4251,7 @@ footer hr {
 
 .remove-cart-btn:hover {
     text-decoration: underline;
-    text-decoration-color: #ff0060 !important;
+    text-decoration-color: #ef4444 !important;
     font-size: 16px;
 }
 
@@ -4340,7 +4328,7 @@ footer hr {
 
 .show-More-btn {
     text-decoration: underline;
-    color: #ff0060;
+    color: #ef4444;
     cursor: pointer;
 }
 

@@ -436,7 +436,7 @@ $(document).ready(function () {
                                                     } ${
                                 response.address.last_name ?? ""
                             } |
-                                                    <span style="color: #c7c7c7;">&nbsp;+91
+                                                    <span style="color: #c7c7c7;">&nbsp;+65
                                                         ${
                                                             response.address
                                                                 .phone
@@ -492,7 +492,7 @@ $(document).ready(function () {
                                 $(
                                     '.modal-body p strong:contains("Phone :")'
                                 ).parent().html(`
-                                    <strong>Phone :</strong> (+91) ${
+                                    <strong>Phone :</strong> (+65) ${
                                         response.address.phone || "--"
                                     }
                                 `);
@@ -502,7 +502,7 @@ $(document).ready(function () {
                                             response.address.first_name
                                         } ${
                                     response.address.last_name ?? ""
-                                } (+91)
+                                } (+65)
                                             ${
                                                 response.address.phone
                                             }</strong>&nbsp;&nbsp;<br>
@@ -769,7 +769,7 @@ $(document).ready(function () {
                                                     } ${
                                 response.address.last_name ?? ""
                             } |
-                                                    <span style="color: #c7c7c7;">&nbsp;+91 ${
+                                                    <span style="color: #c7c7c7;">&nbsp;+65 ${
                                                         response.address.phone
                                                     }</span>
                                                 </span><br>
@@ -823,7 +823,7 @@ $(document).ready(function () {
                                 $(
                                     '.modal-body p strong:contains("Phone :")'
                                 ).parent().html(`
-                                    <strong>Phone :</strong> (+91) ${
+                                    <strong>Phone :</strong> (+65) ${
                                         response.address.phone || "--"
                                     }
                                 `);
@@ -833,7 +833,7 @@ $(document).ready(function () {
                                             response.address.first_name
                                         } ${
                                     response.address.last_name ?? ""
-                                } (+91)
+                                } (+65)
                                             ${
                                                 response.address.phone
                                             }</strong>&nbsp;&nbsp;<br>
@@ -1037,7 +1037,7 @@ $(document).ready(function () {
                     const addressHtml = `
                             <strong>${address.first_name} ${
                         address.last_name ?? ""
-                    } (+91) ${address.phone}</strong><br>
+                    } (+65) ${address.phone}</strong><br>
                             ${address.address}, ${address.city}, ${
                         address.state
                     } - ${address.postalcode}
@@ -1653,11 +1653,11 @@ function showAddress(country) {
     var phoneNumber = document.getElementById("phone-number");
 
     if (country === "india") {
-        phoneLink.href = "tel:+9188941306";
-        phoneNumber.innerHTML = "+91 8894 1306";
+        phoneLink.href = "tel:+6588941306";
+        phoneNumber.innerHTML = "+65 8894 1306";
     } else if (country === "india") {
-        phoneLink.href = "tel:+9188941306";
-        phoneNumber.innerHTML = "+91 8894 1306";
+        phoneLink.href = "tel:+6588941306";
+        phoneNumber.innerHTML = "+65 8894 1306";
     }
 }
 

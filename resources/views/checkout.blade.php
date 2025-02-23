@@ -87,7 +87,7 @@ function formatIndianCurrency($num) {
                                         @endphp --}}
                                         <p style="color: #6C6C6C">
                                             {{ $address->first_name ?? '' }}
-                                            {{ $address->last_name ?? '' }} (+91)
+                                            {{ $address->last_name ?? '' }} (+65)
                                             {{ $address->phone ?? '' }}&nbsp;&nbsp;
                                             {{ $address->address ?? '' }},
                                             {{ $address->city ?? '' }},
@@ -193,7 +193,7 @@ function formatIndianCurrency($num) {
                                             {{ formatIndianCurrency($cart->items->sum(fn($item) => $item->product->discounted_price * $item->quantity)) }}
                                         </span>
                                         <span class="total" style="font-size:12px; color:#00DD21;white-space: nowrap;">
-                                            DealsMachi Discount
+                                            Dealslah Discount
                                             &nbsp;<span
                                                 class="discount">
                                                 {{-- -₹{{ number_format($cart->items->sum(fn($item) => ($item->product->original_price - $item->product->discounted_price) * $item->quantity), 0) }} --}}
@@ -281,7 +281,7 @@ function formatIndianCurrency($num) {
                                     <h5 class="mb-4" style="color:#ef4444;"> Delivery Address</h5>
                                     <p>
                                         <strong>{{ $address->first_name ?? '' }}
-                                            {{ $address->last_name ?? '' }} (+91)
+                                            {{ $address->last_name ?? '' }} (+65)
                                             {{ $address->phone ?? '' }}</strong>&nbsp;&nbsp;
                                         {{ $address->address ?? '' }} - {{ $address->postalcode ?? '' }}
                                         <span>
@@ -382,7 +382,7 @@ function formatIndianCurrency($num) {
                                             {{ formatIndianCurrency($cart->grand_total) }}
                                         </span> <span class="ms-1"
                                             style="font-size:12px; color:#00DD21;white-space: nowrap;">
-                                            DealsMachi Discount
+                                            Dealslah Discount
                                             &nbsp;<span
                                                 class="discount">
                                                 {{-- -₹{{ number_format($cart->discount, 0) }} --}}

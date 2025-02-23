@@ -35,9 +35,9 @@ $imageType = isset($pageimage) ? pathinfo($pageimage, PATHINFO_EXTENSION) : 'png
 
          <!-- Twitter Meta Tags -->
          <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="{{ $pagetitle ?? 'DealsMachi - Deals that Matter in India !' }}" />
-        <meta name="twitter:description" content="{{ $pagedescription ?? 'Shop Big, Earn Big Save Big, DealsMachi – Deals that matters in India' }}" />
-        <meta name="twitter:site" content="@dealsMachi" />
+        <meta name="twitter:title" content="{{ $pagetitle ?? 'Dealslah - Deals that Matter in India !' }}" />
+        <meta name="twitter:description" content="{{ $pagedescription ?? 'Shop Big, Earn Big Save Big, Dealslah – Deals that matters in India' }}" />
+        <meta name="twitter:site" content="@dealslah" />
         <meta name="twitter:image" content="{{ asset($pageimage ?? 'assets/images/social/Dealslah_twitter.png') }}" />
         <meta name="twitter:image:alt" content="Get the best deals and discounts in India" />
 

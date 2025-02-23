@@ -146,7 +146,7 @@ class CheckoutController extends Controller
             // Create order for the cart items
             $latestOrder = Order::orderBy('id', 'desc')->first();
             $customOrderId = $latestOrder ? intval(Str::after($latestOrder->id, '-')) + 1 : 1;
-            $orderNumber = 'DEALSMACHI_O' . $customOrderId;
+            $orderNumber = 'DEALSLAH_O' . $customOrderId;
 
             $itemCount = $cart->items->whereIn('product_id', $ids)->sum('quantity');
             $total = $cart->items->whereIn('product_id', $ids)->sum('total');
@@ -238,7 +238,7 @@ class CheckoutController extends Controller
             // Create order for the cart items
             $latestOrder = Order::orderBy('id', 'desc')->first();
             $customOrderId = $latestOrder ? intval(Str::after($latestOrder->id, '-')) + 1 : 1;
-            $orderNumber = 'DEALSMACHI_O' . $customOrderId;
+            $orderNumber = 'DEALSLAH_O' . $customOrderId;
             $addressId = $request->input('address_id');
             $address = Address::find($addressId);
 

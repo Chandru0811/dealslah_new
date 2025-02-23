@@ -252,7 +252,7 @@
                                                 @else
                                                     <div class="rating mb-4 mt-4">
                                                         <span style="color: #22cb00">Currently Services are free through
-                                                            DealsMachi</span>
+                                                            Dealslah</span>
                                                     </div>
                                                 @endif
                                                 <div class="mb-3">

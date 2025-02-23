@@ -401,7 +401,7 @@
 
                                 </div>
                                 <div class="rating mt-3 mb-3">
-                                    <span style="color: #22cb00">Currently Services are free through DealsMachi</span>
+                                    <span style="color: #22cb00">Currently Services are free through Dealslah</span>
                                 </div>
                             @else
                                 <div class="price-section d-flex align-items-center mt-4">
@@ -1083,7 +1083,7 @@
                             <p class="mb-0 errorMagnetSubHeading text-muted fw-bold pb-2">
                                 You can reach us on
                             </p>
-                            <p class="mb-0 errorMobile pb-4">+91 91501 50687</p>
+                            <p class="mb-0 errorMobile pb-4">+65 88941306</p>
 
                             <!-- Contact Us Button -->
                             <a href="/" class="btn successMagnetButton">

@@ -114,10 +114,10 @@
             </div>
             <hr />
             <p style="margin: 2rem 0 0;">Best regards,</p>
-            <h4 style="margin: 0;">DealsMachi</h4>
+            <h4 style="margin: 0;">Dealslah</h4>
             <p style="margin: 0;">info@ecsaio.com</p>
-            <p style="margin: 0;">+91 91501 50687</p>
-            <p style="margin: 0 0 2rem 0;"><a href="https://dealsmachi.com/">https://dealsmachi.com</a></p>
+            <p style="margin: 0;">+65 88941306</p>
+            <p style="margin: 0 0 2rem 0;"><a href="https://dealslah.com/">https://dealslah.com</a></p>
             <hr />
         </div>
     </div>
