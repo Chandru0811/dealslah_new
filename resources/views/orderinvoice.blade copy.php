@@ -186,18 +186,18 @@
                             <strong>{{ $item->deal_name }}</strong>
                             <p class="desc">{{ Str::limit($item->deal_description, 85, '...') }}</p>
                         </td>
-                        <td>₹{{ number_format($item->deal_originalprice, 2) }}</td>
+                        <td>${{ number_format($item->deal_originalprice, 2) }}</td>
                         <td>{{ $item->quantity }}</td>
-                        <td>₹{{ number_format($item->deal_originalprice * $item->quantity, 2) }}</td>
-                        <td>₹{{ number_format(($item->deal_originalprice - $item->deal_price) * $item->quantity, 2) }}</td>
-                        <td>₹{{ number_format($item->deal_price * $item->quantity, 2) }}</td>
+                        <td>${{ number_format($item->deal_originalprice * $item->quantity, 2) }}</td>
+                        <td>${{ number_format(($item->deal_originalprice - $item->deal_price) * $item->quantity, 2) }}</td>
+                        <td>${{ number_format($item->deal_price * $item->quantity, 2) }}</td>
                     </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="6" style="text-align: right;">Total</td>
-                        <td>₹{{ number_format($item->deal_price * $item->quantity, 2) }}</td>
+                        <td>${{ number_format($item->deal_price * $item->quantity, 2) }}</td>
                     </tr>
                     <tr class="amountinwords">
                         <th colspan="7">Amount in Words:</th>

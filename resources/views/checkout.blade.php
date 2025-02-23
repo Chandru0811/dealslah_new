@@ -1,15 +1,6 @@
 @extends('layouts.master')
 @php
 use Carbon\Carbon;
-function formatIndianCurrency($num) {
-    $num = intval($num);
-    $lastThree = substr($num, -3);
-    $rest = substr($num, 0, -3);
-    if ($rest != '') {
-        $rest = preg_replace("/\B(?=(\d{2})+(?!\d))/", ",", $rest) . ',';
-    }
-    return "₹" . $rest . $lastThree;
-}
 @endphp
 
 @section('content')
@@ -120,16 +111,13 @@ function formatIndianCurrency($num) {
                                         </div>
                                         <div class="col-md-6 col-12 checkoutsummary-card2 text-end">
                                             <span style="text-decoration: line-through; color:#c7c7c7">
-                                                {{-- ₹{{ number_format($item->product->original_price * $item->quantity, 0) }} --}}
-                                                {{ formatIndianCurrency($item->product->original_price * $item->quantity) }}
+                                                ${{ number_format($item->product->original_price * $item->quantity, 2) }}
                                             </span>
                                             <span class="ms-1" style="font-size:22px;color:#ef4444">
-                                                {{-- ₹{{ number_format($item->product->discounted_price * $item->quantity, 0) }} --}}
-                                                {{ formatIndianCurrency($item->product->discounted_price * $item->quantity) }}
+                                                ${{ number_format($item->product->discounted_price * $item->quantity, 2) }}
                                             </span>
                                             <span class="ms-1" style="font-size:12px; color:#00DD21">-
-                                                {{-- ({{ number_format($item->product->discount_percentage, 0) }}%) --}}
-                                                {{ formatIndianCurrency($item->product->discount_percentage) }}%
+                                                ({{ number_format($item->product->discount_percentage, 0) }}%)
                                                 off
                                             </span>
                                         </div>
@@ -184,20 +172,17 @@ function formatIndianCurrency($num) {
                                 <div class="d-flex justify-content-end align-items-center">
                                     <h4>Total Amount &nbsp;&nbsp;
                                         <span style="text-decoration: line-through; color:#c7c7c7" class="subtotal">
-                                            {{-- ₹{{ number_format($cart->items->sum(fn($item) => $item->product->original_price * $item->quantity), 0) }} --}}
-                                            {{ formatIndianCurrency($cart->items->sum(fn($item) => $item->product->original_price * $item->quantity)) }}
+                                            ${{ number_format($cart->items->sum(fn($item) => $item->product->original_price * $item->quantity), 2) }}
                                         </span>
                                         &nbsp;&nbsp;
                                         <span class="mx-1" style="color:#000">
-                                            {{-- ₹{{ number_format($cart->items->sum(fn($item) => $item->product->discounted_price * $item->quantity), 0) }} --}}
-                                            {{ formatIndianCurrency($cart->items->sum(fn($item) => $item->product->discounted_price * $item->quantity)) }}
+                                            ${{ number_format($cart->items->sum(fn($item) => $item->product->discounted_price * $item->quantity), 2) }}
                                         </span>
                                         <span class="total" style="font-size:12px; color:#00DD21;white-space: nowrap;">
                                             Dealslah Discount
                                             &nbsp;<span
                                                 class="discount">
-                                                {{-- -₹{{ number_format($cart->items->sum(fn($item) => ($item->product->original_price - $item->product->discounted_price) * $item->quantity), 0) }} --}}
-                                               - {{ formatIndianCurrency($cart->items->sum(fn($item) => ($item->product->original_price - $item->product->discounted_price) * $item->quantity)) }}
+                                                -${{ number_format($cart->items->sum(fn($item) => ($item->product->original_price - $item->product->discounted_price) * $item->quantity), 2) }}
                                             </span>
                                         </span>
                                     </h4>
@@ -311,16 +296,13 @@ function formatIndianCurrency($num) {
                                         </div>
                                         <div class="col-md-6 col-12 checkoutsummary-card2 text-end">
                                             <span style="text-decoration: line-through; color:#c7c7c7">
-                                                {{-- ₹{{ number_format($item->product->original_price * $item->quantity, 0) }} --}}
-                                                {{ formatIndianCurrency($item->product->original_price * $item->quantity) }}
+                                                ${{ number_format($item->product->original_price * $item->quantity, 2) }}
                                             </span>
                                             <span class="ms-1" style="font-size:22px;color:#ef4444">
-                                                {{-- ₹{{ number_format($item->product->discounted_price * $item->quantity, 0) }} --}}
-                                                {{ formatIndianCurrency($item->product->discounted_price * $item->quantity) }}
+                                                ${{ number_format($item->product->discounted_price * $item->quantity, 2) }}
                                             </span>
                                             <span class="ms-1" style="font-size:12px; color:#00DD21">-
-                                                {{-- ({{ number_format($item->product->discount_percentage, 0) }}%) --}}
-                                                {{ formatIndianCurrency($item->product->discount_percentage) }}
+                                                ({{ number_format($item->product->discount_percentage, 0) }}%)
                                                 off
                                             </span>
                                         </div>
@@ -375,18 +357,15 @@ function formatIndianCurrency($num) {
                                 <div class="d-flex justify-content-end align-items-center ">
                                     <h4>Total Amount &nbsp;&nbsp; <span
                                             style="text-decoration: line-through; color:#c7c7c7" class="subtotal">
-                                            {{-- ₹{{ number_format($cart->total, 0) }} --}}
-                                            {{ formatIndianCurrency($cart->total) }}
+                                            ${{ number_format($cart->total, 2) }}
                                         </span> &nbsp;&nbsp; <span class="total ms-1" style="color:#000">
-                                            {{-- ₹{{ number_format($cart->grand_total, 0) }} --}}
-                                            {{ formatIndianCurrency($cart->grand_total) }}
+                                            ${{ number_format($cart->grand_total, 2) }}
                                         </span> <span class="ms-1"
                                             style="font-size:12px; color:#00DD21;white-space: nowrap;">
                                             Dealslah Discount
                                             &nbsp;<span
                                                 class="discount">
-                                                {{-- -₹{{ number_format($cart->discount, 0) }} --}}
-                                                -{{ formatIndianCurrency($cart->discount) }}
+                                                -${{ number_format($cart->discount, 2) }}
                                             </span></span>
                                     </h4>
                                 </div>

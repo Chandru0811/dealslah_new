@@ -228,7 +228,7 @@ class HomeController extends Controller
             $priceRanges = $request->input('price_range');
             $query->where(function ($priceQuery) use ($priceRanges) {
                 foreach ($priceRanges as $range) {
-                    $cleanRange = str_replace(['₹', ',', ' '], '', $range);
+                    $cleanRange = str_replace(['$', ',', ' '], '', $range);
                     $priceRange = explode('-', $cleanRange);
                     $minPrice = isset($priceRange[0]) ? (float) $priceRange[0] : null;
                     $maxPrice = isset($priceRange[1]) ? (float) $priceRange[1] : null;
@@ -272,8 +272,8 @@ class HomeController extends Controller
 
         for ($start = $minPrice; $start <= $maxPrice; $start += $priceStep) {
             $end = $start + $priceStep;
-            $priceRanges[] = [
-                'label' => '₹' . number_format($start, 2) . ' - ₹' . number_format($end, 2)
+           $priceRanges[] = [
+                'label' => '$' . number_format($start, 2) . ' - $' . number_format($end, 2)
             ];
         }
 
@@ -294,6 +294,7 @@ class HomeController extends Controller
     public function subcategorybasedproducts(Request $request, $slug)
     {
         $perPage = $request->input('per_page', 10);
+
         $query = Product::with(['productMedia:id,resize_path,order,type,imageable_id', 'shop:id,country,state,city,street,street2,zip_code,shop_ratings'])
             ->where('active', 1);
 
@@ -444,12 +445,12 @@ class HomeController extends Controller
 
             if ($end > $maxPrice) {
                 $priceRanges[] = [
-                    'label' => '₹' . number_format($start, 2) . ' - ₹' . number_format($end, 2)
+                    'label' => '$' . number_format($start, 2) . ' - $' . number_format($end, 2)
                 ];
                 break;
             }
             $priceRanges[] = [
-                'label' => '₹' . number_format($start, 2) . ' - ₹' . number_format($end, 2)
+                'label' => '$' . number_format($start, 2) . ' - $' . number_format($end, 2)
             ];
         }
 
@@ -516,7 +517,7 @@ class HomeController extends Controller
             $priceRanges = $request->input('price_range');
             $query->where(function ($priceQuery) use ($priceRanges) {
                 foreach ($priceRanges as $range) {
-                    $cleanRange = str_replace(['₹', ',', ' '], '', $range);
+                    $cleanRange = str_replace(['$', ',', ' '], '', $range);
                     $priceRange = explode('-', $cleanRange);
 
                     $minPrice = isset($priceRange[0]) ? (float) $priceRange[0] : null;
@@ -604,12 +605,12 @@ class HomeController extends Controller
             $end = $start + $priceStep;
             if ($end > $maxPrice) {
                 $priceRanges[] = [
-                    'label' => '₹' . number_format($start, 2) . ' - ₹' . number_format($end, 2)
+                    'label' => '$' . number_format($start, 2) . ' - $' . number_format($end, 2)
                 ];
                 break;
             }
             $priceRanges[] = [
-                'label' => '₹' . number_format($start, 2) . ' - ₹' . number_format($end, 2)
+                'label' => '$' . number_format($start, 2) . ' - $' . number_format($end, 2)
             ];
         }
 

@@ -3,15 +3,6 @@
 @section('content')
     @php
         use Carbon\Carbon;
-        function formatIndianCurrency($num) {
-    $num = intval($num);
-    $lastThree = substr($num, -3);
-    $rest = substr($num, 0, -3);
-    if ($rest != '') {
-        $rest = preg_replace("/\B(?=(\d{2})+(?!\d))/", ",", $rest) . ',';
-    }
-    return "₹" . $rest . $lastThree;
-}
     @endphp
     <div class="container categoryIcons p-3">
         <div class="d-flex justify-content-between mb-3">
@@ -129,18 +120,15 @@
                                                 </div>
                                                 <p>
                                                     <del>
-                                                        {{-- ₹{{ number_format($item->unit_price * $item->quantity, 0) }} --}}
-                                                        {{ formatIndianCurrency($item->unit_price * $item->quantity) }}
+                                                        ${{ number_format($item->unit_price * $item->quantity, 2) }}
                                                     </del>
                                                     &nbsp;
                                                     <span style="color: #ef4444; font-size:24px">
-                                                        {{-- ₹{{ number_format($item->discount * $item->quantity, 0) }} --}}
-                                                        {{ formatIndianCurrency($item->discount * $item->quantity) }}
+                                                        ${{ number_format($item->discount * $item->quantity, 2) }}
                                                     </span> &nbsp;
                                                     <span
                                                         class="badge_payment">
-                                                        {{-- {{ number_format($item->discount_percent, 0) }}% --}}
-                                                        {{ formatIndianCurrency($item->discount_percent) }}%
+                                                        {{ number_format($item->discount_percent, 0) }}%
                                                         saved</span>
                                                 </p>
                                             </div>
@@ -152,7 +140,7 @@
                                                 </div>
                                                 <p>
                                                     <span style="color: #ef4444; font-size:24px">
-                                                        {{-- ₹{{ number_format($item->discount * $item->quantity, 0) }} --}}
+                                                        ${{ number_format($item->discount * $item->quantity, 2) }}
                                                         {{ formatIndianCurrency($item->discount * $item->quantity) }}
                                                     </span> &nbsp;
                                                 </p>

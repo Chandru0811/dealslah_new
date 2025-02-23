@@ -522,7 +522,7 @@ class AppController extends Controller
 
     public function subcategorybasedproductsformobile($id, Request $request)
     {
-        $query = Product::with('productMedia:id,resize_path,order,type,imageable_id', 'shop')
+        $query = Product::with('productMedia', 'shop')
             ->with(['shop:id,country,state,city,street,street2,zip_code,shop_ratings'])
             ->where('active', 1);
 
@@ -590,7 +590,7 @@ class AppController extends Controller
             $query->where(function ($priceQuery) use ($priceRanges) {
                 foreach ($priceRanges as $range) {
                     // Clean and split the price range
-                    $cleanRange = str_replace(['Rs', ',', ' '], '', $range);
+                    $cleanRange = str_replace(['$', ',', ' '], '', $range);
                     $priceRange = explode('-', $cleanRange);
 
                     $minPrice = isset($priceRange[0]) ? (float)$priceRange[0] : null;
@@ -670,12 +670,12 @@ class AppController extends Controller
 
             if ($end > $maxPrice) {
                 $priceRanges[] = [
-                    'label' => 'Rs' . number_format($start, 2) . ' - Rs' . number_format($end, 2)
+                    'label' => '$' . number_format($start, 2) . ' - $' . number_format($end, 2)
                 ];
                 break;
             }
             $priceRanges[] = [
-                'label' => 'Rs' . number_format($start, 2) . ' - Rs' . number_format($end, 2)
+                'label' => '$' . number_format($start, 2) . ' - $' . number_format($end, 2)
             ];
         }
 

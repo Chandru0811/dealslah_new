@@ -191,18 +191,18 @@
                             <strong>{{ $item->deal_name }}</strong>
                             <p class="desc">{{ Str::limit($item->deal_description, 85, '...') }}</p>
                         </td>
-                        <td><span class="amount">₹</span>{{ indian_number_format($item->deal_originalprice) }}</td>
+                        <td><span class="amount">$</span>{{ indian_number_format($item->deal_originalprice) }}</td>
                         <td>{{ $item->quantity }}</td>
-                        <td><span class="amount">₹</span>{{ indian_number_format($netAmount) }}</td>
-                        <td><span class="amount">₹</span>{{ indian_number_format($discount) }}</td>
-                        <td><span class="amount">₹</span>{{ indian_number_format($totalAmount) }}</td>
+                        <td><span class="amount">$</span>{{ indian_number_format($netAmount) }}</td>
+                        <td><span class="amount">$</span>{{ indian_number_format($discount) }}</td>
+                        <td><span class="amount">$</span>{{ indian_number_format($totalAmount) }}</td>
                     </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="6" style="text-align: right;">Total</td>
-                        <td><span class="amount">₹</span>{{ indian_number_format($order->total) }}</td>
+                        <td><span class="amount">$</span>{{ indian_number_format($order->total) }}</td>
                     </tr>
                     <tr class="amountinwords">
                         <th colspan="7">Amount in Words:</th>

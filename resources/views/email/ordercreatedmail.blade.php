@@ -160,8 +160,8 @@
                 <h2>{{$orderdetails->order_number}}</h2>
                 @foreach($orderdetails->items as $item)
                 <p class="sub-heading">Deal Name : {{$item->deal_name}}</p>
-                <p class="sub-heading">Regular Price : <span class="price">₹{{ number_format($item->deal_originalprice, 2) }}</span></p>
-                <p class="sub-heading">Offer Price: <span>₹{{ number_format($item->deal_price, 2) }}</span></p>
+                <p class="sub-heading">Regular Price : <span class="price">${{ number_format($item->deal_originalprice, 2) }}</span></p>
+                <p class="sub-heading">Offer Price: <span>${{ number_format($item->deal_price, 2) }}</span></p>
                 <p class="sub-heading">Discount Percentage : <span>{{ number_format($item->discount_percentage, 0) }}%</span></p>
                 <p class="sub-heading">Coupon Code : <span>{{$item->coupon_code}}</span></p>
                 <p class="sub-heading">Quantity: <span>{{$item->quantity}}</span></p>
@@ -170,7 +170,7 @@
                 @php
                     $total_price = $item->deal_price * $item->quantity;
                 @endphp
-                <p class="sub-heading">Total Price: <span>₹{{$total_price}}</span></p>
+                <p class="sub-heading">Total Price: <span>${{ number_format($total_price, 2) }}</span></p>
                 @endforeach
                 <p class="sold-details">Sold by <span style="color: #1a0dab;">{{ $shop->legal_name }}</span> and
                     Fulfilled by <a href="https://dealslah.com/dealslahVendor/" target="_blank"

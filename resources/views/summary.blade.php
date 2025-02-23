@@ -126,19 +126,6 @@ $default_address = $addresses->firstWhere('id', $selectedAddressId) ?? ($address
                                     alt="{{ $product->name }}" />
                             </div>
                         </div>
-
-                        @php
-                        function formatIndianCurrency($num)
-                        {
-                        $num = intval($num);
-                        $lastThree = substr($num, -3);
-                        $rest = substr($num, 0, -3);
-                        if ($rest != '') {
-                        $rest = preg_replace('/\B(?=(\d{2})+(?!\d))/', ',', $rest) . ',';
-                        }
-                        return '₹' . $rest . $lastThree;
-                        }
-                        @endphp
                         <div class="col-md-8 col-12">
                             <a href="{{ url(path: '/deal/' . $product->id) }}" style="color: #000;"
                                 onclick="clickCount('{{ $product->id }}')">
@@ -173,10 +160,10 @@ $default_address = $addresses->firstWhere('id', $selectedAddressId) ?? ($address
                             @endif
                             <div class="mb-3">
                                 <span class="original-price" style="text-decoration: line-through; color:#c7c7c7">
-                                    {{ formatIndianCurrency($product->original_price) }}
+                                    ${{ number_format($product->original_price, 2) }}
                                 </span>
                                 <span class="discounted-price ms-1" style="font-size:22px;color:#ef4444">
-                                    {{ formatIndianCurrency($product->discounted_price) }}
+                                    ${{ number_format($product->discounted_price, 2) }}
                                 </span>
                                 <span class="ms-1" style="font-size:12px; color:#00DD21">
                                     -{{ round($product->discount_percentage) }}% off
@@ -396,17 +383,17 @@ $default_address = $addresses->firstWhere('id', $selectedAddressId) ?? ($address
                     Total Amount &nbsp;&nbsp;
                     <span id="original-price-strike" style="text-decoration: line-through; color:#c7c7c7"
                         class="subtotal">
-                        ₹{{ number_format($product->original_price, 0, '.', ',') }}
+                        ${{ number_format($product->original_price, 2) }}
                     </span>
                     &nbsp;&nbsp;
                     <span id="discounted-price" style="color:#000;white-space:nowrap">
-                        ₹{{ number_format($product->discounted_price, 0, '.', ',') }}
+                        ${{ number_format($product->discounted_price, 2) }}
                     </span>
                     <span class="total ms-1" style="font-size:12px; color:#00DD21;white-space: nowrap;"
                         id="deal-discount">
                         Dealslah Discount
                         &nbsp;-<span
-                            class="discount">₹{{ number_format($product->original_price - $product->discounted_price, 0, '.', ',') }}</span>
+                            class="discount">${{ number_format($product->original_price - $product->discounted_price, 2) }}</span>
                     </span>
                 </h4>
             </div>
@@ -441,18 +428,9 @@ $default_address = $addresses->firstWhere('id', $selectedAddressId) ?? ($address
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        // Function to format numbers in Indian style
-        function formatIndianNumber(num) {
-            const x = num.toString().split('.');
-            const lastThree = x[0].slice(-3);
-            const otherNumbers = x[0].slice(0, -3);
-            const formatted =
-                otherNumbers !== '' ?
-                otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + lastThree :
-                lastThree;
-            console.log("Format ", formatted)
-
-            return formatted;
+        // Function to format numbers with two decimal places
+        function formatNumber(num) {
+            return `$${parseFloat(num).toFixed(2)}`;
         }
 
         function updateRemoveButtonVisibility() {
@@ -512,10 +490,10 @@ $default_address = $addresses->firstWhere('id', $selectedAddressId) ?? ($address
                                       </div>
                                       <div class="mb-3">
                                             <span class="original-price" style="text-decoration: line-through; color:#c7c7c7">
-                                                ₹${formatIndianNumber(product.original_price)}
+                                                ${formatNumber(product.original_price)}
                                             </span>
                                             <span class="discounted-price ms-1" style="font-size:22px;color:#ef4444">
-                                                ₹${formatIndianNumber(product.discounted_price)}
+                                                ${formatNumber(product.discounted_price)}
                                             </span>
                                             <span class="ms-1" style="font-size:12px; color:#00DD21">
                                                 -${Math.round(product.discount_percentage)}% off
@@ -594,10 +572,10 @@ $default_address = $addresses->firstWhere('id', $selectedAddressId) ?? ($address
             $('#product_list .row').each(function() {
                 const productId = $(this).attr('id').split('_')[1];
                 const originalPrice = parseFloat(
-                    $(this).find('.original-price').text().replace('₹', '').replace(/,/g, '').trim()
+                    $(this).find('.original-price').text().replace('$', '').replace(/,/g, '').trim()
                 );
                 const discountedPrice = parseFloat(
-                    $(this).find('.discounted-price').text().replace('₹', '').replace(/,/g, '')
+                    $(this).find('.discounted-price').text().replace('$', '').replace(/,/g, '')
                     .trim()
                 );
                 const quantity = parseInt($(`#quantityInput_${productId}`).val()) || 1;
@@ -609,9 +587,9 @@ $default_address = $addresses->firstWhere('id', $selectedAddressId) ?? ($address
             });
 
             // Update the displayed totals with formatted numbers
-            $('#original-price-strike').text(`₹ ${formatIndianNumber(totalOriginalPrice)}`);
-            $('#discounted-price').text(`₹ ${formatIndianNumber(totalDiscountedPrice)}`);
-            $('#deal-discount span').text(`₹ ${formatIndianNumber(totalDiscount)}`);
+            $('#original-price-strike').text(formatNumber(totalOriginalPrice));
+            $('#discounted-price').text(formatNumber(totalDiscountedPrice));
+            $('#deal-discount span').text(formatNumber(totalDiscount));
         }
 
         // Function to update the products to buy hidden input

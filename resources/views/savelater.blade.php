@@ -51,19 +51,6 @@
             </div>
         </div>
     @endif
-    @php
-    function formatIndianCurrency($num)
-    {
-        $num = intval($num);
-        $lastThree = substr($num, -3);
-        $rest = substr($num, 0, -3);
-        if ($rest != '') {
-            $rest = preg_replace('/\B(?=(\d{2})+(?!\d))/', ',', $rest) . ',';
-        }
-        return '₹' . $rest . $lastThree;
-    }
-
-@endphp
     <section>
         <div class="container" style="margin-top: 100px">
             <h2 class="my-4">Buy Later</h2>
@@ -101,12 +88,10 @@
                                     <p>Seller : {{ $savedItem->deal->shop->legal_name }}</p>
                                     <div>
                                         <span style="text-decoration: line-through; color:#c7c7c7">
-                                            {{-- ₹{{ $savedItem->deal->original_price }} --}}
-                                            {{ formatIndianCurrency($savedItem->deal->original_price) }}
+                                            ${{ number_format($savedItem->deal->original_price, 2) }}
                                         </span>
                                         <span class="ms-1" style="font-size:22px;color:#ef4444">
-                                            {{-- ₹{{ $savedItem->deal->discounted_price }} --}}
-                                            {{ formatIndianCurrency($savedItem->deal->discounted_price) }}
+                                            ${{ number_format($savedItem->deal->discounted_price, 2) }}
                                         </span>
                                         <span class="ms-1" style="font-size:12px; color:#00DD21">
                                             -{{ round($savedItem->deal->discount_percentage) }}% off

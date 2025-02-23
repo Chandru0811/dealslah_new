@@ -53,16 +53,6 @@
     @endif
     @php
         use Carbon\Carbon;
-
-        function formatIndianCurrency($num) {
-    $num = intval($num);
-    $lastThree = substr($num, -3);
-    $rest = substr($num, 0, -3);
-    if ($rest != '') {
-        $rest = preg_replace("/\B(?=(\d{2})+(?!\d))/", ",", $rest) . ',';
-    }
-    return "₹" . $rest . $lastThree;
-}
     @endphp
     <section>
         <div class="container" style="margin-top: 100px">
@@ -149,7 +139,7 @@
                                                         Dealslah</span>
                                                 </div>
                                                 <span class="ms-1" style="font-size:18px;font-weight:500;color:#ef4444">
-                                                    {{ formatIndianCurrency($product->discounted_price) }}
+                                                    ${{ number_format($product->discounted_price, 2) }}
                                                 </span>
                                             @else
                                                 <div class="d-flex">
@@ -171,11 +161,11 @@
                                                 <div class="ms-0">
                                                     <span
                                                         style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
-                                                        {{ formatIndianCurrency($product->original_price) }}
+                                                        ${{ number_format($product->original_price, 2) }}
                                                     </span>
                                                     <span class="ms-1"
                                                         style="font-size:18px;font-weight:500;color:#ef4444">
-                                                        {{ formatIndianCurrency($product->discounted_price) }}
+                                                        ${{ number_format($product->discounted_price, 2) }}
                                                     </span>
                                                     <span class="ms-1"
                                                         style="font-size:18px;font-weight:500; color:#28A745">
@@ -274,12 +264,12 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <p style="color: #AAAAAA;font-size:16px">Subtotal (x<span
                                             class="quantity-value">{{ $cart->quantity }}</span>)</p>
-                                    <p class="subtotal">₹{{ number_format($subtotal, 0) }}</p>
+                                    <p class="subtotal">${{ number_format($subtotal, 2) }}</p>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center" style="color: #28A745;">
                                     <p style="font-size:16px">Discount (x<span
                                             class="quantity-value">{{ $cart->quantity }}</span>)</p>
-                                    <p class="discount">-₹{{ number_format($total_discount, 0) }}</p>
+                                    <p class="discount">-${{ number_format($total_discount, 2) }}</p>
                                 </div>
                             </div>
                         </div>
@@ -289,15 +279,15 @@
                                 <h4>
                                     Total Amount (x<span class="quantity-value">{{ $cart->quantity }}</span>)&nbsp;&nbsp;
                                     <span style="text-decoration: line-through; color:#c7c7c7" class="subtotal">
-                                        {{ formatIndianCurrency($subtotal) }}
+                                        ${{ number_format($subtotal, 2) }}
                                     </span>
                                     &nbsp;&nbsp;
                                     <span class="total mx-1" style="color:#000">
-                                        {{ formatIndianCurrency($subtotal - $total_discount) }}
+                                        ${{ number_format($subtotal - $total_discount, 2) }}
                                     </span>
                                     <span style="font-size:12px; color:#28A745; white-space: nowrap;">
                                         Dealslah Discount
-                                        &nbsp;<span class="discount">-  {{ formatIndianCurrency($total_discount) }}</span>
+                                        &nbsp;<span class="discount">- ${{ number_format($total_discount, 2) }}</span>
                                     </span>
                                 </h4>
                             </div>
@@ -379,7 +369,7 @@
                                                         Dealslah</span>
                                                 </div>
                                                 <span class="ms-1" style="font-size:18px;font-weight:500;color:#ef4444">
-                                                    ₹{{ number_format($product->discounted_price, 0) }}
+                                                    ${{ number_format($product->discounted_price, 2) }}
                                                 </span>
                                             @else
                                                 <div class="d-flex">
@@ -401,11 +391,11 @@
                                                 <div class="ms-0">
                                                     <span
                                                         style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
-                                                        ₹{{ number_format($product->original_price, 0) }}
+                                                        ${{ number_format($product->original_price, 2) }}
                                                     </span>
                                                     <span class="ms-1"
                                                         style="font-size:18px;font-weight:500;color:#ef4444">
-                                                        ₹{{ number_format($product->discounted_price, 0) }}
+                                                        ${{ number_format($product->discounted_price, 2) }}
                                                     </span>
                                                     <span class="ms-1"
                                                         style="font-size:18px;font-weight:500; color:#28A745">
@@ -505,12 +495,12 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <p style="color: #AAAAAA;font-size:16px">Subtotal (x<span
                                             class="quantity-value">{{ $cart->quantity }}</span>)</p>
-                                    <p class="subtotal">₹{{ number_format($subtotal, 0) }}</p>
+                                    <p class="subtotal">${{ number_format($subtotal, 2) }}</p>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center" style="color: #28A745;">
                                     <p style="font-size:16px">Discount (x<span
                                             class="quantity-value">{{ $cart->quantity }}</span>)</p>
-                                    <p class="discount">-₹{{ number_format($total_discount, 0) }}</p>
+                                    <p class="discount">-${{ number_format($total_discount, 2) }}</p>
                                 </div>
                             </div>
                         </div>
@@ -520,16 +510,16 @@
                                 <h4>
                                     Total Amount (x<span class="quantity-value">{{ $cart->quantity }}</span>)&nbsp;&nbsp;
                                     <span style="text-decoration: line-through; color:#c7c7c7" class="subtotal">
-                                        {{ formatIndianCurrency($subtotal) }}
+                                        ${{ number_format($subtotal, 2) }}
                                     </span>
                                     &nbsp;&nbsp;
                                     <span class="total ms-1" style="color:#000">
-                                        {{ formatIndianCurrency($subtotal - $total_discount) }}
+                                        ${{ number_format($subtotal - $total_discount, 2) }}
                                     </span>
                                     &nbsp;&nbsp;
                                     <span class="ms-1" style="font-size:12px; color:#28A745; white-space: nowrap;">
                                         Dealslah Discount
-                                        &nbsp;<span class="discount">- {{ formatIndianCurrency($total_discount) }}</span>
+                                        &nbsp;<span class="discount">- ${{ number_format($total_discount, 2) }}</span>
                                     </span>
                                 </h4>
                             </div>
@@ -625,10 +615,10 @@
                                         <div></div>
                                         <div class="ms-0">
                                             <span style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
-                                                ₹{{ number_format($savedItem->deal->original_price, 0) }}
+                                                ${{ number_format($savedItem->deal->original_price, 2) }}
                                             </span>
                                             <span class="ms-1" style="font-size:18px;font-weight:500;color:#ef4444">
-                                                ₹{{ number_format($savedItem->deal->discounted_price, 0) }}
+                                                ${{ number_format($savedItem->deal->discounted_price, 2) }}
                                             </span>
                                             <span class="ms-1" style="font-size:18px;font-weight:500; color:#28A745">
                                                 - {{ round($savedItem->deal->discount_percentage) }}% Off
@@ -793,60 +783,52 @@
         });
 
         function updateCart(cartId, productId, quantity, serviceDate = null, serviceTime = null) {
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const data = {
-                cart_id: cartId,
-                product_id: productId,
-                quantity: quantity,
-                service_date: serviceDate,
-                service_time: serviceTime,
-                _token: csrfToken,
-            };
-            fetch("{{ route('cart.update') }}", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.status === 'success') {
-                        const indianCurrencyFormatter = new Intl.NumberFormat('en-IN', {
-                            style: 'currency',
-                            currency: 'INR',
-                            minimumFractionDigits: 0,
-                            maximumFractionDigits: 0,
-                        });
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const data = {
+        cart_id: cartId,
+        product_id: productId,
+        quantity: quantity,
+        service_date: serviceDate,
+        service_time: serviceTime,
+        _token: csrfToken,
+    };
+    fetch("{{ route('cart.update') }}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        if (data.status === 'success') {
+            document.querySelectorAll('.quantity-value').forEach((element) => {
+                element.textContent = data.updatedCart.quantity;
+            });
 
-                        document.querySelectorAll('.quantity-value').forEach((element) => {
-                            element.textContent = data.updatedCart.quantity;
-                        });
+            document.querySelectorAll('.subtotal').forEach((element) => {
+                element.textContent = `$${data.updatedCart.subtotal.toFixed(2)}`;
+            });
 
-                        document.querySelectorAll('.subtotal').forEach((element) => {
-                            element.textContent = indianCurrencyFormatter.format(data.updatedCart.subtotal);
-                        });
+            document.querySelectorAll('.discount').forEach((element) => {
+                let discountValue = data.updatedCart.discount;
+                element.textContent = discountValue < 0 
+                    ? `- $${Math.abs(discountValue).toFixed(2)}`
+                    : `- $${discountValue.toFixed(2)}`;
+            });
 
-                        document.querySelectorAll('.discount').forEach((element) => {
-                            let discountValue = data.updatedCart.discount;
-                            if (discountValue < 0) {
-                                element.textContent =
-                                    `- ${indianCurrencyFormatter.format(Math.abs(discountValue))}`;
-                            } else {
-                                element.textContent = `- ${indianCurrencyFormatter.format(discountValue)}`;
-                            }
-                        });
-                        document.querySelectorAll('.total').forEach((element) => {
-                            element.textContent = indianCurrencyFormatter.format(data.updatedCart.grand_total);
-                        });
-                    } else {
-                        alert(data.message);
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error updating cart:', error);
-                });
+            document.querySelectorAll('.total').forEach((element) => {
+                element.textContent = `$${data.updatedCart.grand_total.toFixed(2)}`;
+            });
+        } else {
+            alert(data.message);
         }
+    })
+    .catch((error) => {
+        console.error('Error updating cart:', error);
+    });
+}
+
 
         function showLoader(form) {
             const button = form.querySelector('button[type="submit"]');
