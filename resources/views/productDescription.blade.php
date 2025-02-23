@@ -172,8 +172,7 @@
                         <div class="row justify-content-center">
                             <div class="col-12">
                                 <div class="card border-0 h-100">
-                                    <a href="https://t.me/dealslah" target="_blank"
-                                        style="text-decoration: none;">
+                                    <a href="https://t.me/dealslah" target="_blank" style="text-decoration: none;">
                                         <div class="qr-code">
                                             <img src="{{ asset('assets/images/home/telegram_qr_code.webp') }}"
                                                 alt="Facebook QR" class="img-fluid">
@@ -288,12 +287,16 @@
                                     <form action="{{ route('cart.add', ['slug' => $product->slug]) }}" method="POST">
                                         @csrf
                                         @if ($product->deal_type == 1)
+                                            <input type="hidden" name="saveoption" id="saveoption" value="buy now">
+
                                             <button type="submit"
                                                 class="Buy_btn media_fonts_conent text-nowrap buy-now-direct-btn"
                                                 data-slug="{{ $product->slug }}">
                                                 <i class="fa-thin fa-bag-shopping"></i>&nbsp;&nbsp;Buy Now
                                             </button>
                                         @elseif ($product->deal_type == 2)
+                                            <input type="hidden" name="saveoption" id="saveoption" value="buy now">
+
                                             <button type="submit"
                                                 class="Buy_btn media_fonts_conent text-nowrap buy-now-direct-btn"
                                                 data-slug="{{ $product->slug }}">
