@@ -384,7 +384,7 @@
                                         <div>
                                             <p>
                                                 <span id="mySpan" class="deal-badge"
-                                                    style="cursor: pointer; position:relative;-"
+                                                    style="cursor: pointer; position:relative;"
                                                     onclick="copySpan(this, event)" data-bs-toggle="tooltip"
                                                     data-bs-placement="bottom" title="Click to Copy">
 
@@ -419,7 +419,7 @@
                                         <div>
                                             <p class="d-flex justify-content-start">
                                                 <span id="mySpan" class="deal-badge mt-3"
-                                                    style="cursor: pointer; position:relative;-"
+                                                    style="cursor: pointer; position:relative;"
                                                     onclick="copySpan(this, event)" data-bs-toggle="tooltip"
                                                     data-bs-placement="bottom" title="Click to Copy">
 
@@ -448,7 +448,7 @@
                                     <div>
                                         <p class="d-flex justify-content-start">
                                             <span id="mySpan" class="deal-badge mt-3"
-                                                style="cursor: pointer; position:relative;-"
+                                                style="cursor: pointer; position:relative;"
                                                 onclick="copySpan(this, event)" data-bs-toggle="tooltip"
                                                 data-bs-placement="bottom" title="Click to Copy">
 
@@ -617,7 +617,7 @@
                             </button>
                         @else
                             <button type="button" class="btn mb-2 sendEnqBtn" disabled
-                                onclick="window.open('https://wa.me/91{{ $product->shop->mobile }}?text=Hello! I visited your website.', '_blank')">
+                                onclick="window.open('https://wa.me/65{{ $product->shop->mobile }}?text=Hello! I visited your website.', '_blank')">
                                 <i class="fa-brands fa-whatsapp"></i>&nbsp;&nbsp;Enquiry
                             </button>
                         @endif

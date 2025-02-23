@@ -109,7 +109,7 @@
                 Your <span style="color: #ef4444">dealslah.com</span>
               </a>
               |
-              <a href="tel:919150150687 " target="_blank" style="text-decoration: none; color: #333">
+              <a href="tel:6588941306" target="_blank" style="text-decoration: none; color: #333">
                 +65 88941306
               </a>
               |

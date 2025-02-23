@@ -121,7 +121,7 @@
             <p class="signature">Warm Regards,</p>
             <p>Team Dealslah Pte Ltd</p>
             <p>Email: <a href="mailto:info@dealslah.com" mailto:target="_blank">info@dealslah.com</a></p>
-            <p>Phone: + 91 9150150687</p>
+            <p>Phone: +65 88941306</p>
             <p><a href="https://dealslah.com/" target="_blank">https://dealslah.com/</a></p>
             <p>Powered by Dealslah</p>
         </div>

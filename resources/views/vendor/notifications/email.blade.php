@@ -16,7 +16,7 @@
             </td>
             <td align="right" style="vertical-align: middle; font-size: 14px; color: #333;">
               <a href="https://dealslah.com/" target="_blank" style="text-decoration: none; color: #333; font-size: 12px; font-weight: 400;">Your <span style="color: #ef4444;">dealslah.com</span></a> |
-              <a href="tel:919150150687" target="_blank" style="text-decoration: none; color: #333; font-size: 12px; font-weight: 400;">+65 88941306</a> |
+              <a href="tel:6588941306" target="_blank" style="text-decoration: none; color: #333; font-size: 12px; font-weight: 400;">+65 88941306</a> |
               <a href="https://play.google.com/store/apps/details?id=com.dealslah.dealslah" target="_blank" style="text-decoration: none; color: #333; font-size: 12px; font-weight: 400;">Get <span style="color: #ef4444;">Dealslah</span> App</a>
             </td>
           </tr>
