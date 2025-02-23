@@ -14,7 +14,7 @@
                 </a>
                 <div class="d-flex align-items-center mb-1">
                     {{-- <span class="navbar-text d-xl-none align-items-center justify-content-end">
-                        <a href=""https://dealslah.com/dealslahVendor/" style="text-decoration: none">
+                        <a href="https://dealslah.com/dealslahVendor/" style="text-decoration: none">
                             <button
                                 class="btn btn-button userlogin-button py-1 px-2 d-flex justify-content-center align-items-center text-nowrap"
                                 type="submit">
@@ -165,6 +165,10 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Hidden logout form -->
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                     @else
                     <a href="{{ url('login') }}" class="text-decoration-none">
                         <span class="" data-bs-toggle="tooltip" data-bs-placement="bottom"

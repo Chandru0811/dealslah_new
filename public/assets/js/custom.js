@@ -113,7 +113,7 @@ $(document).ready(function () {
                 email: $("#email").val(),
                 phone: $("#mobile").val(),
                 company_id: 40,
-                company: "DealsMachi",
+                company: "Dealslah",
                 lead_status: "PENDING",
                 description_info: $("#description_info").val(),
                 lead_source: "Contact Us",
@@ -195,7 +195,7 @@ $(document).ready(function () {
         };
 
         var laravelRequest = $.ajax({
-            url: "https://dealsmachi.com/deals/count/enquire",
+            url: "https://dealslah.com/deals/count/enquire",
             type: "POST",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -415,24 +415,50 @@ $(document).ready(function () {
                                         <div class="d-flex text-start">
                                             <div class="px-1">
                                                 <input type="radio" name="selected_id"
-                                                    id="selected_id_${response.address.id}"
-                                                    value="${response.address.id}"
-                                                    ${response.address.default === "1" ? "checked" : ""} />
+                                                    id="selected_id_${
+                                                        response.address.id
+                                                    }"
+                                                    value="${
+                                                        response.address.id
+                                                    }"
+                                                    ${
+                                                        response.address
+                                                            .default === "1"
+                                                            ? "checked"
+                                                            : ""
+                                                    } />
                                             </div>
                                             <p class="text-turncate fs_common">
                                                 <span class="px-2">
-                                                    ${response.address.first_name} ${response.address.last_name ?? ""} |
+                                                    ${
+                                                        response.address
+                                                            .first_name
+                                                    } ${
+                                response.address.last_name ?? ""
+                            } |
                                                     <span style="color: #c7c7c7;">&nbsp;+91
-                                                        ${response.address.phone}
+                                                        ${
+                                                            response.address
+                                                                .phone
+                                                        }
                                                     </span>
                                                 </span><br>
                                                 <span class="px-2" style="color: #c7c7c7">
-                                                    ${response.address.address}, ${response.address.city}, ${response.address.state} - ${response.address.postalcode}.
+                                                    ${
+                                                        response.address.address
+                                                    }, ${
+                                response.address.city
+                            }, ${response.address.state} - ${
+                                response.address.postalcode
+                            }.
                                                 </span>
                                                 <br>
-                                                ${response.address.default === "1" ?
-                                    '<span class="badge badge_primary">Default</span>' : ""
-                                }
+                                                ${
+                                                    response.address.default ===
+                                                    "1"
+                                                        ? '<span class="badge badge_primary">Default</span>'
+                                                        : ""
+                                                }
                                             </p>
                                         </div>
                                     </div>
@@ -440,31 +466,51 @@ $(document).ready(function () {
                                         <div class="d-flex align-items-center justify-content-end">
                                             <div class="d-flex gap-2 delBadge">
                                                 <button type="button" class="badge_edit" data-bs-toggle="modal"
-                                                    data-address-id="${response.address.id}" data-bs-target="#editAddressModal">
+                                                    data-address-id="${
+                                                        response.address.id
+                                                    }" data-bs-target="#editAddressModal">
                                                     Edit
                                                 </button>
-                                                ${response.address.default === "0" ? `
+                                                ${
+                                                    response.address.default ===
+                                                    "0"
+                                                        ? `
                                                     <button type="button" class="badge_del"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#deleteAddressModal"
                                                         data-address-id="${response.address.id}">
                                                         Delete
-                                                    </button>` : ""
-                                }
+                                                    </button>`
+                                                        : ""
+                                                }
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             `);
                             if (response.address.default === "1") {
-                                $('.modal-body p strong:contains("Phone :")').parent().html(`
-                                    <strong>Phone :</strong> (+91) ${response.address.phone || "--"}
+                                $(
+                                    '.modal-body p strong:contains("Phone :")'
+                                ).parent().html(`
+                                    <strong>Phone :</strong> (+91) ${
+                                        response.address.phone || "--"
+                                    }
                                 `);
                                 var profileAddress = `
                                     <p>
-                                        <strong>${response.address.first_name} ${response.address.last_name ?? ""} (+91)
-                                            ${response.address.phone}</strong>&nbsp;&nbsp;<br>
-                                        ${response.address.address}, ${response.address.city}, ${response.address.state} - ${response.address.postalcode}
+                                        <strong>${
+                                            response.address.first_name
+                                        } ${
+                                    response.address.last_name ?? ""
+                                } (+91)
+                                            ${
+                                                response.address.phone
+                                            }</strong>&nbsp;&nbsp;<br>
+                                        ${response.address.address}, ${
+                                    response.address.city
+                                }, ${response.address.state} - ${
+                                    response.address.postalcode
+                                }
                                         <span>
                                             <span class="badge badge_danger py-1">Default</span>&nbsp;&nbsp;
                                         </span>
@@ -472,7 +518,10 @@ $(document).ready(function () {
                                 `;
                                 $(".selected-address").html(profileAddress);
                                 $(".defaultAddress .primary_new_btn").hide();
-                                if ($(".defaultAddress .badge_infos").length === 0) {
+                                if (
+                                    $(".defaultAddress .badge_infos").length ===
+                                    0
+                                ) {
                                     $(".defaultAddress").append(`
                                         <span class="badge badge_infos py-1" data-bs-toggle="modal" data-bs-target="#myAddressModal">Change</span>
                                     `);
@@ -488,9 +537,13 @@ $(document).ready(function () {
                                     $("#moveCartToCheckout").hide();
                                     $("#moveCartToCheckout").after(`
                                         <form action="/cartCheckout" method="POST" id="cartCheckoutForm">
-                                            <input type="hidden" name="_token" value="${$('meta[name="csrf-token"]').attr("content")}">
+                                            <input type="hidden" name="_token" value="${$(
+                                                'meta[name="csrf-token"]'
+                                            ).attr("content")}">
                                             <input type="hidden" name="cart_id"  value="${cartId}">
-                                            <input type="hidden" name="address_id" id="addressID" value="${response.address.id}">
+                                            <input type="hidden" name="address_id" id="addressID" value="${
+                                                response.address.id
+                                            }">
                                             <button type="submit" class="btn check_out_btn">
                                                 Checkout
                                             </button>
@@ -506,7 +559,10 @@ $(document).ready(function () {
                                     $("#moveToCheckout").data("products-id");
                                 if ($("#moveToCheckout").length) {
                                     $("#moveToCheckout").hide();
-                                    $(".summary_checkout_button").css("display","block");
+                                    $(".summary_checkout_button").css(
+                                        "display",
+                                        "block"
+                                    );
                                 }
                             }
 
@@ -692,22 +748,47 @@ $(document).ready(function () {
                                         <div class="d-flex text-start">
                                             <div class="px-1">
                                                 <input type="radio" name="selected_id"
-                                                    id="selected_id_${response.address.id}"
-                                                    value="${response.address.id}"
-                                                    ${response.address.default === "1" ? "checked" : ""} />
+                                                    id="selected_id_${
+                                                        response.address.id
+                                                    }"
+                                                    value="${
+                                                        response.address.id
+                                                    }"
+                                                    ${
+                                                        response.address
+                                                            .default === "1"
+                                                            ? "checked"
+                                                            : ""
+                                                    } />
                                             </div>
                                             <p class="text-turncate fs_common">
                                                 <span class="px-2">
-                                                    ${response.address.first_name} ${response.address.last_name ?? ""} |
-                                                    <span style="color: #c7c7c7;">&nbsp;+91 ${response.address.phone}</span>
+                                                    ${
+                                                        response.address
+                                                            .first_name
+                                                    } ${
+                                response.address.last_name ?? ""
+                            } |
+                                                    <span style="color: #c7c7c7;">&nbsp;+91 ${
+                                                        response.address.phone
+                                                    }</span>
                                                 </span><br>
                                                 <span class="px-2"
-                                                    style="color: #c7c7c7">${response.address.address}, ${response.address.city}, ${response.address.state} - ${response.address.postalcode}.
+                                                    style="color: #c7c7c7">${
+                                                        response.address.address
+                                                    }, ${
+                                response.address.city
+                            }, ${response.address.state} - ${
+                                response.address.postalcode
+                            }.
                                                 </span>
                                                 <br>
-                                                ${response.address.default === "1" ?
-                                    '<span class="badge badge_primary">Default</span>' : ""
-                                }
+                                                ${
+                                                    response.address.default ===
+                                                    "1"
+                                                        ? '<span class="badge badge_primary">Default</span>'
+                                                        : ""
+                                                }
                                             </p>
                                         </div>
                                     </div>
@@ -715,17 +796,23 @@ $(document).ready(function () {
                                         <div class="d-flex align-items-center justify-content-end">
                                             <div class="d-flex gap-2 delBadge">
                                                 <button type="button" class="badge_edit" data-bs-toggle="modal"
-                                                    data-address-id="${response.address.id}" data-bs-target="#editAddressModal">
+                                                    data-address-id="${
+                                                        response.address.id
+                                                    }" data-bs-target="#editAddressModal">
                                                     Edit
                                                 </button>
-                                                ${response.address.default === "0" ? `
+                                                ${
+                                                    response.address.default ===
+                                                    "0"
+                                                        ? `
                                                     <button type="button" class="badge_del"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#deleteAddressModal"
                                                         data-address-id="${response.address.id}">
                                                         Delete
-                                                    </button>` : ""
-                                }
+                                                    </button>`
+                                                        : ""
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -733,14 +820,28 @@ $(document).ready(function () {
                             `);
 
                             if (response.address.default === "1") {
-                                $('.modal-body p strong:contains("Phone :")').parent().html(`
-                                    <strong>Phone :</strong> (+91) ${response.address.phone || "--"}
+                                $(
+                                    '.modal-body p strong:contains("Phone :")'
+                                ).parent().html(`
+                                    <strong>Phone :</strong> (+91) ${
+                                        response.address.phone || "--"
+                                    }
                                 `);
                                 $(".selected-address").html(`
                                     <p>
-                                        <strong>${response.address.first_name} ${response.address.last_name ?? ""} (+91)
-                                            ${response.address.phone}</strong>&nbsp;&nbsp;<br>
-                                        ${response.address.address}, ${response.address.city}, ${response.address.state} - ${response.address.postalcode}
+                                        <strong>${
+                                            response.address.first_name
+                                        } ${
+                                    response.address.last_name ?? ""
+                                } (+91)
+                                            ${
+                                                response.address.phone
+                                            }</strong>&nbsp;&nbsp;<br>
+                                        ${response.address.address}, ${
+                                    response.address.city
+                                }, ${response.address.state} - ${
+                                    response.address.postalcode
+                                }
                                         <span>
                                             <span class="badge badge_danger py-1">Default</span>&nbsp;&nbsp;
                                         </span>
@@ -819,17 +920,13 @@ $(document).ready(function () {
 
         // Reset radio selection when modal is closed
         $("#myAddressModal").on("hidden.bs.modal", function () {
-            let storedSelectedId =
-                sessionStorage.getItem("selectedAddressId"); // Get last selected ID (if set)
+            let storedSelectedId = sessionStorage.getItem("selectedAddressId"); // Get last selected ID (if set)
             let selectedAddressId = "{{ $selectedAddressId }}"; // PHP session value
             let defaultAddressId =
                 "{{ $default_address ? $default_address->id : '' }}"; // PHP default value
 
             $('input[name="selected_id"]').each(function () {
-                if (
-                    storedSelectedId &&
-                    $(this).val() === storedSelectedId
-                ) {
+                if (storedSelectedId && $(this).val() === storedSelectedId) {
                     $(this).prop("checked", true);
                 } else if ($(this).val() === selectedAddressId) {
                     $(this).prop("checked", true);
@@ -938,11 +1035,17 @@ $(document).ready(function () {
             function updateSelectedAddress(address) {
                 if (address) {
                     const addressHtml = `
-                            <strong>${address.first_name} ${address.last_name ?? ""} (+91) ${address.phone}</strong><br>
-                            ${address.address}, ${address.city}, ${address.state} - ${address.postalcode}
-                            ${address.default ?
-                            '<span class="badge badge_danger py-1">Default</span>' : ""
-                        }
+                            <strong>${address.first_name} ${
+                        address.last_name ?? ""
+                    } (+91) ${address.phone}</strong><br>
+                            ${address.address}, ${address.city}, ${
+                        address.state
+                    } - ${address.postalcode}
+                            ${
+                                address.default
+                                    ? '<span class="badge badge_danger py-1">Default</span>'
+                                    : ""
+                            }
                         `;
                     $("#addressID").val(address.id);
                     $(".selected-address").html(addressHtml);
@@ -1360,7 +1463,7 @@ function copySpanText(element, event) {
     var dealId = element.closest("a").getAttribute("href").split("/").pop();
 
     $.ajax({
-        url: "https://dealsmachi.com/deals/coupon/copied",
+        url: "https://dealslah.com/deals/coupon/copied",
         type: "POST",
         data: {
             _token: $('meta[name="csrf-token"]').attr("content"),
@@ -1392,7 +1495,7 @@ function copyLinkToClipboard(element, event, dealId) {
     document.body.removeChild(tempInput);
 
     $.ajax({
-        url: "https://dealsmachi.com/deals/count/share",
+        url: "https://dealslah.com/deals/count/share",
         type: "POST",
         data: {
             _token: $('meta[name="csrf-token"]').attr("content"),
@@ -1462,7 +1565,7 @@ document
             var shareUrl = event.target.closest("a").href;
 
             $.ajax({
-                url: "https://dealsmachi.com/deals/count/share",
+                url: "https://dealslah.com/deals/count/share",
                 type: "POST",
                 data: {
                     _token: $('meta[name="csrf-token"]').attr("content"),
@@ -1484,7 +1587,7 @@ document
 
 function clickCount(dealId) {
     $.ajax({
-        url: "https://dealsmachi.com/deals/count/click",
+        url: "https://dealslah.com/deals/count/click",
         type: "POST",
         data: {
             _token: $('meta[name="csrf-token"]').attr("content"),
@@ -1501,7 +1604,7 @@ function clickCount(dealId) {
 
 function enquireCount(dealId) {
     $.ajax({
-        url: "https://dealsmachi.com/deals/count/enquire",
+        url: "https://dealslah.com/deals/count/enquire",
         type: "POST",
         data: {
             _token: $('meta[name="csrf-token"]').attr("content"),
@@ -1522,7 +1625,7 @@ function sendEnquiry(dealId, shopMobile, productName, productDescription) {
     const whatsappUrl =
         `https://wa.me/65${shopMobile}?text=` +
         encodeURIComponent(
-            `*Hello! I visited dealsmachi website and found an amazing product:*\n\n${productName}\n${productDescription}\n\nHere is the product page: ${window.location.href}`
+            `*Hello! I visited dealslah website and found an amazing product:*\n\n${productName}\n${productDescription}\n\nHere is the product page: ${window.location.href}`
         );
 
     window.open(whatsappUrl, "_blank");
@@ -1800,7 +1903,7 @@ $(document).ready(function () {
     // Initial Load of Bookmark Count
     function loadBookmarkCount() {
         $.ajax({
-            url: "https://dealsmachi.com/totalbookmark",
+            url: "https://dealslah.com/totalbookmark",
             method: "GET",
             success: function (response) {
                 updateBookmarkCount(response.total_items);
@@ -1848,12 +1951,20 @@ function handleAddBookmark() {
         .on("click", function (e) {
             e.preventDefault();
             let dealId = $(this).data("deal-id");
-
+            let bookmarknumber = localStorage.getItem("bookmarknumber") || null;
+            console.log(bookmarknumber);
             $.ajax({
-                url: `https://dealsmachi.com/bookmark/${dealId}/add`,
+                url: `https://dealslah.com/bookmark/${dealId}/add`,
                 method: "POST",
+                data: {
+                    bookmarknumber: bookmarknumber,
+                },
                 success: function (response) {
-                    // console.log(response);
+                    //console.log(response);
+                    localStorage.setItem(
+                        "bookmarknumber",
+                        response.bookmarknumber
+                    );
                     updateBookmarkCount(response.total_items);
 
                     let button = $(`.add-bookmark[data-deal-id="${dealId}"]`);
@@ -1862,13 +1973,13 @@ function handleAddBookmark() {
                         .addClass("remove-bookmark");
                     button.html(`
                         <p style="height:fit-content;cursor:pointer" class="p-1 px-2">
-                            <i class="fa-solid fa-heart bookmark-icon" style="color: #ff0060;"></i>
+                            <i class="fa-solid fa-bookmark bookmark-icon" style="color: #EF4444;"></i>
                         </p>
                     `);
 
                     handleRemoveBookmark();
                 },
-                error: function (xhr) { },
+                error: function (xhr) {},
             });
         });
 }
@@ -1882,7 +1993,7 @@ function handleRemoveBookmark() {
             let dealId = $(this).data("deal-id");
 
             $.ajax({
-                url: `https://dealsmachi.com/bookmark/${dealId}/remove`,
+                url: `https://dealslah.com/bookmark/${dealId}/remove`,
                 method: "DELETE",
                 success: function (response) {
                     updateBookmarkCount(response.total_items);
@@ -1895,7 +2006,7 @@ function handleRemoveBookmark() {
                         .addClass("add-bookmark");
                     button.html(`
                         <p style="height:fit-content;cursor:pointer" class="p-1 px-2">
-                            <i class="fa-regular fa-heart bookmark-icon" style="color: #ff0060;"></i>
+                            <i class="fa-regular fa-bookmark bookmark-icon" style="color: #EF4444;"></i>
                         </p>
                     `);
 
@@ -1915,25 +2026,25 @@ $(document).ready(function () {
         },
     });
     initializeEventListeners();
-    fetchCartDropdown();
+    //fetchCartDropdown();
     handleAddBookmark();
     handleRemoveBookmark();
 });
 
-function fetchCartDropdown() {
-    $.ajax({
-        url: "/cart/dropdown",
-        type: "GET",
-        success: function (response) {
-            if (response.html) {
-                $(".dropdown_cart").html(response.html);
-            }
-        },
-        error: function () {
-            showMessage("Failed to update cart dropdown!", "error");
-        },
-    });
-}
+// function fetchCartDropdown() {
+//     $.ajax({
+//         url: "/cart/dropdown",
+//         type: "GET",
+//         success: function (response) {
+//             if (response.html) {
+//                 $(".dropdown_cart").html(response.html);
+//             }
+//         },
+//         error: function () {
+//             showMessage("Failed to update cart dropdown!", "error");
+//         },
+//     });
+// }
 
 function showMessage(message, type) {
     var textColor, icon;
@@ -2021,10 +2132,9 @@ function initializeEventListeners() {
             e.preventDefault();
 
             let slug = $(this).data("slug");
-            let cartnumber = localStorage.getItem('cartnumber') || null;
-            console.log(cartnumber);
-            if(cartnumber == null)
-            {
+            let cartnumber = localStorage.getItem("cartnumber") || null;
+            console.log("Cartnumber in localStorage :", cartnumber);
+            if (cartnumber == null) {
                 cartnumber = getCartNumber();
                 console.log(cartnumber);
             }
@@ -2034,64 +2144,73 @@ function initializeEventListeners() {
                 data: {
                     quantity: 1,
                     saveoption: "add to cart",
-                    cartnumber: cartnumber
+                    cartnumber: cartnumber,
                 },
-                success: function (response) {
-                    console.log(response);
-                    if (!cartnumber && response.cart_number) {
-                        const cartCountElement = $("#cart-count");
+                success: function (data, textStatus, jqXHR) {
+                    // console.log(data);
+                    // console.log(textStatus);
+                    if (textStatus == "success") {
+                        let currentCount =
+                            parseInt($("#cart-count").text()) || 0;
+                        console.log(currentCount);
 
-                        if (response.cartItemCount > 0) {
-                            cartCountElement.text(response.cartItemCount);
-                            cartCountElement.css("display", "inline");
+                        let newCount = currentCount + 1;
+                        //console.log(newCount);
+                        $("#cart-count").text(newCount);
+                        $("#cart-count").addClass("cart-border");
+
+                        if (newCount > 0 && newCount <= 6) {
+                            updateCartUI(data.cartItems);
                         } else {
-                            cartCountElement.css("display", "none");
+                            $(".cart_items").append(`
+                                <div class="text-end mb-2">
+                                    <a style="font-size: 13px" class="cart-screen">View All</a>
+                                </div>
+                            `);
                         }
-                        localStorage.setItem("cartnumber", response.cart_number);
+                        localStorage.setItem("cartnumber", data.cart_number);
+                        saveCartNumber(data.cart_number);
+                        showMessage(
+                            data.status || "Deal added to cart!",
+                            "success"
+                        );
+                    } else {
+                        showMessage("Something went wrong!", "error");
                     }
-
-                    saveCartNumber(response.cart_number);
-                    showMessage(response.status || "Deal added to cart!","success");
-                    
                 },
                 error: function (xhr) {
-                                        const errorMessage =
-                                            xhr.responseJSON?.error || "Something went wrong!";
-                                        showMessage(errorMessage, "error");
-                                    },
+                    const errorMessage =
+                        xhr.responseJSON?.error || "Something went wrong!";
+                    showMessage(errorMessage, "error");
+                },
             });
         });
 }
 
+function updateCartUI(cartItems) {
+    $(".cartEmpty").hide();
 
+    const imagePath =
+        cartItems.product.product_media.length > 0
+            ? cartItems.product.product_media.find(
+                  (media) => media.order === 1 && media.type === "image"
+              )?.resize_path
+            : "assets/images/home/noImage.webp";
 
-    $('#cart-link').on('click', function (event) {
-        event.preventDefault(); // Prevent default navigation
-
-        let cartNumber = localStorage.getItem('cart_number'); // Get from localStorage
-        let cartUrl = $(this).attr('href');
-
-        if (cartNumber) {
-            // Navigate with cart number in session
-            $.ajax({
-                url: cartUrl,
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Cart-Number': cartNumber  // Pass cart number in headers
-                },
-                success: function () {
-                    window.location.href = cartUrl; // Redirect after request
-                },
-                error: function (error) {
-                    console.error('Error:', error);
-                }
-            });
-        } else {
-            window.location.href = cartUrl; // Proceed normally if no cartNumber
-        }
-    });
-
+    $(".cart_items").append(`
+        <div class="d-flex">
+            <img src="https://dealslah.com/${imagePath}" class="img-fluid dropdown_img" alt="${cartItems.product.name}" />
+            <div class="text-start">
+                <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
+                    ${cartItems.product.name}
+                </p>
+                <p class="px-1 text_size" style="color: #EF4444">
+                    ₹ ${cartItems.discount.toLocaleString()}
+                </p>
+            </div>
+        </div>
+    `);
+}
 
 function isLocalStorageAvailable() {
     try {
@@ -2120,9 +2239,6 @@ function getCartNumber() {
     }
 }
 
-
-
-
 // Loading Data
 document.addEventListener("DOMContentLoaded", function () {
     let loading = false;
@@ -2138,7 +2254,7 @@ document.addEventListener("DOMContentLoaded", function () {
         loadingSpinner.classList.remove("d-none");
 
         setTimeout(() => {
-            fetch(`/?page=${currentPage}`, {
+            fetch(`./?page=${currentPage}`, {
                 headers: {
                     "X-Requested-With": "XMLHttpRequest",
                 },
@@ -2195,7 +2311,7 @@ $(document).ready(function () {
         },
     });
     initializeEventListeners();
-    
+
     // Save Later Add Function
     $(document).on("click", ".save-for-later-btn", function (e) {
         e.preventDefault();
@@ -2206,11 +2322,15 @@ $(document).ready(function () {
         });
 
         const productId = $(this).data("product-id");
+        let cartnumber = localStorage.getItem("cartnumber") || null;
 
         $.ajax({
             url: "/saveforlater/add",
             type: "POST",
-            data: { product_id: productId },
+            data: {
+                product_id: productId,
+                cartnumber: cartnumber,
+            },
             success: function (response) {
                 if (response.cartItemCount !== undefined) {
                     const cartCountElement = $("#cart-count");
@@ -2218,16 +2338,25 @@ $(document).ready(function () {
                         cartCountElement.text(response.cartItemCount);
                         cartCountElement.css("display", "inline");
                     } else {
-                        cartCountElement.attr("style", "display: none !important;");
+                        cartCountElement.attr(
+                            "style",
+                            "display: none !important;"
+                        );
                     }
                 }
 
                 $(`.cart-item[data-product-id="${productId}"]`).remove();
 
                 if (response.updatedCart) {
-                    $(".subtotal").text("₹" + response.updatedCart.subtotal.toLocaleString());
-                    $(".discount").text("₹" + response.updatedCart.discount.toLocaleString());
-                    $(".total").text("₹" + response.updatedCart.grand_total.toLocaleString());
+                    $(".subtotal").text(
+                        "₹" + response.updatedCart.subtotal.toLocaleString()
+                    );
+                    $(".discount").text(
+                        "₹" + response.updatedCart.discount.toLocaleString()
+                    );
+                    $(".total").text(
+                        "₹" + response.updatedCart.grand_total.toLocaleString()
+                    );
                     $(".quantity-value").text(response.updatedCart.quantity);
                 }
 
@@ -2236,7 +2365,7 @@ $(document).ready(function () {
                          <div class="empty-cart col-12 text-center d-flex flex-column align-items-center justify-content-center mt-0">
                              <img src="assets/images/home/cart_empty.webp" alt="Empty Cart"
                                  class="img-fluid empty_cart_img">
-                             <p class="pt-5" style="color: #ff0060;font-size: 22px">Your Cart is Currently Empty</p>
+                             <p class="pt-5" style="color: #EF4444;font-size: 22px">Your Cart is Currently Empty</p>
                              <p class="" style="color: #6C6C6C;font-size: 16px">Looks Like You Have Not Added Anything To </br>
                                  Your Cart. Go Ahead & Explore Top Categories.</p>
                              <a href="/" class="btn showmoreBtn mt-2">Shop More</a>
@@ -2250,61 +2379,103 @@ $(document).ready(function () {
                 if (response.deal) {
                     $(".empty-savedItems").hide();
 
-                    const imagePath = response.deal.product_media.length > 0
-                        ? response.deal.product_media.find(media => media.order === 1 && media.type === 'image')?.resize_path
-                        : 'assets/images/home/noImage.webp';
-                    
-                   
-                        const deliveryDate = response.deal.deal_type === 1
-                        ? (response.deal.delivery_days && response.deal.delivery_days > 0
-                        ? (() => {
-                           const currentDate = new Date();
-                           currentDate.setTime(currentDate.getTime() + (response.deal.delivery_days * 24 * 60 * 60 * 1000));
-                           const day = String(currentDate.getDate()).padStart(2, '0');
-                           const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-                           const year = currentDate.getFullYear();
-   
-                           return `${day}-${month}-${year}`;
-   
-                         })()
-                         : 'No delivery date available')
-                         : '<span style="color: #22cb00">Currently Services are free through DealsMachi</span>';
+                    const imagePath =
+                        response.deal.product_media.length > 0
+                            ? response.deal.product_media.find(
+                                  (media) =>
+                                      media.order === 1 &&
+                                      media.type === "image"
+                              )?.resize_path
+                            : "assets/images/home/noImage.webp";
 
-                    const discountPercentage = Math.round(response.deal.discount_percentage);
+                    const deliveryDate =
+                        response.deal.deal_type === 1
+                            ? response.deal.delivery_days &&
+                              response.deal.delivery_days > 0
+                                ? (() => {
+                                      const currentDate = new Date();
+                                      currentDate.setTime(
+                                          currentDate.getTime() +
+                                              response.deal.delivery_days *
+                                                  24 *
+                                                  60 *
+                                                  60 *
+                                                  1000
+                                      );
+                                      const day = String(
+                                          currentDate.getDate()
+                                      ).padStart(2, "0");
+                                      const month = String(
+                                          currentDate.getMonth() + 1
+                                      ).padStart(2, "0");
+                                      const year = currentDate.getFullYear();
+
+                                      return `${day}-${month}-${year}`;
+                                  })()
+                                : "No delivery date available"
+                            : '<span style="color: #22cb00">Currently Services are free through Dealslah</span>';
+
+                    const discountPercentage = Math.round(
+                        response.deal.discount_percentage
+                    );
 
                     const savedItemHtml = `
-                        <div class="saved-item" data-product-id="${response.deal.id}">
+                        <div class="saved-item" data-product-id="${
+                            response.deal.id
+                        }">
                             <div class="row p-4">
                                 <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <img src="${imagePath}" style="max-width: 100%; max-height: 100%;" 
+                                        <img src="${imagePath}" style="max-width: 100%; max-height: 100%;"
                                             alt="${response.deal.name}" />
                                     </div>
                                 </div>
                                 <div class="col-md-5">
-                                    <a href="/deal/${response.deal.id}" style="color: #000;" 
-                                        onclick="clickCount('${response.deal.id}')">
-                                        <p style="font-size: 18px;font-weight:500">${response.deal.name}</p>
+                                    <a href="/deal/${
+                                        response.deal.id
+                                    }" style="color: #000;"
+                                        onclick="clickCount('${
+                                            response.deal.id
+                                        }')">
+                                        <p style="font-size: 18px;font-weight:500">${
+                                            response.deal.name
+                                        }</p>
                                     </a>
-                                    <p class="truncated-description" style="font-size: 16px">${response.deal.description}</p>
-                                    ${response.deal.deal_type === 1 ? `
+                                    <p class="truncated-description" style="font-size: 16px">${
+                                        response.deal.description
+                                    }</p>
+                                    ${
+                                        response.deal.deal_type === 1
+                                            ? `
                                         <div class="rating my-2">
                                             <span>Delivery Date :</span><span class="stars">
                                                 <span>${deliveryDate}</span>
                                             </span>
                                         </div>
-                                    ` : `
+                                    `
+                                            : `
                                         <div class="rating mt-3 mb-3">
-                                            <span style="color: #22cb00">Currently Services are free through DealsMachi</span>
+                                            <span style="color: #22cb00">Currently Services are free through Dealslah</span>
                                         </div>
-                                    `}
-                                    <p style="color: #AAAAAA;font-size:14px;">Seller : ${response.deal.shop.legal_name}</p>
+                                    `
+                                    }
+                                    <p style="color: #AAAAAA;font-size:14px;">Seller : ${
+                                        response.deal.shop.legal_name
+                                    }</p>
                                     <div class="ms-0">
                                         <span style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
-                                            ₹${Math.round(response.deal.original_price).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                                            ₹${Math.round(
+                                                response.deal.original_price
+                                            ).toLocaleString("en-IN", {
+                                                maximumFractionDigits: 0,
+                                            })}
                                         </span>
-                                        <span class="ms-1" style="font-size:18px;font-weight:500;color:#ff0060">
-                                             ₹${Math.round(response.deal.discounted_price).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                                        <span class="ms-1" style="font-size:18px;font-weight:500;color:#EF4444">
+                                             ₹${Math.round(
+                                                 response.deal.discounted_price
+                                             ).toLocaleString("en-IN", {
+                                                 maximumFractionDigits: 0,
+                                             })}
                                         </span>
                                         <span class="ms-1" style="font-size:18px;font-weight:500; color:#28A745">
                                             - ${discountPercentage}% Off
@@ -2313,8 +2484,10 @@ $(document).ready(function () {
                                 </div>
                                 <div class="col-md-4 d-flex flex-column justify-content-end align-items-end mb-3">
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn remove-cart-btn removeSaveLater" 
-                                            style="color: #ff0060;border: none" data-product-id="${response.deal.id}">
+                                        <button type="button" class="btn remove-cart-btn removeSaveLater"
+                                            style="color: #EF4444;border: none" data-product-id="${
+                                                response.deal.id
+                                            }">
                                             <div class="d-inline-flex align-items-center gap-2-2">
                                                 <div>
                                                     <img src="assets/images/home/icon_delete.svg" alt="icon" class="img-fluid" />
@@ -2325,8 +2498,10 @@ $(document).ready(function () {
                                                 </div>
                                             </div>
                                         </button>
-                                        <button type="button" class="btn cancel-btn moveToCart" 
-                                            style="color: #ff0060;border: none" data-product-id="${response.deal.id}">
+                                        <button type="button" class="btn cancel-btn moveToCart"
+                                            style="color: #EF4444;border: none" data-product-id="${
+                                                response.deal.id
+                                            }">
                                             <div class="d-inline-flex align-items-center gap-2">
                                                 <div>
                                                     <img src="assets/images/home/icon_delivery.svg" alt="icon" class="img-fluid" />
@@ -2346,11 +2521,15 @@ $(document).ready(function () {
                     $(".saved-item-container").append(savedItemHtml);
                 }
 
-                fetchCartDropdown();
-                showMessage(response.status || "Item moved to Buy for Later!", "success");
+                showMessage(
+                    response.status || "Item moved to Buy for Later!",
+                    "success"
+                );
             },
             error: function (xhr) {
-                const errorMessage = xhr.responseJSON?.error || "Failed to move item to Buy for Later!";
+                const errorMessage =
+                    xhr.responseJSON?.error ||
+                    "Failed to move item to Buy for Later!";
                 showMessage(errorMessage, "error");
             },
         });
@@ -2378,19 +2557,30 @@ $(document).ready(function () {
                         cartCountElement.text(response.cartItemCount);
                         cartCountElement.css("display", "inline");
                     } else {
-                        cartCountElement.attr("style", "display: none !important;");
+                        cartCountElement.attr(
+                            "style",
+                            "display: none !important;"
+                        );
                     }
                 }
 
-                const cartItemElement = $(`.cart-item[data-product-id="${productId}"]`);
+                const cartItemElement = $(
+                    `.cart-item[data-product-id="${productId}"]`
+                );
                 if (cartItemElement.length) {
                     cartItemElement.remove();
                 }
 
                 if (response.updatedCart) {
-                    $(".subtotal").text("₹" + response.updatedCart.subtotal.toLocaleString());
-                    $(".discount").text("₹" + response.updatedCart.discount.toLocaleString());
-                    $(".total").text("₹" + response.updatedCart.grand_total.toLocaleString());
+                    $(".subtotal").text(
+                        "₹" + response.updatedCart.subtotal.toLocaleString()
+                    );
+                    $(".discount").text(
+                        "₹" + response.updatedCart.discount.toLocaleString()
+                    );
+                    $(".total").text(
+                        "₹" + response.updatedCart.grand_total.toLocaleString()
+                    );
                     $(".quantity-value").text(response.updatedCart.quantity);
                 }
 
@@ -2399,7 +2589,7 @@ $(document).ready(function () {
                          <div class="empty-cart col-12 text-center d-flex flex-column align-items-center justify-content-center mt-0">
                              <img src="assets/images/home/cart_empty.webp" alt="Empty Cart"
                                  class="img-fluid empty_cart_img">
-                             <p class="pt-5" style="color: #ff0060;font-size: 22px">Your Cart is Currently Empty</p>
+                             <p class="pt-5" style="color: #EF4444;font-size: 22px">Your Cart is Currently Empty</p>
                              <p class="" style="color: #6C6C6C;font-size: 16px">Looks Like You Have Not Added Anything To </br>
                                  Your Cart. Go Ahead & Explore Top Categories.</p>
                              <a href="/" class="btn showmoreBtn mt-2">Shop More</a>
@@ -2410,7 +2600,6 @@ $(document).ready(function () {
                     $(".item_count").text(response.cartItemCount);
                 }
 
-                fetchCartDropdown();
                 showMessage(
                     response.status || "Item moved to Buy for Later!",
                     "success"
@@ -2434,11 +2623,14 @@ $(document).ready(function () {
         });
         e.preventDefault();
         const productId = $(this).data("product-id");
-
+        let cartnumber = localStorage.getItem("cartnumber") || null;
         $.ajax({
             url: "/saveforlater/toCart",
             type: "POST",
-            data: { product_id: productId },
+            data: {
+                product_id: productId,
+                cartnumber: cartnumber,
+            },
             success: function (response) {
                 if (response.cartItemCount !== undefined) {
                     const cartCountElement = $("#cart-count");
@@ -2446,7 +2638,10 @@ $(document).ready(function () {
                         cartCountElement.text(response.cartItemCount);
                         cartCountElement.css("display", "inline");
                     } else {
-                        cartCountElement.attr("style", "display: none !important;");
+                        cartCountElement.attr(
+                            "style",
+                            "display: none !important;"
+                        );
                     }
                 }
 
@@ -2458,7 +2653,7 @@ $(document).ready(function () {
                     $(".saved-items").after(`
                         <div class="text-center mb-4 empty-savedItems">
                                 <img src='/assets/images/home/empty_savedItems.png' alt="Empty Cart" class="img-fluid mb-2" style="width: 300px;" />
-                                <h4 style="color: #ff0060;">Your Saved Wishlists are awaiting your selection!</h4>
+                                <h4 style="color: #EF4444;">Your Saved Wishlists are awaiting your selection!</h4>
                             </div>
                         `);
                 }
@@ -2466,9 +2661,15 @@ $(document).ready(function () {
                 $(".item_count").text(response.cartItemCount);
 
                 if (response.updatedCart) {
-                    $(".subtotal").text("₹" + response.updatedCart.subtotal.toLocaleString());
-                    $(".discount").text("₹" + response.updatedCart.discount.toLocaleString());
-                    $(".total").text("₹" + response.updatedCart.grand_total.toLocaleString());
+                    $(".subtotal").text(
+                        "₹" + response.updatedCart.subtotal.toLocaleString()
+                    );
+                    $(".discount").text(
+                        "₹" + response.updatedCart.discount.toLocaleString()
+                    );
+                    $(".total").text(
+                        "₹" + response.updatedCart.grand_total.toLocaleString()
+                    );
                     $(".quantity-value").text(response.updatedCart.quantity);
                 }
 
@@ -2477,46 +2678,87 @@ $(document).ready(function () {
 
                     $(".cart-items-container").css("display", "block");
 
-                    const image = response.item.product.product_media.length > 0
-                        ? response.item.product.product_media.find(media => media.order === 1 && media.type === 'image')?.resize_path
-                        : 'assets/images/home/noImage.webp';
+                    const image =
+                        response.item.product.product_media.length > 0
+                            ? response.item.product.product_media.find(
+                                  (media) =>
+                                      media.order === 1 &&
+                                      media.type === "image"
+                              )?.resize_path
+                            : "assets/images/home/noImage.webp";
 
-                    const deliveryDate = response.item.product.deal_type === 1 && response.item.product.delivery_days
-                        ? (() => {
-                            const date = new Date();
-                            date.setDate(date.getDate() + parseInt(response.item.product.delivery_days));
-                            return date.getDate().toString().padStart(2, "0") + "-" +
-                                   (date.getMonth() + 1).toString().padStart(2, "0") + "-" +
-                                   date.getFullYear();
-                        })()
-                        : "No delivery date available";                    
+                    const deliveryDate =
+                        response.item.product.deal_type === 1 &&
+                        response.item.product.delivery_days
+                            ? (() => {
+                                  const date = new Date();
+                                  date.setDate(
+                                      date.getDate() +
+                                          parseInt(
+                                              response.item.product
+                                                  .delivery_days
+                                          )
+                                  );
+                                  return (
+                                      date
+                                          .getDate()
+                                          .toString()
+                                          .padStart(2, "0") +
+                                      "-" +
+                                      (date.getMonth() + 1)
+                                          .toString()
+                                          .padStart(2, "0") +
+                                      "-" +
+                                      date.getFullYear()
+                                  );
+                              })()
+                            : "No delivery date available";
 
-                    const discountPercentage = Math.round(response.item.product.discount_percentage);
+                    const discountPercentage = Math.round(
+                        response.item.product.discount_percentage
+                    );
 
                     const cartItemHtml = `
-                            <div class="cart-item" data-product-id="${response.item.product_id}">
+                            <div class="cart-item" data-product-id="${
+                                response.item.product_id
+                            }">
     <div class="row p-4">
         <div class="col-md-4 mb-3">
             <div class="d-flex justify-content-center align-items-center">
-                <img src="${image}" style="max-width: 100%; max-height: 100%;" alt="${response.item.item_description}" />
+                <img src="${image}" style="max-width: 100%; max-height: 100%;" alt="${
+                        response.item.item_description
+                    }" />
             </div>
         </div>
         <div class="col-md-8">
-            <a href="/deal/${response.item.product_id}" style="color: #000;" onclick="clickCount('${response.item.product.id}')">
+            <a href="/deal/${
+                response.item.product_id
+            }" style="color: #000;" onclick="clickCount('${
+                        response.item.product.id
+                    }')">
                 <p style="font-size: 18px;">${response.item.product.name}</p>
             </a>
-            <p class="truncated-description" style="font-size: 16px">${response.item.product.description}</p>
-            <p style="color: #AAAAAA;font-size:14px;">Seller : ${response.item.product.shop.legal_name}</p>
-            ${response.item.product.deal_type === 2 ? `
+            <p class="truncated-description" style="font-size: 16px">${
+                response.item.product.description
+            }</p>
+            <p style="color: #AAAAAA;font-size:14px;">Seller : ${
+                response.item.product.shop.legal_name
+            }</p>
+            ${
+                response.item.product.deal_type === 2
+                    ? `
             <div class="rating mt-3 mb-3">
                 <span style="color: #22cb00">Currently Services are free through
-                    DealsMachi
+                    Dealslah
                 </span>
             </div>
-            <span class="ms-1" style="font-size:18px;font-weight:500;color:#ff0060">
-                ₹${Math.round(response.item.product.discounted_price).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+            <span class="ms-1" style="font-size:18px;font-weight:500;color:#EF4444">
+                ₹${Math.round(
+                    response.item.product.discounted_price
+                ).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
             </span>
-            ` : `
+            `
+                    : `
             <div class="d-flex">
                 <div class="">
                     <img src="assets/images/home/icon_delivery.svg" alt="icon"
@@ -2530,22 +2772,28 @@ $(document).ready(function () {
             </div>
             <div class="ms-0">
                 <span style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
-                    ₹${Math.round(response.item.product.original_price).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                    ₹${Math.round(
+                        response.item.product.original_price
+                    ).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
                 </span>
-                <span class="ms-1" style="font-size:18px;font-weight:500;color:#ff0060">
-                    ₹${Math.round(response.item.product.discounted_price).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                <span class="ms-1" style="font-size:18px;font-weight:500;color:#EF4444">
+                    ₹${Math.round(
+                        response.item.product.discounted_price
+                    ).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
                 </span>
                 <span class="ms-1" style="font-size:18px;font-weight:500;color:#28A745">
                     - ${discountPercentage}% Off
                 </span>
             </div>
-            `}
+            `
+            }
         </div>
     </div>
     <div class="row d-flex align-items-center">
         <div class="col-md-6">
-            ${response.item.product.deal_type == 2 ?
-                            `<div class="d-flex align-items-start my-1 mb-3" style="padding-left:24px">
+            ${
+                response.item.product.deal_type == 2
+                    ? `<div class="d-flex align-items-start my-1 mb-3" style="padding-left:24px">
                 <div class="d-flex flex-column ms-0" style="width: 30%">
                     <label for="service_date" class="form-label">Service Date</label>
                     <input type="date" id="service_date" name="service_date"
@@ -2559,8 +2807,8 @@ $(document).ready(function () {
                         value="${response.item.service_time}" data-cart-id="${response.item.cart_id}"
                         data-product-id="${response.item.product.id}">
                 </div>
-            </div>` :
-                            `<div class="d-flex align-items-center my-1 mb-3" style="padding-left: 24px;">
+            </div>`
+                    : `<div class="d-flex align-items-center my-1 mb-3" style="padding-left: 24px;">
                 <span>Qty</span> &nbsp;&nbsp;
                 <button class="btn rounded btn-sm decrease-btn1" data-cart-id="${response.item.cart_id}"
                     data-product-id="${response.item.product.id}">-</button>
@@ -2569,12 +2817,15 @@ $(document).ready(function () {
                     value="${response.item.quantity}" readonly>
                 <button class="btn rounded btn-sm increase-btn1" data-cart-id="${response.item.cart_id}"
                     data-product-id="${response.item.product.id}">+</button>
-            </div>`}
+            </div>`
+            }
         </div>
         <div class="col-md-6 d-flex justify-content-md-end" style="padding-left: 24px">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="submit" class="btn save-for-later-btn"
-                    style="color: #ff0060; border: none;" data-product-id="${response.item.product.id}">
+                    style="color: #EF4444; border: none;" data-product-id="${
+                        response.item.product.id
+                    }">
                     <div class="d-inline-flex align-items-center gap-2 buy_later">
                         <div>
                             <img src="/assets/images/home/icon_save_later.svg" alt="icon" class="img-fluid" />
@@ -2586,8 +2837,10 @@ $(document).ready(function () {
                     </div>
                 </button>
                 &nbsp;&nbsp;
-                <button type="submit" class="btn cancel-btn cart-remove" style="color: #ff0060;border: none"
-                    data-product-id="${response.item.product.id}" data-cart-id="${response.item.cart_id}">
+                <button type="submit" class="btn cancel-btn cart-remove" style="color: #EF4444;border: none"
+                    data-product-id="${
+                        response.item.product.id
+                    }" data-cart-id="${response.item.cart_id}">
                     <div class="d-inline-flex align-items-center gap-2">
                         <div>
                             <img src="/assets/images/home/icon_delete.svg" alt="icon" class="img-fluid" />
@@ -2606,29 +2859,58 @@ $(document).ready(function () {
                         `;
 
                     $(".cart-items").append(cartItemHtml);
-                    $('.decrease-btn1, .increase-btn1').on('click', function() {
-                        const cartId = $(this).data('cart-id');
-                        const productId = $(this).data('product-id');
-                        const quantityInput = $(this).closest('.cart-item').find('.quantity-input');
-                        let quantity = parseInt(quantityInput.val());
+                    $(".decrease-btn1, .increase-btn1").on(
+                        "click",
+                        function () {
+                            const cartId = $(this).data("cart-id");
+                            const productId = $(this).data("product-id");
+                            const quantityInput = $(this)
+                                .closest(".cart-item")
+                                .find(".quantity-input");
+                            let quantity = parseInt(quantityInput.val());
 
-                        if ($(this).hasClass('decrease-btn1') && quantity > 1) {
-                            quantity -= 1;
-                        } else if ($(this).hasClass('increase-btn1') && quantity < 10) {
-                            quantity += 1;
+                            if (
+                                $(this).hasClass("decrease-btn1") &&
+                                quantity > 1
+                            ) {
+                                quantity -= 1;
+                            } else if (
+                                $(this).hasClass("increase-btn1") &&
+                                quantity < 10
+                            ) {
+                                quantity += 1;
+                            }
+                            quantityInput.val(quantity);
+                            updateCart(cartId, productId, quantity);
                         }
-                        quantityInput.val(quantity);
-                        updateCart(cartId, productId, quantity);
+                    );
+                    $(".service-date, .service-time").on("change", function () {
+                        const cartId = $(this).data("cart-id");
+                        const productId = $(this).data("product-id");
+                        const serviceDate = $(
+                            `.service-date[data-product-id="${productId}"]`
+                        ).val();
+                        const serviceTime = $(
+                            `.service-time[data-product-id="${productId}"]`
+                        ).val();
+                        updateCart(
+                            cartId,
+                            productId,
+                            null,
+                            serviceDate,
+                            serviceTime
+                        );
                     });
-                    $('.service-date, .service-time').on('change', function() {
-                        const cartId = $(this).data('cart-id');
-                        const productId = $(this).data('product-id');
-                        const serviceDate = $(`.service-date[data-product-id="${productId}"]`).val();
-                        const serviceTime = $(`.service-time[data-product-id="${productId}"]`).val();
-                        updateCart(cartId, productId, null, serviceDate, serviceTime);
-                    });
-                    function updateCart(cartId, productId, quantity, serviceDate = null, serviceTime = null) {
-                        const csrfToken = $('meta[name="csrf-token"]').attr('content');
+                    function updateCart(
+                        cartId,
+                        productId,
+                        quantity,
+                        serviceDate = null,
+                        serviceTime = null
+                    ) {
+                        const csrfToken = $('meta[name="csrf-token"]').attr(
+                            "content"
+                        );
                         const data = {
                             cart_id: cartId,
                             product_id: productId,
@@ -2640,80 +2922,104 @@ $(document).ready(function () {
 
                         $.ajax({
                             url: "/cart/update",
-                            type: 'POST',
-                            contentType: 'application/json',
+                            type: "POST",
+                            contentType: "application/json",
                             data: JSON.stringify(data),
                             success: function (data) {
-                                if (data.status === 'success') {
-                                    const indianCurrencyFormatter = new Intl.NumberFormat('en-IN', {
-                                        style: 'currency',
-                                        currency: 'INR',
-                                        minimumFractionDigits: 0,
-                                        maximumFractionDigits: 0,
-                                    });
+                                if (data.status === "success") {
+                                    const indianCurrencyFormatter =
+                                        new Intl.NumberFormat("en-IN", {
+                                            style: "currency",
+                                            currency: "INR",
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 0,
+                                        });
 
-                                    $('.quantity-value').each(function () {
+                                    $(".quantity-value").each(function () {
                                         $(this).text(data.updatedCart.quantity);
                                     });
 
-                                    $('.subtotal').each(function () {
-                                        $(this).text(indianCurrencyFormatter.format(data.updatedCart.subtotal));
+                                    $(".subtotal").each(function () {
+                                        $(this).text(
+                                            indianCurrencyFormatter.format(
+                                                data.updatedCart.subtotal
+                                            )
+                                        );
                                     });
 
-                                    $('.discount').each(function () {
-                                        let discountValue = data.updatedCart.discount;
+                                    $(".discount").each(function () {
+                                        let discountValue =
+                                            data.updatedCart.discount;
                                         if (discountValue < 0) {
-                                            $(this).text(`- ${indianCurrencyFormatter.format(Math.abs(discountValue))}`);
+                                            $(this).text(
+                                                `- ${indianCurrencyFormatter.format(
+                                                    Math.abs(discountValue)
+                                                )}`
+                                            );
                                         } else {
-                                            $(this).text(`- ${indianCurrencyFormatter.format(discountValue)}`);
+                                            $(this).text(
+                                                `- ${indianCurrencyFormatter.format(
+                                                    discountValue
+                                                )}`
+                                            );
                                         }
                                     });
 
-                                    $('.total').each(function () {
-                                        $(this).text(indianCurrencyFormatter.format(data.updatedCart.grand_total));
+                                    $(".total").each(function () {
+                                        $(this).text(
+                                            indianCurrencyFormatter.format(
+                                                data.updatedCart.grand_total
+                                            )
+                                        );
                                     });
                                 } else {
                                     alert(data.message);
                                 }
                             },
                             error: function (error) {
-                                console.error('Error updating cart:', error);
-                            }
+                                console.error("Error updating cart:", error);
+                            },
                         });
                     }
-                    
-                        const today = new Date();
-                        const currentDate = today.toISOString().split('T')[0]; // Format 'YYYY-MM-DD'
 
-                        // Calculate the next date
-                        const nextDate = new Date(today);
-                        nextDate.setDate(today.getDate() + 1);
-                        const nextDateString = nextDate.toISOString().split('T')[0];
+                    const today = new Date();
+                    const currentDate = today.toISOString().split("T")[0]; // Format 'YYYY-MM-DD'
 
-                        $('.service-date').each(function () {
-                            // Set the minimum date to the day after tomorrow
-                            const restrictedMinDate = new Date(nextDate);
-                            restrictedMinDate.setDate(nextDate.getDate() + 1);
+                    // Calculate the next date
+                    const nextDate = new Date(today);
+                    nextDate.setDate(today.getDate() + 1);
+                    const nextDateString = nextDate.toISOString().split("T")[0];
 
-                            $(this).attr('min', restrictedMinDate.toISOString().split('T')[0]);
+                    $(".service-date").each(function () {
+                        // Set the minimum date to the day after tomorrow
+                        const restrictedMinDate = new Date(nextDate);
+                        restrictedMinDate.setDate(nextDate.getDate() + 1);
 
-                            // Handle user-typed values (if they bypass the UI)
-                            $(this).on('change', function () {
-                                const selectedDate = $(this).val();
-                                if (selectedDate === currentDate || selectedDate === nextDateString) {
-                                    $(this).val(''); // Clear invalid date
-                                }
-                            });
+                        $(this).attr(
+                            "min",
+                            restrictedMinDate.toISOString().split("T")[0]
+                        );
+
+                        // Handle user-typed values (if they bypass the UI)
+                        $(this).on("change", function () {
+                            const selectedDate = $(this).val();
+                            if (
+                                selectedDate === currentDate ||
+                                selectedDate === nextDateString
+                            ) {
+                                $(this).val(""); // Clear invalid date
+                            }
                         });
+                    });
 
-                        $('.service-date, .service-time').on('input', function() {
-                            $(this).closest('.d-flex').find('.error-message').remove();
-                            });
-                    
-
+                    $(".service-date, .service-time").on("input", function () {
+                        $(this)
+                            .closest(".d-flex")
+                            .find(".error-message")
+                            .remove();
+                    });
                 }
 
-                fetchCartDropdown();
                 showMessage(
                     response.status || "Item moved to cart!",
                     "success"
@@ -2749,15 +3055,22 @@ $(document).ready(function () {
                     $(".saved-items").after(`
                         <div class="text-center mb-4 empty-savedItems">
                                 <img src='/assets/images/home/empty_savedItems.png' alt="Empty Cart" class="img-fluid mb-2" style="width: 300px;" />
-                                <h4 style="color: #ff0060;">Your Saved Wishlists are awaiting your selection!</h4>
+                                <h4 style="color: #EF4444;">Your Saved Wishlists are awaiting your selection!</h4>
                             </div>
                         `);
                 }
 
-                showMessage(response.status || "Save for Later Item Removed!", "success");
+                showMessage(
+                    response.status || "Save for Later Item Removed!",
+                    "success"
+                );
             },
             error: function (xhr) {
-                showMessage(xhr.responseJSON?.error || "Failed to remove item from Save for Later!", "error");
+                showMessage(
+                    xhr.responseJSON?.error ||
+                        "Failed to remove item from Save for Later!",
+                    "error"
+                );
             },
         });
     });
@@ -2781,7 +3094,10 @@ $(document).ready(function () {
                         cartCountElement.text(response.cartItemCount);
                         cartCountElement.css("display", "inline");
                     } else {
-                        cartCountElement.attr("style", "display: none !important;");
+                        cartCountElement.attr(
+                            "style",
+                            "display: none !important;"
+                        );
                     }
                 }
 
@@ -2792,16 +3108,22 @@ $(document).ready(function () {
                     $(".saved-items").after(`
                         <div class="text-center mb-4 empty-savedItems">
                                 <img src='/assets/images/home/empty_savedItems.png' alt="Empty Cart" class="img-fluid mb-2" style="width: 300px;" />
-                                <h4 style="color: #ff0060;">Your Saved Wishlists are awaiting your selection!</h4>
+                                <h4 style="color: #EF4444;">Your Saved Wishlists are awaiting your selection!</h4>
                             </div>
                         `);
                 }
 
-                fetchCartDropdown();
-                showMessage(response.status || "Save for Later Item Removed!", "success");
+                showMessage(
+                    response.status || "Save for Later Item Removed!",
+                    "success"
+                );
             },
             error: function (xhr) {
-                showMessage(xhr.responseJSON?.error || "Failed to remove item from Save for Later!", "error");
+                showMessage(
+                    xhr.responseJSON?.error ||
+                        "Failed to remove item from Save for Later!",
+                    "error"
+                );
             },
         });
     });
@@ -2824,7 +3146,10 @@ $(document).ready(function () {
                         cartCountElement.text(response.cartItemCount);
                         cartCountElement.css("display", "inline");
                     } else {
-                        cartCountElement.attr("style", "display: none !important;");
+                        cartCountElement.attr(
+                            "style",
+                            "display: none !important;"
+                        );
                     }
                 }
 
@@ -2839,17 +3164,22 @@ $(document).ready(function () {
                     `);
                 }
 
-                if(response.item){
+                if (response.item) {
                     $("#no_items").hide();
                     $(".no_items").hide();
                     $(".cart-item-container").css("display", "block");
                     $("#get_cartItems").css("display", "block");
 
-                    const image = response.item.product.product_media.length > 0
-                        ? response.item.product.product_media.find(media => media.order === 1 && media.type === 'image')?.resize_path
-                        : 'assets/images/home/noImage.webp';
+                    const image =
+                        response.item.product.product_media.length > 0
+                            ? response.item.product.product_media.find(
+                                  (media) =>
+                                      media.order === 1 &&
+                                      media.type === "image"
+                              )?.resize_path
+                            : "assets/images/home/noImage.webp";
 
-                        const cartItemHtml = `
+                    const cartItemHtml = `
                            <div id="cart_items" class="cart-item">
                             <div class="row d-flex align-items-center mb-3 mt-2"
                                 id="cart_item_${response.item.product_id}">
@@ -2877,33 +3207,24 @@ $(document).ready(function () {
                             </div>
                         </div>
                         `;
-    
-                        $(".cart-items").append(cartItemHtml);
+
+                    $(".cart-items").append(cartItemHtml);
                 }
 
-                fetchCartDropdown();
-                showMessage(response.status || "Save for Later Item Removed!", "success");
+                showMessage(
+                    response.status || "Save for Later Item Removed!",
+                    "success"
+                );
             },
             error: function (xhr) {
-                showMessage(xhr.responseJSON?.error || "Failed to remove item from Save for Later!", "error");
+                showMessage(
+                    xhr.responseJSON?.error ||
+                        "Failed to remove item from Save for Later!",
+                    "error"
+                );
             },
         });
     });
-
-    function fetchCartDropdown() {
-        $.ajax({
-            url: "/cart/dropdown",
-            type: "GET",
-            success: function (response) {
-                if (response.html) {
-                    $(".dropdown_cart").html(response.html);
-                }
-            },
-            error: function () {
-                showMessage("Failed to update cart dropdown!", "error");
-            },
-        });
-    }
 
     function showMessage(message, type) {
         var textColor = type === "success" ? "#16A34A" : "#EF4444";
@@ -2930,6 +3251,21 @@ $(document).ready(function () {
             $(".alert").alert("close");
         }, 5000);
     }
-
-    fetchCartDropdown();
 });
+
+// Function to check if user has address data and open modal
+function checkAddressAndOpenModal() {
+    fetch("/addresses")
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.length === 0) {
+                $("#defaultAddressCheckbox").prop("checked", true);
+                $("#defaultAddressCheckbox").prop("disabled", true);
+            } else {
+                $("#defaultAddressCheckbox").prop("checked", false);
+                $("#defaultAddressCheckbox").prop("disabled", false);
+            }
+            $("#newAddressModal").modal("show");
+        })
+        .catch((error) => console.error("Error fetching address:", error));
+}

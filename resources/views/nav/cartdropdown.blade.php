@@ -18,7 +18,7 @@
                     {{ \Illuminate\Support\Str::limit($item->product->name, 20) }}
                 </p>
                 <p class="px-1 text_size" style="color: #ef4444">
-                    ₹ {{ number_format($item->discount, 0) }}
+                    ${{ number_format($item->discount, 0) }}
                 </p>
             </div>
         </div>
