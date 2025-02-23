@@ -175,7 +175,7 @@ $default_address = $addresses->firstWhere('id', $selectedAddressId) ?? ($address
                                 <span class="original-price" style="text-decoration: line-through; color:#c7c7c7">
                                     {{ formatIndianCurrency($product->original_price) }}
                                 </span>
-                                <span class="discounted-price ms-1" style="font-size:22px;color:#ff0060">
+                                <span class="discounted-price ms-1" style="font-size:22px;color:#ef4444">
                                     {{ formatIndianCurrency($product->discounted_price) }}
                                 </span>
                                 <span class="ms-1" style="font-size:12px; color:#00DD21">
@@ -514,7 +514,7 @@ $default_address = $addresses->firstWhere('id', $selectedAddressId) ?? ($address
                                             <span class="original-price" style="text-decoration: line-through; color:#c7c7c7">
                                                 ₹${formatIndianNumber(product.original_price)}
                                             </span>
-                                            <span class="discounted-price ms-1" style="font-size:22px;color:#ff0060">
+                                            <span class="discounted-price ms-1" style="font-size:22px;color:#ef4444">
                                                 ₹${formatIndianNumber(product.discounted_price)}
                                             </span>
                                             <span class="ms-1" style="font-size:12px; color:#00DD21">
@@ -552,7 +552,7 @@ $default_address = $addresses->firstWhere('id', $selectedAddressId) ?? ($address
                                        `}
                                     <span class="px-2">
                                         <button class="btn btn-sm btn-danger rounded remove-btn"
-                                            style="background: #ff0060; color:#fff;
+                                            style="background: #ef4444; color:#fff;
                                             margin-top: ${product.deal_type === 2 ? '30px;' : '3px;'}">
                                              <img src="{{ asset('assets/images/home/icon_delete.svg') }}" alt="icon" class="img-fluid" /> Remove</button>
                                     </span>

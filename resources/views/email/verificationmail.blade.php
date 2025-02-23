@@ -21,7 +21,7 @@
             padding: 35px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border-bottom: 5px solid #ff0060;
+            border-bottom: 5px solid #ef4444;
         }
 
         .header {
@@ -41,7 +41,7 @@
         }
 
         .content h1 {
-            color: #ff0060;
+            color: #ef4444;
             font-size: 28px;
             margin-bottom: 15px;
         }
@@ -57,7 +57,7 @@
         }
 
         .cta-button a {
-            background-color: #ff0060;
+            background-color: #ef4444;
             color: #fff;
             padding: 14px 28px;
             font-size: 16px;
@@ -85,7 +85,7 @@
         }
 
         .footer a {
-            color: #ff0060;
+            color: #ef4444;
             text-decoration: none;
         }
 

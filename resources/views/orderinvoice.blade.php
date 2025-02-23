@@ -23,7 +23,7 @@
         }
 
         .address h4 {
-            color: #ff0060;
+            color: #ef4444;
             font-weight: bold;
             font-size: 20px;
             margin-bottom: 0.5rem;
@@ -214,7 +214,7 @@
             </table>
         </div>
         <div class="footer">
-            <h6>Thank you for shopping with <span style="color: #ff0060;">DealsMachi</span>! For assistance, contact us at info@dealsmachi.com.</h6>
+            <h6>Thank you for shopping with <span style="color: #ef4444;">DealsMachi</span>! For assistance, contact us at info@dealsmachi.com.</h6>
             <p>2024 © Copyright DealsMachi. All Rights Reserved.</p>
         </div>
     </div>

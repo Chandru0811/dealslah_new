@@ -5,19 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @section('head_links')
-        <title>DealsMachi - Discount Coupons & Money Saver Deals</title>
-        <meta name="description"
-            content="Save money with discount coupons and exclusive deals. Deals that you cannot find elsewhere. Special deals, festive deals, discount offers and more." />
-        <link rel="canonical" href="https://dealsmachi.com/" />
+        <title>Dealslah – Deals that matter in Singapore</title>
+       <meta name="description"
+            content="Get the best deals in Singapore. Electronics, Beauty, Travel and every category you can imagine! Get our apps and stay ahead of every else in deals." />
+        <link rel="canonical" href="https://dealslah.com/" />
         <link rel="icon" href="{{ asset('assets/images/home/favicon.ico') }}" />
-        <meta name="google-site-verification" content="epg22d0eiryofP3td_QFU2i7_Vwj8O8CdWoICn1MpsQ" />
 
-        <meta property="og:title" content="{{ $pagetitle ?? 'DealsMachi – Deals that matter in India' }}" />
+        <meta property="og:title" content="{{ $pagetitle ?? 'Dealslah - Deals that Matter in Singapore !' }}" />
         <meta property="og:description"
-            content="{{ $pagedescription ?? 'Shop Big, Earn Big Save Big, DealsMachi – Deals that matters in India' }}" />
-        <meta property="og:url" content="{{ $pageurl ?? 'https://dealsmachi.com' }}" />
-        <meta property="og:site_name" content="DealsMachi" />
+            content="{{ $pagedescription ?? 'Shop Big, Earn Big Save Big, Dealslah – Deals that matters in Singapore' }}" />
+        <meta property="og:url" content="{{ $pageurl ?? 'https://dealslah.com' }}" />
+        <meta property="og:site_name" content="Dealslah" />
         <meta property="og:image" content="{{ asset($pageimage ?? 'assets/images/social/Dealslah_og.png') }}" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         @php
             // Provide a fallback for $pageimage in case it's not set
 $imageType = isset($pageimage) ? pathinfo($pageimage, PATHINFO_EXTENSION) : 'png'; // Default to 'png' if $pageimage is not set

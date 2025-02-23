@@ -109,7 +109,7 @@
 
         <!-- Loading spinner -->
         <div class="loading-spinner loading-text d-none text-center" style="width: fit-content">
-            <span style="color: #ff0060">Loading...</span>
+            <span style="color: #ef4444">Loading...</span>
         </div>
     </div>
     <!-- Product Card End -->

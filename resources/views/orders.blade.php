@@ -15,7 +15,7 @@
     @endphp
     <div class="container categoryIcons p-3">
         <div class="d-flex justify-content-between mb-3">
-            <h3 style="color: #ff0060">
+            <h3 style="color: #ef4444">
                 My Orders
                 @if ($orders->isNotEmpty())
                     ({{ $orders->sum(function ($order) {return $order->items->count();}) }})
@@ -133,7 +133,7 @@
                                                         {{ formatIndianCurrency($item->unit_price * $item->quantity) }}
                                                     </del>
                                                     &nbsp;
-                                                    <span style="color: #ff0060; font-size:24px">
+                                                    <span style="color: #ef4444; font-size:24px">
                                                         {{-- ₹{{ number_format($item->discount * $item->quantity, 0) }} --}}
                                                         {{ formatIndianCurrency($item->discount * $item->quantity) }}
                                                     </span> &nbsp;
@@ -151,7 +151,7 @@
                                                         DealsMachi</span>
                                                 </div>
                                                 <p>
-                                                    <span style="color: #ff0060; font-size:24px">
+                                                    <span style="color: #ef4444; font-size:24px">
                                                         {{-- ₹{{ number_format($item->discount * $item->quantity, 0) }} --}}
                                                         {{ formatIndianCurrency($item->discount * $item->quantity) }}
                                                     </span> &nbsp;

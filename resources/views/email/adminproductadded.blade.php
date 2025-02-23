@@ -19,7 +19,7 @@
             background-color: #ffffff;
             margin: 40px auto;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border-top: 5px solid #ff0060;
+            border-top: 5px solid #ef4444;
             border-bottom: 3px solid #888888;
         }
 
@@ -47,7 +47,7 @@
         }
 
         .message a {
-            color: #ff0060;
+            color: #ef4444;
         }
 
         .content {
@@ -56,7 +56,7 @@
         }
 
         .content h4 {
-            color: #ff0060;
+            color: #ef4444;
             font-size: 28px;
             margin-top: 15px;
             margin-bottom: 15px;
@@ -100,7 +100,7 @@
         }
 
         .cta-button a {
-            background-color: #ff0060;
+            background-color: #ef4444;
             color: #fff;
             padding: 14px 28px;
             font-size: 16px;
@@ -132,13 +132,13 @@
                     <td align="right" style="vertical-align: middle;">
                         <div class="headerText" style="font-size: 14px; color: #333;">
                             <a href="https://dealsmachi.com/" target="_blank" style="text-decoration: none; color: #333;">
-                                Your <span style="color: #ff0060;">dealsmachi.com</span>
+                                Your <span style="color: #ef4444;">dealsmachi.com</span>
                             </a> |
                             <a href="tel:919150150687 " target="_blank" style="text-decoration: none; color: #333;">
                                 +91 9150150687
                             </a> |
                             <a href="https://play.google.com/store/apps/details?id=com.dealsmachi.dealsmachi" target="_blank" style="text-decoration: none; color: #333;">
-                                Get <span style="color: #ff0060;">DealsMachi</span> App
+                                Get <span style="color: #ef4444;">DealsMachi</span> App
                             </a>
                         </div>
                     </td>
@@ -182,7 +182,7 @@
                     </td>
                     <td align="right" style="vertical-align: middle;">
                         <p style="font-size: 12px; color: #333; margin: 0;">
-                            Connect with <a href="https://dealsmachi.com/" target="_blank" style="color: #ff0060; text-decoration: none;">dealsmachi</a> India
+                            Connect with <a href="https://dealsmachi.com/" target="_blank" style="color: #ef4444; text-decoration: none;">dealsmachi</a> India
                         </p>
                     </td>
                 </tr>

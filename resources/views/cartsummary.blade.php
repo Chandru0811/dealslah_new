@@ -165,14 +165,14 @@ function formatIndianCurrency($num) {
 
                             <div>
                                 @if ($product->deal_type == 2)
-                                <span class="ms-1" style="font-size:22px;color:#ff0060">
+                                <span class="ms-1" style="font-size:22px;color:#ef4444">
                                     {{ formatIndianCurrency($product->discounted_price) }}
                                 </span>
                                 @else
                                 <span style="text-decoration: line-through; color:#c7c7c7">
                                     {{ formatIndianCurrency($product->original_price) }}
                                 </span>
-                                <span class="ms-1" style="font-size:22px;color:#ff0060">
+                                <span class="ms-1" style="font-size:22px;color:#ef4444">
                                     {{ formatIndianCurrency($product->discounted_price) }}
                                 </span>
 

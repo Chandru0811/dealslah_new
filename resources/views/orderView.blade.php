@@ -261,7 +261,7 @@
                                                 <p class="mb-0">
                                                     @if ($item->deal_type == 2)
                                                         <span
-                                                            style="color:#ff0060; font-size:24px">
+                                                            style="color:#ef4444; font-size:24px">
                                                             {{-- ₹{{ number_format($item->discount, 0) }} --}}
                                                             {{ formatIndianCurrency($item->discount) }}
                                                         </span>
@@ -274,7 +274,7 @@
                                                         </del>
                                                         &nbsp;&nbsp;
                                                         <span
-                                                            style="color:#ff0060; font-size:24px">
+                                                            style="color:#ef4444; font-size:24px">
                                                             {{-- ₹{{ number_format($item->discount, 0) }} --}}
                                                             {{ formatIndianCurrency($item->discount) }}
                                                         </span>

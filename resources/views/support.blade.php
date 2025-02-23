@@ -23,7 +23,7 @@
     @show
     <style>
         .pinkColor {
-            color: #ff0060;
+            color: #ef4444;
         }
     </style>
 </head>

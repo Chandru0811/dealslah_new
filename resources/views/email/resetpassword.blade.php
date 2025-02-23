@@ -24,7 +24,7 @@
       background-color: #ffffff;
       margin: 40px auto;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      border-top: 5px solid #ff0060;
+      border-top: 5px solid #ef4444;
       border-bottom: 3px solid #888888;
     }
 
@@ -82,8 +82,8 @@
     }
 
     .reset_btn {
-      background-color: #ff0060;
-      border-color: #ff0060;
+      background-color: #ef4444;
+      border-color: #ef4444;
     }
 
     .reset_btn:hover {
@@ -106,7 +106,7 @@
           <td align="right" style="vertical-align: middle">
             <div class="headerText" style="font-size: 14px; color: #333">
               <a href="https://dealsmachi.com/" target="_blank" style="text-decoration: none; color: #333">
-                Your <span style="color: #ff0060">dealsmachi.com</span>
+                Your <span style="color: #ef4444">dealsmachi.com</span>
               </a>
               |
               <a href="tel:919150150687 " target="_blank" style="text-decoration: none; color: #333">
@@ -115,7 +115,7 @@
               |
               <a href="https://play.google.com/store/apps/details?id=com.dealsmachi.dealsmachi" target="_blank"
                 style="text-decoration: none; color: #333">
-                Get <span style="color: #ff0060">DealsMachi</span> App
+                Get <span style="color: #ef4444">DealsMachi</span> App
               </a>
             </div>
           </td>
@@ -169,7 +169,7 @@
             <p style="font-size: 12px; color: #333; margin: 0">
               Connect with
               <a href="https://dealsmachi.com/" target="_blank"
-                style="color: #ff0060; text-decoration: none">DealsMachi</a>
+                style="color: #ef4444; text-decoration: none">DealsMachi</a>
               India
             </p>
           </td>

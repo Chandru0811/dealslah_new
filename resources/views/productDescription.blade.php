@@ -44,7 +44,7 @@
                     </ul>
                 </span>&nbsp;&nbsp;
                 <button class="toast-close-btn"data-bs-dismiss="alert" aria-label="Close">
-                    <i class="fa-solid fa-xmark" style="color: #ff0060"></i>
+                    <i class="fa-solid fa-xmark" style="color: #ef4444"></i>
                 </button>
             </div>
         </div>
@@ -60,12 +60,12 @@
                     {{ session('error') }}
                 </span>&nbsp;&nbsp;
                 <button class="toast-close-btn"data-bs-dismiss="alert" aria-label="Close">
-                    <i class="fa-solid fa-xmark" style="color: #ff0060"></i>
+                    <i class="fa-solid fa-xmark" style="color: #ef4444"></i>
                 </button>
             </div>
         </div>
     @endif
-    
+
     <section class="categoryIcons container-fluid p-0">
 
         <div class="productContainer">
@@ -100,7 +100,7 @@
                         <div class="row justify-content-center">
                             <div class="col-12">
                                 <div class="card border-0 h-100">
-                                    <a href="https://www.facebook.com/profile.php?id=61566743978973" target="_blank"
+                                    <a href="https://www.facebook.com/profile.php?id=61567112492283" target="_blank"
                                         style="text-decoration: none;">
                                         <div class="qr-code">
                                             <img src="{{ asset('assets/images/home/facebook_qr_code.webp') }}"
@@ -118,7 +118,7 @@
                         <div class="row justify-content-center">
                             <div class="col-12">
                                 <div class="card border-0 h-100">
-                                    <a href="https://www.instagram.com/dealsmachi/" target="_blank"
+                                    <a href="https://www.instagram.com/dealslah/" target="_blank"
                                         style="text-decoration: none;">
                                         <div class="qr-code">
                                             <img src="{{ asset('assets/images/home/instagram_qr_code.webp') }}"
@@ -136,7 +136,7 @@
                         <div class="row justify-content-center">
                             <div class="col-12">
                                 <div class="card border-0 h-100">
-                                    <a href="https://www.youtube.com/channel/UCAyH2wQ2srJE8WqvII8JNrQ" target="_blank"
+                                    <a href="https://www.youtube.com/@DEALSLAH" target="_blank"
                                         style="text-decoration: none;">
                                         <div class="qr-code">
                                             <img src="{{ asset('assets/images/home/youtube_qr_code.webp') }}"
@@ -154,7 +154,7 @@
                         <div class="row justify-content-center">
                             <div class="col-12">
                                 <div class="card border-0 h-100">
-                                    <a href="https://chat.whatsapp.com/Ef23qGMU1d6EXYpRvomaLx" target="_blank"
+                                    <a href="https://chat.whatsapp.com/KR2syYEj3Eo3JwsClx5Zw" target="_blank"
                                         style="text-decoration: none;">
                                         <div class="qr-code">
                                             <img src="{{ asset('assets/images/home/whatsapp_qr_code.webp') }}"
@@ -172,7 +172,7 @@
                         <div class="row justify-content-center">
                             <div class="col-12">
                                 <div class="card border-0 h-100">
-                                    <a href="https://t.me/+UTD7rFen3K4zNDFl" target="_blank"
+                                    <a href="https://t.me/dealslah" target="_blank"
                                         style="text-decoration: none;">
                                         <div class="qr-code">
                                             <img src="{{ asset('assets/images/home/telegram_qr_code.webp') }}"
@@ -285,18 +285,22 @@
                                         <i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;Add to Cart
                                     </button>
 
-                                       <form action="{{ route('cart.add', ['slug' => $product->slug]) }}" method="POST">
-                                        @csrf 
+                                    <form action="{{ route('cart.add', ['slug' => $product->slug]) }}" method="POST">
+                                        @csrf
                                         @if ($product->deal_type == 1)
-                                            <button type="submit" class="Buy_btn media_fonts_conent text-nowrap buy-now-direct-btn" data-slug="{{ $product->slug }}">
+                                            <button type="submit"
+                                                class="Buy_btn media_fonts_conent text-nowrap buy-now-direct-btn"
+                                                data-slug="{{ $product->slug }}">
                                                 <i class="fa-thin fa-bag-shopping"></i>&nbsp;&nbsp;Buy Now
                                             </button>
                                         @elseif ($product->deal_type == 2)
-                                            <button type="submit" class="Buy_btn media_fonts_conent text-nowrap buy-now-direct-btn" data-slug="{{ $product->slug }}">
+                                            <button type="submit"
+                                                class="Buy_btn media_fonts_conent text-nowrap buy-now-direct-btn"
+                                                data-slug="{{ $product->slug }}">
                                                 <i class="fa-thin fa-bag-shopping"></i>&nbsp;&nbsp;Book Now
                                             </button>
                                         @endif
-                                    </form> 
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -315,9 +319,9 @@
                                                 data-deal-id="{{ $product->id }}"
                                                 style="border: none; background: none; font-size:24px; padding: 20px 0 0 30px">
                                                 <p style="height: fit-content; cursor: pointer;" class="p-1 px-2"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Favourite">
-                                                    <i class="fa-solid fa-heart bookmark-icon"
-                                                        style="color: #ff0060;"></i>
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="bookmark">
+                                                    <i class="fa-regular fa-bookmark fa-xl icon_size"
+                                                        style="color: #ef4444;"></i>
                                                 </p>
                                             </button>
                                         @else
@@ -325,9 +329,9 @@
                                                 data-deal-id="{{ $product->id }}"
                                                 style="border: none; background: none; font-size:24px; padding: 20px 0 0 20px">
                                                 <p style="height: fit-content; cursor: pointer;" class="p-1 px-2"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Favourite">
-                                                    <i class="fa-regular fa-heart bookmark-icon"
-                                                        style="color: #ff0060;"></i>
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="bookmark">
+                                                    <i class="fa-regular fa-bookmark fa-xl icon_size"
+                                                        style="color: #ef4444;"></i>
                                                 </p>
                                             </button>
                                         @endif
@@ -553,7 +557,7 @@
                         <div class="row m-0">
                             <div class="col-2 pe-0">
                                 <i class="fa-solid fa-location-dot fa-lg"
-                                    style="color: #ff0060;"></i>
+                                    style="color: #ef4444;"></i>
                             </div>
                             @if ($product->shop->address)
                                 <div class="col-10 ps-2"
@@ -574,7 +578,7 @@
                             <div class="row m-0">
                                 <div class="col-2 pe-0">
                                     <i class="fa-solid fa-phone fa-lg"
-                                        style="color: #ff0060;"></i>
+                                        style="color: #ef4444;"></i>
                                 </div>
                                 <div class="col-10 ps-2"
                                     style="font-size: 18px; color: #5C5C5C;">
@@ -1027,7 +1031,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="enquiryModalLabel">Get the Best Price for <span
-                                    style="color:#ff0060;">”{{ $product->name }}”</span></h5>
+                                    style="color:#ef4444;">”{{ $product->name }}”</span></h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>

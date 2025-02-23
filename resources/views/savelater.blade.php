@@ -71,7 +71,7 @@
                 <div class="text-center mb-4">
                     <img src="{{ asset('assets/images/home/empty_savedItems.png') }}" alt="Empty Cart"
                         class="img-fluid mb-2" style="width: 300px;" />
-                    <h4 style="color: #ff0060;">Your Saved Wishlists are awaiting your selection!</h4>
+                    <h4 style="color: #ef4444;">Your Saved Wishlists are awaiting your selection!</h4>
                 </div>
             @else
                 <!-- Display saved items -->
@@ -104,7 +104,7 @@
                                             {{-- ₹{{ $savedItem->deal->original_price }} --}}
                                             {{ formatIndianCurrency($savedItem->deal->original_price) }}
                                         </span>
-                                        <span class="ms-1" style="font-size:22px;color:#ff0060">
+                                        <span class="ms-1" style="font-size:22px;color:#ef4444">
                                             {{-- ₹{{ $savedItem->deal->discounted_price }} --}}
                                             {{ formatIndianCurrency($savedItem->deal->discounted_price) }}
                                         </span>
