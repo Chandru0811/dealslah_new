@@ -9,7 +9,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Illuminate\Validation\Rule;
 
@@ -30,10 +29,8 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // dd($request->all());
-
         $request->validate([
-            'name' => 'required', 'string', 'max:255',
+            'name' => 'required|string|max:255',
             'email' => [
                 'required',
                 'string',
@@ -46,7 +43,6 @@ class RegisteredUserController extends Controller
             ],
             'password' => 'required|string|min:8|confirmed'
         ]);
-
 
         $user = User::create([
             'name' => $request->name,
@@ -61,6 +57,8 @@ class RegisteredUserController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('home', absolute: false));
+        $message = "Welcome {$user->name}, You have successfully registered. \nGrab the latest Dealslah offers now!";
+
+        return redirect()->intended(route('home'))->with('status', $message);
     }
 }

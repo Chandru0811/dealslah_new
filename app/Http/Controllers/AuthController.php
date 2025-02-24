@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
-use Auth;
-
+use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class AuthController extends Controller
 {
@@ -23,8 +22,8 @@ class AuthController extends Controller
             $finduser = User::where('auth_provider',$socialprovider)->where('auth_provider_id', $user->id)->first();
             if($finduser){
                 Auth::login($finduser);
-                return redirect()->intended('home');
-                
+                $message = "Welcome {$finduser->name}, You have successfully logged in. \nGrab the latest Dealslah offers now!";
+                return redirect()->intended(route('home'))->with('status', $message);
             }else{
                 $newUser = User::create([
                     'name' => $user->name,
@@ -34,12 +33,11 @@ class AuthController extends Controller
                     'password' => encrypt('12345678')
                     ]);
                     Auth::login($newUser);
-                    return redirect()->intended('home');
+                    $message = "Welcome {$newUser->name}, You have successfully registered. \nGrab the latest Dealslah offers now!";
+                    return redirect()->intended(route('home'))->with('status', $message);
                 }
             } catch (Exception $e) {
-    
                 $e->getMessage();
-    
             }
     }
 }

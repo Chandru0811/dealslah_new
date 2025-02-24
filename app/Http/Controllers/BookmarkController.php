@@ -29,12 +29,19 @@ class BookmarkController extends Controller
                 $bookmarknumber = Str::uuid();
                 session(['bookmarknumber' => $bookmarknumber]);
                 //create bookmark
-                $bookmark = Bookmark::create([
+                Bookmark::create([
                     'bookmark_number' => $bookmarknumber,
                     'user_id' => null, // Guest user
                     'ip_address' => $request->ip(),
                     'deal_id' => $deal->id,
                 ]);
+                
+                    if ($request->ajax()) {
+                        $bookmarkCount = $this->getBookmarkCount($request);
+                        return response()->json(['message' => 'Deal added to bookmarks successfully!', 'total_items' => $bookmarkCount,'bookmarknumber'=>$bookmarknumber]);
+                    }
+                    
+                    return redirect()->back()->with('message', 'Deal added to bookmarks successfully!');
             }else{
                 $existing_bookmark = Bookmark::where('deal_id', $deal->id)->where('bookmark_number',$bookmarknumber)->first();
                 if ($existing_bookmark) {
@@ -43,7 +50,7 @@ class BookmarkController extends Controller
                     }
                     return redirect()->back()->with('message', 'Deal already bookmarked');
                 }else{
-                    Bookmark::updateOrCreate(
+                    Bookmark::create(
                         [
                             'deal_id' => $deal->id,
                             'user_id' => $user_id,
@@ -65,21 +72,10 @@ class BookmarkController extends Controller
             $existing_bookmark = Bookmark::where('deal_id', $deal->id)->where('user_id',$user_id)->first();
             if($existing_bookmark)
             {
-                 Bookmark::updateOrCreate(
-                        [
-                            'deal_id' => $deal->id,
-                            'user_id' => $user_id,
-                            'ip_address' => $request->ip(),
-                            'bookmark_number' => $bookmarknumber,
-                        ]
-                    );
-                    
-                    if ($request->ajax()) {
-                        $bookmarkCount = $this->getBookmarkCount($request);
-                        return response()->json(['message' => 'Deal added to bookmarks successfully!', 'total_items' => $bookmarkCount,'bookmarknumber'=>$bookmarknumber]);
-                    }
-                    
-                    return redirect()->back()->with('message', 'Deal added to bookmarks successfully!');
+                if ($request->ajax()) {
+                    return response()->json(['message' => 'Deal already bookmarked']);
+                }
+                return redirect()->back()->with('message', 'Deal already bookmarked');
             }
             else{
                 if($bookmarknumber == null)
@@ -87,7 +83,7 @@ class BookmarkController extends Controller
                     $bookmarknumber = Str::uuid();
                     session(['bookmarknumber' => $bookmarknumber]);
                 }
-                $bookmark = Bookmark::create([
+                Bookmark::create([
                     'bookmark_number' => $bookmarknumber,
                     'user_id' => $user_id, // Guest user
                     'ip_address' => $request->ip(),
@@ -107,7 +103,6 @@ class BookmarkController extends Controller
             }
         }
     }
-
 
     public function remove(Request $request, $deal_id)
     {
@@ -158,7 +153,7 @@ class BookmarkController extends Controller
         
         $user_id = Auth::check() ? Auth::id() : null;
 
-        $bookmarkCount = Bookmark::where(function ($query) use ($user_id, $request) {
+        $bookmarkCount = Bookmark::where(function ($query) use ($user_id, $bookmarknumber) {
             if ($user_id) {
                 $query->where('user_id', $user_id);
             } else {
@@ -186,11 +181,11 @@ class BookmarkController extends Controller
         
         $user_id = Auth::check() ? Auth::id() : null;
 
-        $bookmarkCount = Bookmark::where(function ($query) use ($user_id, $request) {
+        $bookmarkCount = Bookmark::where(function ($query) use ($user_id, $bookmarknumber) {
             if ($user_id) {
                 $query->where('user_id', $user_id);
             } else {
-                $query->whereNull('user_id')->where('book_mark', $bookmarknumber);
+                $query->whereNull('user_id')->where('bookmark_number', $bookmarknumber);
             }
         })
             ->whereHas('deal', function ($query) {

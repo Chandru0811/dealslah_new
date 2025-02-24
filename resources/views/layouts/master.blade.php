@@ -172,6 +172,7 @@ $imageType = isset($pageimage) ? pathinfo($pageimage, PATHINFO_EXTENSION) : 'png
                         } else {
                             $('#cart-count').addClass('cart-border');
                             $('#cart-count').html(data.cartcount);
+                            $('.cartDrop').html(data.html);
                         }
                            
                         },

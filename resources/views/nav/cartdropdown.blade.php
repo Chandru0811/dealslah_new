@@ -1,7 +1,7 @@
-<div class="child">
+<div class="child cartDrop">
     <p class="text_size" style="color: #cbcbcb">Recently Added Products</p>
     <div class="cart_items">
-        @if ($cartItems && $cartItems->count() > 0)
+        @if(isset($cartItems) && $cartItems->count() > 0)
             @foreach ($cartItems->take(6) as $item)
                 <div class="d-flex">
                     @php

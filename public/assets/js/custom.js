@@ -2196,13 +2196,18 @@ function updateCartUI(cartItems) {
                   (media) => media.order === 1 && media.type === "image"
               )?.resize_path
             : "assets/images/home/noImage.webp";
+    
+    const productName =
+        cartItems.product.name.length > 20
+            ? cartItems.product.name.substring(0, 20) + "..."
+            : cartItems.product.name;
 
     $(".cart_items").append(`
         <div class="d-flex">
             <img src="https://dealslah.com/${imagePath}" class="img-fluid dropdown_img" alt="${cartItems.product.name}" />
             <div class="text-start">
                 <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
-                    ${cartItems.product.name}
+                    ${productName}
                 </p>
                 <p class="px-1 text_size" style="color: #EF4444">
                     $${cartItems.discount.toLocaleString()}
@@ -2514,14 +2519,14 @@ $(document).ready(function () {
                 }
 
                 showMessage(
-                    response.status || "Item moved to Buy for Later!",
+                    response.status || "Item moved to Buy Later!",
                     "success"
                 );
             },
             error: function (xhr) {
                 const errorMessage =
                     xhr.responseJSON?.error ||
-                    "Failed to move item to Buy for Later!";
+                    "Failed to move item to Buy Later!";
                 showMessage(errorMessage, "error");
             },
         });
@@ -2593,14 +2598,14 @@ $(document).ready(function () {
                 }
 
                 showMessage(
-                    response.status || "Item moved to Buy for Later!",
+                    response.status || "Item moved to Buy Later!",
                     "success"
                 );
             },
             error: function (xhr) {
                 const errorMessage =
                     xhr.responseJSON?.error ||
-                    "Failed to move item to Buy for Later!";
+                    "Failed to move item to Buy Later!";
                 showMessage(errorMessage, "error");
             },
         });
@@ -2818,7 +2823,7 @@ $(document).ready(function () {
                         </div>
                         <div class="d-inline-flex align-items-center gap-2 buy-for-later-btn">
                             <span class="loader spinner-border spinner-border-sm" style="display: none;"></span>
-                            <span>Buy For Later</span>
+                            <span>Buy Later</span>
                         </div>
                     </div>
                 </button>

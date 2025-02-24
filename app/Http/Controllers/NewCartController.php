@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\CartItem;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\SavedItem;
 
@@ -16,11 +16,11 @@ class NewCartController extends Controller
     public function addtocart(Request $request, $slug)
     {
         $cartnumber = $request->input("cartnumber");
-        if($cartnumber == null)
-        {
+
+        if ($cartnumber == null) {
             $cartnumber = session()->get('cartnumber');
         }
-        // dd($cartnumber);
+
         $product = Product::where('slug', $slug)->first();
 
         if (!$product) {
@@ -28,29 +28,24 @@ class NewCartController extends Controller
         }
 
         $customer_id = Auth::check() ? Auth::user()->id : null;
-    // dd($customer_id);
-        if($customer_id == null)
-        {
-            if($cartnumber == null)
-            {
+
+        if ($customer_id == null) {
+            if ($cartnumber == null) {
                 $old_cart = null;
                 $cartnumber = Str::uuid();
-            }else{
-                $old_cart = Cart::where('cart_number',$cartnumber)->first();
+            } else {
+                $old_cart = Cart::where('cart_number', $cartnumber)->first();
             }
-            
-        }else{
+        } else {
             $existing_cart = Cart::where('customer_id', $customer_id)->first();
-            if($existing_cart)
-            {
+            if ($existing_cart) {
                 if ($existing_cart->cart_number !== $cartnumber) {
-                  
-                  $new_cart = Cart::where('cart_number', $cartnumber)->whereNull('customer_id')->first();
-                        // $new_cart = Cart::where('cart_number', $cartnumber)->first();
-                        
+
+                    $new_cart = Cart::where('cart_number', $cartnumber)->whereNull('customer_id')->first();
+
                     foreach ($new_cart->items as $item) {
                         $existing_cart_item = CartItem::where('cart_id', $existing_cart->id)->where('product_id', $item->product_id)->first();
-            
+
                         if ($existing_cart_item) {
                             // If the item exists in both carts, increase the quantity
                             $existing_cart_item->quantity += $item->quantity;
@@ -73,28 +68,29 @@ class NewCartController extends Controller
                     $existing_cart->taxes += $new_cart->taxes;
                     $existing_cart->grand_total += $new_cart->grand_total;
                     $existing_cart->shipping_weight += $new_cart->shipping_weight;
-            
+
                     $existing_cart->save();
-                    
+
                     $new_cart->delete();
-                    
+
                     $old_cart = Cart::where('customer_id', $customer_id)->first();
-                   
-                }else{
+                } else {
                     $old_cart = Cart::where('customer_id', $customer_id)->first();
                 }
-            }else{
-                $old_cart = Cart::where('customer_id', $customer_id)
-                                    ->orWhere(function ($q) use ($cartnumber){
-                                        $q->whereNull('customer_id')
-                                          ->where('cart_number', $cartnumber);
-                                    })->first();
-                                    
-                                    
+            } else {
+                if ($cartnumber == null) {
+                    $old_cart = null;
+                    $cartnumber = Str::uuid();
+                } else {
+                    $old_cart = Cart::where('customer_id', $customer_id)
+                        ->orWhere(function ($q) use ($cartnumber) {
+                            $q->whereNull('customer_id')
+                                ->where('cart_number', $cartnumber);
+                        })->first();
+                }
             }
-        
         }
-        
+
         // Check if the item is already in the cart
         if ($old_cart) {
             $item_in_cart = CartItem::where('cart_id', $old_cart->id)->where('product_id', $product->id)->first();
@@ -169,44 +165,32 @@ class NewCartController extends Controller
             ]);
         }
     }
-    
+
     public function index(Request $request)
     {
-        //dd($request->all());
-        //$cartnumber = $request->header('X-Cart-Number');
         $cartnumber = $request->input('dmc');
-        ///dd($cartnumber);
-        if($cartnumber == null)
-        {
+
+        if ($cartnumber == null) {
             $cartnumber = session()->get('cartnumber');
         }
-        
-        $customer_id = Auth::check() ? Auth::user()->id : null;
-        
-        if($customer_id == null)
-        {
-            $cart = Cart::where('cart_number',$cartnumber)->first();
-            
-        }else{
-           $cart = Cart::where('customer_id', $customer_id)->first();
-           if($cart == null)
-           {
-               $cart = Cart::where('cart_number', $cartnumber)->first();
-           }
 
+        $customer_id = Auth::check() ? Auth::user()->id : null;
+
+        if ($customer_id == null) {
+            $cart = Cart::where('cart_number', $cartnumber)->first();
+        } else {
+            $cart = Cart::where('customer_id', $customer_id)->first();
+            if ($cart == null) {
+                $cart = Cart::where('cart_number', $cartnumber)->first();
+            }
         }
-        if($cart)
-        {
+        if ($cart) {
             $cart->load(['items.product.shop', 'items.product.productMedia:id,resize_path,order,type,imageable_id']);
-           
-        }else{
+        } else {
             $cart = [];
         }
-            
-            
-        $bookmarkedProducts = [];
-        // $savedItems = collect([]);
-         if ($customer_id == null) {
+
+        if ($customer_id == null) {
             $savedItems = SavedItem::where('cart_number', $cartnumber)
                 ->whereHas('deal', function ($query) {
                     $query->where('active', 1)->whereNull('deleted_at');
@@ -221,61 +205,59 @@ class NewCartController extends Controller
                 ->with('deal.productMedia:id,resize_path,order,type,imageable_id', 'deal.shop')
                 ->get();
         }
-        return view('cart', compact('cart', 'bookmarkedProducts', 'savedItems'));
-        // return response()->json([
-        //         'status' => 'Cart Retrived Successfully!',
-        //         'cart' => $cart,
-        //         'bookmarkedProducts' => $bookmarkedProducts,
-        //         'savedItems' => $savedItems
-        //     ]);
-        
+
+        return view('cart', compact('cart', 'savedItems'));
     }
-    
+
     public function cartdetails(Request $request)
     {
         $cartnumber = $request->input('cartnumber');
-        $customer_id = Auth::check() ? Auth::user()->id : null;
-        if($cartnumber == null)
-        {
+
+        if (!$cartnumber) {
             $cartnumber = session()->get('cartnumber');
         }
-        
-        if($cartnumber != null && $customer_id == null)
-        {
-            $cart = Cart::where('cart_number',$cartnumber)->first();
-        }elseif($cartnumber != null && $customer_id != null)
-        {
-            $cart = Cart::where('customer_id',$customer_id)->first();
-        }elseif($cartnumber == null && $customer_id == null){
+
+        $customer_id = Auth::check() ? Auth::user()->id : null;
+
+        if ($cartnumber !== null && $customer_id === null) {
+            $cart = Cart::where('cart_number', $cartnumber)->first();
+        } elseif ($cartnumber !== null && $customer_id !== null) {
+            $cart = Cart::where('customer_id', $customer_id)->first();
+        } elseif ($cartnumber === null && $customer_id === null) {
             $cart = null;
-        }else{
+        } else {
             $cart = Cart::where('customer_id', $customer_id)
-                                    ->orWhere(function ($q) use ($cartnumber){
-                                        $q->whereNull('customer_id')
-                                          ->where('cart_number', $cartnumber);
-                                    })->first();
+                ->orWhere(function ($q) use ($cartnumber) {
+                    $q->whereNull('customer_id')
+                        ->where('cart_number', $cartnumber);
+                })->first();
         }
-        
-        if($cart != null)
-        {
-            $cart->load(['items.product.shop', 'items.product.productMedia:id,resize_path,order,type,imageable_id']);
-            $cartcount = $cart->item_count;
-            $html = view('nav.cartdropdown', compact('cart'))->render();
-        }else{
-            $cart = [];
-            $cartcount = 0;
-            $html = view('nav.cartdropdown', compact('cart'))->render();
-        }
-        
-        return response()->json([
-                'status' => 'Cart Details Successfully!',
-                'cartcount' => $cartcount,
-                'html' => $html
+
+        if ($cart) {
+            $cart->load([
+                'items.product.shop',
+                'items.product.productMedia:id,resize_path,order,type,imageable_id'
             ]);
-        
-        
+
+            $cartItems = $cart->items()
+                ->whereHas('product', function ($query) {
+                    $query->where('active', 1)
+                        ->whereNull('deleted_at');
+                })
+                ->get();
+
+            $cartItemCount = $cartItems->count();
+        } else {
+            $cartItems = [];
+            $cartItemCount = 0;
+        }
+
+        $html = view('nav.cartdropdown', compact('cartItems'))->render();
+
+        return response()->json([
+            'status' => 'Cart Details Successfully!',
+            'cartcount' => $cartItemCount,
+            'html' => $html
+        ]);
     }
-    
-   
-    
 }
