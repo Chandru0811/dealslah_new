@@ -338,7 +338,7 @@ class CartController extends Controller
             $cart->save();
 
             return response()->json([
-                'status' => 'Item moved to Buy for Later',
+                'status' => 'Item moved to Buy Later',
                 'cartItemCount' => $cart->item_count,
                 'deal' => $deal,
                 'updatedCart' => [
@@ -526,7 +526,7 @@ class CartController extends Controller
         $savedItem->delete();
 
         return response()->json([
-            'status' => 'Item removed from Buy for Later',
+            'status' => 'Item removed from Buy Later',
         ]);
     }
 

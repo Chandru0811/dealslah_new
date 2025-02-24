@@ -228,7 +228,7 @@
                                                             class="d-inline-flex align-items-center gap-2 buy-for-later-btn">
                                                             <span class="loader spinner-border spinner-border-sm"
                                                                 style="display: none;"></span>
-                                                            <span>Buy For Later</span>
+                                                            <span>Buy Later</span>
                                                         </div>
                                                     </div>
                                                 </button>
@@ -459,7 +459,7 @@
                                                             class="d-inline-flex align-items-center gap-2 buy-for-later-btn">
                                                             <span class="loader spinner-border spinner-border-sm"
                                                                 style="display: none;"></span>
-                                                            <span>Buy For Later</span>
+                                                            <span>Buy Later</span>
                                                         </div>
                                                     </div>
                                                 </button>
@@ -542,7 +542,7 @@
                         class="img-fluid" />
                 </div> &nbsp;&nbsp;
                 <div class="my-4">
-                    <p style="font-size:20px;font-weight:400">Buy For Later</p>
+                    <p style="font-size:20px;font-weight:400">Buy Later</p>
                 </div>
             </div>
             <div class="saved-item-container">

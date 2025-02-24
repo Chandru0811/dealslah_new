@@ -80,7 +80,7 @@ class ReferrerDetailController extends Controller
             'vendor_name'    => 'sometimes|string|max:255',
             'date'          => 'sometimes|string',
             'amount'        => 'sometimes|numeric|min:0',
-            'commission_rate' => 'required|numeric|min:0',
+            'commission_rate' => 'sometimes|numeric|min:0',
         ]);
 
         if ($validator->fails()) {

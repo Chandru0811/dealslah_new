@@ -1,7 +1,7 @@
     <!-- Header Start -->
     @php
-    $selectedAddressId = session('selectedId');
-    $default_address = $addresses->firstWhere('default', true) ?? null; // Add fallback to null
+        $selectedAddressId = session('selectedId');
+        $default_address = $addresses->firstWhere('default', true) ?? null; // Add fallback to null
     @endphp
 
     <section class="header">
@@ -70,9 +70,8 @@
                     </button>
 
                     &nbsp;&nbsp;&nbsp;
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
-                        aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
@@ -83,8 +82,8 @@
                             <li class="nav-item mb-2">
                                 <div class="input-wrapper w-100">
                                     <input type="text" name="q" placeholder="Search..."
-                                        class="form-control address_input mx-1 search-input" style="padding-left: 40px !important"
-                                        value="{{ request()->input('q') }}" />
+                                        class="form-control address_input mx-1 search-input"
+                                        style="padding-left: 40px !important" value="{{ request()->input('q') }}" />
                                     <i class="fa-solid fa-magnifying-glass icon-input" style="font-size: 20px"></i>
                                 </div>
                             </li>
@@ -98,96 +97,99 @@
                                 <li class="nav-item mb-2">
                                     <div class="input-wrapper">
                                         <input type="text" name="q" placeholder="Search..."
-                                            class="form-control address_input me-2 search-input-large" style="padding-left: 40px !
+                                            class="form-control address_input me-2 search-input-large"
+                                            style="padding-left: 40px !
                                             important"
                                             value="{{ request()->input('q') }}" />
-                                        <i class="fa-solid fa-magnifying-glass icon-input"
-                                            style="font-size: 20px"></i>
+                                        <i class="fa-solid fa-magnifying-glass icon-input" style="font-size: 20px"></i>
                                     </div>
                                 </li>
                             </ul>
                         </form>
                     </div>
-                    <button class="btn btn-button" style="border: none; position: relative;" data-bs-toggle="tooltip"
-                        data-bs-placement="bottom" title="Bookmark" id="favbutton">
-                        <i class="fa-regular fa-bookmark fa-xl icon_size" style="color: #ef4444;"></i>
-                        <span class="totalItemsCount total-count translate-middle d-none d-xl-block"
-                            style="position: absolute;top: 16px;">
-                        </span>
-                    </button>
-                    <div class="dropdown d-none d-xl-inline">
-                        <button class="btn btn-button ps-0" style="border: none; position: relative;" id="cartButton"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-regular fa-cart-shopping fa-xl icon_size cart-screen" style="color: #ef4444;"></i>
-                            <span id="cart-count" class="total-counts translate-middle d-xl-block"
-                                style="position: absolute; top: 16px; right: 5px;">
+                    <div class="d-flex align-items-center justify-content-end gap-2">
+
+                        <button class="btn btn-button" style="border: none; position: relative;"
+                            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Bookmark" id="favbutton">
+                            <i class="fa-regular fa-bookmark fa-xl icon_size" style="color: #ef4444;"></i>
+                            <span class="totalItemsCount total-count translate-middle d-none d-xl-block"
+                                style="position: absolute;top: 16px;">
                             </span>
                         </button>
-                        <div class="dropdown_cart dropdown-menu shadow-lg" aria-labelledby="cartButton"
-                            style="left: 0; transform: translate(-85%, 0);">
-                            @include('nav.cartdropdown')
-                        </div>
-                    </div>
-                    @auth
-                    <div class="dropdown">
-                        <a href="#" class="text-decoration-none" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="">
-                                <i class="fa-regular fa-circle-user fa-xl icon_size" style="color: #ef4444;"></i>
-                            </span>
-                        </a>
-                        <div class="dropdown-menu user-dropdown_cart custom-dropdown shadow-lg border-0"
-                            style="left: 45%; top:35px; transform: translate(-85%, 0);">
-                            <div class="dropdown_child p-2">
-                                <div class="d-flex justify-content-start align-items-start mb-2">
-                                    <a class="dropdown-item user_list" href="#" data-bs-toggle="modal"
-                                        data-bs-target="#profileModal">
-                                        <i class="user_list_icon fa-light fa-user"></i>
-                                        &nbsp;&nbsp;&nbsp;Profile
-                                    </a>
-                                </div>
-                                <div class="d-flex justify-content-start align-items-start mb-2">
-                                    <a class="dropdown-item user_list" href="{{ url('orders') }}"><i
-                                            class="user_list_icon fa-light fa-bags-shopping"></i>
-                                        &nbsp;&nbsp;Orders</a>
-                                </div>
-                                <div class="d-flex justify-content-start align-items-start mb-2">
-                                    <a class="dropdown-item user_list" href="{{ route('savelater.index') }}"><i
-                                            class="user_list_icon fa-light fa-basket-shopping"></i>
-                                        &nbsp;&nbsp;Buy later</a>
-                                </div>
-                                <div class="d-flex justify-content-start align-items-start mb-2">
-                                    <a class="dropdown-item user_list" href="{{ url('logout') }}"
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-                                            class="user_list_icon fa-light fa-power-off"></i>
-                                        &nbsp;&nbsp;&nbsp;Log Out</a>
-                                </div>
+                        <div class="dropdown d-none d-xl-inline">
+                            <button class="btn btn-button ps-0" style="border: none; position: relative;"
+                                id="cartButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-regular fa-cart-shopping fa-xl icon_size cart-screen"
+                                    style="color: #ef4444;"></i>
+                                <span id="cart-count" class="total-counts translate-middle d-xl-block"
+                                    style="position: absolute; top: 16px; right: 5px;">
+                                </span>
+                            </button>
+                            <div class="dropdown_cart dropdown-menu shadow-lg" aria-labelledby="cartButton"
+                                style="left: 0; transform: translate(-85%, 0);">
+                                @include('nav.cartdropdown')
                             </div>
                         </div>
-                    </div>
-                    <!-- Hidden logout form -->
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                    @else
-                    <a href="{{ url('login') }}" class="text-decoration-none">
-                        <span class="" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            title="Login">
-                            <i class="fa-regular fa-circle-user fa-xl icon_size text-muted"></i>
+                        @auth
+                            <div class="dropdown">
+                                <a href="#" class="text-decoration-none" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <span class="">
+                                        <i class="fa-regular fa-circle-user fa-xl icon_size" style="color: #ef4444;"></i>
+                                    </span>
+                                </a>
+                                <div class="dropdown-menu user-dropdown_cart custom-dropdown shadow-lg border-0"
+                                    style="left: 45%; top:35px; transform: translate(-85%, 0);">
+                                    <div class="dropdown_child p-2">
+                                        <div class="d-flex justify-content-start align-items-start mb-2">
+                                            <a class="dropdown-item user_list" href="#" data-bs-toggle="modal"
+                                                data-bs-target="#profileModal">
+                                                <i class="user_list_icon fa-light fa-user"></i>
+                                                &nbsp;&nbsp;&nbsp;Profile
+                                            </a>
+                                        </div>
+                                        <div class="d-flex justify-content-start align-items-start mb-2">
+                                            <a class="dropdown-item user_list" href="{{ url('orders') }}"><i
+                                                    class="user_list_icon fa-light fa-bags-shopping"></i>
+                                                &nbsp;&nbsp;Orders</a>
+                                        </div>
+                                        <div class="d-flex justify-content-start align-items-start mb-2">
+                                            <a class="dropdown-item user_list" href="{{ route('savelater.index') }}"><i
+                                                    class="user_list_icon fa-light fa-basket-shopping"></i>
+                                                &nbsp;&nbsp;Buy later</a>
+                                        </div>
+                                        <div class="d-flex justify-content-start align-items-start mb-2">
+                                            <a class="dropdown-item user_list" href="{{ url('logout') }}"
+                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                                                    class="user_list_icon fa-light fa-power-off"></i>
+                                                &nbsp;&nbsp;&nbsp;Log Out</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Hidden logout form -->
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: none;">
+                                @csrf
+                            </form>
+                        @else
+                            <a href="{{ url('login') }}" class="text-decoration-none">
+                                <span class="" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Login">
+                                    <i class="fa-regular fa-circle-user fa-xl icon_size text-muted"></i>
+                                </span>
+                            </a>
+                        @endauth
+                        <span class="navbar-text align-items-center justify-content-end" style="margin-left: 10px">
+                            <a href=""https://dealslah.com/dealslahVendor/" style="text-decoration: none">
+                                <button
+                                    class="btn btn-button mt-2 login-button userlogin-button-large py-2 px-4 d-flex justify-content-center align-items-center text-nowrap"
+                                    type="submit">
+                                    Post your Deal
+                                </button>
+                            </a>
                         </span>
-                    </a>
-                    @endauth
-                    <span class="navbar-text align-items-center justify-content-end"
-                        style="margin-left: 10px">
-                        <a href=""https://dealslah.com/dealslahVendor/" style="text-decoration: none">
-                            <button
-                                class="btn btn-button mt-2 login-button userlogin-button-large py-2 px-4 d-flex justify-content-center align-items-center text-nowrap"
-                                type="submit">
-                                Post your Deal
-                            </button>
-                        </a>
-                    </span>
-                    &nbsp;&nbsp;
+                        &nbsp;&nbsp;
+                    </div>
                 </div>
             </div>
         </nav>
@@ -229,37 +231,37 @@
                                 <div class="d-flex justify-content-between align-items-center defaultAddress">
                                     <h6 class="fw-bold">Delivery Addresses</h6>
                                     @if ($default_address)
-                                    <span class="badge badge_infos py-1" data-bs-toggle="modal"
-                                        data-bs-target="#myAddressModal">Change</span>
+                                        <span class="badge badge_infos py-1" data-bs-toggle="modal"
+                                            data-bs-target="#myAddressModal">Change</span>
                                     @else
-                                    <button type="button" class="btn primary_new_btn" style="font-size: 12px"
-                                        data-bs-toggle="modal" data-bs-target="#newAddressModal"
-                                        onclick="checkAddressAndOpenModal()">
-                                        <i class="fa-light fa-plus"></i> Add New Address
-                                    </button>
+                                        <button type="button" class="btn primary_new_btn" style="font-size: 12px"
+                                            data-bs-toggle="modal" data-bs-target="#newAddressModal"
+                                            onclick="checkAddressAndOpenModal()">
+                                            <i class="fa-light fa-plus"></i> Add New Address
+                                        </button>
                                     @endif
                                 </div>
                                 <div class="mt-2">
                                     <div class="selected-address">
                                         @if ($default_address)
-                                        <p>
-                                            <strong>{{ $default_address->first_name ?? '' }}
-                                                {{ $default_address->last_name ?? '' }} (+65)
-                                                {{ $default_address->phone ?? '' }}</strong>&nbsp;&nbsp;<br>
-                                            {{ $default_address->address ?? '' }},
-                                            {{ $default_address->city ?? '' }},
-                                            {{ $default_address->state ?? '' }} -
-                                            {{ $default_address->postalcode ?? '' }}
-                                            <span>
-                                                @if ($default_address->default)
-                                                <span
-                                                    class="badge badge_danger py-1">Default</span>&nbsp;&nbsp;
-                                                @endif
-                                            </span>
-                                        </p>
+                                            <p>
+                                                <strong>{{ $default_address->first_name ?? '' }}
+                                                    {{ $default_address->last_name ?? '' }} (+65)
+                                                    {{ $default_address->phone ?? '' }}</strong>&nbsp;&nbsp;<br>
+                                                {{ $default_address->address ?? '' }},
+                                                {{ $default_address->city ?? '' }},
+                                                {{ $default_address->state ?? '' }} -
+                                                {{ $default_address->postalcode ?? '' }}
+                                                <span>
+                                                    @if ($default_address->default)
+                                                        <span
+                                                            class="badge badge_danger py-1">Default</span>&nbsp;&nbsp;
+                                                    @endif
+                                                </span>
+                                            </p>
                                         @else
-                                        <p>Your address details are missing. Add one now to make checkout faster
-                                            and easier!</p>
+                                            <p>Your address details are missing. Add one now to make checkout faster
+                                                and easier!</p>
                                         @endif
                                     </div>
                                 </div>
@@ -285,51 +287,51 @@
                         <div class="modal-body" style="min-height: 24rem">
                             <div class="allAddress">
                                 @foreach ($addresses as $addr)
-                                <div class="row p-2">
-                                    <div class="col-10">
-                                        <div class="d-flex text-start">
-                                            <div class="px-1">
-                                                <input type="radio" name="selected_id"
-                                                    id="selected_id_{{ $addr->id }}"
-                                                    value="{{ $addr->id }}"
-                                                    {{ $selectedAddressId == $addr->id ? 'checked' : ($default_address && $addr->id == $default_address->id && !$selectedAddressId ? 'checked' : '') }} />
-                                            </div>
-                                            <p class="text-turncate fs_common">
-                                                <span class="px-2">
-                                                    {{ $addr->first_name }} {{ $addr->last_name ?? '' }} |
-                                                    <span style="color: #c7c7c7;">&nbsp;+65
-                                                        {{ $addr->phone }}</span>
-                                                </span><br>
-                                                <span class="px-2" style="color: #c7c7c7">{{ $addr->address }},
-                                                    {{ $addr->city }},
-                                                    {{ $addr->state }}-{{ $addr->postalcode }}.</span>
-                                                <br>
-                                                @if ($addr->default)
-                                                <span class="badge badge_primary">Default</span>
-                                                @endif
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="d-flex align-items-center justify-content-end">
-                                            <div class="d-flex gap-2 delBadge">
-                                                <button type="button" class="badge_edit" data-bs-toggle="modal"
-                                                    data-address-id="{{ $addr->id }}"
-                                                    data-bs-target="#editAddressModal">
-                                                    Edit
-                                                </button>
-                                                @if (!$addr->default)
-                                                <button type="button" class="badge_del"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#deleteAddressModal"
-                                                    data-address-id="{{ $addr->id }}">
-                                                    Delete
-                                                </button>
-                                                @endif
+                                    <div class="row p-2">
+                                        <div class="col-10">
+                                            <div class="d-flex text-start">
+                                                <div class="px-1">
+                                                    <input type="radio" name="selected_id"
+                                                        id="selected_id_{{ $addr->id }}"
+                                                        value="{{ $addr->id }}"
+                                                        {{ $selectedAddressId == $addr->id ? 'checked' : ($default_address && $addr->id == $default_address->id && !$selectedAddressId ? 'checked' : '') }} />
+                                                </div>
+                                                <p class="text-turncate fs_common">
+                                                    <span class="px-2">
+                                                        {{ $addr->first_name }} {{ $addr->last_name ?? '' }} |
+                                                        <span style="color: #c7c7c7;">&nbsp;+65
+                                                            {{ $addr->phone }}</span>
+                                                    </span><br>
+                                                    <span class="px-2" style="color: #c7c7c7">{{ $addr->address }},
+                                                        {{ $addr->city }},
+                                                        {{ $addr->state }}-{{ $addr->postalcode }}.</span>
+                                                    <br>
+                                                    @if ($addr->default)
+                                                        <span class="badge badge_primary">Default</span>
+                                                    @endif
+                                                </p>
                                             </div>
                                         </div>
+                                        <div class="col-2">
+                                            <div class="d-flex align-items-center justify-content-end">
+                                                <div class="d-flex gap-2 delBadge">
+                                                    <button type="button" class="badge_edit" data-bs-toggle="modal"
+                                                        data-address-id="{{ $addr->id }}"
+                                                        data-bs-target="#editAddressModal">
+                                                        Edit
+                                                    </button>
+                                                    @if (!$addr->default)
+                                                        <button type="button" class="badge_del"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#deleteAddressModal"
+                                                            data-address-id="{{ $addr->id }}">
+                                                            Delete
+                                                        </button>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
                                 @endforeach
                             </div>
                         </div>
