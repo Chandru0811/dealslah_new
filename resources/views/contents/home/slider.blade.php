@@ -3,6 +3,34 @@
         <div class="col-lg-9 col-md-12 col-12">
             <div class="owl-carousel carousel_slider owl-theme">
                 <div class="item">
+                    <img src="{{ asset('assets/images/home/Certified AirCon Service.webp') }}" alt="Aircon Deal"
+                        class="img-fluid p-2 rounded-5 banner_image" />
+                </div>
+                <div class="item">
+                    <img src="{{ asset('assets/images/home/Certified Electrician.webp') }}" alt="Electrician Deal"
+                        class="img-fluid p-2 rounded-5 banner_image" />
+                </div>
+                <div class="item">
+                    <img src="{{ asset('assets/images/home/Experienced Carpenter.webp') }}" alt="Carpenter Deal"
+                        class="img-fluid p-2 rounded-5 banner_image" />
+                </div>
+                <div class="item">
+                    <img src="{{ asset('assets/images/home/Expert Plumber.webp') }}" alt="Plumber"
+                        class="img-fluid p-2 rounded-5 banner_image" />
+                </div>
+                <div class="item">
+                    <img src="{{ asset('assets/images/home/Professional Photographer.webp') }}" alt="Photographer"
+                        class="img-fluid p-2 rounded-5 banner_image" />
+                </div>
+                <div class="item">
+                    <img src="{{ asset('assets/images/home/Reliable Handyman.webp') }}" alt="Handyman"
+                        class="img-fluid p-2 rounded-5 banner_image" />
+                </div>
+                <div class="item">
+                    <img src="{{ asset('assets/images/home/Services All.webp') }}" alt="Services All"
+                        class="img-fluid p-2 rounded-5 banner_image" />
+                </div>
+                <div class="item">
                     <img src="{{ asset('assets/images/home/banner1.webp') }}" alt="slider_image1"
                         class="img-fluid p-2 rounded-5 banner_image" />
                 </div>
@@ -10,7 +38,6 @@
                     <img src="{{ asset('assets/images/home/banner2.webp') }}" alt="slider_image2"
                         class="img-fluid p-2 rounded-5 banner_image" />
                 </div>
-
                 <div class="item">
                     <img src="{{ asset('assets/images/home/banner3.webp') }}" alt="slider_image3"
                         class="img-fluid p-2 rounded-5 banner_image" />
