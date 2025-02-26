@@ -43,7 +43,8 @@ class Shop extends Model
         'map_url',
         'shop_lattitude',
         'shop_longtitude',
-        'address'
+        'address',
+        'show_name_on_website'
     ];
 
     protected $dates = ['deleted_at'];
