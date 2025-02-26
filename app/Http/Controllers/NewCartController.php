@@ -248,7 +248,7 @@ class NewCartController extends Controller
 
             $cartItemCount = $cartItems->count();
         } else {
-            $cartItems = [];
+            $cartItems = collect([]);
             $cartItemCount = 0;
         }
 
