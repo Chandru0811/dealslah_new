@@ -141,7 +141,7 @@
                                                 <p>
                                                     <span style="color: #ef4444; font-size:24px">
                                                         ${{ number_format($item->discount * $item->quantity, 2) }}
-                                                        {{ formatIndianCurrency($item->discount * $item->quantity) }}
+                                                        {{-- {{ formatIndianCurrency($item->discount * $item->quantity) }} --}}
                                                     </span> &nbsp;
                                                 </p>
                                                 <div class="d-flex justify-content-start align-items-center">

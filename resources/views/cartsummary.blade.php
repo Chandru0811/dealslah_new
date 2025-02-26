@@ -168,7 +168,7 @@ use Carbon\Carbon;
                                 </span>
 
                                 <span class="ms-1" style="font-size:12px; color:#00DD21">
-                                    -{{ round($product->discount_percentage) }}% off
+                                    {{ round($product->discount_percentage) }}% off
                                 </span>&nbsp; &nbsp; &nbsp;
                                 @endif
                                 @if ($item->deal_type == 1)

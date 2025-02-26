@@ -198,16 +198,12 @@
                                 $hasMedia = $product->productMedia->whereIn('type', ['image', 'video'])->isNotEmpty();
                             @endphp
                             <div class="col-md-2 col-2 pe-md-0 image_slider_vw">
-                                @if ($hasMedia)
-                                    <div class="text-center arrow-button mb-2">
-                                        <button type="button"
-                                            style="border:none; background-color: #eaeaea; font-size:10px"
-                                            id="scrollUpBtn" title="Scroll up" aria-label="Scroll up"
-                                            onclick="scrollUp()">
-                                            <i class="fa fa-angle-up"></i>
-                                        </button>
-                                    </div>
-                                @endif
+                                <div class="text-center arrow-button mb-2">
+                                    <button type="button" style="border:none; background-color: #eaeaea; font-size:10px"
+                                        id="scrollUpBtn" title="Scroll up" aria-label="Scroll up" onclick="scrollUp()">
+                                        <i class="fa fa-angle-up" style="line-height:2;"></i>
+                                    </button>
+                                </div>
 
                                 <div class="thumbnail" id="thumbnailContainer">
                                     @foreach ($product->productMedia->sortBy('order') as $media)
@@ -237,16 +233,13 @@
                                     @endforeach
                                 </div>
 
-                                @if ($hasMedia)
-                                    <div class="text-center arrow-button mt-2">
-                                        <button type="button"
-                                            style="border:none; background-color: #eaeaea; font-size:10px"
-                                            id="scrollDownBtn" title="Scroll down" aria-label="Scroll down"
-                                            onclick="scrollDown()">
-                                            <i class="fa fa-angle-down"></i>
-                                        </button>
-                                    </div>
-                                @endif
+                                <div class="text-center arrow-button mt-2">
+                                    <button type="button" style="border:none; background-color: #eaeaea; font-size:10px"
+                                        id="scrollDownBtn" title="Scroll down" aria-label="Scroll down"
+                                        onclick="scrollDown()">
+                                        <i class="fa fa-angle-down" style="line-height:2;"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <div class="col-md-10 col-10 p-lg-0">
@@ -315,7 +308,7 @@
                                         @else
                                             <button type="button" class="bookmark-button add-bookmark"
                                                 data-deal-id="{{ $product->id }}"
-                                                style="border: none; background: none; font-size:24px; padding: 20px 0 0 20px">
+                                                style="border: none; background: none; font-size:14px; padding: 20px 0 0 20px">
                                                 <p style="height: fit-content; cursor: pointer;" class="p-1 px-2"
                                                     data-bs-toggle="tooltip" data-bs-placement="top" title="bookmark">
                                                     <i class="fa-regular fa-bookmark fa-xl icon_size"
@@ -392,12 +385,12 @@
                                 <div class="price-section d-flex align-items-center mt-4">
                                     <div>
                                         <span
-                                            class="current-price mt-4">${{ number_format($product->original_price, 2) }}</span>
+                                            class="current-price mt-4">${{ number_format($product->discounted_price, 2) }}</span>
                                         &nbsp;&nbsp;
                                         <span
-                                            class="original-price coupon-align">${{ number_format($product->discounted_price, 2) }}</span>
+                                            class="original-price coupon-align">${{ number_format($product->original_price, 2) }}</span>
                                         <span
-                                            class="discount-price coupon-align1 text-nowrap">-{{ round($product->discount_percentage) }}%
+                                            class="discount-price coupon-align1 text-nowrap">{{ round($product->discount_percentage) }}%
                                             off</span>
                                     </div>
                                     @if (!empty($product->coupon_code))
@@ -459,9 +452,11 @@
                                 @endif
                             </div>
 
-                            <div class="">
-                                <span> Seller Company Name: {{ $product->shop->legal_name }}</span>
-                            </div>
+                            @if ($product->shop->show_name_on_website)
+                                <div class="">
+                                    <span> Seller Company Name: {{ $product->shop->legal_name }}</span>
+                                </div>
+                            @endif
 
                             {{-- description  --}}
                             <div class="description-section mt-4">
@@ -588,8 +583,8 @@
                             @if (!empty($product->specifications))
                                 <div class="specification-section mt-4">
                                     <h5>Specifications :</h5>
-                                    <div class="card_offers">
-                                        <p class="p-2 media_fonts_conent">
+                                    <div class="">
+                                        <p class="media_fonts_conent">
                                             {{ $product->specifications ?? 'No Specifications Found' }}
                                         </p>
                                     </div>

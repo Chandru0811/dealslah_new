@@ -116,7 +116,7 @@ use Carbon\Carbon;
                                             <span class="ms-1" style="font-size:22px;color:#ef4444">
                                                 ${{ number_format($item->product->discounted_price * $item->quantity, 2) }}
                                             </span>
-                                            <span class="ms-1" style="font-size:12px; color:#00DD21">-
+                                            <span class="ms-1" style="font-size:12px; color:#00DD21">
                                                 ({{ number_format($item->product->discount_percentage, 0) }}%)
                                                 off
                                             </span>
@@ -301,7 +301,7 @@ use Carbon\Carbon;
                                             <span class="ms-1" style="font-size:22px;color:#ef4444">
                                                 ${{ number_format($item->product->discounted_price * $item->quantity, 2) }}
                                             </span>
-                                            <span class="ms-1" style="font-size:12px; color:#00DD21">-
+                                            <span class="ms-1" style="font-size:12px; color:#00DD21">
                                                 ({{ number_format($item->product->discount_percentage, 0) }}%)
                                                 off
                                             </span>
@@ -365,7 +365,7 @@ use Carbon\Carbon;
                                             Dealslah Discount
                                             &nbsp;<span
                                                 class="discount">
-                                                -${{ number_format($cart->discount, 2) }}
+                                                ${{ number_format($cart->discount, 2) }}
                                             </span></span>
                                     </h4>
                                 </div>

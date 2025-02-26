@@ -94,7 +94,7 @@
                                             ${{ number_format($savedItem->deal->discounted_price, 2) }}
                                         </span>
                                         <span class="ms-1" style="font-size:12px; color:#00DD21">
-                                            -{{ round($savedItem->deal->discount_percentage) }}% off
+                                            {{ round($savedItem->deal->discount_percentage) }}% off
                                         </span>
                                     </div>
                                 </div>

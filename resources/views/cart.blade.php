@@ -169,7 +169,7 @@
                                                     </span>
                                                     <span class="ms-1"
                                                         style="font-size:18px;font-weight:500; color:#28A745">
-                                                        - {{ round($product->discount_percentage) }}% Off
+                                                         {{ round($product->discount_percentage) }}% Off
                                                     </span>
                                                 </div>
                                             @endif
@@ -399,7 +399,7 @@
                                                     </span>
                                                     <span class="ms-1"
                                                         style="font-size:18px;font-weight:500; color:#28A745">
-                                                        - {{ round($product->discount_percentage) }}% Off
+                                                         {{ round($product->discount_percentage) }}% Off
                                                     </span>
                                                 </div>
                                             @endif
@@ -621,7 +621,7 @@
                                                 ${{ number_format($savedItem->deal->discounted_price, 2) }}
                                             </span>
                                             <span class="ms-1" style="font-size:18px;font-weight:500; color:#28A745">
-                                                - {{ round($savedItem->deal->discount_percentage) }}% Off
+                                                 {{ round($savedItem->deal->discount_percentage) }}% Off
                                             </span>
                                         </div>
                                     </div>
@@ -812,7 +812,7 @@
 
             document.querySelectorAll('.discount').forEach((element) => {
                 let discountValue = data.updatedCart.discount;
-                element.textContent = discountValue < 0 
+                element.textContent = discountValue < 0
                     ? `- $${Math.abs(discountValue).toFixed(2)}`
                     : `- $${discountValue.toFixed(2)}`;
             });

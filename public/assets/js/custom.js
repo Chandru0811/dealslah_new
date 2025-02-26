@@ -2196,7 +2196,7 @@ function updateCartUI(cartItems) {
                   (media) => media.order === 1 && media.type === "image"
               )?.resize_path
             : "assets/images/home/noImage.webp";
-    
+
     const productName =
         cartItems.product.name.length > 20
             ? cartItems.product.name.substring(0, 20) + "..."
@@ -2475,7 +2475,7 @@ $(document).ready(function () {
                                             $${response.deal.discounted_price}
                                         </span>
                                         <span class="ms-1" style="font-size:18px;font-weight:500; color:#28A745">
-                                            - ${discountPercentage}% Off
+                                             ${discountPercentage}% Off
                                         </span>
                                     </div>
                                 </div>
@@ -2773,7 +2773,7 @@ $(document).ready(function () {
                     $${response.item.product.discounted_price}
                 </span>
                 <span class="ms-1" style="font-size:18px;font-weight:500;color:#28A745">
-                    - ${discountPercentage}% Off
+                     ${discountPercentage}% Off
                 </span>
             </div>
             `
