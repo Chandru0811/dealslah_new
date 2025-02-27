@@ -10,7 +10,6 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Bookmark;
 use App\Models\SavedItem;
 use Illuminate\Support\Str;
 
@@ -28,10 +27,11 @@ class CartController extends Controller
         $product = Product::where('slug', $slug)->first();
 
         if (!$product) {
-            return response()->json(['error' => 'Deal not found!'], 404);
+            return $this->error('Deal not found!', [], 404);
+
         }
 
-        $customer_id = Auth::check() ? Auth::user()->id : null;
+        $customer_id = Auth::guard('api')->check() ? Auth::guard('api')->id() : null;
 
         if ($customer_id == null) {
             if ($cartnumber == null) {
@@ -82,19 +82,24 @@ class CartController extends Controller
                     $old_cart = Cart::where('customer_id', $customer_id)->first();
                 }
             } else {
-                $old_cart = Cart::where('customer_id', $customer_id)
-                    ->orWhere(function ($q) use ($cartnumber) {
-                        $q->whereNull('customer_id')
-                            ->where('cart_number', $cartnumber);
-                    })->first();
+                if ($cartnumber == null) {
+                    $old_cart = null;
+                    $cartnumber = Str::uuid();
+                } else {
+                    $old_cart = Cart::where('customer_id', $customer_id)
+                        ->orWhere(function ($q) use ($cartnumber) {
+                            $q->whereNull('customer_id')
+                                ->where('cart_number', $cartnumber);
+                        })->first();
+                }
             }
         }
 
         // Check if the item is already in the cart
         if ($old_cart) {
             $item_in_cart = CartItem::where('cart_id', $old_cart->id)->where('product_id', $product->id)->first();
-            if($item_in_cart) {
-                return response()->json(['error' => 'Deal already in cart!'], 400);
+            if ($item_in_cart) {
+                return $this->error('Deal already in cart!', [], 400);
             }
         }
 
@@ -149,7 +154,10 @@ class CartController extends Controller
 
         session()->put('cartnumber', $cartnumber);
 
-        return $this->success('Deal Added to Cart Successfully!', $cart_item);
+        return $this->success('Deal Added to Cart Successfully!', [
+            'cart_number' => $cart->cart_number,
+            'cart_item' => $cart_item
+        ]);
     }
 
     public function getCart(Request $request)
@@ -160,7 +168,7 @@ class CartController extends Controller
             $cartnumber = session()->get('cartnumber');
         }
 
-        $customer_id = Auth::check() ? Auth::user()->id : null;
+        $customer_id = Auth::guard('api')->check() ? Auth::guard('api')->id() : null;
 
         if ($customer_id == null) {
             $cart = Cart::where('cart_number', $cartnumber)->first();
@@ -179,6 +187,22 @@ class CartController extends Controller
 
         $savedItems = collect([]);
 
+        if ($customer_id) {
+            $savedItems = SavedItem::where('user_id', $customer_id)
+                ->whereHas('deal', function ($query) {
+                    $query->where('active', 1)->whereNull('deleted_at');
+                })
+                ->with('deal.productMedia:id,resize_path,order,type,imageable_id', 'deal.shop')
+                ->get();
+        } else {
+            $savedItems = SavedItem::where('cart_number', $cartnumber)
+                ->whereHas('deal', function ($query) {
+                    $query->where('active', 1)->whereNull('deleted_at');
+                })
+                ->with('deal.productMedia:id,resize_path,order,type,imageable_id', 'deal.shop')
+                ->get();
+        }
+
         return $this->success('Cart Items Retrieved Successfully!', [
             'cart' => $cart,
             'savedItems' => $savedItems
@@ -187,23 +211,27 @@ class CartController extends Controller
 
     public function updateCart(Request $request)
     {
-        $cart = Cart::find($request->cart_id);
+        $cartnumber = $request->input("cartnumber");
 
-        if(!$cart)
-        {
+        if (!$cartnumber) {
+            return $this->error('Cart number is required!', [], 400);
+        }
+
+        $cart = Cart::where('cart_number', $cartnumber)->first();
+
+        if (!$cart) {
             return $this->error('Cart not found!', [], 404);
         }
 
         $cart_item = CartItem::where('cart_id', $cart->id)->where('product_id', $request->product_id)->first();
 
-        if(!$cart_item)
-        {
+        if (!$cart_item) {
             return $this->error('Deal not found in cart!', [], 404);
         }
 
         $qtt = $request->quantity;
-        if($qtt == null)
-        {
+
+        if ($qtt == null) {
             $qtt = 1;
         }
 
@@ -221,8 +249,12 @@ class CartController extends Controller
         $cart->save();
 
         $cart_item->quantity = $qtt;
-        $cart_item->service_date = $request->service_date;
-        $cart_item->service_time = $request->service_time;
+        if ($request->service_date) {
+            $cart_item->service_date = $request->service_date;
+        }
+        if ($request->service_time) {
+            $cart_item->service_time = $request->service_time;
+        }
         $cart_item->save();
 
         return $this->success('Cart Updated Successfully!', $cart_item);
@@ -230,10 +262,15 @@ class CartController extends Controller
 
     public function removeItem(Request $request)
     {
-        $cart = Cart::find($request->cart_id);
+        $cartnumber = $request->input("cartnumber");
 
-        if(!$cart)
-        {
+        if (!$cartnumber) {
+            return $this->error('Cart number is required!', [], 400);
+        }
+
+        $cart = Cart::where('cart_number', $cartnumber)->first();
+
+        if (!$cart) {
             return $this->error('Cart not found!', [], 404);
         }
 
@@ -253,47 +290,57 @@ class CartController extends Controller
 
         $cart_item->delete();
 
-        return $this->success('Deal Removed from Cart Successfully!', $cart_item);
+        return $this->ok('Deal Removed from Cart Successfully!');
     }
 
-    public function totalItems()
+    public function totalItems(Request $request)
     {
-        $customer_id = Auth::check() ? Auth::user()->id : null;
+        $cartnumber = $request->input("dmc");
 
-        $cart = Cart::where('customer_id', $customer_id)->orWhere(function($q){
-            $q->whereNull('customer_id')->where('ip_address', request()->ip());
-        })->first();
-
-        if($cart)
-        {
-            return $this->success('Total Items in Cart Retrieved Successfully!', $cart->item_count);
+        if ($cartnumber == null) {
+            $cartnumber = session()->get('cartnumber');
         }
 
-        return $this->success('Total Items in Cart Retrieved Successfully!', 0);
+        $customer_id = Auth::guard('api')->check() ? Auth::guard('api')->id() : null;
+
+        if ($customer_id == null) {
+            $cart = Cart::where('cart_number', $cartnumber)->first();
+        } else {
+            $cart = Cart::where('customer_id', $customer_id)->first();
+            if ($cart == null) {
+                $cart = Cart::where('cart_number', $cartnumber)->first();
+            }
+        }
+
+        $itemCount = $cart ? $cart->item_count : 0;
+
+        return $this->success('Total Items in Cart Retrieved Successfully!', $itemCount);
     }
 
     public function saveForLater(Request $request)
     {
-        //$cartnumber = $request->input('cartnumber');
-        $customer_id = Auth::check() ? Auth::user()->id : null;
+        $cartnumber = $request->input('cartnumber');
 
-        $cart = null;
-
-        if ($customer_id) {
-            $cart = Cart::where('customer_id', $customer_id)->first();
-        } else {
-            $cart = Cart::where(function ($query) {
-                $query->whereNull('customer_id')
-                ->where('ip_address', request()->ip());
-            })->first();
+        if ($cartnumber == null) {
+            $cartnumber = session()->get('cartnumber');
         }
+
+        $customer_id = Auth::guard('api')->check() ? Auth::guard('api')->id() : null;
+
+        $cart = Cart::where('cart_number', $cartnumber);
+
+        if (Auth::guard('api')->check()) {
+            $cart = $cart->orWhere('customer_id', Auth::guard('api')->id);
+        }
+
+        $cart = $cart->first();
 
         $cartItem = null;
 
         if ($cart) {
             $cartItem = CartItem::where('cart_id', $cart->id)
-                            ->where('product_id', $request->product_id)
-                            ->first();
+                ->where('product_id', $request->product_id)
+                ->first();
         }
 
         if ($cartItem) {
@@ -302,7 +349,10 @@ class CartController extends Controller
                 'user_id' => $customer_id,
                 'ip_address' => $request->ip(),
                 'deal_id' => $cartItem->product_id,
+                'cart_number' => $cartnumber,
             ]);
+
+            $deal = Product::with(['productMedia:id,resize_path,order,type,imageable_id', 'shop'])->find($cartItem->product_id);
 
             // Remove from Cart
             $cartItem->delete();
@@ -320,32 +370,96 @@ class CartController extends Controller
             $cart->shipping_weight = $cart->shipping_weight - $cartItem->shipping_weight;
             $cart->save();
 
-            return $this->ok('Item moved to Save for Later!');
+            return $this->success('Deal Removed from Cart Successfully!', $deal);
         }
 
-        return $this->error('Item not found in cart', [], 404);
+        return $this->error('Item not found in cart!', [], 401);
     }
 
     public function moveToCart(Request $request)
     {
-        $user_id = Auth::check() ? Auth::user()->id : null;
+        $cartnumber = $request->input('cartnumber');
 
-        if(!$user_id)
-        {
-            $savedItem = SavedItem::where('ip_address', $request->ip())
+        if ($cartnumber == null) {
+            $cartnumber = session()->get('cartnumber');
+        }
+
+        $product_id = $request->input('product_id');
+
+        $product = Product::where('id', $product_id)->first();
+
+        if (!$product) {
+            return $this->error('Deal not found!', [], 404);
+        }
+
+        $qtt = $request->quantity;
+
+        if ($qtt == null) {
+            $qtt = 1;
+        }
+        
+        $user_id = Auth::guard('api')->check() ? Auth::guard('api')->id() : null;
+
+        if (!$user_id) {
+            $savedItem = SavedItem::where('cart_number', $cartnumber)
                 ->where('deal_id', $request->product_id)
                 ->first();
 
-            $cart = Cart::whereNull('customer_id')->where('ip_address', $request->ip())->first();
-        }else{
+            $cart = Cart::whereNull('customer_id')->where('cart_number', $cartnumber)->first();
+        } else {
             $savedItem = SavedItem::where('user_id', $user_id)
                 ->where('deal_id', $request->product_id)
                 ->first();
 
-            $cart = Cart::where('customer_id', auth('api')->id())->first();
+            $cart = Cart::where('customer_id', $user_id)->first();
         }
 
-            CartItem::create([
+        if (!$cart) {
+            $grand_total = $product->discounted_price * $qtt + $request->shipping + $request->packaging + $request->handling + $request->taxes;
+            $discount = ($product->original_price - $product->discounted_price) * $qtt;
+
+            $cart = new Cart();
+            $cart->customer_id  = Auth::guard('api')->id();
+            $cart->ip_address = $request->ip();
+            $cart->cart_number = $cartnumber;
+            $cart->item_count = 1;
+            $cart->quantity = $qtt;
+            $cart->total = $product->original_price * $qtt;
+            $cart->discount =  $discount;
+            $cart->shipping = $request->shipping;
+            $cart->packaging = $request->packaging;
+            $cart->handling = $request->handling;
+            $cart->taxes = $request->taxes;
+            $cart->grand_total = $grand_total;
+            $cart->shipping_weight = $request->shipping_weight;
+            $cart->save();
+
+            $item = new CartItem;
+            $item->cart_id = $cart->id;
+            $item->product_id = $product->id;
+            $item->item_description = $product->name;
+            $item->quantity = $qtt;
+            $item->unit_price = $product->original_price;
+            $item->delivery_date = $request->delivery_date;
+            $item->coupon_code = $product->coupon_code;
+            $item->discount = $product->discounted_price;
+            $item->discount_percent = $product->discount_percentage;
+            $item->seller_id = $product->shop_id;
+            $item->deal_type = $product->deal_type;
+            $item->service_date = $request->service_date;
+            $item->service_time = $request->service_time;
+            $item->shipping = $request->shipping;
+            $item->packaging = $request->packaging;
+            $item->handling = $request->handling;
+            $item->taxes = $request->taxes;
+            $item->shipping_weight = $request->shipping_weight;
+            $item->save();
+
+            $savedItem->delete();
+
+            $item->load(['product.productMedia:id,resize_path,order,type,imageable_id', 'product.shop']);
+        } else {
+            $item = CartItem::create([
                 'cart_id' => $cart->id,
                 'item_description' => $savedItem->deal->name,
                 'quantity' => 1, // Default quantity
@@ -373,28 +487,53 @@ class CartController extends Controller
             $cart->shipping_weight = $cart->shipping_weight + 0;
             $cart->save();
 
-            return $this->ok('Item moved to Cart');
-    }
-
-    public function getsaveforlater()
-    {
-        $user_id = Auth::check() ? Auth::user()->id : null;
-
-        if(!$user_id){
-            $savedItems = SavedItem::where('ip_address', request()->ip())->with('deal.productMedia:id,resize_path,order,type,imageable_id', 'deal.shop')->get();
-        }else{
-            $savedItems = SavedItem::where('user_id', $user_id)->with('deal.productMedia:id,resize_path,order,type,imageable_id', 'deal.shop')->get();
+            $item->load(['product.productMedia:id,resize_path,order,type,imageable_id', 'product.shop']);
         }
 
-        return $this->success('Item Retrieved from Save for Later!', $savedItems);
+        return $this->success('Item moved to Cart', $item);
+    }
+
+    public function getsaveforlater(Request $request)
+    {
+        $cartnumber = $request->input('cartnumber');
+
+        if ($cartnumber == null) {
+            $cartnumber = session()->get('cartnumber');
+        }
+
+        $user_id = Auth::guard('api')->check() ? Auth::guard('api')->id() : null;
+
+        if (!$user_id) {
+            $savedItems = SavedItem::where('cart_number', $cartnumber)
+                ->whereHas('deal', function ($query) {
+                    $query->where('active', 1)->whereNull('deleted_at');
+                })
+                ->with('deal.productMedia:id,resize_path,order,type,imageable_id', 'deal.shop')
+                ->get();
+        } else {
+            $savedItems = SavedItem::where('user_id', $user_id)
+                ->whereHas('deal', function ($query) {
+                    $query->where('active', 1)->whereNull('deleted_at');
+                })
+                ->with('deal.productMedia:id,resize_path,order,type,imageable_id', 'deal.shop')
+                ->get();
+        }
+
+        return $this->success('Saved items Retrieved Successfully!', $savedItems);
     }
 
     public function removeFromSaveLater(Request $request)
     {
-        $user_id = Auth::check() ? Auth::user()->id : null;
+        $cartnumber = $request->input('cartnumber');
+
+        if ($cartnumber == null) {
+            $cartnumber = session()->get('cartnumber');
+        }
+
+        $user_id = Auth::guard('api')->check() ? Auth::guard('api')->id() : null;
 
         if (!$user_id) {
-            $savedItem = SavedItem::where('ip_address', $request->ip())
+            $savedItem = SavedItem::where('cart_number', $cartnumber)
                 ->where('deal_id', $request->product_id)
                 ->first();
         } else {
@@ -404,29 +543,29 @@ class CartController extends Controller
         }
 
         if (!$savedItem) {
-            return $this->error('Item not found in Save for Later!', [], 404);
+            return $this->error('Item not found in Save for Later', [], 404);
         }
 
         $savedItem->delete();
-
-        return $this->success('Item Removed from Save for Later!', $savedItem);
+        
+        return $this->ok('Item removed from Buy for Later');
     }
 
     public function cartSummary($cart_id, Request $request)
     {
-        if (!Auth::check()) {
+        if (!Auth::guard('api')->check()) {
             return $this->error('User is not authenticated. Redirecting to login.', null, 401);
         } else {
-            $user = Auth::user();
+            $user = Auth::guard('api');
 
             $carts = Cart::where('id', $cart_id)->with(['items.product.productMedia:id,resize_path,order,type,imageable_id'])->first();
 
             $addresses = Address::where('user_id', $user->id)->get();
 
-            return $this->success('Cart Summary Details Retrived Successfully',[
-                'user'=> $user,
-                'carts'=> $carts,
-                'addresses'=>$addresses,
+            return $this->success('Cart Summary Details Retrived Successfully', [
+                'user' => $user,
+                'carts' => $carts,
+                'addresses' => $addresses,
             ]);
         }
     }

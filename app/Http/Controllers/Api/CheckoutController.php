@@ -20,18 +20,18 @@ class CheckoutController extends Controller
 
     public function checkoutsummary($id, Request $request)
     {
-        if (!Auth::check()) {
+        if (!Auth::guard('api')->check()) {
             return $this->error('User is not authenticated. Redirecting to login.', null, 401);
         } else {
-            $user = Auth::user();
+            $user = Auth::guard('api')->user();
             $products = Product::with(['productMedia:id,resize_path,order,type,imageable_id', 'shop'])->where('id', $id)->where('active', 1)->get();
             if (!$products) {
                 return $this->error('Product not found or inactive.', null, 404);
             }
 
             $carts = Cart::whereNull('customer_id')->where('ip_address', $request->ip());
-            if (Auth::guard()->check()) {
-                $carts = $carts->orWhere('customer_id', Auth::guard()->user()->id);
+            if (Auth::guard('api')->check()) {
+                $carts = $carts->orWhere('customer_id', Auth::guard('api')->user()->id);
             }
 
             $carts = $carts->first();
@@ -44,8 +44,8 @@ class CheckoutController extends Controller
 
             $savedItem = SavedItem::whereNull('user_id')->where('ip_address', $request->ip());
 
-            if (Auth::guard()->check()) {
-                $savedItem = $savedItem->orWhere('user_id', Auth::guard()->user()->id);
+            if (Auth::guard('api')->check()) {
+                $savedItem = $savedItem->orWhere('user_id', Auth::guard('api')->user()->id);
             }
 
             $savedItem = $savedItem->get();
@@ -79,10 +79,10 @@ class CheckoutController extends Controller
             }]);
         }
 
-        if (!Auth::check()) {
+        if (!Auth::guard('api')->check()) {
             return $this->error('User is not authenticated. Redirecting to login.', null, 401);
         } else {
-            $user = Auth::user();
+            $user = Auth::guard('api')->user();
             $order = Order::where('customer_id', $user->id)->orderBy('id', 'desc')->first();
             $orderoption = 'buynow';
             return $this->success('Direct Checkout Data Retrieved Successfully!', [
@@ -107,10 +107,10 @@ class CheckoutController extends Controller
             return $this->error('Cart not found.', [], 400);
         }
 
-        if (!Auth::check()) {
+        if (!Auth::guard('api')->check()) {
             return $this->error('User is not authenticated. Redirecting to login.', null, 401);
         } else {
-            $user = Auth::user();
+            $user = Auth::guard('api')->user();
             $order = Order::where('customer_id', $user->id)->orderBy('id', 'desc')->first();
             $orderoption = 'cart';
 
@@ -126,7 +126,7 @@ class CheckoutController extends Controller
 
     public function createorder(Request $request)
     {
-        $user_id = Auth::check() ? Auth::id() : null;
+        $user_id = Auth::guard('api')->check() ? Auth::guard('api')->id() : null;;
         $cart_id = $request->input('cart_id');
         $product_ids = $request->input('product_ids');
         if ($product_ids != null && $cart_id != null) {
@@ -197,7 +197,7 @@ class CheckoutController extends Controller
             ]);
 
             foreach ($cart->items->whereIn('product_id', $ids) as $item) {
-                $itemNumber = 'DM0' . $order->id . '-V' . $item->product->shop_id . 'P' . $item->product_id;
+                $itemNumber = 'DL0' . $order->id . '-V' . $item->product->shop_id . 'P' . $item->product_id;
 
                 OrderItems::create([
                     'order_id' => $order->id,
@@ -278,7 +278,7 @@ class CheckoutController extends Controller
             ]);
 
             foreach ($cart->items as $item) {
-                $itemNumber = 'DM0' . $order->id . '-V' . $item->product->shop_id . 'P' . $item->product_id;
+                $itemNumber = 'DL0' . $order->id . '-V' . $item->product->shop_id . 'P' . $item->product_id;
 
                 OrderItems::create([
                     'order_id' => $order->id,
@@ -321,7 +321,7 @@ class CheckoutController extends Controller
 
     public function getAllOrdersByCustomer()
     {
-        $customerId = Auth::check() ? Auth::id() : null;
+        $customerId = Auth::guard('api')->check() ? Auth::guard('api')->id() : null;;
 
         $orders = Order::where('customer_id', $customerId)
             ->with([
@@ -351,7 +351,7 @@ class CheckoutController extends Controller
             }
         ])->find($id);
 
-        if (!$order || Auth::id() !== $order->customer_id) {
+        if (!$order || Auth::guard('api')->id() !== $order->customer_id) {
             return $this->error('Invalid request.', [], 400);
         }
 
@@ -360,7 +360,7 @@ class CheckoutController extends Controller
         if ($order->items->count() > 0) {
             foreach ($order->items as $item) {
                 if ($item->product && $item->product->review) {
-                    $review = $item->product->review->firstWhere('user_id', Auth::id());
+                    $review = $item->product->review->firstWhere('user_id', Auth::guard('api')->id());
 
                     if ($review) {
                         $orderReviewedByUser = true;
