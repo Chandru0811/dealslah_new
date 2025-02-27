@@ -26,7 +26,8 @@ class CategoryGroupsController extends Controller
             'slug'        => 'required|string|max:200|unique:category_groups,slug,NULL,id,deleted_at,NULL',
             'description' => 'required|string',
             'icon'        => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            // 'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'image'       => 'nullable|image|',
             'order'       => 'required|integer'
         ], [
             'name.unique' => 'The name field must be unique.',
@@ -92,7 +93,8 @@ class CategoryGroupsController extends Controller
             'slug'        => 'required|string|max:200|unique:category_groups,slug,' . $id,
             'description' => 'required|string',
             'icon'        => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            // 'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'image'       => 'nullable|image|',
             'order'       => 'required|integer'
         ], [
             'name.required' => 'The name field is required.',

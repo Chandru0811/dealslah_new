@@ -151,7 +151,7 @@
                         <p style="margin: 0; padding: 0;">{{ $order->first_name }} {{ $order->last_name ?? '' }}</p>
                         @php
                         $deliveryAddress = json_decode($order->delivery_address);
-                        $fullAddress = "{$deliveryAddress->street}, {$deliveryAddress->city}, {$deliveryAddress->zipCode}";
+                        $fullAddress = "{$deliveryAddress->street}, {$deliveryAddress->zipCode}";
                         $deliveryAddressLines = breakAddress($fullAddress);
                         @endphp
                         <p class="addressbreak">

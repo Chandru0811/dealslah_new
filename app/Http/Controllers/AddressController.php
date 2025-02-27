@@ -13,24 +13,15 @@ class AddressController extends Controller
 
     public function index()
     {
-        // Get the authenticated user
         $user = Auth::user();
 
         if ($user) {
-            // Assuming the address is stored in a 'user_addresses' table and related to the user
             $addresses = Address::where('user_id', $user->id)->get();
 
-            // Return the addresses as a JSON response
             return response()->json($addresses);
         }
 
         return response()->json([]);
-    }
-
-
-    public function create()
-    {
-        //
     }
 
     public function store(Request $request)
@@ -39,7 +30,7 @@ class AddressController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name'  => 'required|string|max:200',
             'email'       => 'required|email|max:200',
-            'phone'       => 'required|digits:10',
+            'phone'       => 'required|digits:8',
             'postalcode'  => 'required|digits:6',
             'address'     => 'required|string',
             'type'         => 'required|string',
@@ -52,7 +43,7 @@ class AddressController extends Controller
             'email.email'            => 'Please provide a valid email address.',
             'email.max'              => 'Email may not exceed 200 characters.',
             'phone.required'         => 'Please provide a phone number.',
-            'phone.digits'           => 'Phone number must be exactly 10 digits.',
+            'phone.digits'           => 'Phone number must be exactly 8 digits.',
             'postalcode.required'    => 'Please provide a postal code.',
             'postalcode.digits'      => 'Postal code must be exactly 6 digits.',
             'address.required'       => 'Please provide an address.',
@@ -97,10 +88,6 @@ class AddressController extends Controller
         return response()->json($address);
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function changeSelectedId(Request $request)
     {
         $selectedId = $request->input('selected_id');
@@ -116,15 +103,12 @@ class AddressController extends Controller
         return response()->json(['success' => true, 'selectedId' => $selectedId, 'selectedAddress' => $selectedAddress]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'first_name'  => 'required|string|max:200',
             'email'       => 'required|email|max:200',
-            'phone'       => 'required|digits:10',
+            'phone'       => 'required|digits:8',
             'postalcode'  => 'required|digits:6',
             'address'     => 'required|string',
             'type'        => 'required|string',
@@ -137,7 +121,7 @@ class AddressController extends Controller
             'email.email'            => 'Please provide a valid email address.',
             'email.max'              => 'Email may not exceed 200 characters.',
             'phone.required'         => 'Please provide a phone number.',
-            'phone.digits'           => 'Phone number must be exactly 10 digits.',
+            'phone.digits'           => 'Phone number must be exactly 8 digits.',
             'postalcode.required'    => 'Please provide a postal code.',
             'postalcode.digits'      => 'Postal code must be exactly 6 digits.',
             'address.required'       => 'Please provide an address.',
@@ -172,8 +156,6 @@ class AddressController extends Controller
             'phone'      => $request->phone,
             'postalcode' => $request->postalcode,
             'address'    => $request->address,
-            'state'      => $request->state,
-            'city'       => $request->city,
             'type'       => $request->type,
             'unit'       => $request->unit,
             'default'    => $default,

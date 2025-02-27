@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\AdminProductAddedNotification;
 use App\Mail\ProductAddedSuccessfully;
+use App\Models\Cart;
 use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
@@ -39,30 +40,53 @@ class AuthController extends Controller
         $role = $request->input('role');
 
         $user = User::where('email', $credentials['email'])
-        ->where('role', $role)->whereNull('deleted_at')->first();
+            ->where('role', $role)->whereNull('deleted_at')->first();
 
-        if ($user && Auth::attempt($credentials)) {
-            $token = $user->createToken('Personal Access Token')->accessToken;
-            $referreralCode = 'DMR500' . $user->id;
-            $success['referrer_code'] = $referreralCode;
-            $success['token'] = $token;
-            $success['userDetails'] =  $user;
+        if ($request->role == 3) {
+            if ($user && Auth::attempt($credentials)) {
+                $token = $user->createToken('Personal Access Token')->accessToken;
+                $cartnumber = $request->input('cartnumber') ?? session()->get('cartnumber');
+                if ($cartnumber) {
+                    $guest_cart = Cart::where('cart_number', $cartnumber)->whereNull('customer_id')->first();
 
-            if ($user->role == 3) {
-                $message = "Welcome {$user->name}, You have successfully logged in. Grab the latest Dealslah offers now!";
-            } else {
+                    if ($guest_cart) {
+                        $guest_cart->customer_id = $user->id;
+                        $guest_cart->save();
+
+                        session(['cartnumber' => $guest_cart->cart_number]);
+                    }
+                }
+
+                $success['token'] = $token;
+                $success['userDetails'] =  $user;
+                $success['cartnumber'] = $cartnumber;
+                $message = "Welcome {$user->name}, You have successfully logged in. Grab the latest DealsMachi offers now!";
+            }
+        } elseif ($request->role == 2) {
+            if ($user && Auth::attempt($credentials)) {
+                $token = $user->createToken('Personal Access Token')->accessToken;
+                $referreralCode = 'DLR500' . $user->id;
+
+                $success['referrer_code'] = $referreralCode;
+                $success['token'] = $token;
+                $success['userDetails'] =  $user;
                 $message = 'LoggedIn Successfully!';
             }
+        } else {
+            if ($user && Auth::attempt($credentials)) {
+                $token = $user->createToken('Personal Access Token')->accessToken;
+            }
 
-            return $this->success($message, $success);
+            $success['token'] = $token;
+            $success['userDetails'] =  $user;
+            $message = 'LoggedIn Successfully!';
         }
 
-        return $this->error('Invalid email or password. Please check your credentials and try again.,Email.', ['error' => 'Invalid email or password. Please check your credentials and try again.,Email']);
+        return $this->success($message, $success);
     }
 
     public function register(Request $request)
     {
-        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => [
@@ -92,16 +116,27 @@ class AuthController extends Controller
         ]);
 
         Auth::login($user);
-
-        $referrerCode = 'DMR500' . $user->id;
-
         $token = $user->createToken('Personal Access Token')->accessToken;
-        $success['token'] = $token;
-        $success['userDetails'] =  $user;
-        $success['referrer_code'] = $referrerCode;
+        $success = [
+            'token' => $token,
+            'userDetails' => $user,
+        ];
 
-        if ($user->role == 3) {
-            $message = "Welcome {$user->name}, You have successfully registered. Grab the latest Dealslah offers now!";
+        if ($request->role == 3) {
+            $cartnumber = $request->input('cartnumber') ?? session()->get('cartnumber');
+            if ($cartnumber) {
+                $guest_cart = Cart::where('cart_number', $cartnumber)->whereNull('customer_id')->first();
+                if ($guest_cart) {
+                    $guest_cart->customer_id = $user->id;
+                    $guest_cart->save();
+                    session(['cartnumber' => $guest_cart->cart_number]);
+                }
+            }
+            $success['cartnumber'] = session('cartnumber');
+            $message = "Welcome {$user->name}, You have successfully registered. Start shopping with the best deals on DealsMachi!";
+        } elseif ($request->role == 2) {
+            $success['referrer_code'] = 'DLR500' . $user->id;
+            $message = "You have successfully registered!";
         } else {
             $message = 'Registered Successfully!';
         }
@@ -120,7 +155,6 @@ class AuthController extends Controller
             'description' => 'required|string',
             'external_url' => 'nullable',
             'mobile' => 'required|string|unique:shops,mobile',
-            'street' => 'nullable|string',
             'zip_code' => 'nullable|string',
             'country' => 'nullable|string'
         ], [
@@ -145,7 +179,7 @@ class AuthController extends Controller
 
         $Shop = Shop::create($request->all());
 
-        $user = User::where('id', $Shop->owner_id)->update(['shop_id' => $Shop->id]);
+        User::where('id', $Shop->owner_id)->update(['shop_id' => $Shop->id]);
 
         return $this->success('Shop Registered Successfully!', $Shop);
     }
@@ -158,7 +192,7 @@ class AuthController extends Controller
         // Revoke the token
         $token->revoke();
 
-        return $this->ok('logged Out Successfully!');
+        return $this->ok('Logged Out Successfully!');
     }
 
     public function forgetpassword(Request $request)
@@ -188,7 +222,7 @@ class AuthController extends Controller
 
         $resetLink = "https://dealslah.com/dealslahVendor/resetpassword?token=" . $token . "&email=" . urlencode($request->email);
 
-        Mail::send('email.forgotPassword', ['resetLink' => $resetLink, 'name' => $username, 'token' => $token], function($message) use($request){
+        Mail::send('email.forgotPassword', ['resetLink' => $resetLink, 'name' => $username, 'token' => $token], function ($message) use ($request) {
             $message->to($request->email);
             $message->subject('Reset Password');
         });
@@ -215,7 +249,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Invalid Token']);
         }
 
-        $user = User::where('email', $request->email)
+        User::where('email', $request->email)
             ->update(['password' => Hash::make($request->password)]);
 
         DB::table('password_reset_tokens')->where(['email' => $request->email])->delete();
@@ -226,14 +260,17 @@ class AuthController extends Controller
     public function verifyAccount($id)
     {
         $user = User::find($id);
-        $shop = Shop::where('owner_id',$user->id)->first();
-        $product = Product::where('shop_id',$shop->id)->latest()->first();
+
+        $shop = Shop::where('owner_id', $user->id)->first();
+
+        $product = Product::where('shop_id', $shop->id)->latest()->first();
 
         if ($user && !$user->email_verified_at) {
             $user->email_verified_at = Carbon::now();
+
             $user->save();
 
-            Mail::to($shop->email)->send(new ProductAddedSuccessfully($shop,$product));
+            Mail::to($shop->email)->send(new ProductAddedSuccessfully($shop, $product));
 
             $adminEmail = 'info@dealslah.com';
 

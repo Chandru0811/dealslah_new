@@ -180,7 +180,7 @@
                             </a>
                         @endauth
                         <span class="navbar-text align-items-center justify-content-end" style="margin-left: 10px">
-                            <a href=""https://dealslah.com/dealslahVendor/" style="text-decoration: none">
+                            <a href="https://dealslah.com/dealslahVendor/" style="text-decoration: none">
                                 <button
                                     class="btn btn-button mt-2 login-button userlogin-button-large py-2 px-4 d-flex justify-content-center align-items-center text-nowrap"
                                     type="submit">
@@ -248,9 +248,7 @@
                                                 <strong>{{ $default_address->first_name ?? '' }}
                                                     {{ $default_address->last_name ?? '' }} (+65)
                                                     {{ $default_address->phone ?? '' }}</strong>&nbsp;&nbsp;<br>
-                                                {{ $default_address->address ?? '' }},
-                                                {{ $default_address->city ?? '' }},
-                                                {{ $default_address->state ?? '' }} -
+                                                {{ $default_address->address ?? '' }}-
                                                 {{ $default_address->postalcode ?? '' }}
                                                 <span>
                                                     @if ($default_address->default)
@@ -302,9 +300,7 @@
                                                         <span style="color: #c7c7c7;">&nbsp;+65
                                                             {{ $addr->phone }}</span>
                                                     </span><br>
-                                                    <span class="px-2" style="color: #c7c7c7">{{ $addr->address }},
-                                                        {{ $addr->city }},
-                                                        {{ $addr->state }}-{{ $addr->postalcode }}.</span>
+                                                    <span class="px-2" style="color: #c7c7c7">{{ $addr->address }}-{{ $addr->postalcode }}.</span>
                                                     <br>
                                                     @if ($addr->default)
                                                         <span class="badge badge_primary">Default</span>
@@ -430,22 +426,6 @@
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control address_input" name="address"
                                         id="address" placeholder="Enter your Address" required />
-                                </div>
-
-                                <!-- Phone -->
-                                <div class="col-md-6 col-12 mb-3">
-                                    <label for="state" class="form-label address_lable">State <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control address_input" name="state"
-                                        id="state" placeholder="Enter your state" required />
-                                </div>
-
-                                <!-- Email -->
-                                <div class="col-md-6 col-12 mb-3">
-                                    <label for="city" class="form-label address_lable">City <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control address_input" name="city"
-                                        id="city" placeholder="Enter your city" required />
                                 </div>
 
                                 <!-- Postal Code -->
@@ -597,22 +577,6 @@
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control address_input" name="address"
                                         id="address" placeholder="Enter your Address" required />
-                                </div>
-
-                                <!-- Phone -->
-                                <div class="col-md-6 col-12 mb-3">
-                                    <label for="state" class="form-label address_lable">State <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control address_input" name="state"
-                                        id="state" placeholder="Enter your state" required />
-                                </div>
-
-                                <!-- Email -->
-                                <div class="col-md-6 col-12 mb-3">
-                                    <label for="city" class="form-label address_lable">City <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control address_input" name="city"
-                                        id="city" placeholder="Enter your city" required />
                                 </div>
 
                                 <!-- Postal Code -->
