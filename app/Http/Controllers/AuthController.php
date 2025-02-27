@@ -23,21 +23,30 @@ class AuthController extends Controller
             if($finduser){
                 Auth::login($finduser);
                 $message = "Welcome {$finduser->name}, You have successfully logged in. \nGrab the latest Dealslah offers now!";
-                return redirect()->intended(route('home'))->with('status', $message);
             }else{
+                $existingUser = User::where('email', $user->email)->first();
+                
+                if ($existingUser) {
+                    Auth::login($existingUser);
+                    $message = "Welcome {$finduser->name}, You have successfully logged in. \nGrab the latest Dealslah offers now!";
+                }
+        
                 $newUser = User::create([
                     'name' => $user->name,
                     'email' => $user->email,
                     'auth_provider_id'=> $user->id,
                     'auth_provider' => $socialprovider,
-                    'password' => encrypt('12345678')
-                    ]);
-                    Auth::login($newUser);
-                    $message = "Welcome {$newUser->name}, You have successfully registered. \nGrab the latest Dealslah offers now!";
-                    return redirect()->intended(route('home'))->with('status', $message);
-                }
-            } catch (Exception $e) {
-                $e->getMessage();
+                    'password' => Hash::make('12345678')
+                ]);
+                
+                Auth::login($newUser);
+                $message = "Welcome {$newUser->name}, You have successfully registered. \nGrab the latest Dealslah offers now!";
+                    
             }
+               return redirect()->intended(route('home'))->with('status', $message); 
+            } catch (Exception $e) {
+                return redirect()->route('home')->with('error', $e->getMessage());
+            }
+
     }
 }
