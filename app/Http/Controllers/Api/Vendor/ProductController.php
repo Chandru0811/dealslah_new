@@ -337,7 +337,6 @@ class ProductController extends Controller
                     if (file_exists($existingMedia->path)) {
                         unlink($existingMedia->path);
                     }
-                    
                     // Delete resized image
                     if (file_exists($existingMedia->resize_path)) {
                         unlink($existingMedia->resize_path);
@@ -414,7 +413,8 @@ class ProductController extends Controller
             'name' => 'required|string|max:200|unique:categories,name',
             'slug' => 'required|string|max:200|unique:categories,slug',
             'description' => 'nullable|string',
-            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'icon' => 'required|image|',
+            // 'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ], [
             'category_group_id.required' => 'The category group ID field is required.',
             'category_group_id.exists' => 'The selected category group ID is invalid.',

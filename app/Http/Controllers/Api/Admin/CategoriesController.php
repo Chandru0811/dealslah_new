@@ -38,7 +38,8 @@ class CategoriesController extends Controller
             'name'              => 'required|string|max:200|unique:categories,name,NULL,id,deleted_at,NULL',
             'slug'              => 'required|string|max:200|unique:categories,slug,NULL,id,deleted_at,NULL',
             'description'       => 'nullable|string',
-            'icon'              => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            // 'icon'              => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'icon'              => 'required|image|',
         ], [
             'category_group_id.required' => 'The category group id field is required.',
             'category_group_id.exists' => 'The selected category group id is invalid.',
@@ -58,7 +59,7 @@ class CategoriesController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
-    
+
         // Check if a soft-deleted category with the same name or slug exists
         $existingCategory = Category::withTrashed()
             ->where(function($query) use ($request) {
@@ -66,15 +67,15 @@ class CategoriesController extends Controller
                       ->orWhere('slug', $request->slug);
             })
             ->first();
-    
+
         if ($existingCategory && $existingCategory->trashed()) {
             // Restore the soft-deleted record
             $existingCategory->restore();
-    
+
             // Return a response indicating the category was restored
             return response()->json(['message' => 'Category Restored Successfully!', 'data' => $existingCategory], 200);
         }
-    
+
         $validatedData = $validator->validated();
 
         if ($request->hasFile('icon')) {
@@ -97,7 +98,7 @@ class CategoriesController extends Controller
 
         return response()->json(['message' => 'Category Created Successfully!', 'data' => $category], 201);
     }
-    
+
     public function show($id)
     {
         $category = Category::with(['categoryGroup'])->find($id);
@@ -124,7 +125,8 @@ class CategoriesController extends Controller
                 'name'              => 'required|string|max:200|unique:categories,name,' . $id,
                 'slug'              => 'required|string|max:200|unique:categories,slug,' . $id,
                 'description'       => 'nullable|string',
-                'icon'        => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+                'icon'        => 'sometimes|required|image|',
+                // 'icon'        => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             ],
             [
                 'category_group_id.required' => 'The category group id field is required.',

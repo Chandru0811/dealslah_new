@@ -397,7 +397,6 @@ class CartController extends Controller
         if ($qtt == null) {
             $qtt = 1;
         }
-        
         $user_id = Auth::guard('api')->check() ? Auth::guard('api')->id() : null;
 
         if (!$user_id) {
@@ -547,8 +546,7 @@ class CartController extends Controller
         }
 
         $savedItem->delete();
-        
-        return $this->ok('Item removed from Buy for Later');
+        return $this->ok('Item removed from Buy Later');
     }
 
     public function cartSummary($cart_id, Request $request)

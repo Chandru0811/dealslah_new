@@ -449,12 +449,6 @@ try {
                     @if (!empty($deliveryAddress['address']))
                     {{ $deliveryAddress['address'] }}
                     @endif
-                    @if (!empty($deliveryAddress['city']))
-                    , {{ $deliveryAddress['city'] }}
-                    @endif
-                    @if (!empty($deliveryAddress['state']))
-                    , {{ $deliveryAddress['state'] }}
-                    @endif
                     @if (!empty($deliveryAddress['postalcode']))
                     , {{ $deliveryAddress['postalcode'] }}
                     @endif

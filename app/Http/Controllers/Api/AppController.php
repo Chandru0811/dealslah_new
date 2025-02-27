@@ -1069,7 +1069,7 @@ class AppController extends Controller
     public function softDeleteUser()
     {
         $userId = Auth::guard('api')->id();
-        
+
         $user = User::find($userId);
 
         if (!$user) {

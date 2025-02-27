@@ -84,9 +84,7 @@ $default_address = $addresses->firstWhere('id', $selectedAddressId) ?? ($address
                                 {{ $default_address->first_name ?? '' }}
                                 {{ $default_address->last_name ?? '' }} (+65)
                                 {{ $default_address->phone ?? '' }}&nbsp;&nbsp;<br>
-                                {{ $default_address->address ?? '' }}
-                                {{ $default_address->city ?? '' }},
-                                {{ $default_address->state ?? '' }} -
+                                {{ $default_address->address ?? '' }} -
                                 {{ $default_address->postalcode ?? '' }}
                                 <span>
                                     @if ($default_address->default)

@@ -52,8 +52,9 @@ class ShopController extends Controller
             'mobile' => 'sometimes|required|string|unique:shops,mobile,' . $id,
             'description' => 'sometimes|required|string',
             'external_url' => 'nullable',
-            'logo' => (!$shop->logo ? 'required|' : 'sometimes|') . 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'show_name_on_website' => 'nullable|required|boolean', // Added validation
+            'logo' => (!$shop->logo ? 'required|' : 'sometimes|') . 'image|',
+            // 'logo' => (!$shop->logo ? 'required|' : 'sometimes|') . 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'show_name_on_website' => 'nullable|required|boolean',
 
             // 'banner' => (!$shop->banner ? 'required|' : 'sometimes|') . 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             // 'map_url' => (!$shop->map_url ? 'required|' : 'sometimes|') . 'url'
@@ -321,7 +322,7 @@ class ShopController extends Controller
 
     public function getReferralsByUserId($userId)
     {
-        $referralCode = 'DMR500' . $userId;
+        $referralCode = 'DLR500' . $userId;
 
         $referrals = User::where('referral_code', $referralCode)
             ->orderBy('created_at', 'desc')

@@ -80,9 +80,7 @@ use Carbon\Carbon;
                                             {{ $address->first_name ?? '' }}
                                             {{ $address->last_name ?? '' }} (+65)
                                             {{ $address->phone ?? '' }}&nbsp;&nbsp;
-                                            {{ $address->address ?? '' }},
-                                            {{ $address->city ?? '' }},
-                                            {{ $address->state ?? '' }}
+                                            {{ $address->address ?? '' }}
                                             - {{ $address->postalcode ?? '' }}
                                             {{-- <span>
                                                 <span class="badge badge_infos py-1" data-bs-toggle="modal"

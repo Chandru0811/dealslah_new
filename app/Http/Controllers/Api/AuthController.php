@@ -65,7 +65,7 @@ class AuthController extends Controller
         } elseif ($request->role == 2) {
             if ($user && Auth::attempt($credentials)) {
                 $token = $user->createToken('Personal Access Token')->accessToken;
-                $referreralCode = 'DMR500' . $user->id;
+                $referreralCode = 'DLR500' . $user->id;
 
                 $success['referrer_code'] = $referreralCode;
                 $success['token'] = $token;
@@ -135,7 +135,7 @@ class AuthController extends Controller
             $success['cartnumber'] = session('cartnumber');
             $message = "Welcome {$user->name}, You have successfully registered. Start shopping with the best deals on DealsMachi!";
         } elseif ($request->role == 2) {
-            $success['referrer_code'] = 'DMR500' . $user->id;
+            $success['referrer_code'] = 'DLR500' . $user->id;
             $message = "You have successfully registered!";
         } else {
             $message = 'Registered Successfully!';
@@ -155,7 +155,6 @@ class AuthController extends Controller
             'description' => 'required|string',
             'external_url' => 'nullable',
             'mobile' => 'required|string|unique:shops,mobile',
-            'street' => 'nullable|string',
             'zip_code' => 'nullable|string',
             'country' => 'nullable|string'
         ], [

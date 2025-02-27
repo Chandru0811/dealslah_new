@@ -195,7 +195,7 @@ $(document).ready(function () {
         };
 
         var laravelRequest = $.ajax({
-            url: "https://dealslah.com/deals/count/enquire",
+            url: "http://127.0.0.1:8000/deals/count/enquire",
             type: "POST",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -286,8 +286,8 @@ $(document).ready(function () {
                 phone: {
                     required: true,
                     digits: true,
-                    minlength: 10,
-                    maxlength: 10,
+                    minlength: 8,
+                    maxlength: 8,
                 },
                 postalcode: {
                     required: true,
@@ -296,14 +296,6 @@ $(document).ready(function () {
                     maxlength: 6,
                 },
                 address: {
-                    required: true,
-                    maxlength: 200,
-                },
-                state: {
-                    required: true,
-                    maxlength: 200,
-                },
-                city: {
                     required: true,
                     maxlength: 200,
                 },
@@ -329,9 +321,9 @@ $(document).ready(function () {
                 },
                 phone: {
                     required: "Please provide a phone number.",
-                    digits: "Phone number must be exactly 10 digits.",
-                    minlength: "Phone number must be exactly 10 digits.",
-                    maxlength: "Phone number must be exactly 10 digits.",
+                    digits: "Phone number must be exactly 8 digits.",
+                    minlength: "Phone number must be exactly 8 digits.",
+                    maxlength: "Phone number must be exactly 8 digits.",
                 },
                 postalcode: {
                     required: "Please provide a postal code.",
@@ -342,14 +334,6 @@ $(document).ready(function () {
                 address: {
                     required: "Please provide an address.",
                     maxlength: "Address may not exceed 200 characters.",
-                },
-                state: {
-                    required: "Please provide your State.",
-                    maxlength: "State may not exceed 200 characters.",
-                },
-                city: {
-                    required: "Please provide your City.",
-                    maxlength: "City may not exceed 200 characters.",
                 },
                 unit: {
                     maxlength: "Additional Info may not exceed 200 characters.",
@@ -446,9 +430,7 @@ $(document).ready(function () {
                                                 <span class="px-2" style="color: #c7c7c7">
                                                     ${
                                                         response.address.address
-                                                    }, ${
-                                response.address.city
-                            }, ${response.address.state} - ${
+                                                    }- ${
                                 response.address.postalcode
                             }.
                                                 </span>
@@ -506,9 +488,7 @@ $(document).ready(function () {
                                             ${
                                                 response.address.phone
                                             }</strong>&nbsp;&nbsp;<br>
-                                        ${response.address.address}, ${
-                                    response.address.city
-                                }, ${response.address.state} - ${
+                                        ${response.address.address}- ${
                                     response.address.postalcode
                                 }
                                         <span>
@@ -632,14 +612,6 @@ $(document).ready(function () {
                     required: true,
                     maxlength: 200,
                 },
-                state: {
-                    required: true,
-                    maxlength: 200,
-                },
-                city: {
-                    required: true,
-                    maxlength: 200,
-                },
                 type: {
                     required: true,
                 },
@@ -663,7 +635,7 @@ $(document).ready(function () {
                 phone: {
                     required: "Please provide a phone number.",
                     digits: "Phone number must be exactly 8 digits.",
-                    maxlength: "Phone number must be exactly 10 digits.",
+                    maxlength: "Phone number must be exactly 8 digits.",
                 },
                 postalcode: {
                     required: "Please provide a postal code.",
@@ -677,14 +649,6 @@ $(document).ready(function () {
                 },
                 type: {
                     required: "Please provide the address type.",
-                },
-                state: {
-                    required: "Please provide your State.",
-                    maxlength: "State may not exceed 200 characters.",
-                },
-                city: {
-                    required: "Please provide your City.",
-                    maxlength: "City may not exceed 200 characters.",
                 },
                 unit: {
                     maxlength: "Additional Info may not exceed 200 characters.",
@@ -776,9 +740,7 @@ $(document).ready(function () {
                                                 <span class="px-2"
                                                     style="color: #c7c7c7">${
                                                         response.address.address
-                                                    }, ${
-                                response.address.city
-                            }, ${response.address.state} - ${
+                                                    }- ${
                                 response.address.postalcode
                             }.
                                                 </span>
@@ -837,9 +799,7 @@ $(document).ready(function () {
                                             ${
                                                 response.address.phone
                                             }</strong>&nbsp;&nbsp;<br>
-                                        ${response.address.address}, ${
-                                    response.address.city
-                                }, ${response.address.state} - ${
+                                        ${response.address.address}- ${
                                     response.address.postalcode
                                 }
                                         <span>
@@ -897,8 +857,6 @@ $(document).ready(function () {
             $("#address").val(address.address);
             $("#unit").val(address.unit ?? "");
             $("#address_id").val(address.id ?? "");
-            $("#state").val(address.state ?? "");
-            $("#city").val(address.city ?? "");
 
             // Set Address Type
             if (address.type === "home_mode") {
@@ -1038,9 +996,7 @@ $(document).ready(function () {
                             <strong>${address.first_name} ${
                         address.last_name ?? ""
                     } (+65) ${address.phone}</strong><br>
-                            ${address.address}, ${address.city}, ${
-                        address.state
-                    } - ${address.postalcode}
+                            ${address.address}- ${address.postalcode}
                             ${
                                 address.default
                                     ? '<span class="badge badge_danger py-1">Default</span>'
@@ -1463,7 +1419,7 @@ function copySpanText(element, event) {
     var dealId = element.closest("a").getAttribute("href").split("/").pop();
 
     $.ajax({
-        url: "https://dealslah.com/deals/coupon/copied",
+        url: "http://127.0.0.1:8000/deals/coupon/copied",
         type: "POST",
         data: {
             _token: $('meta[name="csrf-token"]').attr("content"),
@@ -1495,7 +1451,7 @@ function copyLinkToClipboard(element, event, dealId) {
     document.body.removeChild(tempInput);
 
     $.ajax({
-        url: "https://dealslah.com/deals/count/share",
+        url: "http://127.0.0.1:8000/deals/count/share",
         type: "POST",
         data: {
             _token: $('meta[name="csrf-token"]').attr("content"),
@@ -1565,7 +1521,7 @@ document
             var shareUrl = event.target.closest("a").href;
 
             $.ajax({
-                url: "https://dealslah.com/deals/count/share",
+                url: "http://127.0.0.1:8000/deals/count/share",
                 type: "POST",
                 data: {
                     _token: $('meta[name="csrf-token"]').attr("content"),
@@ -1587,7 +1543,7 @@ document
 
 function clickCount(dealId) {
     $.ajax({
-        url: "https://dealslah.com/deals/count/click",
+        url: "http://127.0.0.1:8000/deals/count/click",
         type: "POST",
         data: {
             _token: $('meta[name="csrf-token"]').attr("content"),
@@ -1604,7 +1560,7 @@ function clickCount(dealId) {
 
 function enquireCount(dealId) {
     $.ajax({
-        url: "https://dealslah.com/deals/count/enquire",
+        url: "http://127.0.0.1:8000/deals/count/enquire",
         type: "POST",
         data: {
             _token: $('meta[name="csrf-token"]').attr("content"),
@@ -1702,8 +1658,6 @@ $(document).ready(function () {
                 maxlength: 10,
             },
             street: { required: true },
-            city: { required: true },
-            state: { required: true },
             country: { required: true },
             zipCode: {
                 required: true,
@@ -1735,8 +1689,6 @@ $(document).ready(function () {
                 maxlength: "Mobile number must be 10 digits",
             },
             street: "Street is required",
-            city: "City is required",
-            state: "State is required",
             country: "Country is required",
             zipCode: {
                 required: "Zip Code is required",
@@ -1903,7 +1855,7 @@ $(document).ready(function () {
     // Initial Load of Bookmark Count
     function loadBookmarkCount() {
         $.ajax({
-            url: "https://dealslah.com/totalbookmark",
+            url: "http://127.0.0.1:8000/totalbookmark",
             method: "GET",
             success: function (response) {
                 updateBookmarkCount(response.total_items);
@@ -1954,7 +1906,7 @@ function handleAddBookmark() {
             let bookmarknumber = localStorage.getItem("bookmarknumber") || null;
             console.log(bookmarknumber);
             $.ajax({
-                url: `https://dealslah.com/bookmark/${dealId}/add`,
+                url: `http://127.0.0.1:8000/bookmark/${dealId}/add`,
                 method: "POST",
                 data: {
                     bookmarknumber: bookmarknumber,
@@ -1993,7 +1945,7 @@ function handleRemoveBookmark() {
             let dealId = $(this).data("deal-id");
 
             $.ajax({
-                url: `https://dealslah.com/bookmark/${dealId}/remove`,
+                url: `http://127.0.0.1:8000/bookmark/${dealId}/remove`,
                 method: "DELETE",
                 success: function (response) {
                     updateBookmarkCount(response.total_items);
@@ -2204,7 +2156,7 @@ function updateCartUI(cartItems) {
 
     $(".cart_items").append(`
         <div class="d-flex">
-            <img src="https://dealslah.com/${imagePath}" class="img-fluid dropdown_img" alt="${cartItems.product.name}" />
+            <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${cartItems.product.name}" />
             <div class="text-start">
                 <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
                     ${productName}

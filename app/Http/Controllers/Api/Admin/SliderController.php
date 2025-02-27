@@ -14,14 +14,15 @@ class SliderController extends Controller
 
     public function index()
     {
-        $sliders = Slider::orderBy('id', 'desc')->get(); 
+        $sliders = Slider::orderBy('id', 'desc')->get();
         return $this->success( 'Sliders Retrieved Successfully!',$sliders);
     }
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048', 
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'image' => 'required|image',
             'order' => 'required|integer',
         ], [
             'image.required' => 'The image field is required.',
@@ -31,29 +32,29 @@ class SliderController extends Controller
             'order.required' => 'The order field is required.',
             'order.integer' => 'The order field must be an integer.',
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
-    
+
         $validatedData = $validator->validated();
-    
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $imagePath = 'assets/images/sliders';
-    
+
             if (!file_exists($imagePath)) {
                 mkdir($imagePath, 0755, true);
             }
-    
+
             $image->move($imagePath, $imageName);
-    
+
             $validatedData['image_path'] = $imagePath . "/" . $imageName;
         }
-    
+
         $slider = Slider::create($validatedData);
-    
+
         return $this->success('Slider Created Successfully!', $slider);
     }
 
@@ -69,13 +70,14 @@ class SliderController extends Controller
     public function update(Request $request, string $id)
     {
         $slider = Slider::find($id);
-    
+
         if (!$slider) {
             return $this->error('Slider Not Found.', ['error' => 'Slider Not Found']);
         }
-    
+
         $validator = Validator::make($request->all(), [
-            'image' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048', 
+            // 'image' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'image' => 'sometimes|required|image|',
             'order' => 'required|integer',
         ], [
             'image.image' => 'The image field must be an image.',
@@ -84,36 +86,36 @@ class SliderController extends Controller
             'order.required' => 'The order field is required.',
             'order.integer' => 'The order field must be an integer.',
         ]);
-    
+
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
-    
+
         $validatedData = $validator->validated();
-    
+
         if ($request->hasFile('image')) {
             if ($slider->image_path && file_exists($slider->image_path)) {
                 unlink($slider->image_path);
             }
-    
+
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $imagePath ='assets/images/sliders';
-    
+
             if (!file_exists($imagePath)) {
                 mkdir($imagePath, 0755, true);
             }
-    
+
             $image->move($imagePath, $imageName);
-    
+
             $validatedData['image_path'] = $imagePath . "/" . $imageName;
         }
-    
+
         $slider->update($validatedData);
-    
+
         return $this->success('Slider Updated Successfully!', $slider);
     }
-    
+
     public function destroy(string $id)
     {
         $slider = Slider::findOrFail($id);

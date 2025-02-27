@@ -261,13 +261,13 @@ class DashboardController extends Controller
 
         $totalEarnings = ReferrerDetail::where('referrer_id', $user)->sum('amount');
 
-        $thisMonthReferrals = User::where('referral_code', 'DMR500' . $user)
+        $thisMonthReferrals = User::where('referral_code', 'DLR500' . $user)
         ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
         ->count();
 
-        $totalReferrals = User::where('referral_code', 'DMR500' . $user)->count();
+        $totalReferrals = User::where('referral_code', 'DLR500' . $user)->count();
 
-        $totalReferralsbyMonth = User::where('referral_code', 'DMR500' . $user)
+        $totalReferralsbyMonth = User::where('referral_code', 'DLR500' . $user)
         ->whereBetween('created_at', [now()->subMonths(5)->startOfMonth(), now()->endOfMonth()])
         ->get()
         ->groupBy(function ($user) {
