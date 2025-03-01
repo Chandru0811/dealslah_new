@@ -41,46 +41,58 @@ class AuthController extends Controller
 
         $user = User::where('email', $credentials['email'])
             ->where('role', $role)->whereNull('deleted_at')->first();
+        if ($user) {
+            if ($request->role == 3) {
+                if ($user && Auth::attempt($credentials)) {
+                    $token = $user->createToken('Personal Access Token')->accessToken;
+                    $cartnumber = $request->input('cartnumber') ?? session()->get('cartnumber');
+                    if ($cartnumber) {
+                        $guest_cart = Cart::where('cart_number', $cartnumber)->whereNull('customer_id')->first();
 
-        if ($request->role == 3) {
-            if ($user && Auth::attempt($credentials)) {
-                $token = $user->createToken('Personal Access Token')->accessToken;
-                $cartnumber = $request->input('cartnumber') ?? session()->get('cartnumber');
-                if ($cartnumber) {
-                    $guest_cart = Cart::where('cart_number', $cartnumber)->whereNull('customer_id')->first();
+                        if ($guest_cart) {
+                            // Assign guest cart to the registered user
+                            $guest_cart->customer_id = $user->id;
+                            $guest_cart->save();
 
-                    if ($guest_cart) {
-                        $guest_cart->customer_id = $user->id;
-                        $guest_cart->save();
-
-                        session(['cartnumber' => $guest_cart->cart_number]);
+                            // Update session cartnumber
+                            session(['cartnumber' => $guest_cart->cart_number]);
+                        }
                     }
+
+                    $success['token'] = $token;
+                    $success['userDetails'] =  $user;
+                    $success['cart_number'] = $cartnumber;
+                    $message = "Welcome {$user->name}, You have successfully logged in. Grab the latest DealsMachi offers now!";
+                } else {
+                    return $this->error('Invalid email or password. Please check your credentials and try again.,Email.', ['error' => 'Invalid email or password. Please check your credentials and try again.,Email']);
+                }
+            } elseif ($request->role == 2) {
+                if ($user && Auth::attempt($credentials)) {
+                    $token = $user->createToken('Personal Access Token')->accessToken;
+                    $referreralCode = 'DMR500' . $user->id;
+
+                    $success['referrer_code'] = $referreralCode;
+                    $success['token'] = $token;
+                    $success['userDetails'] =  $user;
+                    $message = 'LoggedIn Successfully!';
+                } else {
+                    return $this->error('Invalid email or password. Please check your credentials and try again.,Email.', ['error' => 'Invalid email or password. Please check your credentials and try again.,Email']);
+                }
+            } else {
+                if ($user && Auth::attempt($credentials)) {
+                    $token = $user->createToken('Personal Access Token')->accessToken;
+                } else {
+                    return $this->error('Invalid email or password. Please check your credentials and try again.,Email.', ['error' => 'Invalid email or password. Please check your credentials and try again.,Email']);
                 }
 
-                $success['token'] = $token;
-                $success['userDetails'] =  $user;
-                $success['cartnumber'] = $cartnumber;
-                $message = "Welcome {$user->name}, You have successfully logged in. Grab the latest DealsMachi offers now!";
-            }
-        } elseif ($request->role == 2) {
-            if ($user && Auth::attempt($credentials)) {
-                $token = $user->createToken('Personal Access Token')->accessToken;
-                $referreralCode = 'DLR500' . $user->id;
-
-                $success['referrer_code'] = $referreralCode;
                 $success['token'] = $token;
                 $success['userDetails'] =  $user;
                 $message = 'LoggedIn Successfully!';
             }
         } else {
-            if ($user && Auth::attempt($credentials)) {
-                $token = $user->createToken('Personal Access Token')->accessToken;
-            }
-
-            $success['token'] = $token;
-            $success['userDetails'] =  $user;
-            $message = 'LoggedIn Successfully!';
+            return $this->error('User not registered, Please register a new account.', 404);
         }
+
 
         return $this->success($message, $success);
     }

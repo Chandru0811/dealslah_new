@@ -42,38 +42,42 @@ class NewCartController extends Controller
                 if ($existing_cart->cart_number !== $cartnumber) {
 
                     $new_cart = Cart::where('cart_number', $cartnumber)->whereNull('customer_id')->first();
+                    if ($new_cart) {
+                        foreach ($new_cart->items as $item) {
+                            $existing_cart_item = CartItem::where('cart_id', $existing_cart->id)->where('product_id', $item->product_id)->first();
 
-                    foreach ($new_cart->items as $item) {
-                        $existing_cart_item = CartItem::where('cart_id', $existing_cart->id)->where('product_id', $item->product_id)->first();
-
-                        if ($existing_cart_item) {
-                            // If the item exists in both carts, increase the quantity
-                            $existing_cart_item->quantity += $item->quantity;
-                            $existing_cart_item->save();
-                        } else {
-                            // Assign new cart items to the existing cart
-                            $item->cart_id = $existing_cart->id;
-                            $item->save();
+                            if ($existing_cart_item) {
+                                // If the item exists in both carts, increase the quantity
+                                $existing_cart_item->quantity += $item->quantity;
+                                $existing_cart_item->save();
+                            } else {
+                                // Assign new cart items to the existing cart
+                                $item->cart_id = $existing_cart->id;
+                                $item->save();
+                            }
                         }
+
+                        // Update cart totals
+                        $existing_cart->item_count += $new_cart->item_count;
+                        $existing_cart->quantity += $new_cart->quantity;
+                        $existing_cart->total += $new_cart->total;
+                        $existing_cart->discount += $new_cart->discount;
+                        $existing_cart->shipping += $new_cart->shipping;
+                        $existing_cart->packaging += $new_cart->packaging;
+                        $existing_cart->handling += $new_cart->handling;
+                        $existing_cart->taxes += $new_cart->taxes;
+                        $existing_cart->grand_total += $new_cart->grand_total;
+                        $existing_cart->shipping_weight += $new_cart->shipping_weight;
+
+                        $existing_cart->save();
+
+                        $new_cart->delete();
+
+                        $old_cart = Cart::where('customer_id', $customer_id)->first();
+                    } else {
+                        $cartnumber = Str::uuid();
+                        $old_cart = Cart::where('customer_id', $customer_id)->first();
                     }
-
-                    // Update cart totals
-                    $existing_cart->item_count += $new_cart->item_count;
-                    $existing_cart->quantity += $new_cart->quantity;
-                    $existing_cart->total += $new_cart->total;
-                    $existing_cart->discount += $new_cart->discount;
-                    $existing_cart->shipping += $new_cart->shipping;
-                    $existing_cart->packaging += $new_cart->packaging;
-                    $existing_cart->handling += $new_cart->handling;
-                    $existing_cart->taxes += $new_cart->taxes;
-                    $existing_cart->grand_total += $new_cart->grand_total;
-                    $existing_cart->shipping_weight += $new_cart->shipping_weight;
-
-                    $existing_cart->save();
-
-                    $new_cart->delete();
-
-                    $old_cart = Cart::where('customer_id', $customer_id)->first();
                 } else {
                     $old_cart = Cart::where('customer_id', $customer_id)->first();
                 }
