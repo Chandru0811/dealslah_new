@@ -128,12 +128,12 @@ class HomeController extends Controller
         $url = url()->current(); // Get the current URL
         $title = $product->name; // Fetch the product's title dynamically
         $description = $product->description; // Fetch the product's description
-        $image = $product->image_url1;
+        $image = optional($product->productMedia->first())->resize_path;
 
         $pageurl = url()->current();
         $pagetitle = $product->name;
         $pagedescription = $product->description;
-        $pageimage = $product->image_url1;
+        $pageimage = optional($product->productMedia->first())->resize_path;
         $vedios = $product->additional_details;
         // $reviewData = $product->review;
         $reviewData = $product->review()->with('user')->orderBy('created_at', 'desc')->get();
