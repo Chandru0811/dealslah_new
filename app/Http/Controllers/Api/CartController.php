@@ -104,7 +104,6 @@ class CartController extends Controller
                 return response()->json(['error' => 'Deal already in cart!'], 400);
             }
         }
-
         $qtt = $request->quantity;
         if ($qtt == null) {
             $qtt = 1;
@@ -123,7 +122,7 @@ class CartController extends Controller
         $cart->ip_address = $request->ip();
         $cart->item_count = $old_cart ? ($old_cart->item_count + 1) : 1;
         $cart->quantity = $old_cart ? ($old_cart->quantity + $qtt) : $qtt;
-        $cart->total = $old_cart ? ($old_cart->total + ($product->original_price  $qtt)) : ($product->original_price  $qtt);
+        $cart->total = $old_cart ? ($old_cart->total + ($product->original_price * $qtt)) : ($product->original_price * $qtt);
         $cart->discount = $old_cart ? ($old_cart->discount + $discount) : $discount;
         $cart->shipping = $old_cart ? ($old_cart->shipping + $request->shipping) : $request->shipping;
         $cart->packaging = $old_cart ? ($old_cart->packaging + $request->packaging) : $request->packaging;
@@ -557,10 +556,8 @@ class CartController extends Controller
             return $this->error('User is not authenticated. Redirecting to login.', null, 401);
         } else {
             $user = Auth::guard('api');
-
             $carts = Cart::where('id', $cart_id)->with(['items.product.productMedia:id,resize_path,order,type,imageable_id'])->first();
-
-            $addresses = Address::where('user_id', $user->id)->get();
+            $addresses = Address::where('user_id', Auth::guard('api')->user()->id)->get();
 
             return $this->success('Cart Summary Details Retrived Successfully', [
                 'user' => $user,
