@@ -182,7 +182,7 @@
                         <span class="navbar-text align-items-center justify-content-end" style="margin-left: 10px">
                             <a href="https://dealslah.com/dealslahVendor/" style="text-decoration: none">
                                 <button
-                                    class="btn btn-button mt-2 login-button userlogin-button-large py-2 px-4 d-flex justify-content-center align-items-center text-nowrap"
+                                    class="btn btn-button login-button userlogin-button-large py-2 px-4 d-flex justify-content-center align-items-center text-nowrap"
                                     type="submit">
                                     Post your Deal
                                 </button>

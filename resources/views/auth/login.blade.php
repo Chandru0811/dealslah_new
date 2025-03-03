@@ -138,7 +138,7 @@
                             <hr class="line-divider" />
                         </div>
                         <div class="mb-3 row">
-                            <div class="col-12 col-md-6 mb-2 mb-md-0">
+                            <div class="col-12 col-md-12 mb-2 mb-md-0">
                                 <a href="{{url('auth/google')}}" style="text-decoration: none">
                                     <button type="button" class="btn btn-light social-btn w-100">
                                         <img src="{{ asset('assets/images/home/google.webp') }}" class="img-fluid "
@@ -147,7 +147,7 @@
                                     </button>
                                 </a>
                             </div>
-                            <div class="col-12 col-md-6">
+                            {{-- <div class="col-12 col-md-6">
                                 <a href="auth/facebook">
                                     <button type="button" class="btn btn-light social-btn w-100 ">
                                         <img src="{{ asset('assets/images/home/facebook.webp') }}" class="img-fluid "
@@ -155,7 +155,7 @@
                                         &nbsp;&nbsp;<span style="font-size: small">Login with Facebook</span>
                                     </button>
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="text-center">
                             <p class="mb-0">Don't have an account? &nbsp; <a href="{{ url('register') }}"
@@ -169,15 +169,15 @@
     </section>
     <!-- jQuery Library -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
-    
+
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/5b8838406b.js" crossorigin="anonymous"></script>
-    
+
     <!-- ✅ Add jQuery Validation Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 
@@ -185,7 +185,7 @@
         $(document).ready(function() {
             let cartnumber = localStorage.getItem('cartnumber') || null;
             $('#cart_number').val(cartnumber);
-        
+
             $('#togglePassword').on('click', function() {
             const passwordField = $('#password');
             const eyeIcon = $('#eyeIconPassword');
@@ -199,47 +199,47 @@
                 eyeIcon.removeClass('fa-eye-slash').addClass('fa-eye');
             }
         });
-        
+
             // Form Validation
                 $("#loginForm").on("submit", function(e) {
                     e.preventDefault();
-    
+
                     let email = $("#email").val().trim();
                     let password = $("#password").val().trim();
                     let isValid = true;
-    
+
                     // Validate Email
                     if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
                         $("#emailError").text("Enter a valid email address.").show();
                         isValid = false;
                     }
-    
+
                     // Validate Password
                     if (password.length < 8) {
                         $("#passwordError").text("Password must be at least 8 characters.").show();
                         isValid = false;
                     }
-    
+
                     if (!isValid) return;
-    
+
                     // Disable Button & Show Loading
                     let submitButton = $("button[type='submit']");
                     submitButton.prop("disabled", true).html(
                         `<span class="spinner-border spinner-border-sm me-2"></span> Logging in...`
                     );
-    
+
                     this.submit();
                 });
-    
+
                 $("#email").on("input", function() {
                     $("#emailError").hide();
                 });
-    
+
                 $("#password").on("input", function() {
                     $("#passwordError").hide();
                 });
         });
-        
+
     </script>
 </body>
 

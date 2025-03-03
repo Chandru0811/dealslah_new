@@ -146,7 +146,7 @@
                             <hr class="line-divider" />
                         </div>
                         <div class="mb-3 row">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <a href="{{url('auth/google')}}" style="text-decoration: none">
                                     <button type="button" class="btn btn-light social-btn w-100">
                                         <img src="{{ asset('assets/images/home/google.webp') }}" class="img-fluid"
@@ -155,7 +155,7 @@
                                     </button>
                                 </a>
                             </div>
-                            <div class="col-6">
+                            {{-- <div class="col-6">
                                 <a href="/sociallogin/facebook/customer">
                                     <button type="button" class="btn btn-light social-btn w-100">
                                         <img src="{{ asset('assets/images/home/facebook.webp') }}" class="img-fluid"
@@ -163,7 +163,7 @@
                                         &nbsp;&nbsp;<span style="font-size: small">Sign in with Facebook</span>
                                     </button>
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="text-center">
                             <p class="mb-4 mt-1" style="font-size:12px;">Already have an account? &nbsp; <a

@@ -86,7 +86,7 @@
                             </div>
                             <div class="borderline col-md-6 col-12 px-5">
                                 <h2 class="contact-heading mb-4">Get In Touch</h2>
-                                <ul class="nav nav-tabs">
+                                {{-- <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <a class="nav-link contact-nav  active" id="singapore-tab"
                                             onclick="showAddress('singapore')" href="javascript:void(0);">
@@ -95,7 +95,7 @@
                                                 style="width: 40px; height: 30px" />
                                         </a>
                                     </li>
-                                </ul>
+                                </ul> --}}
 
                                 <!-- Address for Singapore -->
                                 <div id="singapore" class="address-content active-address">

@@ -362,7 +362,11 @@
 .trending-bookmark-badge {
     color: #ef4444;
     font-weight: 400;
-    font-size: larger;
+    font-size: small;
+}
+
+.cart-border {
+    border: 1px solid #ff0060 !important;
 }
 
 .content-badge {
@@ -510,7 +514,7 @@ footer hr {
 
 .total-counts {
     font-size: 8px;
-    width: 34%;
+    width: 30%;
     border-radius: 50%;
     text-align: center;
     border: 1px solid #ef4444;
