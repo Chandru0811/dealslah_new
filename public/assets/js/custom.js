@@ -1725,12 +1725,14 @@ $(document).ready(function () {
 
         const isValid = $checkoutForm.valid();
 
-        if (isValid) {
-            $placeOrderSpinner.removeClass("d-none");
-            $placeOrderSpinner.addClass("show");
-
-            this.submit();
+        if (!isValid) {
+            showMessage("Please select payment type.", "error");
+            return;
         }
+
+        $placeOrderSpinner.removeClass("d-none").addClass("show");
+
+        this.submit();
     });
 });
 
@@ -2156,7 +2158,9 @@ function updateCartUI(cartItems) {
 
     $(".cart_items").append(`
         <div class="d-flex">
-            <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${cartItems.product.name}" />
+            <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${
+        cartItems.product.name
+    }" />
             <div class="text-start">
                 <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
                     ${productName}
@@ -2416,9 +2420,11 @@ $(document).ready(function () {
                                         </div>
                                     `
                                     }
-                                    <p style="color: #AAAAAA;font-size:14px;">Seller : ${
-                                        response.deal.shop.legal_name
-                                    }</p>
+                                    ${
+                                        response.deal.shop?.show_name_on_website
+                                            ? `<p style="color: #AAAAAA">Seller Company Name: ${response.deal.shop.legal_name}</p>`
+                                            : ""
+                                    }
                                     <div class="ms-0">
                                         <span style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
                                             $${response.deal.original_price}
@@ -2690,9 +2696,11 @@ $(document).ready(function () {
             <p class="truncated-description" style="font-size: 16px">${
                 response.item.product.description
             }</p>
-            <p style="color: #AAAAAA;font-size:14px;">Seller : ${
-                response.item.product.shop.legal_name
-            }</p>
+              ${
+                  response.item.product.shop?.show_name_on_website
+                      ? `<p style="color: #AAAAAA">Seller Company Name: ${response.item.product.shop.legal_name}</p>`
+                      : ""
+              }
             ${
                 response.item.product.deal_type === 2
                     ? `

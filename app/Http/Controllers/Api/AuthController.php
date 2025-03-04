@@ -52,74 +52,86 @@ class AuthController extends Controller
         if (!Auth::attempt($credentials)) {
             return $this->error('Invalid email or password. Please check your credentials and try again.', ['error' => 'Invalid email or password.']);
         }
+        if ($request->role == 3) {
+            $token = $user->createToken('Personal Access Token')->accessToken;
+            $cartnumber = $request->input('cartnumber') ?? session()->get('cartnumber');
 
-        $token = $user->createToken('Personal Access Token')->accessToken;
-        $cartnumber = $request->input('cartnumber') ?? session()->get('cartnumber');
+            $existing_cart = Cart::where('customer_id', $user->id)->first();
 
-        $existing_cart = Cart::where('customer_id', $user->id)->first();
+            $guest_cart = $cartnumber ? Cart::where('cart_number', $cartnumber)->whereNull('customer_id')->first() : null;
 
-        $guest_cart = $cartnumber ? Cart::where('cart_number', $cartnumber)->whereNull('customer_id')->first() : null;
+            if ($existing_cart && $guest_cart) {
+                foreach ($guest_cart->items as $item) {
+                    $existing_cart_item = CartItem::where('cart_id', $existing_cart->id)
+                        ->where('product_id', $item->product_id)
+                        ->first();
 
-        if ($existing_cart && $guest_cart) {
-            foreach ($guest_cart->items as $item) {
-                $existing_cart_item = CartItem::where('cart_id', $existing_cart->id)
-                    ->where('product_id', $item->product_id)
-                    ->first();
-
-                if ($existing_cart_item) {
-                    $existing_cart_item->quantity += $item->quantity;
-                    $existing_cart_item->save();
-                } else {
-                    $item->cart_id = $existing_cart->id;
-                    $item->save();
+                    if ($existing_cart_item) {
+                        $existing_cart_item->quantity += $item->quantity;
+                        $existing_cart_item->save();
+                    } else {
+                        $item->cart_id = $existing_cart->id;
+                        $item->save();
+                    }
                 }
-            }
 
-            // Update totals
-            $existing_cart->update([
-                'item_count' => $existing_cart->item_count + $guest_cart->item_count,
-                'quantity' => $existing_cart->quantity + $guest_cart->quantity,
-                'total' => $existing_cart->total + $guest_cart->total,
-                'discount' => $existing_cart->discount + $guest_cart->discount,
-                'shipping' => $existing_cart->shipping + $guest_cart->shipping,
-                'packaging' => $existing_cart->packaging + $guest_cart->packaging,
-                'handling' => $existing_cart->handling + $guest_cart->handling,
-                'taxes' => $existing_cart->taxes + $guest_cart->taxes,
-                'grand_total' => $existing_cart->grand_total + $guest_cart->grand_total,
-                'shipping_weight' => $existing_cart->shipping_weight + $guest_cart->shipping_weight,
-            ]);
+                // Update totals
+                $existing_cart->update([
+                    'item_count' => $existing_cart->item_count + $guest_cart->item_count,
+                    'quantity' => $existing_cart->quantity + $guest_cart->quantity,
+                    'total' => $existing_cart->total + $guest_cart->total,
+                    'discount' => $existing_cart->discount + $guest_cart->discount,
+                    'shipping' => $existing_cart->shipping + $guest_cart->shipping,
+                    'packaging' => $existing_cart->packaging + $guest_cart->packaging,
+                    'handling' => $existing_cart->handling + $guest_cart->handling,
+                    'taxes' => $existing_cart->taxes + $guest_cart->taxes,
+                    'grand_total' => $existing_cart->grand_total + $guest_cart->grand_total,
+                    'shipping_weight' => $existing_cart->shipping_weight + $guest_cart->shipping_weight,
+                ]);
 
-            $guest_cart->delete();
+                $guest_cart->delete();
 
-            $final_cart = $existing_cart;
-        } elseif (!$existing_cart) {
-            if ($guest_cart) {
-                $guest_cart->update(['customer_id' => $user->id]);
-                $final_cart = $guest_cart;
+                $final_cart = $existing_cart;
+            } elseif (!$existing_cart) {
+                if ($guest_cart) {
+                    $guest_cart->update(['customer_id' => $user->id]);
+                    $final_cart = $guest_cart;
+                } else {
+                    $final_cart = (object) [
+                        'id' => null,
+                        'cart_number' => $request->cartnumber,
+                    ];
+                }
             } else {
-                $final_cart = (object) [
-                    'id' => null,
-                    'cart_number' => $request->cartnumber,
-                ];
+                $final_cart = $existing_cart;
             }
+
+            // Update session cartnumber
+            session(['cartnumber' => $final_cart->cart_number]);
+
+            // Response Data
+            $success = [
+                'token' => $token,
+                'userDetails' => $user,
+                'cart_number' => $final_cart->cart_number,
+                'cart_id' => $final_cart->id
+            ];
+
+            $message = "Welcome {$user->name}, You have successfully logged in. Grab the latest DealsMachi offers now!";
+        } elseif ($request->role == 2) {
+            $token = $user->createToken('Personal Access Token')->accessToken;
+            $referreralCode = 'DLR500' . $user->id;
+
+            $success['referrer_code'] = $referreralCode;
+            $success['token'] = $token;
+            $success['userDetails'] =  $user;
+            $message = "Welcome {$user->name}, You have successfully logged in.";
         } else {
-            // Use existing user cart
-            $final_cart = $existing_cart;
+            $token = $user->createToken('Personal Access Token')->accessToken;
+            $success['token'] = $token;
+            $success['userDetails'] =  $user;
+            $message = 'LoggedIn Successfully!';
         }
-
-        // Update session cartnumber
-        session(['cartnumber' => $final_cart->cart_number]);
-
-        // Response Data
-        $success = [
-            'token' => $token,
-            'userDetails' => $user,
-            'cart_number' => $final_cart->cart_number,
-            'cart_id' => $final_cart->id
-        ];
-
-        $message = "Welcome {$user->name}, You have successfully logged in. Grab the latest DealsMachi offers now!";
-
         return $this->success($message, $success);
     }
 

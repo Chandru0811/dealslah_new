@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @php
-use Carbon\Carbon;
+    use Carbon\Carbon;
 @endphp
 
 @section('content')
@@ -146,18 +146,18 @@ use Carbon\Carbon;
                                         </div>
                                         <div class="col-lg-5 col-10">
                                             <!-- <div class="card payment-option" onclick="selectPaymentOption('online_payment')">
-                                                                                        <div class="d-flex align-items-center p-3 w-100">
-                                                                                            <input type="radio" name="payment_type" id="online_payment"
-                                                                                                value="online_payment" class="form-check-input"
-                                                                                                {{ old('payment_type') == 'online_payment' ? 'checked' : '' }}>
-                                                                                            <label for="online_payment" class="d-flex align-items-center m-0">
-                                                                                                <img src="{{ asset('assets/images/home/online_banking.png') }}"
-                                                                                                    alt="Online Payment" class="mx-3"
-                                                                                                    style="width: 24px; height: auto;">
-                                                                                                <span>Online Payment</span>
-                                                                                            </label>
-                                                                                        </div>
-                                                                                    </div> -->
+                                                                                            <div class="d-flex align-items-center p-3 w-100">
+                                                                                                <input type="radio" name="payment_type" id="online_payment"
+                                                                                                    value="online_payment" class="form-check-input"
+                                                                                                    {{ old('payment_type') == 'online_payment' ? 'checked' : '' }}>
+                                                                                                <label for="online_payment" class="d-flex align-items-center m-0">
+                                                                                                    <img src="{{ asset('assets/images/home/online_banking.png') }}"
+                                                                                                        alt="Online Payment" class="mx-3"
+                                                                                                        style="width: 24px; height: auto;">
+                                                                                                    <span>Online Payment</span>
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div> -->
                                         </div>
                                         @error('payment_type')
                                             <span class="text-danger">{{ $message }}</span>
@@ -178,8 +178,7 @@ use Carbon\Carbon;
                                         </span>
                                         <span class="total" style="font-size:12px; color:#00DD21;white-space: nowrap;">
                                             Dealslah Discount
-                                            &nbsp;<span
-                                                class="discount">
+                                            &nbsp;<span class="discount">
                                                 -${{ number_format($cart->items->sum(fn($item) => ($item->product->original_price - $item->product->discounted_price) * $item->quantity), 2) }}
                                             </span>
                                         </span>
@@ -199,7 +198,7 @@ use Carbon\Carbon;
         </section>
     @else
         <section>
-        @if (session('status'))
+            @if (session('status'))
                 <div class="alert alert-dismissible fade show toast-success" role="alert"
                     style="position: fixed; top: 70px; right: 40px; z-index: 1050;">
                     <div class="toast-content">
@@ -330,18 +329,18 @@ use Carbon\Carbon;
                                         </div>
                                         <div class="col-lg-5 col-10">
                                             <!-- <div class="card payment-option" onclick="selectPaymentOption('online_payment')">
-                                                                                        <div class="d-flex align-items-center p-3 w-100">
-                                                                                            <input type="radio" name="payment_type" id="online_payment"
-                                                                                                value="online_payment" class="form-check-input"
-                                                                                                {{ old('payment_type') == 'online_payment' ? 'checked' : '' }}>
-                                                                                            <label for="online_payment" class="d-flex align-items-center m-0">
-                                                                                                <img src="{{ asset('assets/images/home/online_banking.png') }}"
-                                                                                                    alt="Online Payment" class="mx-3"
-                                                                                                    style="width: 24px; height: auto;">
-                                                                                                <span>Online Payment</span>
-                                                                                            </label>
-                                                                                        </div>
-                                                                                    </div> -->
+                                                                                            <div class="d-flex align-items-center p-3 w-100">
+                                                                                                <input type="radio" name="payment_type" id="online_payment"
+                                                                                                    value="online_payment" class="form-check-input"
+                                                                                                    {{ old('payment_type') == 'online_payment' ? 'checked' : '' }}>
+                                                                                                <label for="online_payment" class="d-flex align-items-center m-0">
+                                                                                                    <img src="{{ asset('assets/images/home/online_banking.png') }}"
+                                                                                                        alt="Online Payment" class="mx-3"
+                                                                                                        style="width: 24px; height: auto;">
+                                                                                                    <span>Online Payment</span>
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div> -->
                                         </div>
                                         @error('payment_type')
                                             <span class="text-danger">{{ $message }}</span>
@@ -361,8 +360,7 @@ use Carbon\Carbon;
                                         </span> <span class="ms-1"
                                             style="font-size:12px; color:#00DD21;white-space: nowrap;">
                                             Dealslah Discount
-                                            &nbsp;<span
-                                                class="discount">
+                                            &nbsp;<span class="discount">
                                                 ${{ number_format($cart->discount, 2) }}
                                             </span></span>
                                     </h4>

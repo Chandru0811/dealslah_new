@@ -130,9 +130,11 @@
                                             <p class="truncated-description" style="font-size: 16px">
                                                 {{ $product->description }}
                                             </p>
-                                            <p style="color: #AAAAAA;font-size:14px;">Seller :
-                                                {{ $product->shop->legal_name ?? '' }}
-                                            </p>
+                                            @if ($product->shop->show_name_on_website)
+                                                <p style="color: #AAAAAA;font-size:14px;">Seller Company Name :
+                                                    {{ $product->shop->legal_name ?? '' }}
+                                                </p>
+                                            @endif
                                             @if ($product->deal_type == 2)
                                                 <div class="rating mt-3 mb-3">
                                                     <span style="color: #22cb00">Currently Services are free through
@@ -169,7 +171,7 @@
                                                     </span>
                                                     <span class="ms-1"
                                                         style="font-size:18px;font-weight:500; color:#28A745">
-                                                         {{ round($product->discount_percentage) }}% Off
+                                                        {{ round($product->discount_percentage) }}% Off
                                                     </span>
                                                 </div>
                                             @endif
@@ -360,9 +362,11 @@
                                             <p class="truncated-description" style="font-size: 16px">
                                                 {{ $product->description }}
                                             </p>
-                                            <p style="color: #AAAAAA;font-size:14px;">Seller :
-                                                {{ $product->shop->legal_name ?? '' }}
-                                            </p>
+                                            @if ($product->shop->show_name_on_website)
+                                                <p style="color: #AAAAAA;font-size:14px;">Seller Company Name :
+                                                    {{ $product->shop->legal_name ?? '' }}
+                                                </p>
+                                            @endif
                                             @if ($product->deal_type == 2)
                                                 <div class="rating mt-3 mb-3">
                                                     <span style="color: #22cb00">Currently Services are free through
@@ -399,7 +403,7 @@
                                                     </span>
                                                     <span class="ms-1"
                                                         style="font-size:18px;font-weight:500; color:#28A745">
-                                                         {{ round($product->discount_percentage) }}% Off
+                                                        {{ round($product->discount_percentage) }}% Off
                                                     </span>
                                                 </div>
                                             @endif
@@ -608,9 +612,11 @@
                                                     Dealslah</span>
                                             </div>
                                         @endif
-                                        <p style="color: #AAAAAA;font-size:14px;">Seller :
-                                            {{ $savedItem->deal->shop->legal_name }}
-                                        </p>
+                                        @if ($savedItem->deal->shop->show_name_on_website)
+                                            <p style="color: #AAAAAA;font-size:14px;">Seller Company Name :
+                                                {{ $savedItem->deal->shop->legal_name }}
+                                            </p>
+                                        @endif
 
                                         <div></div>
                                         <div class="ms-0">
@@ -621,7 +627,7 @@
                                                 ${{ number_format($savedItem->deal->discounted_price, 2) }}
                                             </span>
                                             <span class="ms-1" style="font-size:18px;font-weight:500; color:#28A745">
-                                                 {{ round($savedItem->deal->discount_percentage) }}% Off
+                                                {{ round($savedItem->deal->discount_percentage) }}% Off
                                             </span>
                                         </div>
                                     </div>
@@ -783,51 +789,51 @@
         });
 
         function updateCart(cartId, productId, quantity, serviceDate = null, serviceTime = null) {
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    const data = {
-        cart_id: cartId,
-        product_id: productId,
-        quantity: quantity,
-        service_date: serviceDate,
-        service_time: serviceTime,
-        _token: csrfToken,
-    };
-    fetch("{{ route('cart.update') }}", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        if (data.status === 'success') {
-            document.querySelectorAll('.quantity-value').forEach((element) => {
-                element.textContent = data.updatedCart.quantity;
-            });
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const data = {
+                cart_id: cartId,
+                product_id: productId,
+                quantity: quantity,
+                service_date: serviceDate,
+                service_time: serviceTime,
+                _token: csrfToken,
+            };
+            fetch("{{ route('cart.update') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.status === 'success') {
+                        document.querySelectorAll('.quantity-value').forEach((element) => {
+                            element.textContent = data.updatedCart.quantity;
+                        });
 
-            document.querySelectorAll('.subtotal').forEach((element) => {
-                element.textContent = `$${data.updatedCart.subtotal.toFixed(2)}`;
-            });
+                        document.querySelectorAll('.subtotal').forEach((element) => {
+                            element.textContent = `$${data.updatedCart.subtotal.toFixed(2)}`;
+                        });
 
-            document.querySelectorAll('.discount').forEach((element) => {
-                let discountValue = data.updatedCart.discount;
-                element.textContent = discountValue < 0
-                    ? `- $${Math.abs(discountValue).toFixed(2)}`
-                    : `- $${discountValue.toFixed(2)}`;
-            });
+                        document.querySelectorAll('.discount').forEach((element) => {
+                            let discountValue = data.updatedCart.discount;
+                            element.textContent = discountValue < 0 ?
+                                `- $${Math.abs(discountValue).toFixed(2)}` :
+                                `- $${discountValue.toFixed(2)}`;
+                        });
 
-            document.querySelectorAll('.total').forEach((element) => {
-                element.textContent = `$${data.updatedCart.grand_total.toFixed(2)}`;
-            });
-        } else {
-            alert(data.message);
+                        document.querySelectorAll('.total').forEach((element) => {
+                            element.textContent = `$${data.updatedCart.grand_total.toFixed(2)}`;
+                        });
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error updating cart:', error);
+                });
         }
-    })
-    .catch((error) => {
-        console.error('Error updating cart:', error);
-    });
-}
 
 
         function showLoader(form) {

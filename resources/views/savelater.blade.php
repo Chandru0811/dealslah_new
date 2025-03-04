@@ -1,6 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
+    @php
+        use Carbon\Carbon;
+    @endphp
     @if (session('status'))
         <div class="alert alert-dismissible fade show toast-success" role="alert"
             style="position: fixed; top: 70px; right: 40px; z-index: 1050;">
@@ -82,10 +85,30 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+                                    @php
+                                        $currentDate = Carbon::now();
+
+                                        $deliveryDays = is_numeric($savedItem->deal->delivery_days)
+                                            ? (int) $savedItem->deal->delivery_days
+                                            : 0;
+
+                                        $deliveryDate =
+                                            $deliveryDays > 0
+                                                ? $currentDate->addDays($deliveryDays)->format('d-m-Y')
+                                                : null;
+                                    @endphp
                                     <h5>{{ $savedItem->deal->name }}</h5>
                                     <h6 class="truncated-description">{{ $savedItem->deal->description }}</h6>
-                                    <p class="mb-1">Delivery Date :</p>
-                                    <p>Seller : {{ $savedItem->deal->shop->legal_name }}</p>
+                                    <p class="mb-1">Delivery Date :
+                                        <span class="stars">
+                                            <span>
+                                                {{ $deliveryDays > 0 ? $deliveryDate : 'No delivery date available' }}
+                                            </span>
+                                        </span>
+                                    </p>
+                                    @if ($savedItem->deal->shop->show_name_on_website)
+                                        <p>Seller Company Name : {{ $savedItem->deal->shop->legal_name }}</p>
+                                    @endif
                                     <div>
                                         <span style="text-decoration: line-through; color:#c7c7c7">
                                             ${{ number_format($savedItem->deal->original_price, 2) }}

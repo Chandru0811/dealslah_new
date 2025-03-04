@@ -24,7 +24,9 @@ class User extends Authenticatable
         'role',
         'referral_code',
         'type',
-        'google_id'
+        'google_id',
+        'auth_provider_id',
+        'auth_provider'
     ];
 
     /**
