@@ -1,7 +1,7 @@
 <div class="child cartDrop">
     <p class="text_size" style="color: #cbcbcb">Recently Added Products</p>
     <div class="cart_items">
-        @if(isset($cartItems) && $cartItems->count() > 0)
+        @if (isset($cartItems) && $cartItems->count() > 0)
             @foreach ($cartItems->take(6) as $item)
                 <div class="d-flex">
                     @php
@@ -22,7 +22,7 @@
                 </div>
             @endforeach
             @if ($cartItems->count() > 6)
-                <div class="text-end mb-2">
+                <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
                     <a style="font-size: 13px" class="cart-screen">View All</a>
                 </div>
             @endif
@@ -35,8 +35,15 @@
         @endif
     </div>
     <div class="dropdown_cart_view d-flex justify-content-end">
-        <a href="{{ route('cart.index') }}" class="text_size text-decoration-none d-none d-xl-inline"
+        <a href="#" class="cartButton2 text_size text-decoration-none d-none d-xl-inline"
             style="text-decoration: none;">View My Shopping Cart
         </a>
     </div>
 </div>
+
+<script>
+    $('.cartButton2').on('click', function(event) {
+        var cartNumber = localStorage.getItem('cartnumber');
+        window.location.href = "{{ route('cart.index') }}" + '?dmc=' + cartNumber;
+    });
+</script>

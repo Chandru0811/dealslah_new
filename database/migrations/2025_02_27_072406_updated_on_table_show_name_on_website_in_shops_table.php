@@ -12,9 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('shops', function (Blueprint $table) {
-            $table->boolean('show_name_on_website')->nullable();
+            if (!Schema::hasColumn('shops', 'show_name_on_website')) {
+                $table->boolean('show_name_on_website')->nullable();
+            }
         });
     }
+
 
     /**
      * Reverse the migrations.

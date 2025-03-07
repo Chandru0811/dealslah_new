@@ -34,7 +34,8 @@ class Product extends Model
         'coupon_code',
         'specifications',
         'varient',
-        'delivery_days'
+        'delivery_days',
+        'order'
     ];
 
     protected $dates = ['deleted_at', 'start_date', 'end_date'];

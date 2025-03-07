@@ -2117,7 +2117,7 @@ function initializeEventListeners() {
                             updateCartUI(data.cartItems);
                         } else {
                             $(".cart_items").append(`
-                                <div class="text-end mb-2">
+                                <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
                                     <a style="font-size: 13px" class="cart-screen">View All</a>
                                 </div>
                             `);

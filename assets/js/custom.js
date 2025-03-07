@@ -506,9 +506,7 @@ $(document).ready(function () {
                                             ${
                                                 response.address.phone
                                             }</strong>&nbsp;&nbsp;<br>
-                                        ${response.address.address}, ${
-                                    response.address.city
-                                }, ${response.address.state} - ${
+                                        ${response.address.address} - ${
                                     response.address.postalcode
                                 }
                                         <span>
@@ -2163,7 +2161,7 @@ function initializeEventListeners() {
                             updateCartUI(data.cartItems);
                         } else {
                             $(".cart_items").append(`
-                                <div class="text-end mb-2">
+                                <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
                                     <a style="font-size: 13px" class="cart-screen">View All</a>
                                 </div>
                             `);
@@ -2196,7 +2194,7 @@ function updateCartUI(cartItems) {
                   (media) => media.order === 1 && media.type === "image"
               )?.resize_path
             : "assets/images/home/noImage.webp";
-    
+
     const productName =
         cartItems.product.name.length > 20
             ? cartItems.product.name.substring(0, 20) + "..."

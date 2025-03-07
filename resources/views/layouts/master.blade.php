@@ -1,4 +1,3 @@
-
 <html lang="en">
 
 <head>
@@ -6,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @section('head_links')
         <title>Dealslah – Deals that matter in Singapore</title>
-       <meta name="description"
+        <meta name="description"
             content="Get the best deals in Singapore. Electronics, Beauty, Travel and every category you can imagine! Get our apps and stay ahead of every else in deals." />
         <link rel="canonical" href="https://dealslah.com/" />
         <link rel="icon" href="{{ asset('assets/images/home/favicon.ico') }}" />
@@ -33,10 +32,11 @@ $imageType = isset($pageimage) ? pathinfo($pageimage, PATHINFO_EXTENSION) : 'png
         <meta property="og:image:height" content="256">
 
 
-         <!-- Twitter Meta Tags -->
-         <meta name="twitter:card" content="summary_large_image" />
+        <!-- Twitter Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="{{ $pagetitle ?? 'Dealslah - Deals that Matter in India !' }}" />
-        <meta name="twitter:description" content="{{ $pagedescription ?? 'Shop Big, Earn Big Save Big, Dealslah – Deals that matters in India' }}" />
+        <meta name="twitter:description"
+            content="{{ $pagedescription ?? 'Shop Big, Earn Big Save Big, Dealslah – Deals that matters in India' }}" />
         <meta name="twitter:site" content="@dealslah" />
         <meta name="twitter:image" content="{{ asset($pageimage ?? 'assets/images/social/Dealslah_twitter.png') }}" />
         <meta name="twitter:image:alt" content="Get the best deals and discounts in India" />
@@ -55,7 +55,7 @@ $imageType = isset($pageimage) ? pathinfo($pageimage, PATHINFO_EXTENSION) : 'png
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-            <link rel="stylesheet" href="https://unpkg.com/xzoom/dist/xzoom.css" />
+        <link rel="stylesheet" href="https://unpkg.com/xzoom/dist/xzoom.css" />
 
         {{-- Custom Css  --}}
         <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
@@ -85,8 +85,8 @@ $imageType = isset($pageimage) ? pathinfo($pageimage, PATHINFO_EXTENSION) : 'png
 
     <!--  Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
 
     <!-- jQuery Plugins -->
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
@@ -98,75 +98,80 @@ $imageType = isset($pageimage) ? pathinfo($pageimage, PATHINFO_EXTENSION) : 'png
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <!-- Page Scripts -->
     <script>
-            $(document).ready(function() {
-              const urlParams = new URLSearchParams(window.location.search);
-                let newCartNumber = urlParams.get('cartnumber');
-        
-                if (newCartNumber) {
-                    localStorage.setItem("cartnumber", newCartNumber);
+        $(document).ready(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            let newCartNumber = urlParams.get('cartnumber');
+
+            if (newCartNumber) {
+                localStorage.setItem("cartnumber", newCartNumber);
+            }
+            var cartNumber = localStorage.getItem('cartnumber');
+            getcartdetails(cartNumber);
+            const dropdownBtn = $("#toggleDropdown");
+            const dropdownMenu = $(".dropdown-menu");
+
+            dropdownBtn.on("click", function(event) {
+                event.stopPropagation();
+                dropdownMenu.toggleClass("show");
+            });
+
+            $(document).on("click", function(event) {
+                if (!dropdownMenu.is(event.target) && !dropdownBtn.is(event.target) && dropdownMenu.has(
+                        event.target).length === 0) {
+                    dropdownMenu.removeClass("show");
                 }
+            });
+
+            $('#cartButton').on('click', function(event) {
+                const dropdownMenu = $('.dropdown_cart');
                 var cartNumber = localStorage.getItem('cartnumber');
-                getcartdetails(cartNumber);
-                const dropdownBtn = $("#toggleDropdown");
-                const dropdownMenu = $(".dropdown-menu");
-                
-                dropdownBtn.on("click", function(event) {
-                    event.stopPropagation();
-                    dropdownMenu.toggleClass("show");
-                });
-                
-                $(document).on("click", function(event) {
-                    if (!dropdownMenu.is(event.target) && !dropdownBtn.is(event.target) && dropdownMenu.has(event.target).length === 0) {
-                        dropdownMenu.removeClass("show");
-                    }
-                });
-                
-                 $('#cartButton').on('click', function(event) {
-                     const dropdownMenu = $('.dropdown_cart');
-                     var cartNumber = localStorage.getItem('cartnumber');
-                     if (!dropdownMenu.hasClass('show')) {
-                        window.location.href = "{{ route('cart.index') }}" + '?dmc=' + cartNumber;
-                    }
-                 });
-                 
-                 $('#favbutton').on('click', function(event) {
-                     var bookmarknumber = localStorage.getItem('bookmarknumber');
-                     window.location.href = "{{ route('bookmarks.index') }}" + '?dmbk=' + bookmarknumber;
-                 });
-                 
-                 $('.cart-screen').on('click',function(){
-                     var cartNumber = localStorage.getItem('cartnumber');
-                     window.location.href = "{{ route('cart.index') }}" + '?dmc=' + cartNumber;
-                 });
-                    // Function to check if user has address data and open modal
-                function checkAddressAndOpenModal() {
-                    fetch('/addresses')
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.length === 0) {
-                                $('#defaultAddressCheckbox').prop('checked', true);
-                                $('#defaultAddressCheckbox').prop('disabled', true);
-                            } else {
-                                $('#defaultAddressCheckbox').prop('checked', false);
-                                $('#defaultAddressCheckbox').prop('disabled', false);
-                            }
-                            $('#newAddressModal').modal('show');
-                        })
-                        .catch(error => console.error('Error fetching address:', error));
+                if (!dropdownMenu.hasClass('show')) {
+                    window.location.href = "{{ route('cart.index') }}" + '?dmc=' + cartNumber;
                 }
-                
-                
-                function getcartdetails(cartnumber)
-                {
-                    $.ajax({
-                        type: 'GET',
-                        url: "{{ route('cart.details') }}",
-                        data: {
-                            'cartnumber':cartnumber
-                        },
-                        success: function(data, textStatus, jqXHR) {
-                           //console.log(data);
-                          if (data.cartcount == 0) {
+            });
+
+            $('#cartButton2').on('click', function(event) {
+                var cartNumber = localStorage.getItem('cartnumber');
+                window.location.href = "{{ route('cart.index') }}" + '?dmc=' + cartNumber;
+            });
+
+            $('#favbutton').on('click', function(event) {
+                var bookmarknumber = localStorage.getItem('bookmarknumber');
+                window.location.href = "{{ route('bookmarks.index') }}" + '?dmbk=' + bookmarknumber;
+            });
+
+            $('.cart-screen').on('click', function() {
+                var cartNumber = localStorage.getItem('cartnumber');
+                window.location.href = "{{ route('cart.index') }}" + '?dmc=' + cartNumber;
+            });
+            // Function to check if user has address data and open modal
+            function checkAddressAndOpenModal() {
+                fetch('/addresses')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length === 0) {
+                            $('#defaultAddressCheckbox').prop('checked', true);
+                            $('#defaultAddressCheckbox').prop('disabled', true);
+                        } else {
+                            $('#defaultAddressCheckbox').prop('checked', false);
+                            $('#defaultAddressCheckbox').prop('disabled', false);
+                        }
+                        $('#newAddressModal').modal('show');
+                    })
+                    .catch(error => console.error('Error fetching address:', error));
+            }
+
+
+            function getcartdetails(cartnumber) {
+                $.ajax({
+                    type: 'GET',
+                    url: "{{ route('cart.details') }}",
+                    data: {
+                        'cartnumber': cartnumber
+                    },
+                    success: function(data, textStatus, jqXHR) {
+                        //console.log(data);
+                        if (data.cartcount == 0) {
                             $('#cart-count').css('display', 'none');
                             $('#cart-count').css('border', 'none');
                         } else {
@@ -174,17 +179,17 @@ $imageType = isset($pageimage) ? pathinfo($pageimage, PATHINFO_EXTENSION) : 'png
                             $('#cart-count').html(data.cartcount);
                             $('.cartDrop').html(data.html);
                         }
-                           
-                        },
-                        error: function(xhr, textStatus, errorThrown) {
-                            alert('Fail to Submit' + errorThrown);
-                            console.error(errorThrown);
-                        }
-                    });
-                }
-                
-            });
-        </script>
+
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        alert('Fail to Submit' + errorThrown);
+                        console.error(errorThrown);
+                    }
+                });
+            }
+
+        });
+    </script>
     @yield('scripts')
 </body>
 

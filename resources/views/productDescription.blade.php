@@ -298,7 +298,7 @@
                                         @if ($bookmarkedProducts->contains($product->id))
                                             <button type="button" class="bookmark-button remove-bookmark"
                                                 data-deal-id="{{ $product->id }}"
-                                                style="border: none; background: none; font-size:24px; padding: 20px 0 0 30px">
+                                                style="border: none; background: none; font-size: medium !important; padding: 20px 0 0 30px">
                                                 <p style="height: fit-content; cursor: pointer;" class="p-1 px-2"
                                                     data-bs-toggle="tooltip" data-bs-placement="top" title="bookmark">
                                                     <i class="fa-regular fa-bookmark fa-xl icon_size"

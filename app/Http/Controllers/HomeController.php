@@ -33,8 +33,8 @@ class HomeController extends Controller
         $categoryGroups = CategoryGroup::where('active', 1)->with('categories')->take(10)->get();
         $hotpicks = DealCategory::where('active', 1)->get();
         $products = Product::where('active', 1)
-            ->with(['productMedia:id,resize_path,order,type,imageable_id', 'shop:id,country,city,shop_ratings' ])
-            ->orderBy('created_at', 'desc')
+            ->with(['productMedia:id,resize_path,order,type,imageable_id', 'shop:id,country,city,shop_ratings'])
+            ->orderByRaw("CASE WHEN `order` IS NULL THEN 1 ELSE 0 END, `order` ASC, `created_at` DESC")
             ->paginate(8);
         // dd($products);
         $treandingdeals = DealViews::whereDate('viewed_at', Carbon::today())->get();

@@ -138,6 +138,11 @@ Route::middleware('auth:api')->group(function () {
         Route::put('referrer/update/{id}', [ReferrerDetailController::class, 'update']);
         Route::delete('referrer/{id}', [ReferrerDetailController::class, 'delete']);
         Route::get('getAllReferrer', [ReferrerDetailController::class, 'getAllReferrersAndReferrerVendors']);
+
+        //Product
+        Route::get('getAllProductList', [UserController::class, 'getAllProductWithIds']);
+        Route::post('update-product-order', [UserController::class, 'updateProductOrder']);
+        Route::get('getOrderedProducts', [UserController::class, 'getOrderedProducts']);
     });
 
     //Vendor
