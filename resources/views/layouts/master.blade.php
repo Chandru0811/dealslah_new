@@ -130,7 +130,7 @@ $imageType = isset($pageimage) ? pathinfo($pageimage, PATHINFO_EXTENSION) : 'png
                 }
             });
 
-            $('#cartButton2').on('click', function(event) {
+            $('.cartButton2').on('click', function(event) {
                 var cartNumber = localStorage.getItem('cartnumber');
                 window.location.href = "{{ route('cart.index') }}" + '?dmc=' + cartNumber;
             });

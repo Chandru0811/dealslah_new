@@ -97,7 +97,7 @@ class UserController extends Controller
 
     public function getAllProductWithIds()
     {
-        $products = Product::where('active', 1)->get(['id', 'name'])->map(function ($product) {
+        $products = Product::where('active', 1)->orderBy('id', 'desc')->get(['id', 'name'])->map(function ($product) {
             return [
                 'value' => $product->id,
                 'label' => $product->name,
