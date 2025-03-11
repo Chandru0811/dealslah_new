@@ -32,6 +32,7 @@ Route::post('checkotp', [AppController::class, 'checkotp']);
 
 //user
 Route::get('appHome', [AppController::class, 'homepage']);
+Route::get('newappHome', [AppController::class, 'newhomepage']);
 Route::get('get/{id}/categories', [AppController::class, 'categories']);
 Route::get('deals/{category_id}', [AppController::class, 'getDeals']);
 Route::get('deal/details/{id}', [AppController::class, 'dealDescription']);
