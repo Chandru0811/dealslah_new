@@ -144,23 +144,6 @@ $imageType = isset($pageimage) ? pathinfo($pageimage, PATHINFO_EXTENSION) : 'png
                 var cartNumber = localStorage.getItem('cartnumber');
                 window.location.href = "{{ route('cart.index') }}" + '?dmc=' + cartNumber;
             });
-            // Function to check if user has address data and open modal
-            function checkAddressAndOpenModal() {
-                fetch('/addresses')
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.length === 0) {
-                            $('#defaultAddressCheckbox').prop('checked', true);
-                            $('#defaultAddressCheckbox').prop('disabled', true);
-                        } else {
-                            $('#defaultAddressCheckbox').prop('checked', false);
-                            $('#defaultAddressCheckbox').prop('disabled', false);
-                        }
-                        $('#newAddressModal').modal('show');
-                    })
-                    .catch(error => console.error('Error fetching address:', error));
-            }
-
 
             function getcartdetails(cartnumber) {
                 $.ajax({
@@ -187,7 +170,6 @@ $imageType = isset($pageimage) ? pathinfo($pageimage, PATHINFO_EXTENSION) : 'png
                     }
                 });
             }
-
         });
     </script>
     @yield('scripts')

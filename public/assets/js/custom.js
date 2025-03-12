@@ -1945,10 +1945,13 @@ function handleRemoveBookmark() {
         .on("click", function (e) {
             e.preventDefault();
             let dealId = $(this).data("deal-id");
-
+            let bookmarknumber = localStorage.getItem("bookmarknumber") || null;
             $.ajax({
                 url: `http://127.0.0.1:8000/bookmark/${dealId}/remove`,
                 method: "DELETE",
+                data: {
+                    bookmarknumber: bookmarknumber,
+                },
                 success: function (response) {
                     updateBookmarkCount(response.total_items);
 

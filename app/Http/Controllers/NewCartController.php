@@ -95,6 +95,23 @@ class NewCartController extends Controller
             }
         }
 
+        $savedItem = null;
+        
+        if ($customer_id) {
+            $savedItem = SavedItem::where('user_id', $customer_id)
+                ->where('deal_id', $product->id)
+                ->first();
+        } else {
+            $savedItem = SavedItem::where('cart_number', $cartnumber)
+                ->orWhere('ip_address', $request->ip())
+                ->where('deal_id', $product->id)
+                ->first();
+        }
+
+        if ($savedItem) {
+            $savedItem->delete();
+        }
+
         // Check if the item is already in the cart
         if ($old_cart) {
             $item_in_cart = CartItem::where('cart_id', $old_cart->id)->where('product_id', $product->id)->first();
