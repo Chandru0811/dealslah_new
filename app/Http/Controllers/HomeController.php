@@ -42,15 +42,22 @@ class HomeController extends Controller
         $earlybirddeals = Product::where('active', 1)->whereDate('start_date', now())->get();
         $lastchancedeals = Product::where('active', 1)->whereDate('end_date', now())->get();
         $limitedtimedeals = Product::where('active', 1)->whereRaw('DATEDIFF(end_date, start_date) <= ?', [2])->get();
+        $bookmarknumber = $request->input("bookmarknumber") ?? session()->get('bookmarknumber');
+        $user = Auth::user();
 
         $bookmarkedProducts = collect();
 
-        if (Auth::check()) {
-            $userId = Auth::id();
-            $bookmarkedProducts = Bookmark::where('user_id', $userId)->pluck('deal_id');
+        if ($user) {
+            Bookmark::whereNull('user_id')
+                ->where('bookmark_number', $bookmarknumber)
+                ->update(['user_id' => $user->id]);
+
+            $bookmarkedProducts = Bookmark::where('user_id', $user->id)
+                ->orWhere('bookmark_number', $bookmarknumber)
+                ->pluck('deal_id');
         } else {
-            $ipAddress = $request->ip();
-            $bookmarkedProducts = Bookmark::where('ip_address', $ipAddress)->pluck('deal_id');
+            $bookmarkedProducts = Bookmark::where('bookmark_number', $bookmarknumber)
+                ->pluck('deal_id');
         }
 
         if ($request->ajax()) {
@@ -274,7 +281,7 @@ class HomeController extends Controller
 
         for ($start = $minPrice; $start <= $maxPrice; $start += $priceStep) {
             $end = $start + $priceStep;
-           $priceRanges[] = [
+            $priceRanges[] = [
                 'label' => '$' . number_format($start, 2) . ' - $' . number_format($end, 2)
             ];
         }

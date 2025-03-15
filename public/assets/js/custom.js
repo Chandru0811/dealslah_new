@@ -1856,9 +1856,14 @@ $(document).ready(function () {
 
     // Initial Load of Bookmark Count
     function loadBookmarkCount() {
+        let bookmarknumber = localStorage.getItem("bookmarknumber") || null;
+        console.log(bookmarknumber);
         $.ajax({
             url: "http://127.0.0.1:8000/totalbookmark",
             method: "GET",
+            data: {
+                bookmarknumber: bookmarknumber,
+            },
             success: function (response) {
                 updateBookmarkCount(response.total_items);
             },
@@ -1914,7 +1919,7 @@ function handleAddBookmark() {
                     bookmarknumber: bookmarknumber,
                 },
                 success: function (response) {
-                    //console.log(response);
+                    console.log(response);
                     localStorage.setItem(
                         "bookmarknumber",
                         response.bookmarknumber

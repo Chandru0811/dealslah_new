@@ -23,7 +23,7 @@ Route::fallback(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('hotpick/{slug}', [HomeController::class, 'dealcategorybasedproducts'])->name('deals.categorybased');
 Route::get('categories/{slug}', [HomeController::class, 'subcategorybasedproducts'])->name('deals.subcategorybased');
-Route::get('deal/{id}', [HomeController::class, 'productdescription']);
+Route::get('deal/{id}', [HomeController::class, 'productdescription'])->name('deal.description');
 Route::get('bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.index');
 Route::post('bookmark/{deal_id}/add', [BookmarkController::class, 'add'])->name('bookmarks.add');
 Route::delete('bookmark/{deal_id}/remove', [BookmarkController::class, 'remove'])->name('bookmarks.remove');
@@ -87,17 +87,17 @@ Route::get('auth/{socialprovider}/callback',[AuthController::class,'socailLoginR
 
 // Route::get('social/facebook/callback', function () {
 //     try {
-        
+
 //             $user = Socialite::driver('facebook')->user();
-         
+
 //             $findUser = User::where('auth_provider','facebook')->where('auth_provider_id', $user->id)->first();
-         
+
 //             if($findUser){
-         
+
 //                 Auth::login($findUser);
-        
+
 //                 return redirect()->intended('home');
-         
+
 //             }else{
 //                 $newUser = User::updateOrCreate(['email' => $user->email],[
 //                         'name' => $user->name,
@@ -105,12 +105,12 @@ Route::get('auth/{socialprovider}/callback',[AuthController::class,'socailLoginR
 //                         'auth_provider' => 'facebook',
 //                         'password' => encrypt('12345678')
 //                     ]);
-        
+
 //                 Auth::login($newUser);
-        
+
 //                 return redirect()->intended('home');
 //             }
-        
+
 //         } catch (Exception $e) {
 //             dd($e->getMessage());
 //         }
