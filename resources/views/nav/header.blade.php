@@ -82,7 +82,7 @@
                             <li class="nav-item mb-2">
                                 <div class="input-wrapper w-100">
                                     <input type="text" name="q" placeholder="Search..."
-                                        class="form-control address_input mx-1 search-input"
+                                        class="form-control address_input mx-1 search-input search-dmbk"
                                         style="padding-left: 40px !important" value="{{ request()->input('q') }}" />
                                     <i class="fa-solid fa-magnifying-glass icon-input" style="font-size: 20px"></i>
                                 </div>
@@ -97,7 +97,7 @@
                                 <li class="nav-item mb-2">
                                     <div class="input-wrapper">
                                         <input type="text" name="q" placeholder="Search..."
-                                            class="form-control address_input me-2 search-input-large"
+                                            class="form-control address_input me-2 search-input-large search-dmbk"
                                             style="padding-left: 40px !
                                             important"
                                             value="{{ request()->input('q') }}" />

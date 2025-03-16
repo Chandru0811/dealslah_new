@@ -34,7 +34,7 @@
                     <ul class="dropdown-menu" aria-labelledby="categoryDropdown{{ $categoryGroup->id }}"
                         style="cursor: pointer;">
                         @foreach ($categoryGroup->categories as $category)
-                            <li><a class="dropdown-item" href="{{ url('categories/' . $category->slug) }}">
+                            <li><a class="dropdown-item category-link" data-category-url="{{ url('categories/' . $category->slug) }}">
                                     {{ $category->name }}</a></li>
                         @endforeach
                     </ul>

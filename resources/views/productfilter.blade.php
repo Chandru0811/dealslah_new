@@ -175,6 +175,7 @@
         @endif
         <input type="hidden" id="latitude" name="latitude">
         <input type="hidden" id="longitude" name="longitude">
+        <input type="hidden" name="dmbk" id="dmbkInput" value="">
         <div class="p-4 topFilter">
             <div class="row d-flex align-items-center">
                 <!-- Beauty Spa and Hair Section -->
@@ -527,13 +528,13 @@
                 <div class="container mb-3 topbarContainer">
                     <div class="scroll-container">
                         <div class="d-flex overflow-auto topBar" style="width: 100%; white-space: nowrap;">
-                            <a href="{{ route('deals.subcategorybased', ['slug' => 'all', 'category_group_id' => $categorygroup->id]) }}"
-                                class="btn me-2 {{ request('slug') === 'all' && request('category_group_id') == $categorygroup->id ? 'active' : '' }}">
+                            <a data-category-url="{{ url('categories/all?category_group_id=' . $categorygroup->id) }}"
+                                class="btn me-2 category-link {{ request('slug') === 'all' && request('category_group_id') == $categorygroup->id ? 'active' : '' }}">
                                 All
                             </a>
                             @foreach ($categorygroup->categories as $cat)
-                            <a href="{{ route('deals.subcategorybased', ['slug' => $cat->slug]) }}"
-                                class="btn mx-2 {{ request('slug') === $cat->slug && request('slug') !== 'all' ? 'active' : '' }}">
+                            <a data-category-url="{{ url('categories/' . $cat->slug) }}"
+                                class="btn mx-2 category-link {{ request('slug') === $cat->slug && request('slug') !== 'all' ? 'active' : '' }}">
                                 {{ $cat->name }}
                             </a>
                             @endforeach
@@ -549,7 +550,7 @@
                             @foreach ($deals as $product)
                             <div
                                 class="col-md-4 col-lg-4 col-xxl-3 col-12 mb-3 d-flex justify-content-center align-items-stretch">
-                                <a href="{{ url('/deal/' . $product->id) }}" style="text-decoration: none;"
+                                <a data-product-id="{{ $product->id }}" class="productCard" style="text-decoration: none;"
                                     onclick="clickCount('{{ $product->id }}')">
                                     <div class="card sub_topCard h-100 d-flex flex-column">
                                         <div style="min-height: 50px">
@@ -581,7 +582,7 @@
                                                             <p style="height:fit-content;cursor:pointer"
                                                                 class="p-1 px-2" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="Bookmark">
-                                                                <i class="fa-regular fa-bookmark fa-xl icon_size"
+                                                                <i class="fa-solid fa-bookmark icon_size"
                                                                     style="color: #ef4444;"></i>
                                                             </p>
                                                         </button>
@@ -593,7 +594,7 @@
                                                             <p style="height:fit-content;cursor:pointer"
                                                                 class="p-1 px-2" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="Bookmark">
-                                                                <i class="fa-regular fa-bookmark fa-xl icon_size"
+                                                                <i class="fa-regular fa-bookmark icon_size"
                                                                     style="color: #ef4444;"></i>
                                                             </p>
                                                         </button>
@@ -1048,13 +1049,13 @@
                         <div class="scroll-container">
                             <div class="d-flex overflow-auto topBar"
                                 style="width: 100%; white-space: nowrap;">
-                                <a href="{{ route('deals.subcategorybased', ['slug' => 'all', 'category_group_id' => $categorygroup->id]) }}"
-                                    class="btn me-2 {{ request('slug') === 'all' && request('category_group_id') == $categorygroup->id ? 'active' : '' }}">
+                                <a data-category-url="{{ url('categories/all?category_group_id=' . $categorygroup->id) }}"
+                                    class="btn me-2 category-link {{ request('slug') === 'all' && request('category_group_id') == $categorygroup->id ? 'active' : '' }}">
                                     All
                                 </a>
                                 @foreach ($categorygroup->categories as $cat)
-                                <a href="{{ route('deals.subcategorybased', ['slug' => $cat->slug]) }}"
-                                    class="btn mx-2 {{ request('slug') === $cat->slug && request('slug') !== 'all' ? 'active' : '' }}">
+                                <a data-category-url="{{ url('categories/' . $cat->slug) }}"
+                                    class="btn mx-2 category-link {{ request('slug') === $cat->slug && request('slug') !== 'all' ? 'active' : '' }}">
                                     {{ $cat->name }}
                                 </a>
                                 @endforeach
@@ -1109,7 +1110,7 @@
                                                                     data-bs-toggle="tooltip"
                                                                     data-bs-placement="top"
                                                                     title="Bookmark">
-                                                                    <i class="fa-regular fa-bookmark fa-xl icon_size"
+                                                                    <i class="fa-regular fa-bookmark icon_size"
                                                                         style="color: #ef4444;"></i>
                                                                 </p>
                                                             </button>
@@ -1123,7 +1124,7 @@
                                                                     data-bs-toggle="tooltip"
                                                                     data-bs-placement="top"
                                                                     title="Bookmark">
-                                                                    <i class="fa-regular fa-bookmark fa-xl icon_size"
+                                                                    <i class="fa-regular fa-bookmark icon_size"
                                                                         style="color: #ef4444;"></i>
                                                                 </p>
                                                             </button>
@@ -1305,6 +1306,7 @@
         const categoryGroupId = "{{ request('category_group_id') }}";
         const latitude = document.getElementById('latitude').value;
         const longitude = document.getElementById('longitude').value;
+        const bookmarknumber = localStorage.getItem('bookmarknumber') || 'null';
 
         let url = new URL(clearUrl, window.location.origin);
 
@@ -1315,6 +1317,10 @@
         if (latitude && longitude) {
             url.searchParams.set('latitude', latitude);
             url.searchParams.set('longitude', longitude);
+        }
+
+        if (bookmarknumber) {
+            url.searchParams.set('dmbk', bookmarknumber);
         }
 
         document.getElementById('filterForm').reset();

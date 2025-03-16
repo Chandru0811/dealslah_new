@@ -3,7 +3,7 @@
     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 pb-2" id="hotpicks">
         @foreach ($hotpicks as $hotpick)
         <div class="col mb-3">
-            <a href="{{ url('hotpick/' . $hotpick->slug) }}" style="text-decoration: none;">
+            <a data-hotpick-url="{{ url('hotpick/' . $hotpick->slug) }}" class="hotpick" style="text-decoration: none;">
                 <div class="card topCard card-img-top1 h-100">
                     <div class="card-body p-0" style="min-height: 50px; position: relative;">
 

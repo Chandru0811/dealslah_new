@@ -296,17 +296,17 @@
                                 <p style="color: #000000" class="media_fonts_headings text-nowrap mb-0">
                                     <span>
                                         @if ($bookmarkedProducts->contains($product->id))
-                                            <button type="button" class="bookmark-button remove-bookmark"
+                                            <button type="button" class="bookmark-button desc-remove-bookmark"
                                                 data-deal-id="{{ $product->id }}"
                                                 style="border: none; background: none; font-size: medium !important; padding: 20px 0 0 30px">
                                                 <p style="height: fit-content; cursor: pointer;" class="p-1 px-2"
                                                     data-bs-toggle="tooltip" data-bs-placement="top" title="bookmark">
-                                                    <i class="fa-regular fa-bookmark fa-xl icon_size"
+                                                    <i class="fa-solid fa-bookmark fa-xl icon_size"
                                                         style="color: #ef4444;"></i>
                                                 </p>
                                             </button>
                                         @else
-                                            <button type="button" class="bookmark-button add-bookmark"
+                                            <button type="button" class="bookmark-button desc-add-bookmark"
                                                 data-deal-id="{{ $product->id }}"
                                                 style="border: none; background: none; font-size:14px; padding: 20px 0 0 20px">
                                                 <p style="height: fit-content; cursor: pointer;" class="p-1 px-2"

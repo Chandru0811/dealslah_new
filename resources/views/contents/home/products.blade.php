@@ -126,18 +126,3 @@
         @endforeach
     </div>
 </div>
-<script>
-    document.querySelectorAll('.productCard').forEach(function(card) {
-        card.addEventListener('click', function() {
-            var productId = this.getAttribute('data-product-id');
-            var bookmarknumber = localStorage.getItem('bookmarknumber');
-
-            var url = "/deal/" + productId;
-            if (bookmarknumber) {
-                url += "?dmb=" + bookmarknumber;
-            }
-
-            window.location.href = url;
-        });
-    });
-</script>

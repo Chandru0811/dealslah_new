@@ -1852,6 +1852,8 @@ $(document).ready(function () {
     // Initialize the event handlers
     handleAddBookmark();
     handleRemoveBookmark();
+    handleDescAddBookmark();
+    handleDescRemoveBookmark();
     updateBookmarkCount();
 
     // Initial Load of Bookmark Count
@@ -1887,7 +1889,6 @@ $(document).ready(function () {
 
 // Function to update the bookmark count
 function updateBookmarkCount(count) {
-    console.log(count);
     $(".totalItemsCount").each(function () {
         if (count > 0) {
             $(this).text(count).css({
@@ -1981,6 +1982,84 @@ function handleRemoveBookmark() {
         });
 }
 
+//Add Bookmark for Description
+function handleDescAddBookmark() {
+    $(".desc-add-bookmark")
+        .off("click")
+        .on("click", function (e) {
+            e.preventDefault();
+            let dealId = $(this).data("deal-id");
+            let bookmarknumber = localStorage.getItem("bookmarknumber") || null;
+            console.log(bookmarknumber);
+            $.ajax({
+                url: `http://127.0.0.1:8000/bookmark/${dealId}/add`,
+                method: "POST",
+                data: {
+                    bookmarknumber: bookmarknumber,
+                },
+                success: function (response) {
+                    console.log(response);
+                    localStorage.setItem(
+                        "bookmarknumber",
+                        response.bookmarknumber
+                    );
+                    updateBookmarkCount(response.total_items);
+
+                    let button = $(`.desc-add-bookmark[data-deal-id="${dealId}"]`);
+                    button
+                        .removeClass("desc-add-bookmark")
+                        .addClass("desc-remove-bookmark");
+                    button.html(`
+                        <p style="height:fit-content;cursor:pointer" class="p-1 px-2">
+                            <i class="fa-solid fa-bookmark fa-xl bookmark-icon" style="color: #EF4444;"></i>
+                        </p>
+                    `);
+
+                    handleDescRemoveBookmark();
+                },
+                error: function (xhr) {},
+            });
+        });
+}
+
+//Remove Bookmark for Description
+function handleDescRemoveBookmark() {
+    $(".desc-remove-bookmark")
+        .off("click")
+        .on("click", function (e) {
+            e.preventDefault();
+            let dealId = $(this).data("deal-id");
+            let bookmarknumber = localStorage.getItem("bookmarknumber") || null;
+            $.ajax({
+                url: `http://127.0.0.1:8000/bookmark/${dealId}/remove`,
+                method: "DELETE",
+                data: {
+                    bookmarknumber: bookmarknumber,
+                },
+                success: function (response) {
+                    updateBookmarkCount(response.total_items);
+
+                    let button = $(
+                        `.desc-remove-bookmark[data-deal-id="${dealId}"]`
+                    );
+                    button
+                        .removeClass("desc-remove-bookmark")
+                        .addClass("desc-add-bookmark");
+                    button.html(`
+                        <p style="height:fit-content;cursor:pointer" class="p-1 px-2">
+                            <i class="fa-regular fa-bookmark fa-xl bookmark-icon" style="color: #EF4444;"></i>
+                        </p>
+                    `);
+
+                    handleDescAddBookmark(); // Re-bind the add bookmark handler
+                },
+                error: function (xhr) {
+                    // Handle error (optional)
+                },
+            });
+        });
+}
+
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -1988,25 +2067,9 @@ $(document).ready(function () {
         },
     });
     initializeEventListeners();
-    //fetchCartDropdown();
     handleAddBookmark();
     handleRemoveBookmark();
 });
-
-// function fetchCartDropdown() {
-//     $.ajax({
-//         url: "/cart/dropdown",
-//         type: "GET",
-//         success: function (response) {
-//             if (response.html) {
-//                 $(".dropdown_cart").html(response.html);
-//             }
-//         },
-//         error: function () {
-//             showMessage("Failed to update cart dropdown!", "error");
-//         },
-//     });
-// }
 
 function showMessage(message, type) {
     var textColor, icon;
@@ -2042,50 +2105,6 @@ function showMessage(message, type) {
         $(".alert").alert("close");
     }, 5000);
 }
-// Loading initializeEventListeners Data
-// function initializeEventListeners() {
-//     $(".add-to-cart-btn")
-//         .off("click")
-//         .on("click", function (e) {
-//             e.preventDefault();
-
-//             let slug = $(this).data("slug");
-
-//             $.ajax({
-//                 url: `/addtocart/${slug}`,
-//                 type: "POST",
-//                 data: {
-//                     quantity: 1,
-//                     saveoption: "add to cart",
-//                 },
-//                 success: function (response) {
-//                     if (response.cartItemCount !== undefined) {
-//                         const cartCountElement = $("#cart-count");
-
-//                         if (response.cartItemCount > 0) {
-//                             cartCountElement.text(response.cartItemCount);
-//                             cartCountElement.css("display", "inline");
-//                         } else {
-//                             cartCountElement.css("display", "none");
-//                         }
-//                     }
-
-//                     fetchCartDropdown();
-//                     showMessage(
-//                         response.status || "Deal added to cart!",
-//                         "success"
-//                     );
-//                 },
-//                 error: function (xhr) {
-//                     const errorMessage =
-//                         xhr.responseJSON?.error || "Something went wrong!";
-//                     showMessage(errorMessage, "error");
-//                 },
-//             });
-//         });
-// }
-
-//localStorage.clear();
 
 function initializeEventListeners() {
     $(".add-to-cart-btn")
@@ -3220,3 +3239,43 @@ function checkAddressAndOpenModal() {
         })
         .catch((error) => console.error("Error fetching address:", error));
 }
+
+$(document).ready(function () {
+    var bookmarknumber = localStorage.getItem('bookmarknumber');
+
+    if(!bookmarknumber){
+        bookmarknumber = 'null';
+    }
+
+    $('.productCard').on('click', function () {
+        var productId = $(this).data('product-id');
+        window.location.href = "/deal/" + productId + "?dmbk=" + bookmarknumber;
+    });
+
+    $('.category-link').on('click', function () {
+        var categoryUrl = $(this).data('category-url');
+        var separator = categoryUrl.includes('?') ? '&' : '?';
+        window.location.href = categoryUrl + separator + "dmbk=" + bookmarknumber;
+    });
+
+    $('.hotpick').on('click', function () {
+        var hotpickUrl = $(this).data('hotpick-url');
+        window.location.href = hotpickUrl + "?dmbk=" + bookmarknumber;
+    });
+
+    $('.search-dmbk').on('keypress', function (event) {
+        if (event.which === 13) {
+            event.preventDefault();
+
+            var form = $(this).closest('form');
+            var searchUrl = form.attr('action');
+            var query = $(this).val();
+            var separator = searchUrl.includes('?') ? '&' : '?';
+            var newAction = searchUrl + separator + "q=" + encodeURIComponent(query) + "&dmbk=" + bookmarknumber;
+
+            window.location.href = newAction;
+        }
+    });
+
+    $('#dmbkInput').val(bookmarknumber).attr('value', bookmarknumber);
+});
