@@ -706,108 +706,108 @@ $(document).ready(function () {
                                 .find(`#selected_id_${response.address.id}`)
                                 .closest(".row")
                                 .remove();
-                            finddiv.append(`
-                                <div class="row p-2">
-                                    <div class="col-10">
-                                        <div class="d-flex text-start">
-                                            <div class="px-1">
-                                                <input type="radio" name="selected_id"
-                                                    id="selected_id_${
-                                                        response.address.id
-                                                    }"
-                                                    value="${
-                                                        response.address.id
-                                                    }"
-                                                    ${
-                                                        response.address
-                                                            .default === "1"
-                                                            ? "checked"
-                                                            : ""
-                                                    } />
-                                            </div>
-                                            <p class="text-turncate fs_common">
-                                                <span class="px-2">
-                                                    ${
-                                                        response.address
-                                                            .first_name
-                                                    } ${
-                                response.address.last_name ?? ""
-                            } |
-                                                    <span style="color: #c7c7c7;">&nbsp;+65 ${
-                                                        response.address.phone
-                                                    }</span>
-                                                </span><br>
-                                                <span class="px-2"
-                                                    style="color: #c7c7c7">${
-                                                        response.address.address
-                                                    }- ${
-                                response.address.postalcode
-                            }.
-                                                </span>
-                                                <br>
-                                                ${
-                                                    response.address.default ===
-                                                    "1"
-                                                        ? '<span class="badge badge_primary">Default</span>'
-                                                        : ""
-                                                }
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="d-flex align-items-center justify-content-end">
-                                            <div class="d-flex gap-2 delBadge">
-                                                <button type="button" class="badge_edit" data-bs-toggle="modal"
-                                                    data-address-id="${
-                                                        response.address.id
-                                                    }" data-bs-target="#editAddressModal">
-                                                    Edit
-                                                </button>
-                                                ${
-                                                    response.address.default ===
-                                                    "0"
-                                                        ? `
-                                                    <button type="button" class="badge_del"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#deleteAddressModal"
-                                                        data-address-id="${response.address.id}">
-                                                        Delete
-                                                    </button>`
-                                                        : ""
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            `);
-
-                            if (response.address.default === "1") {
-                                $(
-                                    '.modal-body p strong:contains("Phone :")'
-                                ).parent().html(`
-                                    <strong>Phone :</strong> (+65) ${
-                                        response.address.phone || "--"
-                                    }
-                                `);
-                                $(".selected-address").html(`
-                                    <p>
-                                        <strong>${
-                                            response.address.first_name
-                                        } ${
+                                finddiv.append(`
+                                    <div class="row p-2">
+                                        <div class="col-10">
+                                            <div class="d-flex text-start">
+                                                <div class="px-1">
+                                                    <input type="radio" name="selected_id"
+                                                        id="selected_id_${
+                                                            response.address.id
+                                                        }"
+                                                        value="${
+                                                            response.address.id
+                                                        }"
+                                                        ${
+                                                            response.address
+                                                                .default === "1"
+                                                                ? "checked"
+                                                                : ""
+                                                        } />
+                                                </div>
+                                                <p class="text-turncate fs_common">
+                                                    <span class="px-2">
+                                                        ${
+                                                            response.address
+                                                                .first_name
+                                                        } ${
                                     response.address.last_name ?? ""
-                                } (+65)
-                                            ${
-                                                response.address.phone
-                                            }</strong>&nbsp;&nbsp;<br>
-                                        ${response.address.address}- ${
+                                } |
+                                                        <span style="color: #c7c7c7;">&nbsp;+65 ${
+                                                            response.address.phone
+                                                        }</span>
+                                                    </span><br>
+                                                    <span class="px-2"
+                                                        style="color: #c7c7c7">${
+                                                            response.address.address
+                                                        }- ${
                                     response.address.postalcode
-                                }
-                                        <span>
-                                            <span class="badge badge_danger py-1">Default</span>&nbsp;&nbsp;
-                                        </span>
-                                    </p>
+                                }.
+                                                    </span>
+                                                    <br>
+                                                    ${
+                                                        response.address.default ===
+                                                        "1"
+                                                            ? '<span class="badge badge_primary">Default</span>'
+                                                            : ""
+                                                    }
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="d-flex align-items-center justify-content-end">
+                                                <div class="d-flex gap-2 delBadge">
+                                                    <button type="button" class="badge_edit" data-bs-toggle="modal"
+                                                        data-address-id="${
+                                                            response.address.id
+                                                        }" data-bs-target="#editAddressModal">
+                                                        Edit
+                                                    </button>
+                                                    ${
+                                                        response.address.default ===
+                                                        "0"
+                                                            ? `
+                                                        <button type="button" class="badge_del"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#deleteAddressModal"
+                                                            data-address-id="${response.address.id}">
+                                                            Delete
+                                                        </button>`
+                                                            : ""
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 `);
-                            }
+
+                                if (response.address.default === "1") {
+                                    $(
+                                        '.modal-body p strong:contains("Phone :")'
+                                    ).parent().html(`
+                                        <strong>Phone :</strong> (+65) ${
+                                            response.address.phone || "--"
+                                        }
+                                    `);
+                                    $(".selected-address").html(`
+                                        <p>
+                                            <strong>${
+                                                response.address.first_name
+                                            } ${
+                                        response.address.last_name ?? ""
+                                    } (+65)
+                                                ${
+                                                    response.address.phone
+                                                }</strong>&nbsp;&nbsp;<br>
+                                            ${response.address.address}- ${
+                                        response.address.postalcode
+                                    }
+                                            <span>
+                                                <span class="badge badge_danger py-1">Default</span>&nbsp;&nbsp;
+                                            </span>
+                                        </p>
+                                    `);
+                                }
 
                             // Show the updated address modal
                             $("#myAddressModal").modal("show");
@@ -993,15 +993,13 @@ $(document).ready(function () {
             function updateSelectedAddress(address) {
                 if (address) {
                     const addressHtml = `
-                            <strong>${address.first_name} ${
-                        address.last_name ?? ""
-                    } (+65) ${address.phone}</strong><br>
+                            <strong>${address.first_name} ${address.last_name ?? ""
+                        } (+65) ${address.phone}</strong><br>
                             ${address.address}- ${address.postalcode}
-                            ${
-                                address.default
-                                    ? '<span class="badge badge_danger py-1">Default</span>'
-                                    : ""
-                            }
+                            ${address.default
+                            ? '<span class="badge badge_danger py-1">Default</span>'
+                            : ""
+                        }
                         `;
                     $("#addressID").val(address.id);
                     $(".selected-address").html(addressHtml);
@@ -1939,7 +1937,7 @@ function handleAddBookmark() {
 
                     handleRemoveBookmark();
                 },
-                error: function (xhr) {},
+                error: function (xhr) { },
             });
         });
 }
@@ -2017,7 +2015,7 @@ function handleDescAddBookmark() {
 
                     handleDescRemoveBookmark();
                 },
-                error: function (xhr) {},
+                error: function (xhr) { },
             });
         });
 }
@@ -2143,11 +2141,13 @@ function initializeEventListeners() {
                         if (newCount > 0 && newCount <= 6) {
                             updateCartUI(data.cartItems);
                         } else {
-                            $(".cart_items").append(`
-                                <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
-                                    <a style="font-size: 13px" class="cart-screen">View All</a>
-                                </div>
-                            `);
+                            if ($(".cart_items .cartButton2").length === 0) {
+                                $(".cart_items").append(`
+                                    <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
+                                        <a style="font-size: 13px" class="cart-screen">View All</a>
+                                    </div>
+                                `);
+                            }
                         }
                         localStorage.setItem("cartnumber", data.cart_number);
                         saveCartNumber(data.cart_number);
@@ -2174,8 +2174,8 @@ function updateCartUI(cartItems) {
     const imagePath =
         cartItems.product.product_media.length > 0
             ? cartItems.product.product_media.find(
-                  (media) => media.order === 1 && media.type === "image"
-              )?.resize_path
+                (media) => media.order === 1 && media.type === "image"
+            )?.resize_path
             : "assets/images/home/noImage.webp";
 
     const productName =
@@ -2183,11 +2183,10 @@ function updateCartUI(cartItems) {
             ? cartItems.product.name.substring(0, 20) + "..."
             : cartItems.product.name;
 
-    $(".cart_items").append(`
+    const newCartItem = `
         <div class="d-flex">
-            <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${
-        cartItems.product.name
-    }" />
+            <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${cartItems.product.name
+        }" />
             <div class="text-start">
                 <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
                     ${productName}
@@ -2197,7 +2196,9 @@ function updateCartUI(cartItems) {
                 </p>
             </div>
         </div>
-    `);
+    `;
+
+    $(".cart_items").prepend(newCartItem);
 }
 
 function isLocalStorageAvailable() {
@@ -2335,6 +2336,8 @@ $(document).ready(function () {
 
                 $(`.cart-item[data-product-id="${productId}"]`).remove();
 
+                $(`.cart_items .d-flex[data-product-id="${productId}"]`).remove();
+
                 if (response.updatedCart) {
                     $(".subtotal").text(
                         `$${response.updatedCart.subtotal.toFixed(2)}`
@@ -2346,6 +2349,51 @@ $(document).ready(function () {
                         `$${response.updatedCart.grand_total.toFixed(2)}`
                     );
                     $(".quantity-value").text(response.updatedCart.quantity);
+                }
+
+                if (response.cartItemCount <= 6) {
+                    $(".cartButton2").hide();
+                }
+
+                if (response.cartItemCount >= 6) {
+                    console.log("Next Item : ", response.nextItem);
+                    if (response.nextItem) {
+                        $(".cartButton2").hide();
+
+                        if ($(`.cart_items .d-flex[data-product-id="${response.nextItem.product.id}"]`).length === 0) {
+                            const imagePath = response.nextItem.product.product_media.length > 0
+                                ? response.nextItem.product.product_media.find(
+                                    (media) => media.order === 1 && media.type === "image"
+                                )?.resize_path
+                                : "assets/images/home/noImage.webp";
+
+                            const productName = response.nextItem.product.name.length > 20
+                                ? response.nextItem.product.name.substring(0, 20) + "..."
+                                : response.nextItem.product.name;
+
+                            $(".cart_items").append(`
+                                <div class="d-flex" data-product-id="${response.nextItem.product.id}">
+                                    <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${response.nextItem.product.name}" />
+                                    <div class="text-start">
+                                        <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
+                                            ${productName}
+                                        </p>
+                                        <p class="px-1 text_size" style="color: #EF4444">
+                                            $${parseFloat(response.nextItem.discount).toFixed(2)}
+                                        </p>
+                                    </div>
+                                </div>
+                            `);
+
+                            if (response.cartItemCount > 6) {
+                                $(".cart_items").append(`
+                                    <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
+                                        <a style="font-size: 13px" class="cart-screen">View All</a>
+                                    </div>
+                                `);
+                            }
+                        }
+                    }
                 }
 
                 if (response.cartItemCount === 0) {
@@ -2360,6 +2408,12 @@ $(document).ready(function () {
                          </div>
                     `);
                     $(".cart-items-container").hide();
+                    $(".cart_items").html(`
+                        <div class="text-center cartEmpty">
+                            <img src="assets/images/home/cart_empty.webp" alt="Empty Cart" class="img-fluid" width="75">
+                            <p class="text_size" style="color: #cbcbcb">Your cart is empty</p>
+                        </div>
+                    `);
                 } else {
                     $(".item_count").text(response.cartItemCount);
                 }
@@ -2370,36 +2424,36 @@ $(document).ready(function () {
                     const imagePath =
                         response.deal.product_media.length > 0
                             ? response.deal.product_media.find(
-                                  (media) =>
-                                      media.order === 1 &&
-                                      media.type === "image"
-                              )?.resize_path
+                                (media) =>
+                                    media.order === 1 &&
+                                    media.type === "image"
+                            )?.resize_path
                             : "assets/images/home/noImage.webp";
 
                     const deliveryDate =
                         response.deal.deal_type === 1
                             ? response.deal.delivery_days &&
-                              response.deal.delivery_days > 0
+                                response.deal.delivery_days > 0
                                 ? (() => {
-                                      const currentDate = new Date();
-                                      currentDate.setTime(
-                                          currentDate.getTime() +
-                                              response.deal.delivery_days *
-                                                  24 *
-                                                  60 *
-                                                  60 *
-                                                  1000
-                                      );
-                                      const day = String(
-                                          currentDate.getDate()
-                                      ).padStart(2, "0");
-                                      const month = String(
-                                          currentDate.getMonth() + 1
-                                      ).padStart(2, "0");
-                                      const year = currentDate.getFullYear();
+                                    const currentDate = new Date();
+                                    currentDate.setTime(
+                                        currentDate.getTime() +
+                                        response.deal.delivery_days *
+                                        24 *
+                                        60 *
+                                        60 *
+                                        1000
+                                    );
+                                    const day = String(
+                                        currentDate.getDate()
+                                    ).padStart(2, "0");
+                                    const month = String(
+                                        currentDate.getMonth() + 1
+                                    ).padStart(2, "0");
+                                    const year = currentDate.getFullYear();
 
-                                      return `${day}-${month}-${year}`;
-                                  })()
+                                    return `${day}-${month}-${year}`;
+                                })()
                                 : "No delivery date available"
                             : '<span style="color: #22cb00">Currently Services are free through Dealslah</span>';
 
@@ -2408,8 +2462,7 @@ $(document).ready(function () {
                     );
 
                     const savedItemHtml = `
-                        <div class="saved-item" data-product-id="${
-                            response.deal.id
+                        <div class="saved-item" data-product-id="${response.deal.id
                         }">
                             <div class="row p-4">
                                 <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
@@ -2419,39 +2472,33 @@ $(document).ready(function () {
                                     </div>
                                 </div>
                                 <div class="col-md-5">
-                                    <a href="/deal/${
-                                        response.deal.id
-                                    }" style="color: #000;"
-                                        onclick="clickCount('${
-                                            response.deal.id
-                                        }')">
-                                        <p style="font-size: 18px;font-weight:500">${
-                                            response.deal.name
-                                        }</p>
+                                    <a href="/deal/${response.deal.id
+                        }" style="color: #000;"
+                                        onclick="clickCount('${response.deal.id
+                        }')">
+                                        <p style="font-size: 18px;font-weight:500">${response.deal.name
+                        }</p>
                                     </a>
-                                    <p class="truncated-description" style="font-size: 16px">${
-                                        response.deal.description
-                                    }</p>
-                                    ${
-                                        response.deal.deal_type === 1
-                                            ? `
+                                    <p class="truncated-description" style="font-size: 16px">${response.deal.description
+                        }</p>
+                                    ${response.deal.deal_type === 1
+                            ? `
                                         <div class="rating my-2">
                                             <span>Delivery Date :</span><span class="stars">
                                                 <span>${deliveryDate}</span>
                                             </span>
                                         </div>
                                     `
-                                            : `
+                            : `
                                         <div class="rating mt-3 mb-3">
                                             <span style="color: #22cb00">Currently Services are free through Dealslah</span>
                                         </div>
                                     `
-                                    }
-                                    ${
-                                        response.deal.shop?.show_name_on_website
-                                            ? `<p style="color: #AAAAAA">Seller Company Name: ${response.deal.shop.legal_name}</p>`
-                                            : ""
-                                    }
+                        }
+                                    ${response.deal.shop?.show_name_on_website
+                            ? `<p style="color: #AAAAAA">Seller Company Name: ${response.deal.shop.legal_name}</p>`
+                            : ""
+                        }
                                     <div class="ms-0">
                                         <span style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
                                             $${response.deal.original_price}
@@ -2467,9 +2514,8 @@ $(document).ready(function () {
                                 <div class="col-md-4 d-flex flex-column justify-content-end align-items-end mb-3">
                                     <div class="btn-group" role="group">
                                         <button type="button" class="btn remove-cart-btn removeSaveLater"
-                                            style="color: #EF4444;border: none" data-product-id="${
-                                                response.deal.id
-                                            }">
+                                            style="color: #EF4444;border: none" data-product-id="${response.deal.id
+                        }">
                                             <div class="d-inline-flex align-items-center gap-2-2">
                                                 <div>
                                                     <img src="assets/images/home/icon_delete.svg" alt="icon" class="img-fluid" />
@@ -2481,9 +2527,8 @@ $(document).ready(function () {
                                             </div>
                                         </button>
                                         <button type="button" class="btn cancel-btn moveToCart"
-                                            style="color: #EF4444;border: none" data-product-id="${
-                                                response.deal.id
-                                            }">
+                                            style="color: #EF4444;border: none" data-product-id="${response.deal.id
+                        }">
                                             <div class="d-inline-flex align-items-center gap-2">
                                                 <div>
                                                     <img src="assets/images/home/icon_delivery.svg" alt="icon" class="img-fluid" />
@@ -2538,6 +2583,7 @@ $(document).ready(function () {
                     if (response.cartItemCount > 0) {
                         cartCountElement.text(response.cartItemCount);
                         cartCountElement.css("display", "inline");
+                        $("cartEmpty").hide();
                     } else {
                         cartCountElement.attr(
                             "style",
@@ -2549,8 +2595,14 @@ $(document).ready(function () {
                 const cartItemElement = $(
                     `.cart-item[data-product-id="${productId}"]`
                 );
+
+                const cartDropElement = $(
+                    `.cart_items .d-flex[data-product-id="${productId}"]`
+                );
+
                 if (cartItemElement.length) {
                     cartItemElement.remove();
+                    cartDropElement.remove();
                 }
 
                 if (response.updatedCart) {
@@ -2566,6 +2618,52 @@ $(document).ready(function () {
                     $(".quantity-value").text(response.updatedCart.quantity);
                 }
 
+                if (response.cartItemCount <= 6) {
+                    $(".cartButton2").hide();
+                }
+
+                if (response.cartItemCount >= 6) {
+                    console.log("Next Item : ", response.nextItem);
+                    if (response.nextItem) {
+                        $(".cartButton2").hide();
+
+                        if ($(`.cart_items .d-flex[data-product-id="${response.nextItem.product.id}"]`).length === 0) {
+                            const imagePath = response.nextItem.product.product_media.length > 0
+                                ? response.nextItem.product.product_media.find(
+                                    (media) => media.order === 1 && media.type === "image"
+                                )?.resize_path
+                                : "assets/images/home/noImage.webp";
+
+                            const productName = response.nextItem.product.name.length > 20
+                                ? response.nextItem.product.name.substring(0, 20) + "..."
+                                : response.nextItem.product.name;
+
+                            $(".cart_items").append(`
+                                <div class="d-flex" data-product-id="${response.nextItem.product.id}">
+                                    <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${response.nextItem.product.name}" />
+                                    <div class="text-start">
+                                        <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
+                                            ${productName}
+                                        </p>
+                                        <p class="px-1 text_size" style="color: #EF4444">
+                                            $${parseFloat(response.nextItem.discount).toFixed(2)}
+                                        </p>
+                                    </div>
+                                </div>
+                            `);
+
+                            if (response.cartItemCount > 6) {
+                                console.log("Hi", response.cartItemCount)
+                                $(".cart_items").append(`
+                                    <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
+                                        <a style="font-size: 13px" class="cart-screen">View All</a>
+                                    </div>
+                                `);
+                            }
+                        }
+                    }
+                }
+
                 if (response.cartItemCount === 0) {
                     $(".cart-items-container").after(`
                          <div class="empty-cart col-12 text-center d-flex flex-column align-items-center justify-content-center mt-0">
@@ -2578,6 +2676,12 @@ $(document).ready(function () {
                          </div>
                     `);
                     $(".cart-items-container").hide();
+                    $(".cart_items").html(`
+                        <div class="text-center cartEmpty">
+                            <img src="assets/images/home/cart_empty.webp" alt="Empty Cart" class="img-fluid" width="75">
+                            <p class="text_size" style="color: #cbcbcb">Your cart is empty</p>
+                        </div>
+                    `);
                 } else {
                     $(".item_count").text(response.cartItemCount);
                 }
@@ -2618,7 +2722,13 @@ $(document).ready(function () {
                     const cartCountElement = $("#cart-count");
                     if (response.cartItemCount > 0) {
                         cartCountElement.text(response.cartItemCount);
-                        cartCountElement.css("display", "inline");
+                        cartCountElement.css({
+                            "display": "inline",
+                            "position": "absolute",
+                            "top": "16px",
+                            "right": "5px",
+                            "border": "1px solid #ef4444"
+                        });
                     } else {
                         cartCountElement.attr(
                             "style",
@@ -2660,40 +2770,52 @@ $(document).ready(function () {
 
                     $(".cart-items-container").css("display", "block");
 
+                    if (response.cartItemCount > 0 && response.cartItemCount <= 6) {
+                        updateCartDrop(response.item);
+                    } else {
+                        if ($(".cart_items .cartButton2").css("display") === "none" || $(".cart_items .cartButton2").length === 0) {
+                            $(".cart_items").append(`
+                                <div class="text-end mb-2 cartButton2" style="cursor: pointer; display: block !important;">
+                                    <a style="font-size: 13px" class="cart-screen">View All</a>
+                                </div>
+                            `);
+                        }
+                    }
+
                     const image =
                         response.item.product.product_media.length > 0
                             ? response.item.product.product_media.find(
-                                  (media) =>
-                                      media.order === 1 &&
-                                      media.type === "image"
-                              )?.resize_path
+                                (media) =>
+                                    media.order === 1 &&
+                                    media.type === "image"
+                            )?.resize_path
                             : "assets/images/home/noImage.webp";
 
                     const deliveryDate =
                         response.item.product.deal_type === 1 &&
-                        response.item.product.delivery_days
+                            response.item.product.delivery_days
                             ? (() => {
-                                  const date = new Date();
-                                  date.setDate(
-                                      date.getDate() +
-                                          parseInt(
-                                              response.item.product
-                                                  .delivery_days
-                                          )
-                                  );
-                                  return (
-                                      date
-                                          .getDate()
-                                          .toString()
-                                          .padStart(2, "0") +
-                                      "-" +
-                                      (date.getMonth() + 1)
-                                          .toString()
-                                          .padStart(2, "0") +
-                                      "-" +
-                                      date.getFullYear()
-                                  );
-                              })()
+                                const date = new Date();
+                                date.setDate(
+                                    date.getDate() +
+                                    parseInt(
+                                        response.item.product
+                                            .delivery_days
+                                    )
+                                );
+                                return (
+                                    date
+                                        .getDate()
+                                        .toString()
+                                        .padStart(2, "0") +
+                                    "-" +
+                                    (date.getMonth() + 1)
+                                        .toString()
+                                        .padStart(2, "0") +
+                                    "-" +
+                                    date.getFullYear()
+                                );
+                            })()
                             : "No delivery date available";
 
                     const discountPercentage = Math.round(
@@ -2701,36 +2823,29 @@ $(document).ready(function () {
                     );
 
                     const cartItemHtml = `
-                            <div class="cart-item" data-product-id="${
-                                response.item.product_id
-                            }">
+                            <div class="cart-item" data-product-id="${response.item.product_id
+                        }">
     <div class="row p-4">
         <div class="col-md-4 mb-3">
             <div class="d-flex justify-content-center align-items-center">
-                <img src="${image}" style="max-width: 100%; max-height: 100%;" alt="${
-                        response.item.item_description
-                    }" />
+                <img src="${image}" style="max-width: 100%; max-height: 100%;" alt="${response.item.item_description
+                        }" />
             </div>
         </div>
         <div class="col-md-8">
-            <a href="/deal/${
-                response.item.product_id
-            }" style="color: #000;" onclick="clickCount('${
-                        response.item.product.id
-                    }')">
+            <a href="/deal/${response.item.product_id
+                        }" style="color: #000;" onclick="clickCount('${response.item.product.id
+                        }')">
                 <p style="font-size: 18px;">${response.item.product.name}</p>
             </a>
-            <p class="truncated-description" style="font-size: 16px">${
-                response.item.product.description
-            }</p>
-              ${
-                  response.item.product.shop?.show_name_on_website
-                      ? `<p style="color: #AAAAAA">Seller Company Name: ${response.item.product.shop.legal_name}</p>`
-                      : ""
-              }
-            ${
-                response.item.product.deal_type === 2
-                    ? `
+            <p class="truncated-description" style="font-size: 16px">${response.item.product.description
+                        }</p>
+              ${response.item.product.shop?.show_name_on_website
+                            ? `<p style="color: #AAAAAA">Seller Company Name: ${response.item.product.shop.legal_name}</p>`
+                            : ""
+                        }
+            ${response.item.product.deal_type === 2
+                            ? `
             <div class="rating mt-3 mb-3">
                 <span style="color: #22cb00">Currently Services are free through
                     Dealslah
@@ -2740,7 +2855,7 @@ $(document).ready(function () {
                 $${response.item.product.discounted_price}
             </span>
             `
-                    : `
+                            : `
             <div class="d-flex">
                 <div class="">
                     <img src="assets/images/home/icon_delivery.svg" alt="icon"
@@ -2764,14 +2879,13 @@ $(document).ready(function () {
                 </span>
             </div>
             `
-            }
+                        }
         </div>
     </div>
     <div class="row d-flex align-items-center">
         <div class="col-md-6">
-            ${
-                response.item.product.deal_type == 2
-                    ? `<div class="d-flex align-items-start my-1 mb-3" style="padding-left:24px">
+            ${response.item.product.deal_type == 2
+                            ? `<div class="d-flex align-items-start my-1 mb-3" style="padding-left:24px">
                 <div class="d-flex flex-column ms-0" style="width: 30%">
                     <label for="service_date" class="form-label">Service Date</label>
                     <input type="date" id="service_date" name="service_date"
@@ -2786,7 +2900,7 @@ $(document).ready(function () {
                         data-product-id="${response.item.product.id}">
                 </div>
             </div>`
-                    : `<div class="d-flex align-items-center my-1 mb-3" style="padding-left: 24px;">
+                            : `<div class="d-flex align-items-center my-1 mb-3" style="padding-left: 24px;">
                 <span>Qty</span> &nbsp;&nbsp;
                 <button class="btn rounded btn-sm decrease-btn1" data-cart-id="${response.item.cart_id}"
                     data-product-id="${response.item.product.id}">-</button>
@@ -2796,14 +2910,13 @@ $(document).ready(function () {
                 <button class="btn rounded btn-sm increase-btn1" data-cart-id="${response.item.cart_id}"
                     data-product-id="${response.item.product.id}">+</button>
             </div>`
-            }
+                        }
         </div>
         <div class="col-md-6 d-flex justify-content-md-end" style="padding-left: 24px">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="submit" class="btn save-for-later-btn"
-                    style="color: #EF4444; border: none;" data-product-id="${
-                        response.item.product.id
-                    }">
+                    style="color: #EF4444; border: none;" data-product-id="${response.item.product.id
+                        }">
                     <div class="d-inline-flex align-items-center gap-2 buy_later">
                         <div>
                             <img src="/assets/images/home/icon_save_later.svg" alt="icon" class="img-fluid" />
@@ -2816,9 +2929,8 @@ $(document).ready(function () {
                 </button>
                 &nbsp;&nbsp;
                 <button type="submit" class="btn cancel-btn cart-remove" style="color: #EF4444;border: none"
-                    data-product-id="${
-                        response.item.product.id
-                    }" data-cart-id="${response.item.cart_id}">
+                    data-product-id="${response.item.product.id
+                        }" data-cart-id="${response.item.cart_id}">
                     <div class="d-inline-flex align-items-center gap-2">
                         <div>
                             <img src="/assets/images/home/icon_delete.svg" alt="icon" class="img-fluid" />
@@ -2836,7 +2948,43 @@ $(document).ready(function () {
 </div>
                         `;
 
-                    $(".cart-items").append(cartItemHtml);
+                    $(".cart-items").prepend(cartItemHtml);
+
+                    function updateCartDrop(item) {
+                        console.log("updateCartDrop called", item);
+                        $(".cartEmpty").hide();
+                    
+                        const imagePath = (item.product.product_media.length > 0)
+                            ? item.product.product_media.find(
+                                (media) => media.order === 1 && media.type === "image"
+                            )?.resize_path
+                            : "assets/images/home/noImage.webp";
+                    
+                        const productName = item.product.name.length > 20
+                            ? item.product.name.substring(0, 20) + "..."
+                            : item.product.name;
+                    
+                        // Ensure discount is always a number
+                        const formattedDiscount = parseFloat(item.discount).toFixed(2);
+                    
+                        const newCart = `
+                            <div class="d-flex" data-product-id="${item.product.id}">
+                                <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${item.product.name}" />
+                                <div class="text-start">
+                                    <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
+                                        ${productName}
+                                    </p>
+                                    <p class="px-1 text_size" style="color: #EF4444">
+                                        $${formattedDiscount}
+                                    </p>
+                                </div>
+                            </div>
+                        `;
+                    
+                        $(".cart_items").prepend(newCart);
+                    }
+                    
+
                     $(".decrease-btn1, .increase-btn1").on(
                         "click",
                         function () {
@@ -2862,6 +3010,7 @@ $(document).ready(function () {
                             updateCart(cartId, productId, quantity);
                         }
                     );
+
                     $(".service-date, .service-time").on("change", function () {
                         const cartId = $(this).data("cart-id");
                         const productId = $(this).data("product-id");
@@ -3038,7 +3187,7 @@ $(document).ready(function () {
             error: function (xhr) {
                 showMessage(
                     xhr.responseJSON?.error ||
-                        "Failed to remove item from Save for Later!",
+                    "Failed to remove item from Save for Later!",
                     "error"
                 );
             },
@@ -3091,7 +3240,7 @@ $(document).ready(function () {
             error: function (xhr) {
                 showMessage(
                     xhr.responseJSON?.error ||
-                        "Failed to remove item from Save for Later!",
+                    "Failed to remove item from Save for Later!",
                     "error"
                 );
             },
@@ -3143,10 +3292,10 @@ $(document).ready(function () {
                     const image =
                         response.item.product.product_media.length > 0
                             ? response.item.product.product_media.find(
-                                  (media) =>
-                                      media.order === 1 &&
-                                      media.type === "image"
-                              )?.resize_path
+                                (media) =>
+                                    media.order === 1 &&
+                                    media.type === "image"
+                            )?.resize_path
                             : "assets/images/home/noImage.webp";
 
                     const cartItemHtml = `
@@ -3189,7 +3338,7 @@ $(document).ready(function () {
             error: function (xhr) {
                 showMessage(
                     xhr.responseJSON?.error ||
-                        "Failed to remove item from Save for Later!",
+                    "Failed to remove item from Save for Later!",
                     "error"
                 );
             },
@@ -3241,29 +3390,27 @@ function checkAddressAndOpenModal() {
 }
 
 $(document).ready(function () {
-    var bookmarknumber = localStorage.getItem('bookmarknumber');
-
-    if(!bookmarknumber){
-        bookmarknumber = 'null';
-    }
-
     $('.productCard').on('click', function () {
+        var bookmarknumber = localStorage.getItem('bookmarknumber');
         var productId = $(this).data('product-id');
         window.location.href = "/deal/" + productId + "?dmbk=" + bookmarknumber;
     });
 
     $('.category-link').on('click', function () {
+        var bookmarknumber = localStorage.getItem('bookmarknumber');
         var categoryUrl = $(this).data('category-url');
         var separator = categoryUrl.includes('?') ? '&' : '?';
         window.location.href = categoryUrl + separator + "dmbk=" + bookmarknumber;
     });
 
     $('.hotpick').on('click', function () {
+        var bookmarknumber = localStorage.getItem('bookmarknumber');
         var hotpickUrl = $(this).data('hotpick-url');
         window.location.href = hotpickUrl + "?dmbk=" + bookmarknumber;
     });
 
     $('.search-dmbk').on('keypress', function (event) {
+        var bookmarknumber = localStorage.getItem('bookmarknumber');
         if (event.which === 13) {
             event.preventDefault();
 
@@ -3277,5 +3424,6 @@ $(document).ready(function () {
         }
     });
 
+    var bookmarknumber = localStorage.getItem('bookmarknumber');
     $('#dmbkInput').val(bookmarknumber).attr('value', bookmarknumber);
 });

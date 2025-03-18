@@ -249,6 +249,17 @@ class CartController extends Controller
 
         $cart_item->delete();
 
+        $nextItem = CartItem::where('cart_id', $cart->id)
+            ->orderBy('created_at', 'desc')
+            ->skip(5)
+            ->first();
+
+        if ($nextItem) {
+            $nextItem->load(
+                'product.productMedia:id,resize_path,order,type,imageable_id'
+            );
+        }
+
         return response()->json([
             'status' => 'Deal Removed from Cart!',
             'cartItemCount' => $cart->item_count,
@@ -257,7 +268,8 @@ class CartController extends Controller
                 'subtotal' => $cart->total,
                 'discount' => $cart->discount,
                 'grand_total' => $cart->grand_total
-            ]
+            ],
+            'nextItem' => $nextItem ? $nextItem : null
         ]);
     }
 
@@ -298,9 +310,7 @@ class CartController extends Controller
         if (Auth::guard()->check()) {
             $cart = $cart->orWhere('customer_id', Auth::guard()->user()->id);
         }
-        $cart = $cart->first();
-        
-       
+        $cart = $cart->first();    
 
         $cartItem = null;
 
@@ -324,6 +334,17 @@ class CartController extends Controller
             // Remove from Cart
             $cartItem->delete();
 
+            $nextItem = CartItem::where('cart_id', $cart->id)
+                ->orderBy('created_at', 'desc')
+                ->skip(5)
+                ->first();
+
+            if ($nextItem) {
+                $nextItem->load(
+                    'product.productMedia:id,resize_path,order,type,imageable_id'
+                );
+            }
+
             //update cart
             $cart->item_count = $cart->item_count - 1;
             $cart->quantity = $cart->quantity - $cartItem->quantity;
@@ -346,7 +367,8 @@ class CartController extends Controller
                     'subtotal' => $cart->total,
                     'discount' => $cart->discount,
                     'grand_total' => $cart->grand_total
-                ]
+                ],
+                'nextItem' => $nextItem ? $nextItem : null
             ]);
         }
 

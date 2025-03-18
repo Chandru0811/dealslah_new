@@ -3,7 +3,7 @@
     <div class="cart_items">
         @if (isset($cartItems) && $cartItems->count() > 0)
             @foreach ($cartItems->take(6) as $item)
-                <div class="d-flex">
+                <div class="d-flex" data-product-id="{{ $item->product_id }}">
                     @php
                         $image = isset($item->product->productMedia)
                             ? $item->product->productMedia->where('order', 1)->where('type', 'image')->first()
@@ -16,7 +16,7 @@
                             {{ \Illuminate\Support\Str::limit($item->product->name, 20) }}
                         </p>
                         <p class="px-1 text_size" style="color: #ef4444">
-                            ${{ number_format($item->discount, 0) }}
+                            ${{ number_format($item->discount, 2) }}
                         </p>
                     </div>
                 </div>
@@ -28,14 +28,14 @@
             @endif
         @else
             <div class="text-center cartEmpty">
-                <img src="{{ asset('assets/images/home/empty_cart.webp') }}" alt="Empty Cart" class="img-fluid"
+                <img src="{{ asset('assets/images/home/cart_empty.webp') }}" alt="Empty Cart" class="img-fluid"
                     width="75">
                 <p class="text_size" style="color: #cbcbcb">Your cart is empty</p>
             </div>
         @endif
     </div>
     <div class="dropdown_cart_view d-flex justify-content-end">
-        <a href="#" class="cartButton2 text_size text-decoration-none d-none d-xl-inline"
+        <a href="#" class="cartButton1 text_size text-decoration-none d-none d-xl-inline"
             style="text-decoration: none;">View My Shopping Cart
         </a>
     </div>

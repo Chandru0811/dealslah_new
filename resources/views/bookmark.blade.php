@@ -72,110 +72,109 @@
             @endphp
             <div class="col-md-4 col-lg-3 col-12 mb-3 d-flex align-items-stretch justify-content-center">
                 <!-- Click event on this wrapper div instead of <a> tag -->
-                <div class="clickable-card" data-deal-id="{{ $deal->id }}">
-                    <a style="text-decoration: none;">
-                        <div class="card sub_topCard h-100 d-flex flex-column">
-                            <div style="min-height: 50px">
-                                <span class="badge trending-badge">TRENDING</span>
-                                @php
-                                $image = isset($deal->productMedia)
-                                ? $deal->productMedia
-                                ->where('order', 1)
-                                ->where('type', 'image')
-                                ->first()
-                                : null;
-                                @endphp
-                                <img src="{{ $image ? asset($image->resize_path) : asset('assets/images/home/noImage.webp') }}"
-                                    class="img-fluid card-img-top1" alt="{{ $deal->name }}" />
-                            </div>
-                            <div
-                                class="card-body card_section flex-grow-1 d-flex flex-column justify-content-between">
-                                <div>
-                                    <div class="mt-3 d-flex align-items-center justify-content-between">
-                                        <h5 class="card-title ps-3">{{ $deal->name }}</h5>
-                                        <span class="badge mx-3 p-0 trending-bookmark-badge"
-                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Bookmark">
-                                            <button type="button" data-deal-id="{{ $deal->id }}"
-                                                class="bookmark-button" style="border: none; background: none;">
-                                                @if (count($deal->bookmark) === 0)
-                                                <i class="fa-regular fa-bookmark"
-                                                    style="color: #ef4444;"></i>
-                                                @else
-                                                <i class="fa-solid fa-bookmark" style="color: #ef4444;"></i>
-                                                @endif
-                                            </button>
-                                        </span>
-                                    </div>
-                                    <span class="px-3">
-                                        @php
-                                        $fullStars = floor($deal->shop->shop_ratings);
-                                        $hasHalfStar = $deal->shop->shop_ratings - $fullStars >= 0.5;
-                                        $remaining = 5 - ($hasHalfStar ? $fullStars + 1 : $fullStars);
-                                        @endphp
-                                        @for ($i = 0; $i < $fullStars; $i++)
-                                            <i class="fa-solid fa-star" style="color: #ffc200;"></i>
-                                            @endfor
-                                            @if ($hasHalfStar)
-                                            <i class="fa-solid fa-star-half-stroke" style="color: #ffc200;"></i>
+                <a data-product-id="{{ $deal->id }}" class="productCard" style="text-decoration: none;"
+                    onclick="clickCount('{{ $deal->id }}')">
+                    <div class="card sub_topCard h-100 d-flex flex-column">
+                        <div style="min-height: 50px">
+                            <span class="badge trending-badge">TRENDINGf</span>
+                            @php
+                            $image = isset($deal->productMedia)
+                            ? $deal->productMedia
+                            ->where('order', 1)
+                            ->where('type', 'image')
+                            ->first()
+                            : null;
+                            @endphp
+                            <img src="{{ $image ? asset($image->resize_path) : asset('assets/images/home/noImage.webp') }}"
+                                class="img-fluid card-img-top1" alt="{{ $deal->name }}" />
+                        </div>
+                        <div
+                            class="card-body card_section flex-grow-1 d-flex flex-column justify-content-between">
+                            <div>
+                                <div class="mt-3 d-flex align-items-center justify-content-between">
+                                    <h5 class="card-title ps-3">{{ $deal->name }}</h5>
+                                    <span class="badge mx-3 p-0 trending-bookmark-badge"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Bookmark">
+                                        <button type="button" data-deal-id="{{ $deal->id }}"
+                                            class="bookmark-button" style="border: none; background: none;">
+                                            @if (count($deal->bookmark) === 0)
+                                            <i class="fa-regular fa-bookmark"
+                                                style="color: #ef4444;"></i>
+                                            @else
+                                            <i class="fa-solid fa-bookmark" style="color: #ef4444;"></i>
                                             @endif
-                                            @for ($i = 0; $i < $remaining; $i++)
-                                                <i class="fa-regular fa-star" style="color: #ffc200;"></i>
-                                                @endfor
+                                        </button>
                                     </span>
-                                    <p class="px-3 fw-normal truncated-description">{{ $deal->description }}</p>
                                 </div>
-                                <div>
-                                    <div class="card-divider"></div>
-                                    <p class="ps-3 fw-medium d-flex align-items-center justify-content-between"
-                                        style="color: #ef4444">
-                                        <span>${{ number_format($deal->discounted_price, 2) }}</span>
-                                        @if (!empty($deal->coupon_code))
-                                        <span id="mySpan" class="mx-3 px-2 couponBadge"
-                                            onclick="copySpanText(this, event)" data-bs-toggle="tooltip"
-                                            data-bs-placement="bottom" title="Click to Copy"
-                                            style="position:relative;">
+                                <span class="px-3">
+                                    @php
+                                    $fullStars = floor($deal->shop->shop_ratings);
+                                    $hasHalfStar = $deal->shop->shop_ratings - $fullStars >= 0.5;
+                                    $remaining = 5 - ($hasHalfStar ? $fullStars + 1 : $fullStars);
+                                    @endphp
+                                    @for ($i = 0; $i < $fullStars; $i++)
+                                        <i class="fa-solid fa-star" style="color: #ffc200;"></i>
+                                        @endfor
+                                        @if ($hasHalfStar)
+                                        <i class="fa-solid fa-star-half-stroke" style="color: #ffc200;"></i>
+                                        @endif
+                                        @for ($i = 0; $i < $remaining; $i++)
+                                            <i class="fa-regular fa-star" style="color: #ffc200;"></i>
+                                            @endfor
+                                </span>
+                                <p class="px-3 fw-normal truncated-description">{{ $deal->description }}</p>
+                            </div>
+                            <div>
+                                <div class="card-divider"></div>
+                                <p class="ps-3 fw-medium d-flex align-items-center justify-content-between"
+                                    style="color: #ef4444">
+                                    <span>${{ number_format($deal->discounted_price, 2) }}</span>
+                                    @if (!empty($deal->coupon_code))
+                                    <span id="mySpan" class="mx-3 px-2 couponBadge"
+                                        onclick="copySpanText(this, event)" data-bs-toggle="tooltip"
+                                        data-bs-placement="bottom" title="Click to Copy"
+                                        style="position:relative;">
 
-                                            {{ $deal->coupon_code }}
+                                        {{ $deal->coupon_code }}
 
-                                            <!-- Tooltip container -->
-                                            <span class="tooltip-text"
-                                                style="visibility: hidden; background-color: black; color: #fff; text-align: center;
+                                        <!-- Tooltip container -->
+                                        <span class="tooltip-text"
+                                            style="visibility: hidden; background-color: black; color: #fff; text-align: center;
                                                     border-radius: 6px; padding: 5px; position: absolute; z-index: 1;
                                                     bottom: 125%; left: 50%; margin-left: -60px;">
-                                                Copied!
-                                            </span>
+                                            Copied!
                                         </span>
+                                    </span>
+                                    @endif
+                                </p>
+                                <div class="card-divider"></div>
+                                <div class="ps-3 d-flex justify-content-between align-items-center pe-2">
+                                    <div>
+                                        <p>Regular Price</p>
+                                        @if ($deal->deal_type == 2)
+                                        <span style="color: #22cb00ab !important">Standard Rates</span>
+                                        @else
+                                        <span><s>${{ number_format($deal->original_price, 2) }}</s></span>
                                         @endif
-                                    </p>
-                                    <div class="card-divider"></div>
-                                    <div class="ps-3 d-flex justify-content-between align-items-center pe-2">
-                                        <div>
-                                            <p>Regular Price</p>
-                                            @if ($deal->deal_type == 2)
-                                            <span style="color: #22cb00ab !important">Standard Rates</span>
-                                            @else
-                                            <span><s>${{ number_format($deal->original_price, 2) }}</s></span>
-                                            @endif
-                                        </div>
-                                        <div>
-                                            <button class="btn card_cart add-to-cart-btn"
-                                                data-slug="{{ $deal->slug }}"
-                                                onclick="event.stopPropagation();">
-                                                Add to Cart
-                                            </button>&nbsp;&nbsp;
-                                        </div>
                                     </div>
-                                    <div class="card-divider"></div>
-                                    <p class="ps-3 fw-medium"
-                                        style="color: #ef4444; font-weight: 400 !important;">
-                                        <i
-                                            class="fa-solid fa-location-dot"></i>&nbsp;{{ $deal->shop->country }}
-                                    </p>
+                                    <div>
+                                        <button class="btn card_cart add-to-cart-btn"
+                                            data-slug="{{ $deal->slug }}"
+                                            onclick="event.stopPropagation();">
+                                            Add to Cart
+                                        </button>&nbsp;&nbsp;
+                                    </div>
                                 </div>
+                                <div class="card-divider"></div>
+                                <p class="ps-3 fw-medium"
+                                    style="color: #ef4444; font-weight: 400 !important;">
+                                    <i
+                                        class="fa-solid fa-location-dot"></i>&nbsp;{{ $deal->shop->country }}
+                                </p>
                             </div>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
             </div>
             @endforeach
         </div>
@@ -293,13 +292,6 @@
                         console.error('Error occurred while removing bookmark:', xhr);
                     }
                 });
-            }
-        });
-
-        $(document).on('click', '.clickable-card', function(e) {
-            if (!$(e.target).closest('.bookmark-button').length) {
-                let dealId = $(this).data('deal-id');
-                clickCount(dealId); // Trigger click count only if not clicking the bookmark
             }
         });
 
