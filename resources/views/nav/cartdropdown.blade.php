@@ -3,7 +3,7 @@
     <div class="cart_items">
         @if (isset($cartItems) && $cartItems->count() > 0)
             @foreach ($cartItems->take(6) as $item)
-                <div class="d-flex" data-product-id="{{ $item->product_id }}">
+                <div class="d-flex cart-item-drop" data-product-id="{{ $item->product_id }}">
                     @php
                         $image = isset($item->product->productMedia)
                             ? $item->product->productMedia->where('order', 1)->where('type', 'image')->first()

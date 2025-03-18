@@ -399,48 +399,39 @@ $(document).ready(function () {
                                         <div class="d-flex text-start">
                                             <div class="px-1">
                                                 <input type="radio" name="selected_id"
-                                                    id="selected_id_${
-                                                        response.address.id
-                                                    }"
-                                                    value="${
-                                                        response.address.id
-                                                    }"
-                                                    ${
-                                                        response.address
-                                                            .default === "1"
-                                                            ? "checked"
-                                                            : ""
-                                                    } />
+                                                    id="selected_id_${response.address.id
+                                }"
+                                                    value="${response.address.id
+                                }"
+                                                    ${response.address
+                                    .default === "1"
+                                    ? "checked"
+                                    : ""
+                                } />
                                             </div>
                                             <p class="text-turncate fs_common">
                                                 <span class="px-2">
-                                                    ${
-                                                        response.address
-                                                            .first_name
-                                                    } ${
-                                response.address.last_name ?? ""
-                            } |
+                                                    ${response.address
+                                    .first_name
+                                } ${response.address.last_name ?? ""
+                                } |
                                                     <span style="color: #c7c7c7;">&nbsp;+65
-                                                        ${
-                                                            response.address
-                                                                .phone
-                                                        }
+                                                        ${response.address
+                                    .phone
+                                }
                                                     </span>
                                                 </span><br>
                                                 <span class="px-2" style="color: #c7c7c7">
-                                                    ${
-                                                        response.address.address
-                                                    }- ${
-                                response.address.postalcode
-                            }.
+                                                    ${response.address.address
+                                }- ${response.address.postalcode
+                                }.
                                                 </span>
                                                 <br>
-                                                ${
-                                                    response.address.default ===
-                                                    "1"
-                                                        ? '<span class="badge badge_primary">Default</span>'
-                                                        : ""
-                                                }
+                                                ${response.address.default ===
+                                    "1"
+                                    ? '<span class="badge badge_primary">Default</span>'
+                                    : ""
+                                }
                                             </p>
                                         </div>
                                     </div>
@@ -448,23 +439,21 @@ $(document).ready(function () {
                                         <div class="d-flex align-items-center justify-content-end">
                                             <div class="d-flex gap-2 delBadge">
                                                 <button type="button" class="badge_edit" data-bs-toggle="modal"
-                                                    data-address-id="${
-                                                        response.address.id
-                                                    }" data-bs-target="#editAddressModal">
+                                                    data-address-id="${response.address.id
+                                }" data-bs-target="#editAddressModal">
                                                     Edit
                                                 </button>
-                                                ${
-                                                    response.address.default ===
-                                                    "0"
-                                                        ? `
+                                                ${response.address.default ===
+                                    "0"
+                                    ? `
                                                     <button type="button" class="badge_del"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#deleteAddressModal"
                                                         data-address-id="${response.address.id}">
                                                         Delete
                                                     </button>`
-                                                        : ""
-                                                }
+                                    : ""
+                                }
                                             </div>
                                         </div>
                                     </div>
@@ -474,23 +463,18 @@ $(document).ready(function () {
                                 $(
                                     '.modal-body p strong:contains("Phone :")'
                                 ).parent().html(`
-                                    <strong>Phone :</strong> (+65) ${
-                                        response.address.phone || "--"
+                                    <strong>Phone :</strong> (+65) ${response.address.phone || "--"
                                     }
                                 `);
                                 var profileAddress = `
                                     <p>
-                                        <strong>${
-                                            response.address.first_name
-                                        } ${
-                                    response.address.last_name ?? ""
-                                } (+65)
-                                            ${
-                                                response.address.phone
-                                            }</strong>&nbsp;&nbsp;<br>
-                                        ${response.address.address}- ${
-                                    response.address.postalcode
-                                }
+                                        <strong>${response.address.first_name
+                                    } ${response.address.last_name ?? ""
+                                    } (+65)
+                                            ${response.address.phone
+                                    }</strong>&nbsp;&nbsp;<br>
+                                        ${response.address.address}- ${response.address.postalcode
+                                    }
                                         <span>
                                             <span class="badge badge_danger py-1">Default</span>&nbsp;&nbsp;
                                         </span>
@@ -518,12 +502,11 @@ $(document).ready(function () {
                                     $("#moveCartToCheckout").after(`
                                         <form action="/cartCheckout" method="POST" id="cartCheckoutForm">
                                             <input type="hidden" name="_token" value="${$(
-                                                'meta[name="csrf-token"]'
-                                            ).attr("content")}">
+                                        'meta[name="csrf-token"]'
+                                    ).attr("content")}">
                                             <input type="hidden" name="cart_id"  value="${cartId}">
-                                            <input type="hidden" name="address_id" id="addressID" value="${
-                                                response.address.id
-                                            }">
+                                            <input type="hidden" name="address_id" id="addressID" value="${response.address.id
+                                        }">
                                             <button type="submit" class="btn check_out_btn">
                                                 Checkout
                                             </button>
@@ -706,51 +689,42 @@ $(document).ready(function () {
                                 .find(`#selected_id_${response.address.id}`)
                                 .closest(".row")
                                 .remove();
-                                finddiv.append(`
+                            finddiv.append(`
                                     <div class="row p-2">
                                         <div class="col-10">
                                             <div class="d-flex text-start">
                                                 <div class="px-1">
                                                     <input type="radio" name="selected_id"
-                                                        id="selected_id_${
-                                                            response.address.id
-                                                        }"
-                                                        value="${
-                                                            response.address.id
-                                                        }"
-                                                        ${
-                                                            response.address
-                                                                .default === "1"
-                                                                ? "checked"
-                                                                : ""
-                                                        } />
+                                                        id="selected_id_${response.address.id
+                                }"
+                                                        value="${response.address.id
+                                }"
+                                                        ${response.address
+                                    .default === "1"
+                                    ? "checked"
+                                    : ""
+                                } />
                                                 </div>
                                                 <p class="text-turncate fs_common">
                                                     <span class="px-2">
-                                                        ${
-                                                            response.address
-                                                                .first_name
-                                                        } ${
-                                    response.address.last_name ?? ""
+                                                        ${response.address
+                                    .first_name
+                                } ${response.address.last_name ?? ""
                                 } |
-                                                        <span style="color: #c7c7c7;">&nbsp;+65 ${
-                                                            response.address.phone
-                                                        }</span>
+                                                        <span style="color: #c7c7c7;">&nbsp;+65 ${response.address.phone
+                                }</span>
                                                     </span><br>
                                                     <span class="px-2"
-                                                        style="color: #c7c7c7">${
-                                                            response.address.address
-                                                        }- ${
-                                    response.address.postalcode
+                                                        style="color: #c7c7c7">${response.address.address
+                                }- ${response.address.postalcode
                                 }.
                                                     </span>
                                                     <br>
-                                                    ${
-                                                        response.address.default ===
-                                                        "1"
-                                                            ? '<span class="badge badge_primary">Default</span>'
-                                                            : ""
-                                                    }
+                                                    ${response.address.default ===
+                                    "1"
+                                    ? '<span class="badge badge_primary">Default</span>'
+                                    : ""
+                                }
                                                 </p>
                                             </div>
                                         </div>
@@ -758,56 +732,49 @@ $(document).ready(function () {
                                             <div class="d-flex align-items-center justify-content-end">
                                                 <div class="d-flex gap-2 delBadge">
                                                     <button type="button" class="badge_edit" data-bs-toggle="modal"
-                                                        data-address-id="${
-                                                            response.address.id
-                                                        }" data-bs-target="#editAddressModal">
+                                                        data-address-id="${response.address.id
+                                }" data-bs-target="#editAddressModal">
                                                         Edit
                                                     </button>
-                                                    ${
-                                                        response.address.default ===
-                                                        "0"
-                                                            ? `
+                                                    ${response.address.default ===
+                                    "0"
+                                    ? `
                                                         <button type="button" class="badge_del"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#deleteAddressModal"
                                                             data-address-id="${response.address.id}">
                                                             Delete
                                                         </button>`
-                                                            : ""
-                                                    }
+                                    : ""
+                                }
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 `);
 
-                                if (response.address.default === "1") {
-                                    $(
-                                        '.modal-body p strong:contains("Phone :")'
-                                    ).parent().html(`
-                                        <strong>Phone :</strong> (+65) ${
-                                            response.address.phone || "--"
-                                        }
+                            if (response.address.default === "1") {
+                                $(
+                                    '.modal-body p strong:contains("Phone :")'
+                                ).parent().html(`
+                                        <strong>Phone :</strong> (+65) ${response.address.phone || "--"
+                                    }
                                     `);
-                                    $(".selected-address").html(`
+                                $(".selected-address").html(`
                                         <p>
-                                            <strong>${
-                                                response.address.first_name
-                                            } ${
-                                        response.address.last_name ?? ""
+                                            <strong>${response.address.first_name
+                                    } ${response.address.last_name ?? ""
                                     } (+65)
-                                                ${
-                                                    response.address.phone
-                                                }</strong>&nbsp;&nbsp;<br>
-                                            ${response.address.address}- ${
-                                        response.address.postalcode
+                                                ${response.address.phone
+                                    }</strong>&nbsp;&nbsp;<br>
+                                            ${response.address.address}- ${response.address.postalcode
                                     }
                                             <span>
                                                 <span class="badge badge_danger py-1">Default</span>&nbsp;&nbsp;
                                             </span>
                                         </p>
                                     `);
-                                }
+                            }
 
                             // Show the updated address modal
                             $("#myAddressModal").modal("show");
@@ -2138,16 +2105,8 @@ function initializeEventListeners() {
                         $("#cart-count").text(newCount);
                         $("#cart-count").addClass("cart-border");
 
-                        if (newCount > 0 && newCount <= 6) {
+                        if (newCount > 0) {
                             updateCartUI(data.cartItems);
-                        } else {
-                            if ($(".cart_items .cartButton2").length === 0) {
-                                $(".cart_items").append(`
-                                    <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
-                                        <a style="font-size: 13px" class="cart-screen">View All</a>
-                                    </div>
-                                `);
-                            }
                         }
                         localStorage.setItem("cartnumber", data.cart_number);
                         saveCartNumber(data.cart_number);
@@ -2184,9 +2143,8 @@ function updateCartUI(cartItems) {
             : cartItems.product.name;
 
     const newCartItem = `
-        <div class="d-flex">
-            <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${cartItems.product.name
-        }" />
+        <div class="d-flex cart-item-drop">
+            <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${cartItems.product.name}" />
             <div class="text-start">
                 <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
                     ${productName}
@@ -2199,6 +2157,20 @@ function updateCartUI(cartItems) {
     `;
 
     $(".cart_items").prepend(newCartItem);
+
+    let cartItemCount = $(".cart_items .cart-item-drop").length;
+
+    if (cartItemCount > 6) {
+        $(".cart_items .cart-item-drop").last().remove();
+    }
+
+    if (cartItemCount > 6 && $(".cart_items .cartButton2").length === 0) {
+        $(".cart_items").append(`
+            <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
+                <a style="font-size: 13px" class="cart-screen">View All</a>
+            </div>
+        `);
+    }
 }
 
 function isLocalStorageAvailable() {
@@ -2639,7 +2611,7 @@ $(document).ready(function () {
                                 : response.nextItem.product.name;
 
                             $(".cart_items").append(`
-                                <div class="d-flex" data-product-id="${response.nextItem.product.id}">
+                                <div class="d-flex cart-item-drop" data-product-id="${response.nextItem.product.id}">
                                     <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${response.nextItem.product.name}" />
                                     <div class="text-start">
                                         <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
@@ -2653,7 +2625,6 @@ $(document).ready(function () {
                             `);
 
                             if (response.cartItemCount > 6) {
-                                console.log("Hi", response.cartItemCount)
                                 $(".cart_items").append(`
                                     <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
                                         <a style="font-size: 13px" class="cart-screen">View All</a>
@@ -2770,16 +2741,8 @@ $(document).ready(function () {
 
                     $(".cart-items-container").css("display", "block");
 
-                    if (response.cartItemCount > 0 && response.cartItemCount <= 6) {
+                    if (response.cartItemCount > 0) {
                         updateCartDrop(response.item);
-                    } else {
-                        if ($(".cart_items .cartButton2").css("display") === "none" || $(".cart_items .cartButton2").length === 0) {
-                            $(".cart_items").append(`
-                                <div class="text-end mb-2 cartButton2" style="cursor: pointer; display: block !important;">
-                                    <a style="font-size: 13px" class="cart-screen">View All</a>
-                                </div>
-                            `);
-                        }
                     }
 
                     const image =
@@ -2951,24 +2914,23 @@ $(document).ready(function () {
                     $(".cart-items").prepend(cartItemHtml);
 
                     function updateCartDrop(item) {
-                        console.log("updateCartDrop called", item);
                         $(".cartEmpty").hide();
-                    
+
                         const imagePath = (item.product.product_media.length > 0)
                             ? item.product.product_media.find(
                                 (media) => media.order === 1 && media.type === "image"
                             )?.resize_path
                             : "assets/images/home/noImage.webp";
-                    
+
                         const productName = item.product.name.length > 20
                             ? item.product.name.substring(0, 20) + "..."
                             : item.product.name;
-                    
+
                         // Ensure discount is always a number
                         const formattedDiscount = parseFloat(item.discount).toFixed(2);
-                    
+
                         const newCart = `
-                            <div class="d-flex" data-product-id="${item.product.id}">
+                            <div class="d-flex cart-item-drop" data-product-id="${item.product.id}">
                                 <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${item.product.name}" />
                                 <div class="text-start">
                                     <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
@@ -2980,10 +2942,30 @@ $(document).ready(function () {
                                 </div>
                             </div>
                         `;
-                    
+
                         $(".cart_items").prepend(newCart);
+
+                        let cartItemCount = $(".cart_items .cart-item-drop").length;
+
+                        if (cartItemCount > 6) {
+                            $(".cart_items .cart-item-drop").last().remove();
+                        }
+
+                        if (cartItemCount >= 6) {
+                            let cartButton = $(".cart_items .cartButton2");
+                        
+                            if (cartButton.length === 0) {
+                                $(".cart_items").append(`
+                                    <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
+                                        <a style="font-size: 13px" class="cart-screen">View All</a>
+                                    </div>
+                                `);
+                            } else if (cartButton.css("display") === "none") {
+                                cartButton.show();
+                            }
+                        }                        
                     }
-                    
+
 
                     $(".decrease-btn1, .increase-btn1").on(
                         "click",
