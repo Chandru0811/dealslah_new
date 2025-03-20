@@ -133,10 +133,6 @@ class HomeController extends Controller
 
         $bookmarknumber = $request->input("dmbk") ?? session('bookmarknumber') ?? $request->cookie('bookmarknumber') ?? null;
 
-        if ($bookmarknumber === null) {
-            $bookmarknumber = session()->get('bookmark');
-        }
-
         $bookmarkedProducts = collect();
 
         if (Auth::check()) {

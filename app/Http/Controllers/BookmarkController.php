@@ -18,15 +18,15 @@ class BookmarkController extends Controller
         $bookmarknumber = $request->input("bookmarknumber") ?? session('bookmarknumber') ?? $request->cookie('bookmarknumber') ?? null;
 
         if ($user_id == null) {
-            if ($bookmarknumber == null) {
+            if ($bookmarknumber == null || $bookmarknumber == "undefined") {
 
                 $bookmarknumber = Str::uuid();
                 session(['bookmarknumber' => $bookmarknumber]);
-                Cookie::queue('bookmarknumber', $bookmarknumber, 43200); // 43200 minutes = 30 days
+                Cookie::queue('bookmarknumber', $bookmarknumber, 43200);
                 //create bookmark
                 Bookmark::create([
                     'bookmark_number' => $bookmarknumber,
-                    'user_id' => null, // Guest user
+                    'user_id' => null, 
                     'ip_address' => $request->ip(),
                     'deal_id' => $deal->id,
                 ]);
