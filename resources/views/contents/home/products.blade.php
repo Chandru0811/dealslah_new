@@ -29,7 +29,7 @@
                         <div class="card-body card_section flex-grow-1 d-flex flex-column justify-content-between">
                             <div>
                                 <div class="mt-3 d-flex align-items-center justify-content-between">
-                                    <h5 class="card-title ps-3">{{ $product->name }}</h5>
+                                    <h4 class="card-title ps-3 h3-styling">{{ $product->name }}</h4>
                                     <span class="badge mx-3 p-0 trending-bookmark-badge"
                                         onclick="event.stopPropagation();">
                                         @if ($bookmarkedProducts->contains($product->id))
