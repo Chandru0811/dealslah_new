@@ -437,7 +437,7 @@ $(document).ready(function () {
                                     </div>
                                     <div class="col-2">
                                         <div class="d-flex align-items-center justify-content-end">
-                                            <div class="d-flex gap-2 delBadge">
+                                            <div class="d-flex delBadge gap-2">
                                                 <button type="button" class="badge_edit" data-bs-toggle="modal"
                                                     data-address-id="${response.address.id
                                 }" data-bs-target="#editAddressModal">
@@ -730,7 +730,7 @@ $(document).ready(function () {
                                         </div>
                                         <div class="col-2">
                                             <div class="d-flex align-items-center justify-content-end">
-                                                <div class="d-flex gap-2 delBadge">
+                                                <div class="d-flex delBadge gap-2">
                                                     <button type="button" class="badge_edit" data-bs-toggle="modal"
                                                         data-address-id="${response.address.id
                                 }" data-bs-target="#editAddressModal">
@@ -995,7 +995,7 @@ $(document).ready(function () {
             if (type === "success") {
                 textColor = "#16A34A";
                 icon =
-                    '<i class="fa-solid fa-check-circle" style="color: #16A34A"></i>';
+                    '<i class="fa-check-circle fa-solid" style="color: #16A34A"></i>';
                 var alertClass = "toast-success";
             } else {
                 textColor = "#EF4444";
@@ -1005,7 +1005,7 @@ $(document).ready(function () {
             }
 
             var alertHtml = `
-              <div class="alert ${alertClass} alert-dismissible fade show" role="alert" style="position: fixed; top: 70px; right: 40px; z-index: 1050; color: ${textColor};">
+              <div class="alert alert-dismissible ${alertClass} fade show" role="alert" style="position: fixed; top: 70px; right: 40px; z-index: 1050; color: ${textColor};">
                 <div class="toast-content">
                     <div class="toast-icon">
                         ${icon}
@@ -1040,8 +1040,8 @@ $(document).ready(function () {
         autoplay: false,
         dots: false,
         navText: [
-            '<span class="custom-prev-btn"><i class="fa-solid fa-arrow-left"></i></span>',
-            '<span class="custom-next-btn"><i class="fa-solid fa-arrow-right"></i></span>',
+            '<span class="custom-prev-btn"><i class="fa-arrow-left fa-solid"></i></span>',
+            '<span class="custom-next-btn"><i class="fa-arrow-right fa-solid"></i></span>',
         ],
         responsive: {
             0: {
@@ -1124,7 +1124,7 @@ $(document).ready(function () {
 
             // Add a loader inside the button
             submitButton.html(
-                `<span class="spinner-border spinner-border-sm me-2"></span> Logging in...`
+                `<span class="me-2 spinner-border spinner-border-sm"></span> Logging in...`
             );
 
             // Simulate a delay (optional)
@@ -1898,7 +1898,7 @@ function handleAddBookmark() {
                         .addClass("remove-bookmark");
                     button.html(`
                         <p style="height:fit-content;cursor:pointer" class="p-1 px-2">
-                            <i class="fa-solid fa-bookmark bookmark-icon" style="color: #EF4444;"></i>
+                            <i class="bookmark-icon fa-bookmark fa-solid" style="color: #EF4444;"></i>
                         </p>
                     `);
 
@@ -1934,7 +1934,7 @@ function handleRemoveBookmark() {
                         .addClass("add-bookmark");
                     button.html(`
                         <p style="height:fit-content;cursor:pointer" class="p-1 px-2">
-                            <i class="fa-regular fa-bookmark bookmark-icon" style="color: #EF4444;"></i>
+                            <i class="bookmark-icon fa-bookmark fa-regular" style="color: #EF4444;"></i>
                         </p>
                     `);
 
@@ -1976,7 +1976,7 @@ function handleDescAddBookmark() {
                         .addClass("desc-remove-bookmark");
                     button.html(`
                         <p style="height:fit-content;cursor:pointer" class="p-1 px-2">
-                            <i class="fa-solid fa-bookmark fa-xl bookmark-icon" style="color: #EF4444;"></i>
+                            <i class="bookmark-icon fa-bookmark fa-solid fa-xl" style="color: #EF4444;"></i>
                         </p>
                     `);
 
@@ -2012,7 +2012,7 @@ function handleDescRemoveBookmark() {
                         .addClass("desc-add-bookmark");
                     button.html(`
                         <p style="height:fit-content;cursor:pointer" class="p-1 px-2">
-                            <i class="fa-regular fa-bookmark fa-xl bookmark-icon" style="color: #EF4444;"></i>
+                            <i class="bookmark-icon fa-bookmark fa-regular fa-xl" style="color: #EF4444;"></i>
                         </p>
                     `);
 
@@ -2042,7 +2042,7 @@ function showMessage(message, type) {
     if (type === "success") {
         textColor = "#16A34A";
         icon =
-            '<i class="fa-regular fa-cart-shopping" style="color: #16A34A"></i>';
+            '<i class="fa-cart-shopping fa-regular" style="color: #16A34A"></i>';
         var alertClass = "toast-success";
     } else {
         textColor = "#EF4444";
@@ -2052,7 +2052,7 @@ function showMessage(message, type) {
     }
 
     var alertHtml = `
-          <div class="alert ${alertClass} alert-dismissible fade show" role="alert" style="position: fixed; top: 70px; right: 40px; z-index: 1050; color: ${textColor};">
+          <div class="alert alert-dismissible ${alertClass} fade show" role="alert" style="position: fixed; top: 70px; right: 40px; z-index: 1050; color: ${textColor};">
             <div class="toast-content">
                 <div class="toast-icon">
                     ${icon}
@@ -2144,9 +2144,9 @@ function updateCartUI(cartItems) {
 
     const newCartItem = `
         <div class="d-flex cart-item-drop">
-            <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${cartItems.product.name}" />
+            <img src="http://127.0.0.1:8000/${imagePath}" class="dropdown_img img-fluid" alt="${cartItems.product.name}" />
             <div class="text-start">
-                <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
+                <p class="m-0 p-0 text-start text-wrap px-1" style="font-size: 12px; white-space: normal;">
                     ${productName}
                 </p>
                 <p class="px-1 text_size" style="color: #EF4444">
@@ -2166,7 +2166,7 @@ function updateCartUI(cartItems) {
 
     if (cartItemCount > 6 && $(".cart_items .cartButton2").length === 0) {
         $(".cart_items").append(`
-            <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
+            <div class="text-end cartButton2 mb-2" style="cursor: pointer;">
                 <a style="font-size: 13px" class="cart-screen">View All</a>
             </div>
         `);
@@ -2345,9 +2345,9 @@ $(document).ready(function () {
 
                             $(".cart_items").append(`
                                 <div class="d-flex" data-product-id="${response.nextItem.product.id}">
-                                    <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${response.nextItem.product.name}" />
+                                    <img src="http://127.0.0.1:8000/${imagePath}" class="dropdown_img img-fluid" alt="${response.nextItem.product.name}" />
                                     <div class="text-start">
-                                        <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
+                                        <p class="m-0 p-0 text-start text-wrap px-1" style="font-size: 12px; white-space: normal;">
                                             ${productName}
                                         </p>
                                         <p class="px-1 text_size" style="color: #EF4444">
@@ -2359,7 +2359,7 @@ $(document).ready(function () {
 
                             if (response.cartItemCount > 6) {
                                 $(".cart_items").append(`
-                                    <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
+                                    <div class="text-end cartButton2 mb-2" style="cursor: pointer;">
                                         <a style="font-size: 13px" class="cart-screen">View All</a>
                                     </div>
                                 `);
@@ -2370,13 +2370,13 @@ $(document).ready(function () {
 
                 if (response.cartItemCount === 0) {
                     $(".cart-items-container").after(`
-                         <div class="empty-cart col-12 text-center d-flex flex-column align-items-center justify-content-center mt-0">
+                         <div class="col-12 d-flex flex-column align-items-center justify-content-center text-center empty-cart mt-0">
                              <img src="assets/images/home/cart_empty.webp" alt="Empty Cart"
-                                 class="img-fluid empty_cart_img">
+                                 class="empty_cart_img img-fluid">
                              <p class="pt-5" style="color: #EF4444;font-size: 22px">Your Cart is Currently Empty</p>
                              <p class="" style="color: #6C6C6C;font-size: 16px">Looks Like You Have Not Added Anything To </br>
                                  Your Cart. Go Ahead & Explore Top Categories.</p>
-                             <a href="/" class="btn showmoreBtn mt-2">Shop More</a>
+                             <a href="/" class="btn mt-2 showmoreBtn">Shop More</a>
                          </div>
                     `);
                     $(".cart-items-container").hide();
@@ -2433,12 +2433,21 @@ $(document).ready(function () {
                         response.deal.discount_percentage
                     );
 
+                    const stockStatus =
+                    response.deal &&
+                    response.deal.shop &&
+                    response.deal.shop.is_direct === 1
+                        ? response.deal.stock === 0
+                            ? '<span class="product-out-of-stock">Out of Stock</span>'
+                            : '<span class="product-stock-badge">In Stock</span>'
+                        : "";
+
                     const savedItemHtml = `
                         <div class="saved-item" data-product-id="${response.deal.id
                         }">
                             <div class="row p-4">
-                                <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
-                                    <div class="d-flex justify-content-center align-items-center">
+                                <div class="col-md-3 d-flex flex-column align-items-center justify-content-center">
+                                    <div class="d-flex align-items-center justify-content-center">
                                         <img src="${imagePath}" style="max-width: 100%; max-height: 100%;"
                                             alt="${response.deal.name}" />
                                     </div>
@@ -2455,14 +2464,14 @@ $(document).ready(function () {
                         }</p>
                                     ${response.deal.deal_type === 1
                             ? `
-                                        <div class="rating my-2">
+                                        <div class="my-2 rating">
                                             <span>Delivery Date :</span><span class="stars">
                                                 <span>${deliveryDate}</span>
                                             </span>
                                         </div>
                                     `
                             : `
-                                        <div class="rating mt-3 mb-3">
+                                        <div class="mb-3 mt-3 rating">
                                             <span style="color: #22cb00">Currently Services are free through Dealslah</span>
                                         </div>
                                     `
@@ -2471,7 +2480,7 @@ $(document).ready(function () {
                             ? `<p style="color: #AAAAAA">Seller Company Name: ${response.deal.shop.legal_name}</p>`
                             : ""
                         }
-                                    <div class="ms-0">
+                                    <div class="d-flex mb-3 ms-0">
                                         <span style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
                                             $${response.deal.original_price}
                                         </span>
@@ -2481,9 +2490,28 @@ $(document).ready(function () {
                                         <span class="ms-1" style="font-size:18px;font-weight:500; color:#28A745">
                                              ${discountPercentage}% Off
                                         </span>
+                                         <div class="ms-2 mt-2" id="totalStock">${stockStatus}</div>
                                     </div>
+                                    ${
+                                        response.deal.shop.is_direct === 1
+                                            ? response.deal.special_price ===
+                                                  1 &&
+                                              new Date(response.deal.end_date) >
+                                                  new Date()
+                                                ? `
+                                                    <button type="button" style="height: fit-content;" id="servicePrice"
+                                                        data-id=""
+                                                        class="p-1 text-nowrap special-price">
+                                                        <span>&nbsp;<i class="fa-solid fa-stopwatch-20"></i>&nbsp;
+                                                            &nbsp;Special Price
+                                                            &nbsp; &nbsp;
+                                                        </span>
+                                                    </button>`
+                                                : ""
+                                            : ""
+                                    }
                                 </div>
-                                <div class="col-md-4 d-flex flex-column justify-content-end align-items-end mb-3">
+                                <div class="col-md-4 d-flex flex-column align-items-end justify-content-end mb-3">
                                     <div class="btn-group" role="group">
                                         <button type="button" class="btn remove-cart-btn removeSaveLater"
                                             style="color: #EF4444;border: none" data-product-id="${response.deal.id
@@ -2506,7 +2534,7 @@ $(document).ready(function () {
                                                     <img src="assets/images/home/icon_delivery.svg" alt="icon" class="img-fluid" />
                                                 </div>
                                                 <div class="d-inline-flex align-items-center gap-2">
-                                                    <span class="loader spinner-border spinner-border-sm me-2" style="display: none"></span>
+                                                    <span class="loader me-2 spinner-border spinner-border-sm" style="display: none"></span>
                                                     Move to Cart
                                                 </div>
                                             </div>
@@ -2612,9 +2640,9 @@ $(document).ready(function () {
 
                             $(".cart_items").append(`
                                 <div class="d-flex cart-item-drop" data-product-id="${response.nextItem.product.id}">
-                                    <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${response.nextItem.product.name}" />
+                                    <img src="http://127.0.0.1:8000/${imagePath}" class="dropdown_img img-fluid" alt="${response.nextItem.product.name}" />
                                     <div class="text-start">
-                                        <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
+                                        <p class="m-0 p-0 text-start text-wrap px-1" style="font-size: 12px; white-space: normal;">
                                             ${productName}
                                         </p>
                                         <p class="px-1 text_size" style="color: #EF4444">
@@ -2626,7 +2654,7 @@ $(document).ready(function () {
 
                             if (response.cartItemCount > 6) {
                                 $(".cart_items").append(`
-                                    <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
+                                    <div class="text-end cartButton2 mb-2" style="cursor: pointer;">
                                         <a style="font-size: 13px" class="cart-screen">View All</a>
                                     </div>
                                 `);
@@ -2637,13 +2665,13 @@ $(document).ready(function () {
 
                 if (response.cartItemCount === 0) {
                     $(".cart-items-container").after(`
-                         <div class="empty-cart col-12 text-center d-flex flex-column align-items-center justify-content-center mt-0">
+                         <div class="col-12 d-flex flex-column align-items-center justify-content-center text-center empty-cart mt-0">
                              <img src="assets/images/home/cart_empty.webp" alt="Empty Cart"
-                                 class="img-fluid empty_cart_img">
+                                 class="empty_cart_img img-fluid">
                              <p class="pt-5" style="color: #EF4444;font-size: 22px">Your Cart is Currently Empty</p>
                              <p class="" style="color: #6C6C6C;font-size: 16px">Looks Like You Have Not Added Anything To </br>
                                  Your Cart. Go Ahead & Explore Top Categories.</p>
-                             <a href="/" class="btn showmoreBtn mt-2">Shop More</a>
+                             <a href="/" class="btn mt-2 showmoreBtn">Shop More</a>
                          </div>
                     `);
                     $(".cart-items-container").hide();
@@ -2714,7 +2742,7 @@ $(document).ready(function () {
                     $(".saved-items").hide();
                     $(".empty-savedItems").show();
                     $(".saved-items").after(`
-                        <div class="text-center mb-4 empty-savedItems">
+                        <div class="text-center empty-savedItems mb-4">
                                 <img src='/assets/images/home/empty_savedItems.png' alt="Empty Cart" class="img-fluid mb-2" style="width: 300px;" />
                                 <h4 style="color: #EF4444;">Your Saved Wishlists are awaiting your selection!</h4>
                             </div>
@@ -2739,7 +2767,7 @@ $(document).ready(function () {
                 if (response.item) {
                     $(".empty-cart").attr("style", "display: none !important;");
 
-                    $(".cart-items-container").css("display", "block");
+                    $(".cart-items-container").css("display", "block !important;");
 
                     if (response.cartItemCount > 0) {
                         updateCartDrop(response.item);
@@ -2785,12 +2813,20 @@ $(document).ready(function () {
                         response.item.product.discount_percentage
                     );
 
+                    const stockStatus =
+                        response.item.product.shop &&
+                        response.item.product.shop.is_direct === 1
+                            ? response.item.product.stock === 0
+                                ? `<span class="product-out-of-stock">Out of Stock</span>`
+                                : `<span class="product-stock-badge">In Stock</span>`
+                            : "";
+
                     const cartItemHtml = `
                             <div class="cart-item" data-product-id="${response.item.product_id
                         }">
     <div class="row p-4">
         <div class="col-md-4 mb-3">
-            <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex align-items-center justify-content-center">
                 <img src="${image}" style="max-width: 100%; max-height: 100%;" alt="${response.item.item_description
                         }" />
             </div>
@@ -2809,7 +2845,7 @@ $(document).ready(function () {
                         }
             ${response.item.product.deal_type === 2
                             ? `
-            <div class="rating mt-3 mb-3">
+            <div class="mb-3 mt-3 rating">
                 <span style="color: #22cb00">Currently Services are free through
                     Dealslah
                 </span>
@@ -2830,7 +2866,7 @@ $(document).ready(function () {
                     </p>
                 </div>
             </div>
-            <div class="ms-0">
+            <div class="d-flex mb-3 ms-0">
                 <span style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
                     $${response.item.product.original_price}
                 </span>
@@ -2840,15 +2876,32 @@ $(document).ready(function () {
                 <span class="ms-1" style="font-size:18px;font-weight:500;color:#28A745">
                      ${discountPercentage}% Off
                 </span>
+                <div class="ms-2 mt-2" id="totalStock">${stockStatus}</div>
             </div>
-            `
-                        }
+            ${
+                response.item.product.shop.is_direct === 1
+                    ? response.item.product.special_price === 1 &&
+                      new Date(response.item.product.end_date) > new Date()
+                        ? `
+                       <button type="button" style="height: fit-content;" id="servicePrice"
+                      data-id=""
+                      class="p-1 text-nowrap special-price">
+                      <span>&nbsp;<i class="fa-solid fa-stopwatch-20"></i>&nbsp;
+                      &nbsp;Special Price
+                      &nbsp; &nbsp;
+                     </span>
+                     </button>`
+                        : ""
+                    : ""
+            }
+         `
+        }
         </div>
     </div>
-    <div class="row d-flex align-items-center">
+    <div class="d-flex row align-items-center">
         <div class="col-md-6">
             ${response.item.product.deal_type == 2
-                            ? `<div class="d-flex align-items-start my-1 mb-3" style="padding-left:24px">
+                            ? `<div class="d-flex align-items-start mb-3 my-1" style="padding-left:24px">
                 <div class="d-flex flex-column ms-0" style="width: 30%">
                     <label for="service_date" class="form-label">Service Date</label>
                     <input type="date" id="service_date" name="service_date"
@@ -2863,14 +2916,14 @@ $(document).ready(function () {
                         data-product-id="${response.item.product.id}">
                 </div>
             </div>`
-                            : `<div class="d-flex align-items-center my-1 mb-3" style="padding-left: 24px;">
+                            : `<div class="d-flex align-items-center mb-3 my-1" style="padding-left: 24px;">
                 <span>Qty</span> &nbsp;&nbsp;
-                <button class="btn rounded btn-sm decrease-btn1" data-cart-id="${response.item.cart_id}"
+                <button class="btn btn-sm rounded decrease-btn1" data-cart-id="${response.item.cart_id}"
                     data-product-id="${response.item.product.id}">-</button>
-                <input type="text" class="form-control form-control-sm mx-2 text-center quantity-input"
+                <input type="text" class="form-control form-control-sm text-center mx-2 quantity-input"
                     style="width: 50px;background-color:#F9F9F9;border-radius:2px"
                     value="${response.item.quantity}" readonly>
-                <button class="btn rounded btn-sm increase-btn1" data-cart-id="${response.item.cart_id}"
+                <button class="btn btn-sm rounded increase-btn1" data-cart-id="${response.item.cart_id}"
                     data-product-id="${response.item.product.id}">+</button>
             </div>`
                         }
@@ -2880,11 +2933,11 @@ $(document).ready(function () {
                 <button type="submit" class="btn save-for-later-btn"
                     style="color: #EF4444; border: none;" data-product-id="${response.item.product.id
                         }">
-                    <div class="d-inline-flex align-items-center gap-2 buy_later">
+                    <div class="d-inline-flex align-items-center buy_later gap-2">
                         <div>
                             <img src="/assets/images/home/icon_save_later.svg" alt="icon" class="img-fluid" />
                         </div>
-                        <div class="d-inline-flex align-items-center gap-2 buy-for-later-btn">
+                        <div class="d-inline-flex align-items-center buy-for-later-btn gap-2">
                             <span class="loader spinner-border spinner-border-sm" style="display: none;"></span>
                             <span>Buy Later</span>
                         </div>
@@ -2899,7 +2952,7 @@ $(document).ready(function () {
                             <img src="/assets/images/home/icon_delete.svg" alt="icon" class="img-fluid" />
                         </div>
                         <div class="d-inline-flex align-items-center gap-2">
-                            <span class="loader spinner-border spinner-border-sm me-2" style="display: none"></span>
+                            <span class="loader me-2 spinner-border spinner-border-sm" style="display: none"></span>
                             Remove
                         </div>
                     </div>
@@ -2931,9 +2984,9 @@ $(document).ready(function () {
 
                         const newCart = `
                             <div class="d-flex cart-item-drop" data-product-id="${item.product.id}">
-                                <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${item.product.name}" />
+                                <img src="http://127.0.0.1:8000/${imagePath}" class="dropdown_img img-fluid" alt="${item.product.name}" />
                                 <div class="text-start">
-                                    <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
+                                    <p class="m-0 p-0 text-start text-wrap px-1" style="font-size: 12px; white-space: normal;">
                                         ${productName}
                                     </p>
                                     <p class="px-1 text_size" style="color: #EF4444">
@@ -2953,17 +3006,17 @@ $(document).ready(function () {
 
                         if (cartItemCount >= 6) {
                             let cartButton = $(".cart_items .cartButton2");
-                        
+
                             if (cartButton.length === 0) {
                                 $(".cart_items").append(`
-                                    <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
+                                    <div class="text-end cartButton2 mb-2" style="cursor: pointer;">
                                         <a style="font-size: 13px" class="cart-screen">View All</a>
                                     </div>
                                 `);
                             } else if (cartButton.css("display") === "none") {
                                 cartButton.show();
                             }
-                        }                        
+                        }
                     }
 
 
@@ -3154,7 +3207,7 @@ $(document).ready(function () {
                     $(".saved-items").hide();
                     $(".empty-savedItems").show();
                     $(".saved-items").after(`
-                        <div class="text-center mb-4 empty-savedItems">
+                        <div class="text-center empty-savedItems mb-4">
                                 <img src='/assets/images/home/empty_savedItems.png' alt="Empty Cart" class="img-fluid mb-2" style="width: 300px;" />
                                 <h4 style="color: #EF4444;">Your Saved Wishlists are awaiting your selection!</h4>
                             </div>
@@ -3207,7 +3260,7 @@ $(document).ready(function () {
                 if ($(".saved-item").length === 0) {
                     $(".saved-items").hide();
                     $(".saved-items").after(`
-                        <div class="text-center mb-4 empty-savedItems">
+                        <div class="text-center empty-savedItems mb-4">
                                 <img src='/assets/images/home/empty_savedItems.png' alt="Empty Cart" class="img-fluid mb-2" style="width: 300px;" />
                                 <h4 style="color: #EF4444;">Your Saved Wishlists are awaiting your selection!</h4>
                             </div>
@@ -3282,7 +3335,7 @@ $(document).ready(function () {
 
                     const cartItemHtml = `
                            <div id="cart_items" class="cart-item">
-                            <div class="row d-flex align-items-center mb-3 mt-2"
+                            <div class="d-flex row align-items-center mb-3 mt-2"
                                 id="cart_item_${response.item.product_id}">
                                 <div class="col-1">
                                     <input type="checkbox" class="cartItem_check" value="${response.item.product_id}"
@@ -3290,17 +3343,17 @@ $(document).ready(function () {
                                 </div>
                                 <div class="col-3">
                                     <img src="/${image}"
-                                        class="img-fluid card_img_cont" alt="${response.item.product.name}" />
+                                        class="card_img_cont img-fluid" alt="${response.item.product.name}" />
                                 </div>
                                 <div class="col-8">
                                     <div class="d-flex flex-column justify-content-start">
                                         <a href="/deal/${response.item.product_id}" style="color: #000;"
                                             onclick="clickCount('${response.item.product_id}')">
-                                            <h5 class="mb-1 fs_common text-truncate" style="max-width: 100%;">
+                                            <h5 class="text-truncate fs_common mb-1" style="max-width: 100%;">
                                             ${response.item.product.name}
                                             </h5>
                                         </a>
-                                        <p class="mb-0 text-muted fs_common text-truncate" style="max-width: 100%;">
+                                        <p class="text-muted text-truncate fs_common mb-0" style="max-width: 100%;">
                                         ${response.item.product.description}
                                         </p>
                                     </div>
@@ -3331,12 +3384,12 @@ $(document).ready(function () {
         var textColor = type === "success" ? "#16A34A" : "#EF4444";
         var icon =
             type === "success"
-                ? '<i class="fa-regular fa-cart-shopping" style="color: #16A34A"></i>'
+                ? '<i class="fa-cart-shopping fa-regular" style="color: #16A34A"></i>'
                 : '<i class="fa-solid fa-triangle-exclamation" style="color: #EF4444"></i>';
         var alertClass = type === "success" ? "toast-success" : "toast-danger";
 
         var alertHtml = `
-          <div class="alert ${alertClass} alert-dismissible fade show" role="alert" style="position: fixed; top: 70px; right: 40px; z-index: 1050; color: ${textColor};">
+          <div class="alert alert-dismissible ${alertClass} fade show" role="alert" style="position: fixed; top: 70px; right: 40px; z-index: 1050; color: ${textColor};">
             <div class="toast-content">
                 <div class="toast-icon">${icon}</div>
                 <span class="toast-text">${message}</span>&nbsp;&nbsp;

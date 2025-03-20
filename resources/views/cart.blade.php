@@ -160,7 +160,7 @@
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <div class="ms-0">
+                                                <div class="ms-0 d-flex mb-3">
                                                     <span
                                                         style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
                                                         ${{ number_format($product->original_price, 2) }}
@@ -173,7 +173,35 @@
                                                         style="font-size:18px;font-weight:500; color:#28A745">
                                                         {{ round($product->discount_percentage) }}% Off
                                                     </span>
+                                                    @if (!empty($product->shop->is_direct) && $product->shop->is_direct == 1)
+                                                        <div class="ms-2 mt-1" id="totalStock">
+                                                            @if (empty($product->stock) || $product->stock == 0)
+                                                                <span class="product-out-of-stock">
+                                                                    Out of Stock
+                                                                </span>
+                                                            @else
+                                                                <span class="product-stock-badge">
+                                                                    In Stock
+                                                                </span>
+                                                            @endif
+                                                        </div>
+                                                    @else
+                                                    @endif
                                                 </div>
+                                                @if (!empty($product->shop->is_direct) && $product->shop->is_direct == 1)
+                                                    @if (!empty($product->special_price) && $product->special_price && \Carbon\Carbon::parse($product->end_date)->isFuture())
+                                                        <div class="px-3">
+                                                            <button type="button" style="height: fit-content;"
+                                                                id="servicePrice" data-id="{{ $product->id }}"
+                                                                class="p-1 text-nowrap special-price">
+                                                                <span>&nbsp;<i class="fa-solid fa-stopwatch-20"></i>&nbsp;
+                                                                    &nbsp;Special Price
+                                                                    &nbsp; &nbsp;
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    @endif
+                                                @endif
                                             @endif
                                         </div>
                                     </div>
@@ -392,7 +420,7 @@
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <div class="ms-0">
+                                                <div class="ms-0 d-flex mb-3">
                                                     <span
                                                         style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
                                                         ${{ number_format($product->original_price, 2) }}
@@ -405,90 +433,105 @@
                                                         style="font-size:18px;font-weight:500; color:#28A745">
                                                         {{ round($product->discount_percentage) }}% Off
                                                     </span>
-                                                </div>
-                                            @endif
+                                                    @if (!empty($savedItem->deal->shop->is_direct) && $savedItem->deal->shop->is_direct == 1)
+                                                        <div class="ms-2 mt-2" id="totalStock">
+                                                            @if (empty($savedItem->deal->stock) || $savedItem->deal->stock == 0)
+                                                                <span class="product-out-of-stock">
+                                                                    Out of Stock
+                                                                </span>
+                                                            @else
+                                                                <span class="product-stock-badge">
+                                                                    In Stock
+                                                                </span>
+                                                            @endif
+                                                        </div>
+                                                    @endif
 
+                                                </div>
                                         </div>
-                                    </div>
-                                    <div class="row d-flex align-items-center">
-                                        <div class="col-md-6">
-                                            @if ($product->deal_type === 2)
-                                                <div class="d-flex align-items-start my-1 mb-3" style="padding-left:24px">
-                                                    <div class="d-flex flex-column ms-0" style="width: 30%">
-                                                        <label for="service_date" class="form-label">Service Date</label>
-                                                        <input type="date" id="service_date" name="service_date"
-                                                            class="form-control form-control-sm service-date"
-                                                            value="{{ $item->service_date }}"
-                                                            data-cart-id="{{ $cart->id }}"
-                                                            data-product-id="{{ $product->id }}">
+                                        <div class="row d-flex align-items-center">
+                                            <div class="col-md-6">
+                                                @if ($product->deal_type === 2)
+                                                    <div class="d-flex align-items-start my-1 mb-3"
+                                                        style="padding-left:24px">
+                                                        <div class="d-flex flex-column ms-0" style="width: 30%">
+                                                            <label for="service_date" class="form-label">Service
+                                                                Date</label>
+                                                            <input type="date" id="service_date" name="service_date"
+                                                                class="form-control form-control-sm service-date"
+                                                                value="{{ $item->service_date }}"
+                                                                data-cart-id="{{ $cart->id }}"
+                                                                data-product-id="{{ $product->id }}">
+                                                        </div>
+                                                        &nbsp;&nbsp;
+                                                        <div class="d-flex flex-column" style="width: 30%;">
+                                                            <label for="service_time" class="form-label">Service
+                                                                Time</label>
+                                                            <input type="time" id="service_time" name="service_time"
+                                                                class="form-control form-control-sm service-time"
+                                                                value="{{ $item->service_time }}"
+                                                                data-cart-id="{{ $cart->id }}"
+                                                                data-product-id="{{ $product->id }}">
+                                                        </div>
                                                     </div>
+                                                @else
+                                                    <div class="d-flex align-items-center my-1 mb-3"
+                                                        style="padding-left: 24px;">
+                                                        <span>Qty</span> &nbsp;&nbsp;
+                                                        <button class="btn rounded btn-sm decrease-btn"
+                                                            data-cart-id="{{ $cart->id }}"
+                                                            data-product-id="{{ $product->id }}">-</button>
+                                                        <input type="text"
+                                                            class="form-control form-control-sm mx-2 text-center quantity-input"
+                                                            style="width: 50px;background-color:#F9F9F9;border-radius:2px"
+                                                            value="{{ $item->quantity }}" readonly>
+                                                        <button class="btn rounded btn-sm increase-btn"
+                                                            data-cart-id="{{ $cart->id }}"
+                                                            data-product-id="{{ $product->id }}">+</button>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="col-md-6 d-flex justify-content-md-end"
+                                                style="padding-left: 24px">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button type="submit" class="btn save-for-later-btn"
+                                                        style="color: #ef4444; border: none;"
+                                                        data-product-id="{{ $product->id }}">
+                                                        <div class="d-inline-flex align-items-center gap-2 buy_later">
+                                                            <div>
+                                                                <img src="{{ asset('assets/images/home/icon_save_later.svg') }}"
+                                                                    alt="icon" class="img-fluid" />
+                                                            </div>
+                                                            <div
+                                                                class="d-inline-flex align-items-center gap-2 buy-for-later-btn">
+                                                                <span class="loader spinner-border spinner-border-sm"
+                                                                    style="display: none;"></span>
+                                                                <span>Buy Later</span>
+                                                            </div>
+                                                        </div>
+                                                    </button>
                                                     &nbsp;&nbsp;
-                                                    <div class="d-flex flex-column" style="width: 30%;">
-                                                        <label for="service_time" class="form-label">Service Time</label>
-                                                        <input type="time" id="service_time" name="service_time"
-                                                            class="form-control form-control-sm service-time"
-                                                            value="{{ $item->service_time }}"
-                                                            data-cart-id="{{ $cart->id }}"
-                                                            data-product-id="{{ $product->id }}">
-                                                    </div>
-                                                </div>
-                                            @else
-                                                <div class="d-flex align-items-center my-1 mb-3"
-                                                    style="padding-left: 24px;">
-                                                    <span>Qty</span> &nbsp;&nbsp;
-                                                    <button class="btn rounded btn-sm decrease-btn"
-                                                        data-cart-id="{{ $cart->id }}"
-                                                        data-product-id="{{ $product->id }}">-</button>
-                                                    <input type="text"
-                                                        class="form-control form-control-sm mx-2 text-center quantity-input"
-                                                        style="width: 50px;background-color:#F9F9F9;border-radius:2px"
-                                                        value="{{ $item->quantity }}" readonly>
-                                                    <button class="btn rounded btn-sm increase-btn"
-                                                        data-cart-id="{{ $cart->id }}"
-                                                        data-product-id="{{ $product->id }}">+</button>
-                                                </div>
-                                            @endif
-                                        </div>
-                                        <div class="col-md-6 d-flex justify-content-md-end" style="padding-left: 24px">
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="submit" class="btn save-for-later-btn"
-                                                    style="color: #ef4444; border: none;"
-                                                    data-product-id="{{ $product->id }}">
-                                                    <div class="d-inline-flex align-items-center gap-2 buy_later">
-                                                        <div>
-                                                            <img src="{{ asset('assets/images/home/icon_save_later.svg') }}"
-                                                                alt="icon" class="img-fluid" />
-                                                        </div>
-                                                        <div
-                                                            class="d-inline-flex align-items-center gap-2 buy-for-later-btn">
-                                                            <span class="loader spinner-border spinner-border-sm"
-                                                                style="display: none;"></span>
-                                                            <span>Buy Later</span>
-                                                        </div>
-                                                    </div>
-                                                </button>
-                                                &nbsp;&nbsp;
-                                                <button type="submit" class="btn cancel-btn cart-remove"
-                                                    style="color: #ef4444;border: none"
-                                                    data-product-id="{{ $product->id }}"
-                                                    data-cart-id="{{ $cart->id }}">
-                                                    <div class="d-inline-flex align-items-center gap-2">
-                                                        <div>
-                                                            <img src="{{ asset('assets/images/home/icon_delete.svg') }}"
-                                                                alt="icon" class="img-fluid" />
-                                                        </div>
+                                                    <button type="submit" class="btn cancel-btn cart-remove"
+                                                        style="color: #ef4444;border: none"
+                                                        data-product-id="{{ $product->id }}"
+                                                        data-cart-id="{{ $cart->id }}">
                                                         <div class="d-inline-flex align-items-center gap-2">
-                                                            <span class="loader spinner-border spinner-border-sm me-2"
-                                                                style="display: none"></span>
-                                                            Remove
+                                                            <div>
+                                                                <img src="{{ asset('assets/images/home/icon_delete.svg') }}"
+                                                                    alt="icon" class="img-fluid" />
+                                                            </div>
+                                                            <div class="d-inline-flex align-items-center gap-2">
+                                                                <span class="loader spinner-border spinner-border-sm me-2"
+                                                                    style="display: none"></span>
+                                                                Remove
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </button>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
+                                        <hr>
                                     </div>
-                                    <hr>
-                                </div>
                             @endforeach
                         </div>
                         <div class="card mb-4 order_summary_card p-3">
@@ -619,7 +662,7 @@
                                         @endif
 
                                         <div></div>
-                                        <div class="ms-0">
+                                        <div class="ms-0 d-flex mb-3">
                                             <span style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
                                                 ${{ number_format($savedItem->deal->original_price, 2) }}
                                             </span>
@@ -629,7 +672,41 @@
                                             <span class="ms-1" style="font-size:18px;font-weight:500; color:#28A745">
                                                 {{ round($savedItem->deal->discount_percentage) }}% Off
                                             </span>
+                                            @if (!empty($savedItem->deal->shop->is_direct) && $savedItem->deal->shop->is_direct == 1)
+                                                <div class="ms-2 mt-2" id="totalStock">
+                                                    @if (empty($savedItem->deal->stock) || $savedItem->deal->stock == 0)
+                                                        <span class="product-out-of-stock">
+                                                            Out of Stock
+                                                        </span>
+                                                    @else
+                                                        <span class="product-stock-badge">
+                                                            In Stock
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            @else
+                                            @endif
                                         </div>
+                                        @if (!empty($savedItem->deal->shop->is_direct) && $savedItem->deal->shop->is_direct == 1)
+                                            @if (
+                                                !empty($savedItem->deal->special_price) &&
+                                                    $savedItem->deal->special_price &&
+                                                    \Carbon\Carbon::parse($savedItem->deal->end_date)->isFuture())
+                                                <div class="px-3">
+                                                    @php
+                                                        // dd($product->id );
+                                                    @endphp
+                                                    <button type="button" style="height: fit-content;" id="servicePrice"
+                                                        data-id="{{ $product->id ?? '' }}"
+                                                        class="p-1 text-nowrap special-price">
+                                                        <span>&nbsp;<i class="fa-solid fa-stopwatch-20"></i>&nbsp;
+                                                            &nbsp;Special Price
+                                                            &nbsp; &nbsp;
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            @endif
+                                        @endif
                                     </div>
                                     <div class="col-md-4 d-flex flex-column justify-content-end align-items-end mb-3">
                                         <div class="btn-group" role="group" aria-label="Basic example">

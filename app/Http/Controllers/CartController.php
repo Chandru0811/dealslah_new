@@ -49,7 +49,7 @@ class CartController extends Controller
 
         $user_id = Auth::check() ? Auth::user()->id : null;
 
-       
+
 
         return view('cart', compact('cart', 'bookmarkedProducts', 'savedItems'));
     }
@@ -310,7 +310,7 @@ class CartController extends Controller
         if (Auth::guard()->check()) {
             $cart = $cart->orWhere('customer_id', Auth::guard()->user()->id);
         }
-        $cart = $cart->first();    
+        $cart = $cart->first();
 
         $cartItem = null;
 
@@ -362,6 +362,7 @@ class CartController extends Controller
                 'status' => 'Item moved to Buy Later',
                 'cartItemCount' => $cart->item_count,
                 'deal' => $deal,
+                'shop' => $deal->shop,
                 'updatedCart' => [
                     'quantity' => $cart->quantity,
                     'subtotal' => $cart->total,
@@ -561,14 +562,21 @@ class CartController extends Controller
 
         $user = Auth::user();
         $carts = Cart::where('id', $cart_id)->with(['items.product'])->first();
-        
+                // dd($carts);
         if (!$carts) {
-            return redirect()->route('cart')->with('error', 'Cart not found.');
+            return redirect()->route('cart.index')->with('error', 'Cart not found.');
         }
 
         $minServiceDate = now()->addDays(2)->format('Y-m-d');
 
         foreach ($carts->items as $item) {
+            if (!empty($item->product) && !empty($item->product->shop) && $item->product->shop->is_direct == 1) {
+                if (isset($item->product->stock) && $item->product->stock == 0) {
+                    return redirect()->route('cart.index')->with('error', "Product '{$item->product->name}' is not available in stock.");
+                }
+            }
+            //  dd($item->product->shop);
+
             if ($item->product->deal_type == 2) {
                 if (empty($item->service_date) || empty($item->service_time)) {
                     return redirect()->route('cart.index')->with('error', 'Please select a service date and time for all service-type products.');
