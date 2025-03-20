@@ -55,7 +55,7 @@ $imageType = isset($pageimage) ? pathinfo($pageimage, PATHINFO_EXTENSION) : 'png
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-        <link rel="stylesheet" href="https://unpkg.com/xzoom/dist/xzoom.css" />
+        {{-- <link rel="stylesheet" href="https://unpkg.com/xzoom/dist/xzoom.css" /> --}}
 
         {{-- Custom Css  --}}
         <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">

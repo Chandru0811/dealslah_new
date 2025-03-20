@@ -121,19 +121,19 @@
     <!-- Lead Magnet Model -->
     <div class="modal fade" id="indexLeadMagnetModal" tabindex="-1" role="dialog"
         aria-labelledby="indexLeadMagnetModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-md" style="width: 380px;" role="document">
             <div class="modal-content modalContent" style="background-color: #1e1e1e">
                 <div class="modal-body p-0 text-center position-relative">
                     <div type="button" class="position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"
                         aria-label="Close"><i class="fa-solid fa-circle-xmark" style="color: #000; font-size: 20px"></i>
                     </div>
-                    <img src="{{ asset('assets/images/Republic_Campaign.webp') }}" alt="Republic_Campaign" width="500"
-                        height="500" class="img-fluid">
+                    <a href="https://dealslah.com/categories/laptops_and_computers?dmbk=null">
+                        <img src="{{ asset('assets/images/Ramadan Sales Gaming Laptops offers.webp') }}"
+                            alt="Ramadan Sales Gaming Laptops offers" class="img-fluid">
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
 @endsection
-
-

@@ -42,18 +42,28 @@ class HomeController extends Controller
         $earlybirddeals = Product::where('active', 1)->whereDate('start_date', now())->get();
         $lastchancedeals = Product::where('active', 1)->whereDate('end_date', now())->get();
         $limitedtimedeals = Product::where('active', 1)->whereRaw('DATEDIFF(end_date, start_date) <= ?', [2])->get();
-        $bookmarknumber = $request->input("bookmarknumber") ?? session()->get('bookmarknumber');
+        $bookmarknumber = $request->input("bookmarknumber") ?? session('bookmarknumber') ?? $request->cookie('bookmarknumber') ?? null;
         $user = Auth::user();
 
         $bookmarkedProducts = collect();
-
         if ($user) {
-            Bookmark::whereNull('user_id')
+            $guestBookmarks = Bookmark::whereNull('user_id')
                 ->where('bookmark_number', $bookmarknumber)
-                ->update(['user_id' => $user->id]);
+                ->get();
+
+            foreach ($guestBookmarks as $guestBookmark) {
+                $existingBookmark = Bookmark::where('user_id', $user->id)
+                    ->where('deal_id', $guestBookmark->deal_id)
+                    ->first();
+
+                if ($existingBookmark) {
+                    $guestBookmark->delete();
+                } else {
+                    $guestBookmark->update(['user_id' => $user->id]);
+                }
+            }
 
             $bookmarkedProducts = Bookmark::where('user_id', $user->id)
-                ->orWhere('bookmark_number', $bookmarknumber)
                 ->pluck('deal_id');
         } else {
             $bookmarkedProducts = Bookmark::where('bookmark_number', $bookmarknumber)
@@ -121,11 +131,13 @@ class HomeController extends Controller
         $product = Product::with(['productMedia', 'shop', 'shop.hour', 'shop.policy'])->where('id', $id)
             ->first();
 
-        $bookmarknumber = $request->input('dmbk');
+        $bookmarknumber = $request->input("dmbk") ?? session('bookmarknumber') ?? $request->cookie('bookmarknumber') ?? null;
 
         if ($bookmarknumber === null) {
             $bookmarknumber = session()->get('bookmark');
         }
+
+        $bookmarkedProducts = collect();
 
         if (Auth::check()) {
             $userId = Auth::id();
@@ -141,12 +153,12 @@ class HomeController extends Controller
         }
 
         $url = url()->current(); // Get the current URL
-        $title = $product->name; // Fetch the product's title dynamically
+        $title = $product->name . ' | $ ' . $product->discounted_price;
         $description = $product->description; // Fetch the product's description
         $image = optional($product->productMedia->first())->resize_path;
 
         $pageurl = url()->current();
-        $pagetitle = $product->name;
+        $pagetitle = $product->name . ' | $ ' . $product->discounted_price;
         $pagedescription = $product->description;
         $pageimage = optional($product->productMedia->first())->resize_path;
         $vedios = $product->additional_details;
@@ -164,13 +176,13 @@ class HomeController extends Controller
     public function dealcategorybasedproducts($slug, Request $request)
     {
         $shortBy = $request->input('short_by');
-        
-        $bookmarknumber = $request->input('dmbk');
+
+        $bookmarknumber = $request->input("dmbk") ?? session('bookmarknumber') ?? $request->cookie('bookmarknumber') ?? null;
 
         if ($bookmarknumber === null) {
             $bookmarknumber = session()->get('bookmark');
         }
-
+        $bookmarkedProducts = collect();
         if ($shortBy) {
             return redirect()->route('deals.categorybased', [
                 'slug' =>  $shortBy,
@@ -306,12 +318,12 @@ class HomeController extends Controller
 
         $shortby = DealCategory::where('active', 1)->get();
         $totaldeals = $deals->total();
-        $bookmarknumber = $request->input('dmbk');
+        $bookmarknumber = $request->input("dmbk") ?? session('bookmarknumber') ?? $request->cookie('bookmarknumber') ?? null;
 
         if ($bookmarknumber === null) {
             $bookmarknumber = session()->get('bookmark');
         }
-
+        $bookmarkedProducts = collect();
         if (Auth::check()) {
             $userId = Auth::id();
 
@@ -492,13 +504,13 @@ class HomeController extends Controller
 
         $shortby = DealCategory::where('active', 1)->get();
         $totaldeals = $deals->total();
-        
-        $bookmarknumber = $request->input('dmbk');
+
+        $bookmarknumber = $request->input("dmbk") ?? session('bookmarknumber') ?? $request->cookie('bookmarknumber') ?? null;
 
         if ($bookmarknumber === null) {
             $bookmarknumber = session()->get('bookmark');
         }
-
+        $bookmarkedProducts = collect();
         if (Auth::check()) {
             $userId = Auth::id();
 
@@ -663,12 +675,12 @@ class HomeController extends Controller
 
         $shortby = DealCategory::where('active', 1)->get();
         $totaldeals = $deals->total();
-        $bookmarknumber = $request->input('dmbk');
+        $bookmarknumber = $request->input("dmbk") ?? session('bookmarknumber') ?? $request->cookie('bookmarknumber') ?? null;
 
         if ($bookmarknumber === null) {
             $bookmarknumber = session()->get('bookmark');
         }
-
+        $bookmarkedProducts = collect();
         if (Auth::check()) {
             $userId = Auth::id();
 

@@ -7,6 +7,7 @@ use App\Models\Bookmark;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cookie;
 
 class BookmarkController extends Controller
 {
@@ -14,17 +15,14 @@ class BookmarkController extends Controller
     {
         $deal = Product::findOrFail($deal_id);
         $user_id = Auth::check() ? Auth::id() : null;
-        $bookmarknumber = $request->input("bookmarknumber");
+        $bookmarknumber = $request->input("bookmarknumber") ?? session('bookmarknumber') ?? $request->cookie('bookmarknumber') ?? null;
 
-        if ($bookmarknumber == null) {
-            $bookmarknumber = session()->get('bookmarknumber');
-        }
-// dd($bookmarknumber);
         if ($user_id == null) {
             if ($bookmarknumber == null) {
 
                 $bookmarknumber = Str::uuid();
                 session(['bookmarknumber' => $bookmarknumber]);
+                Cookie::queue('bookmarknumber', $bookmarknumber, 43200); // 43200 minutes = 30 days
                 //create bookmark
                 Bookmark::create([
                     'bookmark_number' => $bookmarknumber,
@@ -75,6 +73,8 @@ class BookmarkController extends Controller
                 if ($bookmarknumber == null) {
                     $bookmarknumber = Str::uuid();
                     session(['bookmarknumber' => $bookmarknumber]);
+                    Cookie::queue('bookmarknumber', $bookmarknumber, 43200); // 43200 minutes = 30 days
+
                 }
                 Bookmark::create([
                     'bookmark_number' => $bookmarknumber,
@@ -101,7 +101,6 @@ class BookmarkController extends Controller
     {
 
         $bookmarknumber = $request->input("bookmarknumber");
-
         if ($bookmarknumber == null) {
             $bookmarknumber = session()->get('bookmarknumber');
         }
@@ -111,7 +110,7 @@ class BookmarkController extends Controller
         if ($user_id) {
             $bookmark = Bookmark::where('deal_id', $deal_id)->where('user_id', $user_id)->first();
         } else {
-            $bookmark = Bookmark::where('deal_id', $deal_id)->whereNull('user_id')->where('bookmark_number', $bookmarknumber)->first();
+            $bookmark = Bookmark::where('deal_id', $deal_id)->where('bookmark_number', $bookmarknumber)->first();
         }
 
         if ($bookmark) {
