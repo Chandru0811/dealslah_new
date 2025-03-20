@@ -18,6 +18,7 @@ use App\Models\ProductMedia;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use App\Models\SubCategory;
 
 class ProductController extends Controller
 {
@@ -49,6 +50,8 @@ class ProductController extends Controller
             'name' => 'required|string',
             'deal_type' => 'required|integer|in:1,2,3',
             'category_id' => 'required|exists:categories,id',
+            'sub_category_id' => 'nullable|array',
+            'sub_category_id.*' => 'exists:sub_categories,id',
             'brand' => 'nullable|string',
             'description' => 'nullable|string',
             'slug' => 'required|string|unique:products,slug',
@@ -71,6 +74,9 @@ class ProductController extends Controller
             'deal_type.in' => 'The deal type must be either 0 (standard) or 1 (special deal).',
             'category_id.required' => 'Please select a category for this product.',
             'category_id.exists' => 'The selected category does not exist in our records.',
+            'sub_category_id.required' => 'Please select at least one subcategory for this product.',
+            'sub_category_id.array' => 'Subcategories must be an array.',
+            'sub_category_id.*.exists' => 'One or more selected subcategories do not exist in our records.',
             'brand.string' => 'The brand must be a valid string.',
             'description.string' => 'The description must be a valid string.',
             'slug.required' => 'The product slug is required.',
@@ -105,6 +111,7 @@ class ProductController extends Controller
         $validatedData = $validator->validated();
         $shopId = $request->input('shop_id');
 
+        $validatedData['sub_category_id'] = json_encode($validatedData['sub_category_id'] ?? []);
         $validatedData['active'] = 0;
         $validatedData['specifications'] = $request->specifications;
         $validatedData['varient'] = $request->varient;
@@ -197,6 +204,28 @@ class ProductController extends Controller
             return $this->error('Product Not Found.', ['error' => 'Product Not Found']);
         }
 
+        $subCategoryIds = json_decode($product->sub_category_id, true) ?? [];
+
+        if (!empty($subCategoryIds)) {
+            $subCategoryNames = SubCategory::whereIn('id', $subCategoryIds)
+                ->select('name', 'id')
+                ->get()
+                ->map(function ($subCategory) {
+                    return [
+                        'label' => $subCategory->name,
+                        'value' => (string) $subCategory->id
+                    ];
+                })
+                ->toArray();
+        } else {
+            $subCategoryNames = []; // Ensure it's always an array
+        }
+
+        $product->subCategoryNames = $subCategoryNames;
+
+
+        $product->subCategoryNames = $subCategoryNames;
+
         $product->categoryName = $product->category ? $product->category->name : null;
         $product->categoryGroupName = $product->category && $product->category->categoryGroup ? $product->category->categoryGroup->name : null;
         $product->categoryGroupId = $product->category && $product->category->categoryGroup ? $product->category->categoryGroup->id : null;
@@ -213,6 +242,8 @@ class ProductController extends Controller
             'name' => 'required|string',
             'deal_type' => 'required|integer|in:1,2,3',
             'category_id' => 'required|exists:categories,id',
+            'sub_category_id' => 'nullable|array',
+            'sub_category_id.*' => 'exists:sub_categories,id',
             'brand' => 'nullable|string',
             'description' => 'nullable|string',
             'slug' => 'required|string|unique:products,slug,' . $id,
@@ -234,6 +265,9 @@ class ProductController extends Controller
             'deal_type.in' => 'The deal type must be either 0 (standard) or 1 (special deal).',
             'category_id.required' => 'Please select a category for this product.',
             'category_id.exists' => 'The selected category does not exist in our records.',
+            'sub_category_id.required' => 'Please select at least one subcategory for this product.',
+            'sub_category_id.array' => 'Subcategories must be an array.',
+            'sub_category_id.*.exists' => 'One or more selected subcategories do not exist in our records.',
             'brand.string' => 'The brand must be a valid string.',
             'description.string' => 'The description must be a valid string.',
             'slug.required' => 'The product slug is required.',
@@ -272,10 +306,12 @@ class ProductController extends Controller
         }
 
         $validatedData = $validator->validated();
+        $validatedData['sub_category_id'] = json_encode($validatedData['sub_category_id'] ?? []);
+        // dd($validatedData['sub_category_id']);
         $validatedData['specifications'] = $request->specifications;
         $validatedData['varient'] = $request->varient;
         $validatedData['delivery_days'] = $request->delivery_days;
-
+        // dd($validatedData);
         $product->update($validatedData);
 
         $shopId = $request->input('shop_id');
@@ -337,6 +373,7 @@ class ProductController extends Controller
                     if (file_exists($existingMedia->path)) {
                         unlink($existingMedia->path);
                     }
+
                     // Delete resized image
                     if (file_exists($existingMedia->resize_path)) {
                         unlink($existingMedia->resize_path);
@@ -456,5 +493,15 @@ class ProductController extends Controller
         $category = Category::create($validatedData);
 
         return $this->success('Category created successfully! It will be available once approved by admin. Please try creating a product after some time.', $category);
+    }
+
+    public function getAllSubCategoriesByCategoryId($id)
+    {
+        $subcategories = SubCategory::where('category_id', $id)
+            ->where('active', 1)
+            ->select('id', 'name')
+            ->orderBy('id', 'desc')
+            ->get();
+        return $this->success('Active Sub Categories Retrieved Successfully!', $subcategories);
     }
 }

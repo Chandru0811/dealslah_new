@@ -20,6 +20,7 @@ use App\Models\CouponCodeUsed;
 use App\Models\Dealenquire;
 use App\Models\DealShare;
 use App\Models\Review;
+use App\Models\SubCategory;
 use App\Models\User;
 use Stevebauman\Location\Facades\Location;
 use Illuminate\Support\Facades\Validator;
@@ -31,7 +32,8 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $categoryGroups = CategoryGroup::where('active', 1)->with('categories')->take(10)->get();
-        $hotpicks = DealCategory::where('active', 1)->get();
+        // $hotpicks = DealCategory::where('active', 1)->get();
+        $subCategories = SubCategory::where("category_id", 2)->select('name', 'slug', 'path')->get();
         $products = Product::where('active', 1)
             ->with(['productMedia:id,resize_path,order,type,imageable_id', 'shop:id,country,city,shop_ratings'])
             ->orderByRaw("CASE WHEN `order` IS NULL THEN 1 ELSE 0 END, `order` ASC, `created_at` DESC")
@@ -89,7 +91,7 @@ class HomeController extends Controller
             )->render();
         }
 
-        return view('home', compact('categoryGroups', 'hotpicks', 'products', 'bookmarkedProducts', 'treandingdeals', 'populardeals', 'earlybirddeals', 'lastchancedeals', 'limitedtimedeals'));
+        return view('home', compact('categoryGroups', 'subCategories',  'products', 'bookmarkedProducts', 'treandingdeals', 'populardeals', 'earlybirddeals', 'lastchancedeals', 'limitedtimedeals'));
     }
 
     public function clickcounts(Request $request)
@@ -338,10 +340,10 @@ class HomeController extends Controller
 
     public function subcategorybasedproducts(Request $request, $slug)
     {
+        $subCategories = collect();
         $perPage = $request->input('per_page', 10);
-
         $query = Product::with(['productMedia:id,resize_path,order,type,imageable_id', 'shop:id,country,state,city,street,street2,zip_code,shop_ratings'])
-            ->where('active', 1)->orderBy('created_at', 'desc');
+            ->where('active', 1);
 
         if ($slug === 'all') {
             $categoryGroupId = $request->input('category_group_id');
@@ -378,7 +380,7 @@ class HomeController extends Controller
         } else {
             $category = Category::where('slug', $slug)->first();
             $categorygroup = CategoryGroup::where('id', $category->category_group_id)->first();
-
+            $subCategories = SubCategory::where('category_id', $category->id)->get();
             $query->whereHas('category', function ($query) use ($slug) {
                 $query->where('slug', $slug);
             });
@@ -391,6 +393,16 @@ class HomeController extends Controller
         if ($request->has('brand') && is_array($request->brand)) {
             $query->whereIn('brand', $request->brand);
         }
+
+        if ($request->has('sub_category')) {
+            $subcategory = SubCategory::where('slug', $request->sub_category)->first();
+
+            if ($subcategory) {
+                $query->whereJsonContains('sub_category_id', (string) $subcategory->id);
+            }
+        }
+
+
 
         if ($request->has('discount') && is_array($request->discount)) {
             $discountTerms = $request->discount;
@@ -422,6 +434,7 @@ class HomeController extends Controller
                 }
             });
         }
+
 
         if ($request->has('rating_item') && is_array($request->rating_item)) {
             $ratings = $request->rating_item;
@@ -489,38 +502,31 @@ class HomeController extends Controller
 
             if ($end > $maxPrice) {
                 $priceRanges[] = [
-                    'label' => '$' . number_format($start, 2) . ' - $' . number_format($end, 2)
+                    'label' => '₹' . number_format($start, 2) . ' - ₹' . number_format($end, 2)
                 ];
                 break;
             }
             $priceRanges[] = [
-                'label' => '$' . number_format($start, 2) . ' - $' . number_format($end, 2)
+                'label' => '₹' . number_format($start, 2) . ' - ₹' . number_format($end, 2)
             ];
         }
 
         $shortby = DealCategory::where('active', 1)->get();
         $totaldeals = $deals->total();
-
-        $bookmarknumber = $request->input("dmbk") ?? session('bookmarknumber') ?? $request->cookie('bookmarknumber') ?? null;
-
-        if ($bookmarknumber === null) {
-            $bookmarknumber = session()->get('bookmark');
-        }
         $bookmarkedProducts = collect();
         if (Auth::check()) {
             $userId = Auth::id();
-
-            $bookmarkedProducts = Bookmark::where('user_id', $userId)
-                ->orWhere('bookmark_number', $bookmarknumber)
-                ->pluck('deal_id');
+            $bookmarkedProducts = Bookmark::where('user_id', $userId)->pluck('deal_id');
         } else {
-            if ($bookmarknumber) {
-                $bookmarkedProducts = Bookmark::where('bookmark_number', $bookmarknumber)
-                    ->pluck('deal_id');
+            $bookmarkNumber = session()->get('bookmarknumber');
+            if ($bookmarkNumber) {
+                $bookmarkedProducts = Bookmark::where('bookmark_number', $bookmarkNumber)->pluck('deal_id');
+            } else {
+                $bookmarkedProducts = collect(); // Empty collection if no bookmark number exists
             }
         }
 
-        return view('productfilter', compact('deals', 'brands', 'discounts', 'rating_items', 'priceRanges', 'shortby', 'totaldeals', 'category', 'categorygroup', 'bookmarkedProducts'));
+        return view('productfilter', compact('deals', 'brands', 'discounts', 'rating_items', 'priceRanges', 'shortby', 'totaldeals', 'category', 'categorygroup', 'subCategories', 'bookmarkedProducts'));
     }
 
     public function search(Request $request)

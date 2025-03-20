@@ -22,6 +22,7 @@ Route::fallback(function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('hotpick/{slug}', [HomeController::class, 'dealcategorybasedproducts'])->name('deals.categorybased');
+Route::get('subCategory/{category_slug}/{slug}', [HomeController::class, 'subcategorybasedproducts'])->name('deals.subcategories');
 Route::get('categories/{slug}', [HomeController::class, 'subcategorybasedproducts'])->name('deals.subcategorybased');
 Route::get('deal/{id}', [HomeController::class, 'productdescription'])->name('deal.description');
 Route::get('bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.index');
@@ -76,9 +77,9 @@ Route::get('/contactus', function () {
 });
 
 //social login
-Route::get('auth/{socialprovider}',[AuthController::class,'socialLogin'])->name('google.login');
+Route::get('auth/{socialprovider}', [AuthController::class, 'socialLogin'])->name('google.login');
 
-Route::get('auth/{socialprovider}/callback',[AuthController::class,'socailLoginResponse']);
+Route::get('auth/{socialprovider}/callback', [AuthController::class, 'socailLoginResponse']);
 
 //facebook login
 // Route::get('auth/facebook', function () {
@@ -118,4 +119,3 @@ Route::get('auth/{socialprovider}/callback',[AuthController::class,'socailLoginR
 
 
 require __DIR__ . '/auth.php';
-

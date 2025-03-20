@@ -99,9 +99,10 @@
     <div class="products-container">
         <div id="products-wrapper">
             <section>
-                @include('contents.home.hotpicks')
+                {{-- @include('contents.home.hotpicks') --}}
+                @include('contents.home.subCategory')
                 <div class="container">
-                    <h5 class="pt-0 pb-2">Products</h5>
+                    <h3 class="pt-0 pb-2 h3-styling">Products</h3>
                 </div>
                 @include('contents.home.products')
             </section>

@@ -35,7 +35,8 @@ class Product extends Model
         'specifications',
         'varient',
         'delivery_days',
-        'order'
+        'order',
+        'sub_category_id'
     ];
 
     protected $dates = ['deleted_at', 'start_date', 'end_date'];
@@ -43,6 +44,11 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function subcategory()
+    {
+        return $this->belongsTo(SubCategory::class, 'sub_category_id');
     }
 
     public function shop()
