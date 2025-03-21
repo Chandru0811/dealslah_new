@@ -67,6 +67,18 @@ class ShopController extends Controller
         return $this->ok('Shop Deactivated Successfully.');
     }
 
+    public function directshop($id)
+    {
+        Shop::where('id', $id)->update(['is_direct' => '1']);
+        return $this->ok('Shop has been successfully set as a direct shop.');
+    }
+
+    public function indirectshop($id)
+    {
+        Shop::where('id', $id)->update(['is_direct' => '0']);
+        return $this->ok('Shop has been successfully set as an indirect shop.');
+    }
+
     public function indexproduct()
     {
         $products = Product::orderBy('id', 'desc')->with(['shop:id,legal_name'])->get();
