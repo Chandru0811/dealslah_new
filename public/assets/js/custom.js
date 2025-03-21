@@ -113,7 +113,7 @@ $(document).ready(function () {
                 email: $("#email").val(),
                 phone: $("#mobile").val(),
                 company_id: 40,
-                company: "Dealslah",
+                company: "DealsMachi",
                 lead_status: "PENDING",
                 description_info: $("#description_info").val(),
                 lead_source: "Contact Us",
@@ -195,7 +195,7 @@ $(document).ready(function () {
         };
 
         var laravelRequest = $.ajax({
-            url: "http://127.0.0.1:8000/deals/count/enquire",
+            url: "deals/count/enquire",
             type: "POST",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -286,8 +286,8 @@ $(document).ready(function () {
                 phone: {
                     required: true,
                     digits: true,
-                    minlength: 8,
-                    maxlength: 8,
+                    minlength: 10,
+                    maxlength: 10,
                 },
                 postalcode: {
                     required: true,
@@ -296,6 +296,14 @@ $(document).ready(function () {
                     maxlength: 6,
                 },
                 address: {
+                    required: true,
+                    maxlength: 200,
+                },
+                state: {
+                    required: true,
+                    maxlength: 200,
+                },
+                city: {
                     required: true,
                     maxlength: 200,
                 },
@@ -321,9 +329,9 @@ $(document).ready(function () {
                 },
                 phone: {
                     required: "Please provide a phone number.",
-                    digits: "Phone number must be exactly 8 digits.",
-                    minlength: "Phone number must be exactly 8 digits.",
-                    maxlength: "Phone number must be exactly 8 digits.",
+                    digits: "Phone number must be exactly 10 digits.",
+                    minlength: "Phone number must be exactly 10 digits.",
+                    maxlength: "Phone number must be exactly 10 digits.",
                 },
                 postalcode: {
                     required: "Please provide a postal code.",
@@ -334,6 +342,14 @@ $(document).ready(function () {
                 address: {
                     required: "Please provide an address.",
                     maxlength: "Address may not exceed 200 characters.",
+                },
+                state: {
+                    required: "Please provide your State.",
+                    maxlength: "State may not exceed 200 characters.",
+                },
+                city: {
+                    required: "Please provide your City.",
+                    maxlength: "City may not exceed 200 characters.",
                 },
                 unit: {
                     maxlength: "Additional Info may not exceed 200 characters.",
@@ -399,61 +415,74 @@ $(document).ready(function () {
                                         <div class="d-flex text-start">
                                             <div class="px-1">
                                                 <input type="radio" name="selected_id"
-                                                    id="selected_id_${response.address.id
-                                }"
-                                                    value="${response.address.id
-                                }"
-                                                    ${response.address
-                                    .default === "1"
-                                    ? "checked"
-                                    : ""
-                                } />
+                                                    id="selected_id_${
+                                                        response.address.id
+                                                    }"
+                                                    value="${
+                                                        response.address.id
+                                                    }"
+                                                    ${
+                                                        response.address
+                                                            .default === "1"
+                                                            ? "checked"
+                                                            : ""
+                                                    } />
                                             </div>
                                             <p class="text-turncate fs_common">
                                                 <span class="px-2">
-                                                    ${response.address
-                                    .first_name
-                                } ${response.address.last_name ?? ""
-                                } |
-                                                    <span style="color: #c7c7c7;">&nbsp;+65
-                                                        ${response.address
-                                    .phone
-                                }
+                                                    ${
+                                                        response.address
+                                                            .first_name
+                                                    } ${
+                                response.address.last_name ?? ""
+                            } |
+                                                    <span style="color: #c7c7c7;">&nbsp;+91
+                                                        ${
+                                                            response.address
+                                                                .phone
+                                                        }
                                                     </span>
                                                 </span><br>
                                                 <span class="px-2" style="color: #c7c7c7">
-                                                    ${response.address.address
-                                }- ${response.address.postalcode
-                                }.
+                                                    ${
+                                                        response.address.address
+                                                    }, ${
+                                response.address.city
+                            }, ${response.address.state} - ${
+                                response.address.postalcode
+                            }.
                                                 </span>
                                                 <br>
-                                                ${response.address.default ===
-                                    "1"
-                                    ? '<span class="badge badge_primary">Default</span>'
-                                    : ""
-                                }
+                                                ${
+                                                    response.address.default ===
+                                                    "1"
+                                                        ? '<span class="badge badge_primary">Default</span>'
+                                                        : ""
+                                                }
                                             </p>
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="d-flex align-items-center justify-content-end">
-                                            <div class="d-flex delBadge gap-2">
+                                            <div class="d-flex gap-2 delBadge">
                                                 <button type="button" class="badge_edit" data-bs-toggle="modal"
-                                                    data-address-id="${response.address.id
-                                }" data-bs-target="#editAddressModal">
+                                                    data-address-id="${
+                                                        response.address.id
+                                                    }" data-bs-target="#editAddressModal">
                                                     Edit
                                                 </button>
-                                                ${response.address.default ===
-                                    "0"
-                                    ? `
+                                                ${
+                                                    response.address.default ===
+                                                    "0"
+                                                        ? `
                                                     <button type="button" class="badge_del"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#deleteAddressModal"
                                                         data-address-id="${response.address.id}">
                                                         Delete
                                                     </button>`
-                                    : ""
-                                }
+                                                        : ""
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -463,18 +492,25 @@ $(document).ready(function () {
                                 $(
                                     '.modal-body p strong:contains("Phone :")'
                                 ).parent().html(`
-                                    <strong>Phone :</strong> (+65) ${response.address.phone || "--"
+                                    <strong>Phone :</strong> (+91) ${
+                                        response.address.phone || "--"
                                     }
                                 `);
                                 var profileAddress = `
                                     <p>
-                                        <strong>${response.address.first_name
-                                    } ${response.address.last_name ?? ""
-                                    } (+65)
-                                            ${response.address.phone
-                                    }</strong>&nbsp;&nbsp;<br>
-                                        ${response.address.address}- ${response.address.postalcode
-                                    }
+                                        <strong>${
+                                            response.address.first_name
+                                        } ${
+                                    response.address.last_name ?? ""
+                                } (+91)
+                                            ${
+                                                response.address.phone
+                                            }</strong>&nbsp;&nbsp;<br>
+                                        ${response.address.address}, ${
+                                    response.address.city
+                                }, ${response.address.state} - ${
+                                    response.address.postalcode
+                                }
                                         <span>
                                             <span class="badge badge_danger py-1">Default</span>&nbsp;&nbsp;
                                         </span>
@@ -502,11 +538,12 @@ $(document).ready(function () {
                                     $("#moveCartToCheckout").after(`
                                         <form action="/cartCheckout" method="POST" id="cartCheckoutForm">
                                             <input type="hidden" name="_token" value="${$(
-                                        'meta[name="csrf-token"]'
-                                    ).attr("content")}">
+                                                'meta[name="csrf-token"]'
+                                            ).attr("content")}">
                                             <input type="hidden" name="cart_id"  value="${cartId}">
-                                            <input type="hidden" name="address_id" id="addressID" value="${response.address.id
-                                        }">
+                                            <input type="hidden" name="address_id" id="addressID" value="${
+                                                response.address.id
+                                            }">
                                             <button type="submit" class="btn check_out_btn">
                                                 Checkout
                                             </button>
@@ -595,6 +632,14 @@ $(document).ready(function () {
                     required: true,
                     maxlength: 200,
                 },
+                state: {
+                    required: true,
+                    maxlength: 200,
+                },
+                city: {
+                    required: true,
+                    maxlength: 200,
+                },
                 type: {
                     required: true,
                 },
@@ -618,7 +663,7 @@ $(document).ready(function () {
                 phone: {
                     required: "Please provide a phone number.",
                     digits: "Phone number must be exactly 8 digits.",
-                    maxlength: "Phone number must be exactly 8 digits.",
+                    maxlength: "Phone number must be exactly 10 digits.",
                 },
                 postalcode: {
                     required: "Please provide a postal code.",
@@ -632,6 +677,14 @@ $(document).ready(function () {
                 },
                 type: {
                     required: "Please provide the address type.",
+                },
+                state: {
+                    required: "Please provide your State.",
+                    maxlength: "State may not exceed 200 characters.",
+                },
+                city: {
+                    required: "Please provide your City.",
+                    maxlength: "City may not exceed 200 characters.",
                 },
                 unit: {
                     maxlength: "Additional Info may not exceed 200 characters.",
@@ -690,90 +743,110 @@ $(document).ready(function () {
                                 .closest(".row")
                                 .remove();
                             finddiv.append(`
-                                    <div class="row p-2">
-                                        <div class="col-10">
-                                            <div class="d-flex text-start">
-                                                <div class="px-1">
-                                                    <input type="radio" name="selected_id"
-                                                        id="selected_id_${response.address.id
-                                }"
-                                                        value="${response.address.id
-                                }"
-                                                        ${response.address
-                                    .default === "1"
-                                    ? "checked"
-                                    : ""
-                                } />
-                                                </div>
-                                                <p class="text-turncate fs_common">
-                                                    <span class="px-2">
-                                                        ${response.address
-                                    .first_name
-                                } ${response.address.last_name ?? ""
-                                } |
-                                                        <span style="color: #c7c7c7;">&nbsp;+65 ${response.address.phone
-                                }</span>
-                                                    </span><br>
-                                                    <span class="px-2"
-                                                        style="color: #c7c7c7">${response.address.address
-                                }- ${response.address.postalcode
-                                }.
-                                                    </span>
-                                                    <br>
-                                                    ${response.address.default ===
-                                    "1"
-                                    ? '<span class="badge badge_primary">Default</span>'
-                                    : ""
-                                }
-                                                </p>
+                                <div class="row p-2">
+                                    <div class="col-10">
+                                        <div class="d-flex text-start">
+                                            <div class="px-1">
+                                                <input type="radio" name="selected_id"
+                                                    id="selected_id_${
+                                                        response.address.id
+                                                    }"
+                                                    value="${
+                                                        response.address.id
+                                                    }"
+                                                    ${
+                                                        response.address
+                                                            .default === "1"
+                                                            ? "checked"
+                                                            : ""
+                                                    } />
                                             </div>
+                                            <p class="text-turncate fs_common">
+                                                <span class="px-2">
+                                                    ${
+                                                        response.address
+                                                            .first_name
+                                                    } ${
+                                response.address.last_name ?? ""
+                            } |
+                                                    <span style="color: #c7c7c7;">&nbsp;+91 ${
+                                                        response.address.phone
+                                                    }</span>
+                                                </span><br>
+                                                <span class="px-2"
+                                                    style="color: #c7c7c7">${
+                                                        response.address.address
+                                                    }, ${
+                                response.address.city
+                            }, ${response.address.state} - ${
+                                response.address.postalcode
+                            }.
+                                                </span>
+                                                <br>
+                                                ${
+                                                    response.address.default ===
+                                                    "1"
+                                                        ? '<span class="badge badge_primary">Default</span>'
+                                                        : ""
+                                                }
+                                            </p>
                                         </div>
-                                        <div class="col-2">
-                                            <div class="d-flex align-items-center justify-content-end">
-                                                <div class="d-flex delBadge gap-2">
-                                                    <button type="button" class="badge_edit" data-bs-toggle="modal"
-                                                        data-address-id="${response.address.id
-                                }" data-bs-target="#editAddressModal">
-                                                        Edit
-                                                    </button>
-                                                    ${response.address.default ===
-                                    "0"
-                                    ? `
-                                                        <button type="button" class="badge_del"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#deleteAddressModal"
-                                                            data-address-id="${response.address.id}">
-                                                            Delete
-                                                        </button>`
-                                    : ""
-                                }
-                                                </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="d-flex align-items-center justify-content-end">
+                                            <div class="d-flex gap-2 delBadge">
+                                                <button type="button" class="badge_edit" data-bs-toggle="modal"
+                                                    data-address-id="${
+                                                        response.address.id
+                                                    }" data-bs-target="#editAddressModal">
+                                                    Edit
+                                                </button>
+                                                ${
+                                                    response.address.default ===
+                                                    "0"
+                                                        ? `
+                                                    <button type="button" class="badge_del"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteAddressModal"
+                                                        data-address-id="${response.address.id}">
+                                                        Delete
+                                                    </button>`
+                                                        : ""
+                                                }
                                             </div>
                                         </div>
                                     </div>
-                                `);
+                                </div>
+                            `);
 
                             if (response.address.default === "1") {
                                 $(
                                     '.modal-body p strong:contains("Phone :")'
                                 ).parent().html(`
-                                        <strong>Phone :</strong> (+65) ${response.address.phone || "--"
+                                    <strong>Phone :</strong> (+91) ${
+                                        response.address.phone || "--"
                                     }
-                                    `);
+                                `);
                                 $(".selected-address").html(`
-                                        <p>
-                                            <strong>${response.address.first_name
-                                    } ${response.address.last_name ?? ""
-                                    } (+65)
-                                                ${response.address.phone
-                                    }</strong>&nbsp;&nbsp;<br>
-                                            ${response.address.address}- ${response.address.postalcode
-                                    }
-                                            <span>
-                                                <span class="badge badge_danger py-1">Default</span>&nbsp;&nbsp;
-                                            </span>
-                                        </p>
-                                    `);
+                                    <p>
+                                        <strong>${
+                                            response.address.first_name
+                                        } ${
+                                    response.address.last_name ?? ""
+                                } (+91)
+                                            ${
+                                                response.address.phone
+                                            }</strong>&nbsp;&nbsp;<br>
+                                        ${response.address.address}, ${
+                                    response.address.city
+                                }, ${response.address.state} - ${
+                                    response.address.postalcode
+                                }
+                                        <span>
+                                            <span class="badge badge_danger py-1">Default</span>&nbsp;&nbsp;
+                                        </span>
+                                    </p>
+                                `);
                             }
 
                             // Show the updated address modal
@@ -824,6 +897,8 @@ $(document).ready(function () {
             $("#address").val(address.address);
             $("#unit").val(address.unit ?? "");
             $("#address_id").val(address.id ?? "");
+            $("#state").val(address.state ?? "");
+            $("#city").val(address.city ?? "");
 
             // Set Address Type
             if (address.type === "home_mode") {
@@ -960,13 +1035,17 @@ $(document).ready(function () {
             function updateSelectedAddress(address) {
                 if (address) {
                     const addressHtml = `
-                            <strong>${address.first_name} ${address.last_name ?? ""
-                        } (+65) ${address.phone}</strong><br>
-                            ${address.address}- ${address.postalcode}
-                            ${address.default
-                            ? '<span class="badge badge_danger py-1">Default</span>'
-                            : ""
-                        }
+                            <strong>${address.first_name} ${
+                        address.last_name ?? ""
+                    } (+91) ${address.phone}</strong><br>
+                            ${address.address}, ${address.city}, ${
+                        address.state
+                    } - ${address.postalcode}
+                            ${
+                                address.default
+                                    ? '<span class="badge badge_danger py-1">Default</span>'
+                                    : ""
+                            }
                         `;
                     $("#addressID").val(address.id);
                     $(".selected-address").html(addressHtml);
@@ -995,7 +1074,7 @@ $(document).ready(function () {
             if (type === "success") {
                 textColor = "#16A34A";
                 icon =
-                    '<i class="fa-check-circle fa-solid" style="color: #16A34A"></i>';
+                    '<i class="fa-solid fa-check-circle" style="color: #16A34A"></i>';
                 var alertClass = "toast-success";
             } else {
                 textColor = "#EF4444";
@@ -1005,7 +1084,7 @@ $(document).ready(function () {
             }
 
             var alertHtml = `
-              <div class="alert alert-dismissible ${alertClass} fade show" role="alert" style="position: fixed; top: 70px; right: 40px; z-index: 1050; color: ${textColor};">
+              <div class="alert ${alertClass} alert-dismissible fade show" role="alert" style="position: fixed; top: 70px; right: 40px; z-index: 1050; color: ${textColor};">
                 <div class="toast-content">
                     <div class="toast-icon">
                         ${icon}
@@ -1040,8 +1119,8 @@ $(document).ready(function () {
         autoplay: false,
         dots: false,
         navText: [
-            '<span class="custom-prev-btn"><i class="fa-arrow-left fa-solid"></i></span>',
-            '<span class="custom-next-btn"><i class="fa-arrow-right fa-solid"></i></span>',
+            '<span class="custom-prev-btn"><i class="fa-solid fa-arrow-left"></i></span>',
+            '<span class="custom-next-btn"><i class="fa-solid fa-arrow-right"></i></span>',
         ],
         responsive: {
             0: {
@@ -1124,7 +1203,7 @@ $(document).ready(function () {
 
             // Add a loader inside the button
             submitButton.html(
-                `<span class="me-2 spinner-border spinner-border-sm"></span> Logging in...`
+                `<span class="spinner-border spinner-border-sm me-2"></span> Logging in...`
             );
 
             // Simulate a delay (optional)
@@ -1384,7 +1463,7 @@ function copySpanText(element, event) {
     var dealId = element.closest("a").getAttribute("href").split("/").pop();
 
     $.ajax({
-        url: "http://127.0.0.1:8000/deals/coupon/copied",
+        url: "deals/coupon/copied",
         type: "POST",
         data: {
             _token: $('meta[name="csrf-token"]').attr("content"),
@@ -1416,7 +1495,7 @@ function copyLinkToClipboard(element, event, dealId) {
     document.body.removeChild(tempInput);
 
     $.ajax({
-        url: "http://127.0.0.1:8000/deals/count/share",
+        url: "deals/count/share",
         type: "POST",
         data: {
             _token: $('meta[name="csrf-token"]').attr("content"),
@@ -1486,7 +1565,7 @@ document
             var shareUrl = event.target.closest("a").href;
 
             $.ajax({
-                url: "http://127.0.0.1:8000/deals/count/share",
+                url: "deals/count/share",
                 type: "POST",
                 data: {
                     _token: $('meta[name="csrf-token"]').attr("content"),
@@ -1508,7 +1587,7 @@ document
 
 function clickCount(dealId) {
     $.ajax({
-        url: "http://127.0.0.1:8000/deals/count/click",
+        url: "deals/count/click",
         type: "POST",
         data: {
             _token: $('meta[name="csrf-token"]').attr("content"),
@@ -1525,7 +1604,7 @@ function clickCount(dealId) {
 
 function enquireCount(dealId) {
     $.ajax({
-        url: "http://127.0.0.1:8000/deals/count/enquire",
+        url: "deals/count/enquire",
         type: "POST",
         data: {
             _token: $('meta[name="csrf-token"]').attr("content"),
@@ -1546,7 +1625,7 @@ function sendEnquiry(dealId, shopMobile, productName, productDescription) {
     const whatsappUrl =
         `https://wa.me/65${shopMobile}?text=` +
         encodeURIComponent(
-            `*Hello! I visited dealslah website and found an amazing product:*\n\n${productName}\n${productDescription}\n\nHere is the product page: ${window.location.href}`
+            `*Hello! I visited dealsmachi website and found an amazing product:*\n\n${productName}\n${productDescription}\n\nHere is the product page: ${window.location.href}`
         );
 
     window.open(whatsappUrl, "_blank");
@@ -1574,28 +1653,28 @@ function showAddress(country) {
     var phoneNumber = document.getElementById("phone-number");
 
     if (country === "india") {
-        phoneLink.href = "tel:+6588941306";
-        phoneNumber.innerHTML = "+65 8894 1306";
+        phoneLink.href = "tel:+9188941306";
+        phoneNumber.innerHTML = "+91 8894 1306";
     } else if (country === "india") {
-        phoneLink.href = "tel:+6588941306";
-        phoneNumber.innerHTML = "+65 8894 1306";
+        phoneLink.href = "tel:+9188941306";
+        phoneNumber.innerHTML = "+91 8894 1306";
     }
 }
 
-function selectPaymentOption(optionId) {
-    document.querySelectorAll(".card.payment-option").forEach((card) => {
-        card.classList.remove("selected");
-    });
+// function selectPaymentOption(optionId) {
+//     document.querySelectorAll(".card.payment-option").forEach((card) => {
+//         card.classList.remove("selected");
+//     });
 
-    const selectedCard = document.getElementById(optionId).closest(".card");
-    selectedCard.classList.add("selected");
+//     const selectedCard = document.getElementById(optionId).closest(".card");
+//     selectedCard.classList.add("selected");
 
-    document.getElementById(optionId).checked = true;
+//     document.getElementById(optionId).checked = true;
 
-    $("#checkoutForm")
-        .validate()
-        .element("#" + optionId);
-}
+//     $("#checkoutForm")
+//         .validate()
+//         .element("#" + optionId);
+// }
 
 $(document).ready(function () {
     const dealType = parseInt($("#checkoutForm").data("deal-type"), 10);
@@ -1623,6 +1702,8 @@ $(document).ready(function () {
                 maxlength: 10,
             },
             street: { required: true },
+            city: { required: true },
+            state: { required: true },
             country: { required: true },
             zipCode: {
                 required: true,
@@ -1654,6 +1735,8 @@ $(document).ready(function () {
                 maxlength: "Mobile number must be 10 digits",
             },
             street: "Street is required",
+            city: "City is required",
+            state: "State is required",
             country: "Country is required",
             zipCode: {
                 required: "Zip Code is required",
@@ -1690,14 +1773,12 @@ $(document).ready(function () {
 
         const isValid = $checkoutForm.valid();
 
-        if (!isValid) {
-            showMessage("Please select payment type.", "error");
-            return;
+        if (isValid) {
+            $placeOrderSpinner.removeClass("d-none");
+            $placeOrderSpinner.addClass("show");
+
+            this.submit();
         }
-
-        $placeOrderSpinner.removeClass("d-none").addClass("show");
-
-        this.submit();
     });
 });
 
@@ -1817,16 +1898,13 @@ $(document).ready(function () {
     // Initialize the event handlers
     handleAddBookmark();
     handleRemoveBookmark();
-    handleDescAddBookmark();
-    handleDescRemoveBookmark();
     updateBookmarkCount();
 
     // Initial Load of Bookmark Count
     function loadBookmarkCount() {
         let bookmarknumber = localStorage.getItem("bookmarknumber") || null;
-        console.log(bookmarknumber);
         $.ajax({
-            url: "http://127.0.0.1:8000/totalbookmark",
+            url: "totalbookmark",
             method: "GET",
             data: {
                 bookmarknumber: bookmarknumber,
@@ -1854,6 +1932,7 @@ $(document).ready(function () {
 
 // Function to update the bookmark count
 function updateBookmarkCount(count) {
+    console.log(count);
     $(".totalItemsCount").each(function () {
         if (count > 0) {
             $(this).text(count).css({
@@ -1877,15 +1956,14 @@ function handleAddBookmark() {
             e.preventDefault();
             let dealId = $(this).data("deal-id");
             let bookmarknumber = localStorage.getItem("bookmarknumber") || null;
-            console.log(bookmarknumber);
             $.ajax({
-                url: `http://127.0.0.1:8000/bookmark/${dealId}/add`,
+                url: `bookmark/${dealId}/add`,
                 method: "POST",
                 data: {
                     bookmarknumber: bookmarknumber,
                 },
                 success: function (response) {
-                    console.log(response);
+                    //console.log(response);
                     localStorage.setItem(
                         "bookmarknumber",
                         response.bookmarknumber
@@ -1898,13 +1976,13 @@ function handleAddBookmark() {
                         .addClass("remove-bookmark");
                     button.html(`
                         <p style="height:fit-content;cursor:pointer" class="p-1 px-2">
-                            <i class="bookmark-icon fa-bookmark fa-solid" style="color: #EF4444;"></i>
+                            <i class="fa-solid fa-heart bookmark-icon" style="color: #ff0060;"></i>
                         </p>
                     `);
 
                     handleRemoveBookmark();
                 },
-                error: function (xhr) { },
+                error: function (xhr) {},
             });
         });
 }
@@ -1918,7 +1996,7 @@ function handleRemoveBookmark() {
             let dealId = $(this).data("deal-id");
             let bookmarknumber = localStorage.getItem("bookmarknumber") || null;
             $.ajax({
-                url: `http://127.0.0.1:8000/bookmark/${dealId}/remove`,
+                url: `bookmark/${dealId}/remove`,
                 method: "DELETE",
                 data: {
                     bookmarknumber: bookmarknumber,
@@ -1934,89 +2012,11 @@ function handleRemoveBookmark() {
                         .addClass("add-bookmark");
                     button.html(`
                         <p style="height:fit-content;cursor:pointer" class="p-1 px-2">
-                            <i class="bookmark-icon fa-bookmark fa-regular" style="color: #EF4444;"></i>
+                            <i class="fa-regular fa-heart bookmark-icon" style="color: #ff0060;"></i>
                         </p>
                     `);
 
                     handleAddBookmark(); // Re-bind the add bookmark handler
-                },
-                error: function (xhr) {
-                    // Handle error (optional)
-                },
-            });
-        });
-}
-
-//Add Bookmark for Description
-function handleDescAddBookmark() {
-    $(".desc-add-bookmark")
-        .off("click")
-        .on("click", function (e) {
-            e.preventDefault();
-            let dealId = $(this).data("deal-id");
-            let bookmarknumber = localStorage.getItem("bookmarknumber") || null;
-            console.log(bookmarknumber);
-            $.ajax({
-                url: `http://127.0.0.1:8000/bookmark/${dealId}/add`,
-                method: "POST",
-                data: {
-                    bookmarknumber: bookmarknumber,
-                },
-                success: function (response) {
-                    console.log(response);
-                    localStorage.setItem(
-                        "bookmarknumber",
-                        response.bookmarknumber
-                    );
-                    updateBookmarkCount(response.total_items);
-
-                    let button = $(`.desc-add-bookmark[data-deal-id="${dealId}"]`);
-                    button
-                        .removeClass("desc-add-bookmark")
-                        .addClass("desc-remove-bookmark");
-                    button.html(`
-                        <p style="height:fit-content;cursor:pointer" class="p-1 px-2">
-                            <i class="bookmark-icon fa-bookmark fa-solid fa-xl" style="color: #EF4444;"></i>
-                        </p>
-                    `);
-
-                    handleDescRemoveBookmark();
-                },
-                error: function (xhr) { },
-            });
-        });
-}
-
-//Remove Bookmark for Description
-function handleDescRemoveBookmark() {
-    $(".desc-remove-bookmark")
-        .off("click")
-        .on("click", function (e) {
-            e.preventDefault();
-            let dealId = $(this).data("deal-id");
-            let bookmarknumber = localStorage.getItem("bookmarknumber") || null;
-            $.ajax({
-                url: `http://127.0.0.1:8000/bookmark/${dealId}/remove`,
-                method: "DELETE",
-                data: {
-                    bookmarknumber: bookmarknumber,
-                },
-                success: function (response) {
-                    updateBookmarkCount(response.total_items);
-
-                    let button = $(
-                        `.desc-remove-bookmark[data-deal-id="${dealId}"]`
-                    );
-                    button
-                        .removeClass("desc-remove-bookmark")
-                        .addClass("desc-add-bookmark");
-                    button.html(`
-                        <p style="height:fit-content;cursor:pointer" class="p-1 px-2">
-                            <i class="bookmark-icon fa-bookmark fa-regular fa-xl" style="color: #EF4444;"></i>
-                        </p>
-                    `);
-
-                    handleDescAddBookmark(); // Re-bind the add bookmark handler
                 },
                 error: function (xhr) {
                     // Handle error (optional)
@@ -2042,7 +2042,7 @@ function showMessage(message, type) {
     if (type === "success") {
         textColor = "#16A34A";
         icon =
-            '<i class="fa-cart-shopping fa-regular" style="color: #16A34A"></i>';
+            '<i class="fa-regular fa-cart-shopping" style="color: #16A34A"></i>';
         var alertClass = "toast-success";
     } else {
         textColor = "#EF4444";
@@ -2052,7 +2052,7 @@ function showMessage(message, type) {
     }
 
     var alertHtml = `
-          <div class="alert alert-dismissible ${alertClass} fade show" role="alert" style="position: fixed; top: 70px; right: 40px; z-index: 1050; color: ${textColor};">
+          <div class="alert ${alertClass} alert-dismissible fade show" role="alert" style="position: fixed; top: 70px; right: 40px; z-index: 1050; color: ${textColor};">
             <div class="toast-content">
                 <div class="toast-icon">
                     ${icon}
@@ -2133,8 +2133,8 @@ function updateCartUI(cartItems) {
     const imagePath =
         cartItems.product.product_media.length > 0
             ? cartItems.product.product_media.find(
-                (media) => media.order === 1 && media.type === "image"
-            )?.resize_path
+                  (media) => media.order === 1 && media.type === "image"
+              )?.resize_path
             : "assets/images/home/noImage.webp";
 
     const productName =
@@ -2144,13 +2144,15 @@ function updateCartUI(cartItems) {
 
     const newCartItem = `
         <div class="d-flex cart-item-drop">
-            <img src="http://127.0.0.1:8000/${imagePath}" class="dropdown_img img-fluid" alt="${cartItems.product.name}" />
+            <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${
+        cartItems.product.name
+    }" />
             <div class="text-start">
-                <p class="m-0 p-0 text-start text-wrap px-1" style="font-size: 12px; white-space: normal;">
+                <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
                     ${productName}
                 </p>
                 <p class="px-1 text_size" style="color: #EF4444">
-                    $${cartItems.discount.toLocaleString()}
+                    ₹${cartItems.discount.toLocaleString()}
                 </p>
             </div>
         </div>
@@ -2166,7 +2168,7 @@ function updateCartUI(cartItems) {
 
     if (cartItemCount > 6 && $(".cart_items .cartButton2").length === 0) {
         $(".cart_items").append(`
-            <div class="text-end cartButton2 mb-2" style="cursor: pointer;">
+            <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
                 <a style="font-size: 13px" class="cart-screen">View All</a>
             </div>
         `);
@@ -2285,6 +2287,11 @@ $(document).ready(function () {
         const productId = $(this).data("product-id");
         let cartnumber = localStorage.getItem("cartnumber") || null;
 
+        $(document).on("click", ".servicePriceBtn", function () {
+            const dealId = $(this).data("id");
+            fetchServicePrice(dealId);
+        });
+
         $.ajax({
             url: "/saveforlater/add",
             type: "POST",
@@ -2308,17 +2315,19 @@ $(document).ready(function () {
 
                 $(`.cart-item[data-product-id="${productId}"]`).remove();
 
-                $(`.cart_items .d-flex[data-product-id="${productId}"]`).remove();
+                $(
+                    `.cart_items .d-flex[data-product-id="${productId}"]`
+                ).remove();
 
                 if (response.updatedCart) {
                     $(".subtotal").text(
-                        `$${response.updatedCart.subtotal.toFixed(2)}`
+                        "₹" + response.updatedCart.subtotal.toLocaleString()
                     );
                     $(".discount").text(
-                        `$${response.updatedCart.discount.toFixed(2)}`
+                        "₹" + response.updatedCart.discount.toLocaleString()
                     );
                     $(".total").text(
-                        `$${response.updatedCart.grand_total.toFixed(2)}`
+                        "₹" + response.updatedCart.grand_total.toLocaleString()
                     );
                     $(".quantity-value").text(response.updatedCart.quantity);
                 }
@@ -2332,26 +2341,44 @@ $(document).ready(function () {
                     if (response.nextItem) {
                         $(".cartButton2").hide();
 
-                        if ($(`.cart_items .d-flex[data-product-id="${response.nextItem.product.id}"]`).length === 0) {
-                            const imagePath = response.nextItem.product.product_media.length > 0
-                                ? response.nextItem.product.product_media.find(
-                                    (media) => media.order === 1 && media.type === "image"
-                                )?.resize_path
-                                : "assets/images/home/noImage.webp";
+                        if (
+                            $(
+                                `.cart_items .d-flex[data-product-id="${response.nextItem.product.id}"]`
+                            ).length === 0
+                        ) {
+                            const imagePath =
+                                response.nextItem.product.product_media.length >
+                                0
+                                    ? response.nextItem.product.product_media.find(
+                                          (media) =>
+                                              media.order === 1 &&
+                                              media.type === "image"
+                                      )?.resize_path
+                                    : "assets/images/home/noImage.webp";
 
-                            const productName = response.nextItem.product.name.length > 20
-                                ? response.nextItem.product.name.substring(0, 20) + "..."
-                                : response.nextItem.product.name;
+                            const productName =
+                                response.nextItem.product.name.length > 20
+                                    ? response.nextItem.product.name.substring(
+                                          0,
+                                          20
+                                      ) + "..."
+                                    : response.nextItem.product.name;
 
                             $(".cart_items").append(`
-                                <div class="d-flex" data-product-id="${response.nextItem.product.id}">
-                                    <img src="http://127.0.0.1:8000/${imagePath}" class="dropdown_img img-fluid" alt="${response.nextItem.product.name}" />
+                                <div class="d-flex" data-product-id="${
+                                    response.nextItem.product.id
+                                }">
+                                    <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${
+                                response.nextItem.product.name
+                            }" />
                                     <div class="text-start">
-                                        <p class="m-0 p-0 text-start text-wrap px-1" style="font-size: 12px; white-space: normal;">
+                                        <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
                                             ${productName}
                                         </p>
-                                        <p class="px-1 text_size" style="color: #EF4444">
-                                            $${parseFloat(response.nextItem.discount).toFixed(2)}
+                                        <p class="px-1 text_size" style="color: #ff0060">
+                                            ₹${parseFloat(
+                                                response.nextItem.discount
+                                            ).toFixed(0)}
                                         </p>
                                     </div>
                                 </div>
@@ -2359,7 +2386,7 @@ $(document).ready(function () {
 
                             if (response.cartItemCount > 6) {
                                 $(".cart_items").append(`
-                                    <div class="text-end cartButton2 mb-2" style="cursor: pointer;">
+                                    <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
                                         <a style="font-size: 13px" class="cart-screen">View All</a>
                                     </div>
                                 `);
@@ -2370,13 +2397,13 @@ $(document).ready(function () {
 
                 if (response.cartItemCount === 0) {
                     $(".cart-items-container").after(`
-                         <div class="col-12 d-flex flex-column align-items-center justify-content-center text-center empty-cart mt-0">
+                         <div class="empty-cart col-12 text-center d-flex flex-column align-items-center justify-content-center mt-0">
                              <img src="assets/images/home/cart_empty.webp" alt="Empty Cart"
-                                 class="empty_cart_img img-fluid">
-                             <p class="pt-5" style="color: #EF4444;font-size: 22px">Your Cart is Currently Empty</p>
+                                 class="img-fluid empty_cart_img">
+                             <p class="pt-5" style="color: #ff0060;font-size: 22px">Your Cart is Currently Empty</p>
                              <p class="" style="color: #6C6C6C;font-size: 16px">Looks Like You Have Not Added Anything To </br>
                                  Your Cart. Go Ahead & Explore Top Categories.</p>
-                             <a href="/" class="btn mt-2 showmoreBtn">Shop More</a>
+                             <a href="/" class="btn showmoreBtn mt-2">Shop More</a>
                          </div>
                     `);
                     $(".cart-items-container").hide();
@@ -2396,101 +2423,114 @@ $(document).ready(function () {
                     const imagePath =
                         response.deal.product_media.length > 0
                             ? response.deal.product_media.find(
-                                (media) =>
-                                    media.order === 1 &&
-                                    media.type === "image"
-                            )?.resize_path
+                                  (media) =>
+                                      media.order === 1 &&
+                                      media.type === "image"
+                              )?.resize_path
                             : "assets/images/home/noImage.webp";
 
                     const deliveryDate =
                         response.deal.deal_type === 1
                             ? response.deal.delivery_days &&
-                                response.deal.delivery_days > 0
+                              response.deal.delivery_days > 0
                                 ? (() => {
-                                    const currentDate = new Date();
-                                    currentDate.setTime(
-                                        currentDate.getTime() +
-                                        response.deal.delivery_days *
-                                        24 *
-                                        60 *
-                                        60 *
-                                        1000
-                                    );
-                                    const day = String(
-                                        currentDate.getDate()
-                                    ).padStart(2, "0");
-                                    const month = String(
-                                        currentDate.getMonth() + 1
-                                    ).padStart(2, "0");
-                                    const year = currentDate.getFullYear();
+                                      const currentDate = new Date();
+                                      currentDate.setTime(
+                                          currentDate.getTime() +
+                                              response.deal.delivery_days *
+                                                  24 *
+                                                  60 *
+                                                  60 *
+                                                  1000
+                                      );
+                                      const day = String(
+                                          currentDate.getDate()
+                                      ).padStart(2, "0");
+                                      const month = String(
+                                          currentDate.getMonth() + 1
+                                      ).padStart(2, "0");
+                                      const year = currentDate.getFullYear();
 
-                                    return `${day}-${month}-${year}`;
-                                })()
+                                      return `${day}-${month}-${year}`;
+                                  })()
                                 : "No delivery date available"
-                            : '<span style="color: #22cb00">Currently Services are free through Dealslah</span>';
+                            : '<span style="color: #22cb00">Currently Services are free through DealsMachi</span>';
 
                     const discountPercentage = Math.round(
                         response.deal.discount_percentage
                     );
 
                     const stockStatus =
-                    response.deal &&
-                    response.deal.shop &&
-                    response.deal.shop.is_direct === 1
-                        ? response.deal.stock === 0
-                            ? '<span class="product-out-of-stock">Out of Stock</span>'
-                            : '<span class="product-stock-badge">In Stock</span>'
-                        : "";
+                        response.deal &&
+                        response.deal.shop &&
+                        response.deal.shop.is_direct === 1
+                            ? response.deal.stock === 0
+                                ? '<span class="product-out-of-stock">Out of Stock</span>'
+                                : '<span class="product-stock-badge">In Stock</span>'
+                            : "";
 
                     const savedItemHtml = `
-                        <div class="saved-item" data-product-id="${response.deal.id
+                        <div class="saved-item" data-product-id="${
+                            response.deal.id
                         }">
                             <div class="row p-4">
-                                <div class="col-md-3 d-flex flex-column align-items-center justify-content-center">
-                                    <div class="d-flex align-items-center justify-content-center">
+                                <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                                    <div class="d-flex justify-content-center align-items-center">
                                         <img src="${imagePath}" style="max-width: 100%; max-height: 100%;"
                                             alt="${response.deal.name}" />
                                     </div>
                                 </div>
                                 <div class="col-md-5">
-                                    <a href="/deal/${response.deal.id
-                        }" style="color: #000;"
-                                        onclick="clickCount('${response.deal.id
-                        }')">
-                                        <p style="font-size: 18px;font-weight:500">${response.deal.name
-                        }</p>
+                                    <a href="/deal/${
+                                        response.deal.id
+                                    }" style="color: #000;"
+                                        onclick="clickCount('${
+                                            response.deal.id
+                                        }')">
+                                        <p style="font-size: 18px;font-weight:500">${
+                                            response.deal.name
+                                        }</p>
                                     </a>
-                                    <p class="truncated-description" style="font-size: 16px">${response.deal.description
-                        }</p>
-                                    ${response.deal.deal_type === 1
-                            ? `
-                                        <div class="my-2 rating">
+                                    <p class="truncated-description" style="font-size: 16px">${
+                                        response.deal.description
+                                    }</p>
+                                    ${
+                                        response.deal.deal_type === 1
+                                            ? `
+                                        <div class="rating my-2">
                                             <span>Delivery Date :</span><span class="stars">
                                                 <span>${deliveryDate}</span>
                                             </span>
                                         </div>
                                     `
-                            : `
-                                        <div class="mb-3 mt-3 rating">
-                                            <span style="color: #22cb00">Currently Services are free through Dealslah</span>
+                                            : `
+                                        <div class="rating mt-3 mb-3">
+                                            <span style="color: #22cb00">Currently Services are free through DealsMachi</span>
                                         </div>
                                     `
-                        }
-                                    ${response.deal.shop?.show_name_on_website
-                            ? `<p style="color: #AAAAAA">Seller Company Name: ${response.deal.shop.legal_name}</p>`
-                            : ""
-                        }
-                                    <div class="d-flex mb-3 ms-0">
+                                    }
+                                    <p style="color: #AAAAAA;font-size:14px;">Seller : ${
+                                        response.deal.shop.legal_name
+                                    }</p>
+                                    <div class="d-flex ms-0 mb-3">
                                         <span style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
-                                            $${response.deal.original_price}
+                                            ₹${Math.round(
+                                                response.deal.original_price
+                                            ).toLocaleString("en-IN", {
+                                                maximumFractionDigits: 0,
+                                            })}
                                         </span>
-                                        <span class="ms-1" style="font-size:18px;font-weight:500;color:#EF4444">
-                                            $${response.deal.discounted_price}
+                                        <span class="ms-1" style="font-size:18px;font-weight:500;color:#ff0060">
+                                             ₹${Math.round(
+                                                 response.deal.discounted_price
+                                             ).toLocaleString("en-IN", {
+                                                 maximumFractionDigits: 0,
+                                             })}
                                         </span>
                                         <span class="ms-1" style="font-size:18px;font-weight:500; color:#28A745">
                                              ${discountPercentage}% Off
                                         </span>
-                                         <div class="ms-2 mt-2" id="totalStock">${stockStatus}</div>
+                                        <div class="ms-2 mt-2" id="totalStock">${stockStatus}</div>
                                     </div>
                                     ${
                                         response.deal.shop.is_direct === 1
@@ -2500,8 +2540,8 @@ $(document).ready(function () {
                                                   new Date()
                                                 ? `
                                                     <button type="button" style="height: fit-content;" id="servicePrice"
-                                                        data-id=""
-                                                        class="p-1 text-nowrap special-price">
+                                                          data-id="${response.deal.id}"
+                                                        class="p-1 text-nowrap special-price servicePriceBtn">
                                                         <span>&nbsp;<i class="fa-solid fa-stopwatch-20"></i>&nbsp;
                                                             &nbsp;Special Price
                                                             &nbsp; &nbsp;
@@ -2511,11 +2551,12 @@ $(document).ready(function () {
                                             : ""
                                     }
                                 </div>
-                                <div class="col-md-4 d-flex flex-column align-items-end justify-content-end mb-3">
+                                <div class="col-md-4 d-flex flex-column justify-content-end align-items-end mb-3">
                                     <div class="btn-group" role="group">
                                         <button type="button" class="btn remove-cart-btn removeSaveLater"
-                                            style="color: #EF4444;border: none" data-product-id="${response.deal.id
-                        }">
+                                            style="color: #ff0060;border: none" data-product-id="${
+                                                response.deal.id
+                                            }">
                                             <div class="d-inline-flex align-items-center gap-2-2">
                                                 <div>
                                                     <img src="assets/images/home/icon_delete.svg" alt="icon" class="img-fluid" />
@@ -2527,14 +2568,15 @@ $(document).ready(function () {
                                             </div>
                                         </button>
                                         <button type="button" class="btn cancel-btn moveToCart"
-                                            style="color: #EF4444;border: none" data-product-id="${response.deal.id
-                        }">
+                                            style="color: #ff0060;border: none" data-product-id="${
+                                                response.deal.id
+                                            }">
                                             <div class="d-inline-flex align-items-center gap-2">
                                                 <div>
                                                     <img src="assets/images/home/icon_delivery.svg" alt="icon" class="img-fluid" />
                                                 </div>
                                                 <div class="d-inline-flex align-items-center gap-2">
-                                                    <span class="loader me-2 spinner-border spinner-border-sm" style="display: none"></span>
+                                                    <span class="loader spinner-border spinner-border-sm me-2" style="display: none"></span>
                                                     Move to Cart
                                                 </div>
                                             </div>
@@ -2583,7 +2625,6 @@ $(document).ready(function () {
                     if (response.cartItemCount > 0) {
                         cartCountElement.text(response.cartItemCount);
                         cartCountElement.css("display", "inline");
-                        $("cartEmpty").hide();
                     } else {
                         cartCountElement.attr(
                             "style",
@@ -2607,13 +2648,13 @@ $(document).ready(function () {
 
                 if (response.updatedCart) {
                     $(".subtotal").text(
-                        `$${response.updatedCart.subtotal.toFixed(2)}`
+                        "₹" + response.updatedCart.subtotal.toLocaleString()
                     );
                     $(".discount").text(
-                        `$${response.updatedCart.discount.toFixed(2)}`
+                        "₹" + response.updatedCart.discount.toLocaleString()
                     );
                     $(".total").text(
-                        `$${response.updatedCart.grand_total.toFixed(2)}`
+                        "₹" + response.updatedCart.grand_total.toLocaleString()
                     );
                     $(".quantity-value").text(response.updatedCart.quantity);
                 }
@@ -2627,26 +2668,44 @@ $(document).ready(function () {
                     if (response.nextItem) {
                         $(".cartButton2").hide();
 
-                        if ($(`.cart_items .d-flex[data-product-id="${response.nextItem.product.id}"]`).length === 0) {
-                            const imagePath = response.nextItem.product.product_media.length > 0
-                                ? response.nextItem.product.product_media.find(
-                                    (media) => media.order === 1 && media.type === "image"
-                                )?.resize_path
-                                : "assets/images/home/noImage.webp";
+                        if (
+                            $(
+                                `.cart_items .d-flex[data-product-id="${response.nextItem.product.id}"]`
+                            ).length === 0
+                        ) {
+                            const imagePath =
+                                response.nextItem.product.product_media.length >
+                                0
+                                    ? response.nextItem.product.product_media.find(
+                                          (media) =>
+                                              media.order === 1 &&
+                                              media.type === "image"
+                                      )?.resize_path
+                                    : "assets/images/home/noImage.webp";
 
-                            const productName = response.nextItem.product.name.length > 20
-                                ? response.nextItem.product.name.substring(0, 20) + "..."
-                                : response.nextItem.product.name;
+                            const productName =
+                                response.nextItem.product.name.length > 20
+                                    ? response.nextItem.product.name.substring(
+                                          0,
+                                          20
+                                      ) + "..."
+                                    : response.nextItem.product.name;
 
                             $(".cart_items").append(`
-                                <div class="d-flex cart-item-drop" data-product-id="${response.nextItem.product.id}">
-                                    <img src="http://127.0.0.1:8000/${imagePath}" class="dropdown_img img-fluid" alt="${response.nextItem.product.name}" />
+                                <div class="d-flex cart-item-drop" data-product-id="${
+                                    response.nextItem.product.id
+                                }">
+                                    <img src="http://127.0.0.1:8000/${imagePath}" class="img-fluid dropdown_img" alt="${
+                                response.nextItem.product.name
+                            }" />
                                     <div class="text-start">
-                                        <p class="m-0 p-0 text-start text-wrap px-1" style="font-size: 12px; white-space: normal;">
+                                        <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
                                             ${productName}
                                         </p>
-                                        <p class="px-1 text_size" style="color: #EF4444">
-                                            $${parseFloat(response.nextItem.discount).toFixed(2)}
+                                        <p class="px-1 text_size" style="color: #ff0060">
+                                            ₹${parseFloat(
+                                                response.nextItem.discount
+                                            ).toFixed(0)}
                                         </p>
                                     </div>
                                 </div>
@@ -2654,7 +2713,7 @@ $(document).ready(function () {
 
                             if (response.cartItemCount > 6) {
                                 $(".cart_items").append(`
-                                    <div class="text-end cartButton2 mb-2" style="cursor: pointer;">
+                                    <div class="text-end mb-2 cartButton2" style="cursor: pointer;">
                                         <a style="font-size: 13px" class="cart-screen">View All</a>
                                     </div>
                                 `);
@@ -2665,13 +2724,13 @@ $(document).ready(function () {
 
                 if (response.cartItemCount === 0) {
                     $(".cart-items-container").after(`
-                         <div class="col-12 d-flex flex-column align-items-center justify-content-center text-center empty-cart mt-0">
+                         <div class="empty-cart col-12 text-center d-flex flex-column align-items-center justify-content-center mt-0">
                              <img src="assets/images/home/cart_empty.webp" alt="Empty Cart"
-                                 class="empty_cart_img img-fluid">
-                             <p class="pt-5" style="color: #EF4444;font-size: 22px">Your Cart is Currently Empty</p>
+                                 class="img-fluid empty_cart_img">
+                             <p class="pt-5" style="color: #ff0060;font-size: 22px">Your Cart is Currently Empty</p>
                              <p class="" style="color: #6C6C6C;font-size: 16px">Looks Like You Have Not Added Anything To </br>
                                  Your Cart. Go Ahead & Explore Top Categories.</p>
-                             <a href="/" class="btn mt-2 showmoreBtn">Shop More</a>
+                             <a href="/" class="btn showmoreBtn mt-2">Shop More</a>
                          </div>
                     `);
                     $(".cart-items-container").hide();
@@ -2709,6 +2768,12 @@ $(document).ready(function () {
         e.preventDefault();
         const productId = $(this).data("product-id");
         let cartnumber = localStorage.getItem("cartnumber") || null;
+
+        $(document).on("click", ".servicePriceBtn", function () {
+            const itemId = $(this).data("id");
+            fetchServicePrice(itemId);
+        });
+
         $.ajax({
             url: "/saveforlater/toCart",
             type: "POST",
@@ -2722,11 +2787,11 @@ $(document).ready(function () {
                     if (response.cartItemCount > 0) {
                         cartCountElement.text(response.cartItemCount);
                         cartCountElement.css({
-                            "display": "inline",
-                            "position": "absolute",
-                            "top": "16px",
-                            "right": "5px",
-                            "border": "1px solid #ef4444"
+                            display: "inline",
+                            position: "absolute",
+                            top: "16px",
+                            right: "5px",
+                            border: "1px solid #ff0060",
                         });
                     } else {
                         cartCountElement.attr(
@@ -2742,9 +2807,9 @@ $(document).ready(function () {
                     $(".saved-items").hide();
                     $(".empty-savedItems").show();
                     $(".saved-items").after(`
-                        <div class="text-center empty-savedItems mb-4">
+                        <div class="text-center mb-4 empty-savedItems">
                                 <img src='/assets/images/home/empty_savedItems.png' alt="Empty Cart" class="img-fluid mb-2" style="width: 300px;" />
-                                <h4 style="color: #EF4444;">Your Saved Wishlists are awaiting your selection!</h4>
+                                <h4 style="color: #ff0060;">Your Saved Wishlists are awaiting your selection!</h4>
                             </div>
                         `);
                 }
@@ -2753,13 +2818,13 @@ $(document).ready(function () {
 
                 if (response.updatedCart) {
                     $(".subtotal").text(
-                        `$${response.updatedCart.subtotal.toFixed(2)}`
+                        "₹" + response.updatedCart.subtotal.toLocaleString()
                     );
                     $(".discount").text(
-                        `$${response.updatedCart.discount.toFixed(2)}`
+                        "₹" + response.updatedCart.discount.toLocaleString()
                     );
                     $(".total").text(
-                        `$${response.updatedCart.grand_total.toFixed(2)}`
+                        "₹" + response.updatedCart.grand_total.toLocaleString()
                     );
                     $(".quantity-value").text(response.updatedCart.quantity);
                 }
@@ -2767,220 +2832,33 @@ $(document).ready(function () {
                 if (response.item) {
                     $(".empty-cart").attr("style", "display: none !important;");
 
-                    $(".cart-items-container").css("display", "block !important;");
+                    $(".cart-items-container").css("display", "block");
 
                     if (response.cartItemCount > 0) {
                         updateCartDrop(response.item);
                     }
 
-                    const image =
-                        response.item.product.product_media.length > 0
-                            ? response.item.product.product_media.find(
-                                (media) =>
-                                    media.order === 1 &&
-                                    media.type === "image"
-                            )?.resize_path
-                            : "assets/images/home/noImage.webp";
-
-                    const deliveryDate =
-                        response.item.product.deal_type === 1 &&
-                            response.item.product.delivery_days
-                            ? (() => {
-                                const date = new Date();
-                                date.setDate(
-                                    date.getDate() +
-                                    parseInt(
-                                        response.item.product
-                                            .delivery_days
-                                    )
-                                );
-                                return (
-                                    date
-                                        .getDate()
-                                        .toString()
-                                        .padStart(2, "0") +
-                                    "-" +
-                                    (date.getMonth() + 1)
-                                        .toString()
-                                        .padStart(2, "0") +
-                                    "-" +
-                                    date.getFullYear()
-                                );
-                            })()
-                            : "No delivery date available";
-
-                    const discountPercentage = Math.round(
-                        response.item.product.discount_percentage
-                    );
-
-                    const stockStatus =
-                        response.item.product.shop &&
-                        response.item.product.shop.is_direct === 1
-                            ? response.item.product.stock === 0
-                                ? `<span class="product-out-of-stock">Out of Stock</span>`
-                                : `<span class="product-stock-badge">In Stock</span>`
-                            : "";
-
-                    const cartItemHtml = `
-                            <div class="cart-item" data-product-id="${response.item.product_id
-                        }">
-    <div class="row p-4">
-        <div class="col-md-4 mb-3">
-            <div class="d-flex align-items-center justify-content-center">
-                <img src="${image}" style="max-width: 100%; max-height: 100%;" alt="${response.item.item_description
-                        }" />
-            </div>
-        </div>
-        <div class="col-md-8">
-            <a href="/deal/${response.item.product_id
-                        }" style="color: #000;" onclick="clickCount('${response.item.product.id
-                        }')">
-                <p style="font-size: 18px;">${response.item.product.name}</p>
-            </a>
-            <p class="truncated-description" style="font-size: 16px">${response.item.product.description
-                        }</p>
-              ${response.item.product.shop?.show_name_on_website
-                            ? `<p style="color: #AAAAAA">Seller Company Name: ${response.item.product.shop.legal_name}</p>`
-                            : ""
-                        }
-            ${response.item.product.deal_type === 2
-                            ? `
-            <div class="mb-3 mt-3 rating">
-                <span style="color: #22cb00">Currently Services are free through
-                    Dealslah
-                </span>
-            </div>
-            <span class="ms-1" style="font-size:18px;font-weight:500;color:#EF4444">
-                $${response.item.product.discounted_price}
-            </span>
-            `
-                            : `
-            <div class="d-flex">
-                <div class="">
-                    <img src="assets/images/home/icon_delivery.svg" alt="icon"
-                        class="img-fluid" />
-                </div> &nbsp;&nbsp;
-                <div class="">
-                    <p style="font-size: 16px;">
-                        Delivery Date : ${deliveryDate}
-                    </p>
-                </div>
-            </div>
-            <div class="d-flex mb-3 ms-0">
-                <span style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
-                    $${response.item.product.original_price}
-                </span>
-                <span class="ms-1" style="font-size:18px;font-weight:500;color:#EF4444">
-                    $${response.item.product.discounted_price}
-                </span>
-                <span class="ms-1" style="font-size:18px;font-weight:500;color:#28A745">
-                     ${discountPercentage}% Off
-                </span>
-                <div class="ms-2 mt-2" id="totalStock">${stockStatus}</div>
-            </div>
-            ${
-                response.item.product.shop.is_direct === 1
-                    ? response.item.product.special_price === 1 &&
-                      new Date(response.item.product.end_date) > new Date()
-                        ? `
-                       <button type="button" style="height: fit-content;" id="servicePrice"
-                      data-id=""
-                      class="p-1 text-nowrap special-price">
-                      <span>&nbsp;<i class="fa-solid fa-stopwatch-20"></i>&nbsp;
-                      &nbsp;Special Price
-                      &nbsp; &nbsp;
-                     </span>
-                     </button>`
-                        : ""
-                    : ""
-            }
-         `
-        }
-        </div>
-    </div>
-    <div class="d-flex row align-items-center">
-        <div class="col-md-6">
-            ${response.item.product.deal_type == 2
-                            ? `<div class="d-flex align-items-start mb-3 my-1" style="padding-left:24px">
-                <div class="d-flex flex-column ms-0" style="width: 30%">
-                    <label for="service_date" class="form-label">Service Date</label>
-                    <input type="date" id="service_date" name="service_date"
-                        class="form-control form-control-sm service-date" value="${response.item.service_date}"
-                        data-cart-id="${response.item.cart_id}" data-product-id="${response.item.product.id}">
-                </div>&nbsp;&nbsp;
-                <div class="d-flex flex-column" style="width: 30%;">
-                    <label for="service_time" class="form-label">Service Time</label>
-                    <input type="time" id="service_time" name="service_time"
-                        class="form-control form-control-sm service-time"
-                        value="${response.item.service_time}" data-cart-id="${response.item.cart_id}"
-                        data-product-id="${response.item.product.id}">
-                </div>
-            </div>`
-                            : `<div class="d-flex align-items-center mb-3 my-1" style="padding-left: 24px;">
-                <span>Qty</span> &nbsp;&nbsp;
-                <button class="btn btn-sm rounded decrease-btn1" data-cart-id="${response.item.cart_id}"
-                    data-product-id="${response.item.product.id}">-</button>
-                <input type="text" class="form-control form-control-sm text-center mx-2 quantity-input"
-                    style="width: 50px;background-color:#F9F9F9;border-radius:2px"
-                    value="${response.item.quantity}" readonly>
-                <button class="btn btn-sm rounded increase-btn1" data-cart-id="${response.item.cart_id}"
-                    data-product-id="${response.item.product.id}">+</button>
-            </div>`
-                        }
-        </div>
-        <div class="col-md-6 d-flex justify-content-md-end" style="padding-left: 24px">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="submit" class="btn save-for-later-btn"
-                    style="color: #EF4444; border: none;" data-product-id="${response.item.product.id
-                        }">
-                    <div class="d-inline-flex align-items-center buy_later gap-2">
-                        <div>
-                            <img src="/assets/images/home/icon_save_later.svg" alt="icon" class="img-fluid" />
-                        </div>
-                        <div class="d-inline-flex align-items-center buy-for-later-btn gap-2">
-                            <span class="loader spinner-border spinner-border-sm" style="display: none;"></span>
-                            <span>Buy Later</span>
-                        </div>
-                    </div>
-                </button>
-                &nbsp;&nbsp;
-                <button type="submit" class="btn cancel-btn cart-remove" style="color: #EF4444;border: none"
-                    data-product-id="${response.item.product.id
-                        }" data-cart-id="${response.item.cart_id}">
-                    <div class="d-inline-flex align-items-center gap-2">
-                        <div>
-                            <img src="/assets/images/home/icon_delete.svg" alt="icon" class="img-fluid" />
-                        </div>
-                        <div class="d-inline-flex align-items-center gap-2">
-                            <span class="loader me-2 spinner-border spinner-border-sm" style="display: none"></span>
-                            Remove
-                        </div>
-                    </div>
-                </button>
-            </div>
-        </div>
-    </div>
-    <hr>
-</div>
-                        `;
-
-                    $(".cart-items").prepend(cartItemHtml);
-
                     function updateCartDrop(item) {
                         $(".cartEmpty").hide();
 
-                        const imagePath = (item.product.product_media.length > 0)
-                            ? item.product.product_media.find(
-                                (media) => media.order === 1 && media.type === "image"
-                            )?.resize_path
-                            : "assets/images/home/noImage.webp";
+                        const imagePath =
+                            item.product.product_media.length > 0
+                                ? item.product.product_media.find(
+                                      (media) =>
+                                          media.order === 1 &&
+                                          media.type === "image"
+                                  )?.resize_path
+                                : "assets/images/home/noImage.webp";
 
-                        const productName = item.product.name.length > 20
-                            ? item.product.name.substring(0, 20) + "..."
-                            : item.product.name;
+                        const productName =
+                            item.product.name.length > 20
+                                ? item.product.name.substring(0, 20) + "..."
+                                : item.product.name;
 
                         // Ensure discount is always a number
-                        const formattedDiscount = parseFloat(item.discount).toFixed(2);
+                        const formattedDiscount = parseFloat(
+                            item.discount
+                        ).toFixed(0);
 
                         const newCart = `
                             <div class="d-flex cart-item-drop" data-product-id="${item.product.id}">
@@ -2989,8 +2867,8 @@ $(document).ready(function () {
                                     <p class="m-0 p-0 text-start text-wrap px-1" style="font-size: 12px; white-space: normal;">
                                         ${productName}
                                     </p>
-                                    <p class="px-1 text_size" style="color: #EF4444">
-                                        $${formattedDiscount}
+                                    <p class="px-1 text_size" style="color: #ff0060">
+                                        ₹${formattedDiscount}
                                     </p>
                                 </div>
                             </div>
@@ -2998,7 +2876,9 @@ $(document).ready(function () {
 
                         $(".cart_items").prepend(newCart);
 
-                        let cartItemCount = $(".cart_items .cart-item-drop").length;
+                        let cartItemCount = $(
+                            ".cart_items .cart-item-drop"
+                        ).length;
 
                         if (cartItemCount > 6) {
                             $(".cart_items .cart-item-drop").last().remove();
@@ -3019,7 +2899,212 @@ $(document).ready(function () {
                         }
                     }
 
+                    const image =
+                        response.item.product.product_media.length > 0
+                            ? response.item.product.product_media.find(
+                                  (media) =>
+                                      media.order === 1 &&
+                                      media.type === "image"
+                              )?.resize_path
+                            : "assets/images/home/noImage.webp";
 
+                    const deliveryDate =
+                        response.item.product.deal_type === 1 &&
+                        response.item.product.delivery_days
+                            ? (() => {
+                                  const date = new Date();
+                                  date.setDate(
+                                      date.getDate() +
+                                          parseInt(
+                                              response.item.product
+                                                  .delivery_days
+                                          )
+                                  );
+                                  return (
+                                      date
+                                          .getDate()
+                                          .toString()
+                                          .padStart(2, "0") +
+                                      "-" +
+                                      (date.getMonth() + 1)
+                                          .toString()
+                                          .padStart(2, "0") +
+                                      "-" +
+                                      date.getFullYear()
+                                  );
+                              })()
+                            : "No delivery date available";
+
+                    const discountPercentage = Math.round(
+                        response.item.product.discount_percentage
+                    );
+
+                    const stockStatus =
+                        response.item.product.shop &&
+                        response.item.product.shop.is_direct === 1
+                            ? response.item.product.stock === 0
+                                ? `<span class="product-out-of-stock">Out of Stock</span>`
+                                : `<span class="product-stock-badge">In Stock</span>`
+                            : "";
+
+                    const cartItemHtml = `
+                            <div class="cart-item" data-product-id="${
+                                response.item.product_id
+                            }">
+    <div class="row p-4">
+        <div class="col-md-4 mb-3">
+            <div class="d-flex justify-content-center align-items-center">
+                <img src="${image}" style="max-width: 100%; max-height: 100%;" alt="${
+                        response.item.item_description
+                    }" />
+            </div>
+        </div>
+        <div class="col-md-8">
+            <a href="/deal/${
+                response.item.product_id
+            }" style="color: #000;" onclick="clickCount('${
+                        response.item.product.id
+                    }')">
+                <p style="font-size: 18px;">${response.item.product.name}</p>
+            </a>
+            <p class="truncated-description" style="font-size: 16px">${
+                response.item.product.description
+            }</p>
+            <p style="color: #AAAAAA;font-size:14px;">Seller : ${
+                response.item.product.shop.legal_name
+            }</p>
+            ${
+                response.item.product.deal_type === 2
+                    ? `
+            <div class="rating mt-3 mb-3">
+                <span style="color: #22cb00">Currently Services are free through
+                    DealsMachi
+                </span>
+            </div>
+            <span class="ms-1" style="font-size:18px;font-weight:500;color:#ff0060">
+                ₹${Math.round(
+                    response.item.product.discounted_price
+                ).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+            </span>
+            `
+                    : `
+            <div class="d-flex">
+                <div class="">
+                    <img src="assets/images/home/icon_delivery.svg" alt="icon"
+                        class="img-fluid" />
+                </div> &nbsp;&nbsp;
+                <div class="">
+                    <p style="font-size: 16px;">
+                        Delivery Date : ${deliveryDate}
+                    </p>
+                </div>
+            </div>
+            <div class="d-flex mb-3 ms-0">
+                <span style="font-size:15px;text-decoration: line-through; color:#c7c7c7">
+                    ₹${Math.round(
+                        response.item.product.original_price
+                    ).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                </span>
+                <span class="ms-1" style="font-size:18px;font-weight:500;color:#ff0060">
+                    ₹${Math.round(
+                        response.item.product.discounted_price
+                    ).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                </span>
+                <span class="ms-1" style="font-size:18px;font-weight:500;color:#28A745">
+                     ${discountPercentage}% Off
+                </span>
+                <div class="ms-2 mt-2" id="totalStock">${stockStatus}</div>
+            </div>
+            ${
+                response.item.product.shop.is_direct === 1
+                    ? response.item.product.special_price === 1 &&
+                      new Date(response.item.product.end_date) > new Date()
+                        ? `
+                       <button type="button" style="height: fit-content;" id="servicePrice"
+                            data-id="${response.item.product.id}"
+                            class="p-1 text-nowrap special-price servicePriceBtn">
+                            <span>&nbsp;<i class="fa-solid fa-stopwatch-20"></i>&nbsp;
+                            &nbsp;Special Price
+                            &nbsp; &nbsp;
+                            </span>
+                            </button>`
+                        : ""
+                    : ""
+            }
+                `
+            }
+        </div>
+    </div>
+    <div class="row d-flex align-items-center">
+        <div class="col-md-6">
+            ${
+                response.item.product.deal_type == 2
+                    ? `<div class="d-flex align-items-start my-1 mb-3" style="padding-left:24px">
+                <div class="d-flex flex-column ms-0" style="width: 30%">
+                    <label for="service_date" class="form-label">Service Date</label>
+                    <input type="date" id="service_date" name="service_date"
+                        class="form-control form-control-sm service-date" value="${response.item.service_date}"
+                        data-cart-id="${response.item.cart_id}" data-product-id="${response.item.product.id}">
+                </div>&nbsp;&nbsp;
+                <div class="d-flex flex-column" style="width: 30%;">
+                    <label for="service_time" class="form-label">Service Time</label>
+                    <input type="time" id="service_time" name="service_time"
+                        class="form-control form-control-sm service-time"
+                        value="${response.item.service_time}" data-cart-id="${response.item.cart_id}"
+                        data-product-id="${response.item.product.id}">
+                </div>
+            </div>`
+                    : `<div class="d-flex align-items-center my-1 mb-3" style="padding-left: 24px;">
+                <span>Qty</span> &nbsp;&nbsp;
+                <button class="btn rounded btn-sm decrease-btn1" data-cart-id="${response.item.cart_id}"
+                    data-product-id="${response.item.product.id}">-</button>
+                <input type="text" class="form-control form-control-sm mx-2 text-center quantity-input"
+                    style="width: 50px;background-color:#F9F9F9;border-radius:2px"
+                    value="${response.item.quantity}" readonly>
+                <button class="btn rounded btn-sm increase-btn1" data-cart-id="${response.item.cart_id}"
+                    data-product-id="${response.item.product.id}">+</button>
+            </div>`
+            }
+        </div>
+        <div class="col-md-6 d-flex justify-content-md-end" style="padding-left: 24px">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="submit" class="btn save-for-later-btn"
+                    style="color: #ff0060; border: none;" data-product-id="${
+                        response.item.product.id
+                    }">
+                    <div class="d-inline-flex align-items-center gap-2 buy_later">
+                        <div>
+                            <img src="/assets/images/home/icon_save_later.svg" alt="icon" class="img-fluid" />
+                        </div>
+                        <div class="d-inline-flex align-items-center gap-2 buy-for-later-btn">
+                            <span class="loader spinner-border spinner-border-sm" style="display: none;"></span>
+                            <span>Buy Later</span>
+                        </div>
+                    </div>
+                </button>
+                &nbsp;&nbsp;
+                <button type="submit" class="btn cancel-btn cart-remove" style="color: #ff0060;border: none"
+                    data-product-id="${
+                        response.item.product.id
+                    }" data-cart-id="${response.item.cart_id}">
+                    <div class="d-inline-flex align-items-center gap-2">
+                        <div>
+                            <img src="/assets/images/home/icon_delete.svg" alt="icon" class="img-fluid" />
+                        </div>
+                        <div class="d-inline-flex align-items-center gap-2">
+                            <span class="loader spinner-border spinner-border-sm me-2" style="display: none"></span>
+                            Remove
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr>
+</div>
+                        `;
+
+                    $(".cart-items").append(cartItemHtml);
                     $(".decrease-btn1, .increase-btn1").on(
                         "click",
                         function () {
@@ -3045,7 +3130,6 @@ $(document).ready(function () {
                             updateCart(cartId, productId, quantity);
                         }
                     );
-
                     $(".service-date, .service-time").on("change", function () {
                         const cartId = $(this).data("cart-id");
                         const productId = $(this).data("product-id");
@@ -3089,6 +3173,14 @@ $(document).ready(function () {
                             data: JSON.stringify(data),
                             success: function (data) {
                                 if (data.status === "success") {
+                                    const indianCurrencyFormatter =
+                                        new Intl.NumberFormat("en-IN", {
+                                            style: "currency",
+                                            currency: "INR",
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 0,
+                                        });
+
                                     $(".quantity-value").each(function () {
                                         $(this).text(data.updatedCart.quantity);
                                     });
@@ -3207,9 +3299,9 @@ $(document).ready(function () {
                     $(".saved-items").hide();
                     $(".empty-savedItems").show();
                     $(".saved-items").after(`
-                        <div class="text-center empty-savedItems mb-4">
+                        <div class="text-center mb-4 empty-savedItems">
                                 <img src='/assets/images/home/empty_savedItems.png' alt="Empty Cart" class="img-fluid mb-2" style="width: 300px;" />
-                                <h4 style="color: #EF4444;">Your Saved Wishlists are awaiting your selection!</h4>
+                                <h4 style="color: #ff0060;">Your Saved Wishlists are awaiting your selection!</h4>
                             </div>
                         `);
                 }
@@ -3222,7 +3314,7 @@ $(document).ready(function () {
             error: function (xhr) {
                 showMessage(
                     xhr.responseJSON?.error ||
-                    "Failed to remove item from Save for Later!",
+                        "Failed to remove item from Save for Later!",
                     "error"
                 );
             },
@@ -3260,9 +3352,9 @@ $(document).ready(function () {
                 if ($(".saved-item").length === 0) {
                     $(".saved-items").hide();
                     $(".saved-items").after(`
-                        <div class="text-center empty-savedItems mb-4">
+                        <div class="text-center mb-4 empty-savedItems">
                                 <img src='/assets/images/home/empty_savedItems.png' alt="Empty Cart" class="img-fluid mb-2" style="width: 300px;" />
-                                <h4 style="color: #EF4444;">Your Saved Wishlists are awaiting your selection!</h4>
+                                <h4 style="color: #ff0060;">Your Saved Wishlists are awaiting your selection!</h4>
                             </div>
                         `);
                 }
@@ -3275,7 +3367,7 @@ $(document).ready(function () {
             error: function (xhr) {
                 showMessage(
                     xhr.responseJSON?.error ||
-                    "Failed to remove item from Save for Later!",
+                        "Failed to remove item from Save for Later!",
                     "error"
                 );
             },
@@ -3327,15 +3419,15 @@ $(document).ready(function () {
                     const image =
                         response.item.product.product_media.length > 0
                             ? response.item.product.product_media.find(
-                                (media) =>
-                                    media.order === 1 &&
-                                    media.type === "image"
-                            )?.resize_path
+                                  (media) =>
+                                      media.order === 1 &&
+                                      media.type === "image"
+                              )?.resize_path
                             : "assets/images/home/noImage.webp";
 
                     const cartItemHtml = `
                            <div id="cart_items" class="cart-item">
-                            <div class="d-flex row align-items-center mb-3 mt-2"
+                            <div class="row d-flex align-items-center mb-3 mt-2"
                                 id="cart_item_${response.item.product_id}">
                                 <div class="col-1">
                                     <input type="checkbox" class="cartItem_check" value="${response.item.product_id}"
@@ -3343,17 +3435,17 @@ $(document).ready(function () {
                                 </div>
                                 <div class="col-3">
                                     <img src="/${image}"
-                                        class="card_img_cont img-fluid" alt="${response.item.product.name}" />
+                                        class="img-fluid card_img_cont" alt="${response.item.product.name}" />
                                 </div>
                                 <div class="col-8">
                                     <div class="d-flex flex-column justify-content-start">
                                         <a href="/deal/${response.item.product_id}" style="color: #000;"
                                             onclick="clickCount('${response.item.product_id}')">
-                                            <h5 class="text-truncate fs_common mb-1" style="max-width: 100%;">
+                                            <h5 class="mb-1 fs_common text-truncate" style="max-width: 100%;">
                                             ${response.item.product.name}
                                             </h5>
                                         </a>
-                                        <p class="text-muted text-truncate fs_common mb-0" style="max-width: 100%;">
+                                        <p class="mb-0 text-muted fs_common text-truncate" style="max-width: 100%;">
                                         ${response.item.product.description}
                                         </p>
                                     </div>
@@ -3373,7 +3465,7 @@ $(document).ready(function () {
             error: function (xhr) {
                 showMessage(
                     xhr.responseJSON?.error ||
-                    "Failed to remove item from Save for Later!",
+                        "Failed to remove item from Save for Later!",
                     "error"
                 );
             },
@@ -3384,12 +3476,12 @@ $(document).ready(function () {
         var textColor = type === "success" ? "#16A34A" : "#EF4444";
         var icon =
             type === "success"
-                ? '<i class="fa-cart-shopping fa-regular" style="color: #16A34A"></i>'
+                ? '<i class="fa-regular fa-cart-shopping" style="color: #16A34A"></i>'
                 : '<i class="fa-solid fa-triangle-exclamation" style="color: #EF4444"></i>';
         var alertClass = type === "success" ? "toast-success" : "toast-danger";
 
         var alertHtml = `
-          <div class="alert alert-dismissible ${alertClass} fade show" role="alert" style="position: fixed; top: 70px; right: 40px; z-index: 1050; color: ${textColor};">
+          <div class="alert ${alertClass} alert-dismissible fade show" role="alert" style="position: fixed; top: 70px; right: 40px; z-index: 1050; color: ${textColor};">
             <div class="toast-content">
                 <div class="toast-icon">${icon}</div>
                 <span class="toast-text">${message}</span>&nbsp;&nbsp;
@@ -3424,41 +3516,129 @@ function checkAddressAndOpenModal() {
         .catch((error) => console.error("Error fetching address:", error));
 }
 
+function fetchServicePrice(productId) {
+    if (!productId) {
+        console.error("Product ID is missing!");
+        return;
+    }
+
+    $.ajax({
+        url: `http://127.0.0.1:8000/service/price/${productId}`,
+        type: "GET",
+        contentType: "application/json",
+        success: function (response) {
+            if (response.product) {
+                let product = response.product;
+
+                let discountAmount =
+                    product.original_price && product.discounted_price
+                        ? product.original_price - product.discounted_price
+                        : "--";
+
+                $("#productDiscount").text(discountAmount);
+
+                let formattedDate = product.end_date
+                    ? new Date(product.end_date).toLocaleDateString()
+                    : "--";
+                $("#productExpiry").text(formattedDate);
+            } else {
+                console.error("No product data found!");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("API call failed:", error);
+        },
+    });
+
+    $(".servicePriceModal").modal("show");
+}
+
+// Attach event listener
+$(document).on("click", "#servicePrice", function (event) {
+    event.preventDefault();
+    let productId = $(this).data("id");
+    fetchServicePrice(productId);
+});
+
+$("#totalStock").click(function (event) {
+    event.preventDefault();
+
+    let productId = $(this).data("id");
+
+    if (!productId) {
+        console.error("Product ID is missing!");
+        return;
+    }
+
+    $.ajax({
+        url: `stock/${productId}`,
+        type: "GET",
+        contentType: "application/json",
+        success: function (response) {
+            if (response.product) {
+                let product = response.product;
+                $("#productDiscount").text(
+                    product.discounted_price ? product.discounted_price : "--"
+                );
+
+                let formattedDate = product.end_date
+                    ? new Date(product.end_date).toLocaleDateString()
+                    : "--";
+                $("#productExpiry").text(formattedDate);
+            } else {
+                console.error("No product data found!");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("API call failed:", error);
+        },
+    });
+
+    $(".servicePriceModal").modal("show");
+});
+
 $(document).ready(function () {
-    $('.productCard').on('click', function () {
-        var bookmarknumber = localStorage.getItem('bookmarknumber');
-        var productId = $(this).data('product-id');
+    $(".productCard").on("click", function () {
+        var bookmarknumber = localStorage.getItem("bookmarknumber");
+        var productId = $(this).data("product-id");
         window.location.href = "/deal/" + productId + "?dmbk=" + bookmarknumber;
     });
 
-    $('.category-link').on('click', function () {
-        var bookmarknumber = localStorage.getItem('bookmarknumber');
-        var categoryUrl = $(this).data('category-url');
-        var separator = categoryUrl.includes('?') ? '&' : '?';
-        window.location.href = categoryUrl + separator + "dmbk=" + bookmarknumber;
+    $(".category-link").on("click", function () {
+        var bookmarknumber = localStorage.getItem("bookmarknumber");
+        var categoryUrl = $(this).data("category-url");
+        var separator = categoryUrl.includes("?") ? "&" : "?";
+        window.location.href =
+            categoryUrl + separator + "dmbk=" + bookmarknumber;
     });
 
-    $('.hotpick').on('click', function () {
-        var bookmarknumber = localStorage.getItem('bookmarknumber');
-        var hotpickUrl = $(this).data('hotpick-url');
+    $(".hotpick").on("click", function () {
+        var bookmarknumber = localStorage.getItem("bookmarknumber");
+        var hotpickUrl = $(this).data("hotpick-url");
         window.location.href = hotpickUrl + "?dmbk=" + bookmarknumber;
     });
 
-    $('.search-dmbk').on('keypress', function (event) {
-        var bookmarknumber = localStorage.getItem('bookmarknumber');
+    $(".search-dmbk").on("keypress", function (event) {
+        var bookmarknumber = localStorage.getItem("bookmarknumber");
         if (event.which === 13) {
             event.preventDefault();
 
-            var form = $(this).closest('form');
-            var searchUrl = form.attr('action');
+            var form = $(this).closest("form");
+            var searchUrl = form.attr("action");
             var query = $(this).val();
-            var separator = searchUrl.includes('?') ? '&' : '?';
-            var newAction = searchUrl + separator + "q=" + encodeURIComponent(query) + "&dmbk=" + bookmarknumber;
+            var separator = searchUrl.includes("?") ? "&" : "?";
+            var newAction =
+                searchUrl +
+                separator +
+                "q=" +
+                encodeURIComponent(query) +
+                "&dmbk=" +
+                bookmarknumber;
 
             window.location.href = newAction;
         }
     });
 
-    var bookmarknumber = localStorage.getItem('bookmarknumber');
-    $('#dmbkInput').val(bookmarknumber).attr('value', bookmarknumber);
+    var bookmarknumber = localStorage.getItem("bookmarknumber");
+    $("#dmbkInput").val(bookmarknumber).attr("value", bookmarknumber);
 });

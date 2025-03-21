@@ -73,13 +73,26 @@
                                 </span>
 
                                 <p class="px-3 fw-normal truncated-description">{{ $product->description }}</p>
+                                @if (!empty($product->shop->is_direct) && $product->shop->is_direct == 1)
+                                    @if (!empty($product->special_price) && $product->special_price && \Carbon\Carbon::parse($product->end_date)->isFuture())
+                                        <div class="px-3 d-flex justify-content-end">
+                                            <button type="button" style="height: fit-content;" id="servicePrice"
+                                                data-id="{{ $product->id }}" class="p-1 text-nowrap special-price">
+                                                <span>&nbsp;<i class="fa-solid fa-stopwatch-20"></i>&nbsp;
+                                                    &nbsp;Special Price
+                                                    &nbsp; &nbsp;
+                                                </span>
+                                            </button>
+                                        </div>
+                                    @endif
+                                @endif
                             </div>
                             <div>
                                 <div class="card-divider"></div>
                                 <p class="ps-3 fw-medium d-flex align-items-center justify-content-between"
                                     style="color: #ef4444">
                                     <span>${{ number_format($product->discounted_price, 2) }}</span>
-                                    @if (!empty($product->coupon_code))
+                                    {{-- @if (!empty($product->coupon_code))
                                         <span id="mySpan" class="mx-3 px-2 couponBadge"
                                             onclick="copySpanText(this, event)" data-bs-toggle="tooltip"
                                             data-bs-placement="bottom" title="Click to Copy" style="position:relative;">
@@ -94,6 +107,35 @@
                                                 Copied!
                                             </span>
                                         </span>
+                                    @endif --}}
+                                    @if (!empty($product->shop->is_direct) && $product->shop->is_direct == 1)
+                                        <span class="me-3" id="totalStock">
+                                            @if (empty($product->stock) || $product->stock == 0)
+                                                <span class="product-out-of-stock">
+                                                    Out of Stock
+                                                </span>
+                                            @else
+                                                <span class="product-stock-badge">
+                                                    In Stock
+                                                </span>
+                                            @endif
+                                        </span>
+                                    @else
+                                        @if (!empty($product->coupon_code))
+                                            <span id="mySpan" class="mx-3 px-2 couponBadge"
+                                                onclick="copySpanText(this, event)" data-bs-toggle="tooltip"
+                                                data-bs-placement="bottom" title="Click to Copy"
+                                                style="position:relative;">
+                                                {{ $product->coupon_code }}
+                                                <!-- Tooltip container -->
+                                                <span class="tooltip-text"
+                                                    style="visibility: hidden; background-color: black; color: #fff; text-align: center;
+                                                border-radius: 6px; padding: 5px; position: absolute; z-index: 1;
+                                                bottom: 125%; left: 50%; margin-left: -60px;">
+                                                    Copied!
+                                                </span>
+                                            </span>
+                                        @endif
                                     @endif
                                 </p>
                                 <div class="card-divider"></div>

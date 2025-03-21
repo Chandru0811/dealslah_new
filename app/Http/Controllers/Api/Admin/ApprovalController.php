@@ -15,28 +15,34 @@ class ApprovalController extends Controller
 {
     use ApiResponses;
 
-    public function approveProduct($id)
+    public function approveProduct(Request $request, $id)
     {
-        $UpdatableProduct = Product::where('id',$id)->update(['active' => '1']);
-        $product = Product::where('id',$id)->first();
+        $UpdatableProduct = Product::where('id', $id)->update(['active' => '1']);
+        $product = Product::where('id', $id)->first();
         $shop_id = $product->shop_id;
-        $shop = Shop::where('id',$shop_id)->first();
+        $shop = Shop::where('id', $shop_id)->first();
+        if ($request->special_price) {
+            $product->update([
+                'special_price' => $request->special_price,
+                'end_date' => $request->end_date,
+            ]);
+        }
 
-        Mail::to($shop->email)->send(new ProductApprovedSuccessfully($shop,$product));
+        Mail::to($shop->email)->send(new ProductApprovedSuccessfully($shop, $product));
 
-        
+
         return $this->ok('Product Approved Successfully!');
     }
 
     public function disapproveProduct($id)
     {
-        $product = Product::where('id',$id)->update(['active' => '0']);
+        $product = Product::where('id', $id)->update(['active' => '0']);
         return $this->ok('Product Disapproved Successfully!');
     }
 
     public function approveCategory($id)
     {
-        $product = Category::where('id',$id)->update(['active' => '1']);
+        $product = Category::where('id', $id)->update(['active' => '1']);
         return $this->ok('Category Approved Successfully!');
     }
 }

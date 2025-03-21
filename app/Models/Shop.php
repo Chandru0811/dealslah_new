@@ -44,7 +44,8 @@ class Shop extends Model
         'shop_lattitude',
         'shop_longtitude',
         'address',
-        'show_name_on_website'
+        'show_name_on_website',
+        'is_direct'
     ];
 
     protected $dates = ['deleted_at'];

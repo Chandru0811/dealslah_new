@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('shops', function (Blueprint $table) {
-            $table->string('shop_lattitude')->nullable()->change();
-            $table->string('shop_longtitude')->nullable()->change();
+            $table->string('shop_lattitude')->nullable();
+            $table->string('shop_longtitude')->nullable();
+        });
+
+        // If "active" means setting a default value
+        Schema::table('shops', function (Blueprint $table) {
+            $table->string('shop_lattitude')->nullable()->default('active')->change();
         });
     }
 
@@ -23,8 +28,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('shops', function (Blueprint $table) {
-            $table->string('shop_lattitude')->nullable(false)->change();
-            $table->string('shop_longtitude')->nullable(false)->change();
+            $table->dropColumn(['shop_lattitude', 'shop_longtitude']);
         });
     }
 };

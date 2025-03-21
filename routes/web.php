@@ -35,6 +35,8 @@ Route::post('deals/count/views', [HomeController::class, 'viewcounts']);
 Route::post('deals/coupon/copied', [HomeController::class, 'couponCodeCopied']);
 Route::post('deals/count/share', [HomeController::class, 'dealshare']);
 Route::post('deals/count/enquire', [HomeController::class, 'dealenquire']);
+Route::get('/service/price/{id}', [HomeController::class, 'showSpecialPrice'])->name('service.price');
+Route::get('/stock/{id}', [HomeController::class, 'stock'])->name('stock.unit');
 Route::middleware('auth')->group(function () {
     Route::get('/checkoutSummary/{product_id}', [CheckoutController::class, 'checkoutsummary'])->name('checkout.summary');
     Route::post('/cartCheckout', [CheckoutController::class, 'cartcheckout'])->name('checkout.cart');

@@ -9,19 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->longText('specifications')->nullable()->after('description');
+        Schema::table('order_items', function (Blueprint $table) {
+            $table->unsignedBigInteger('seller_id')->after('product_id')->nullable();
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('order_items', function (Blueprint $table) {
             //
         });
     }

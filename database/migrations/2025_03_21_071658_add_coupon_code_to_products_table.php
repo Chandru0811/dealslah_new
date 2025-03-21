@@ -9,20 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->longText('specifications')->nullable()->after('description');
+            $table->string('coupon_code')->nullable();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            //
+            $table->dropColumn('coupon_code');
         });
     }
 };

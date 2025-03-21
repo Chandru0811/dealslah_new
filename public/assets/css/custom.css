@@ -5,18 +5,18 @@
     font-family: "Kanit", sans-serif;
 }
 
-.h2-styling{
+.h2-styling {
     font-size: 12px;
     text-align: center;
     color: #000;
 }
- 
-.h1-styling{
+
+.h1-styling {
     font-size: 16px;
     color: #ef4444;
 }
- 
-.h3-styling{
+
+.h3-styling {
     font-size: 1.25rem;
 }
 
@@ -4480,4 +4480,49 @@ footer hr {
         font-size: 8px;
         color: #fff;
     }
+}
+
+.special-price {
+    background-color: #d6e3ff;
+    color: #6294ff;
+    border: 0.5px solid #6294ff;
+    border-radius: 3px;
+    font-size: 10px;
+    padding: 0px 7px;
+}
+
+.stock-badge {
+    background-color: #d6ffd8;
+    color: #00dd1a;
+    border: 0.5px solid #00dd1a;
+    border-radius: 3px;
+    font-size: 10px;
+    padding: 0px 10px;
+}
+
+.out-of-stock {
+    background-color: #ffdddd;
+    color: #ff8989;
+    border: 0.5px solid #ff8989;
+    border-radius: 3px;
+    font-size: 10px;
+    padding: 3px 10px;
+}
+
+.product-stock-badge {
+    background-color: #d6ffd8;
+    color: #00dd1a;
+    border: 0.5px solid #00dd1a;
+    border-radius: 3px;
+    font-size: 12px;
+    padding: 0px 10px;
+}
+
+.product-out-of-stock {
+    background-color: #ffdddd;
+    color: #ff8989;
+    border: 0.5px solid #ff8989;
+    border-radius: 3px;
+    font-size: 12px;
+    padding: 3px 10px;
 }

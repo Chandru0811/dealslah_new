@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->longText('specifications')->nullable()->after('description');
+        Schema::table('saved_items', function (Blueprint $table) {
+            $table->string('cart_number')->unique()->after('id');
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('saved_items', function (Blueprint $table) {
             //
         });
     }

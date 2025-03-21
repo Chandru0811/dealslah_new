@@ -36,7 +36,8 @@ class Product extends Model
         'varient',
         'delivery_days',
         'order',
-        'sub_category_id'
+        'sub_category_id',
+        'special_price',
     ];
 
     protected $dates = ['deleted_at', 'start_date', 'end_date'];

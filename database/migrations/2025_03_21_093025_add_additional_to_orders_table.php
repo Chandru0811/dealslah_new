@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->longText('specifications')->nullable()->after('description');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->decimal('shipping_weight', 20, 2)->nullable();
+            $table->longText('delivery_address')->nullable();
         });
     }
 
@@ -21,8 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            //
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropColumn('shipping_weight');
+            $table->dropColumn('delivery_address');
         });
     }
 };

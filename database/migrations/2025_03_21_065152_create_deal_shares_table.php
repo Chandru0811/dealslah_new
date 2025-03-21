@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bookmarks', function (Blueprint $table) {
+        Schema::create('deal_shares', function (Blueprint $table) {
             $table->id();
-            $table->string('ip_address')->nullable();
-            $table->integer('bookmark_number')->nullable();
-            $table->bigInteger('user_id')->unsigned()->nullable();
-            $table->bigInteger('deal_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('deal_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('ip_address', 45)->nullable();
+            $table->timestamp('share_at')->useCurrent();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('deal_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bookmarks');
+        Schema::dropIfExists('deal_shares');
     }
 };

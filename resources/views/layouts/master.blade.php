@@ -72,6 +72,7 @@ $imageType = isset($pageimage) ? pathinfo($pageimage, PATHINFO_EXTENSION) : 'png
             <div>
                 @yield('content')
             </div>
+            @include('service_price_modal')
             @include('nav.footer')
         </div>
     </section>

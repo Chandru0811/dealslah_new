@@ -35,7 +35,7 @@ class HomeController extends Controller
         // $hotpicks = DealCategory::where('active', 1)->get();
         $subCategories = SubCategory::where("category_id", 2)->select('name', 'slug', 'path')->get();
         $products = Product::where('active', 1)
-            ->with(['productMedia:id,resize_path,order,type,imageable_id', 'shop:id,country,city,shop_ratings'])
+            ->with(['productMedia:id,resize_path,order,type,imageable_id', 'shop:id,country,city,shop_ratings,is_direct'])
             ->orderByRaw("CASE WHEN `order` IS NULL THEN 1 ELSE 0 END, `order` ASC, `created_at` DESC")
             ->paginate(8);
         // dd($products);
@@ -193,7 +193,7 @@ class HomeController extends Controller
         $deals = collect();
 
         $query = Product::where('active', 1)
-            ->with('productMedia:id,resize_path,order,type,imageable_id', 'shop:id,country,state,city,street,street2,zip_code,shop_ratings')
+            ->with('productMedia:id,resize_path,order,type,imageable_id', 'shop:id,country,state,city,street,street2,zip_code,shop_ratings,is_direct')
             ->orderBy('created_at', 'desc');
 
         if ($slug == 'trending') {
@@ -342,7 +342,7 @@ class HomeController extends Controller
     {
         $subCategories = collect();
         $perPage = $request->input('per_page', 10);
-        $query = Product::with(['productMedia:id,resize_path,order,type,imageable_id', 'shop:id,country,state,city,street,street2,zip_code,shop_ratings'])
+        $query = Product::with(['productMedia:id,resize_path,order,type,imageable_id', 'shop:id,country,state,city,street,street2,zip_code,shop_ratings,is_direct'])
             ->where('active', 1);
 
         if ($slug === 'all') {
@@ -832,5 +832,27 @@ class HomeController extends Controller
         );
 
         return redirect()->back()->with(['status' => 'Review has been successfully added.'], 200);
+    }
+
+
+    public function showSpecialPrice($id)
+    {
+        $product = Product::where("id", $id)->first();
+        if (!$product) {
+            return response()->json(['error' => 'Product not found'], 404);
+        }
+
+        return response()->json(['product' => $product], 200);
+    }
+
+    public function stock($id)
+    {
+        $product = Product::where("id", $id)->first();
+
+        if (!$product) {
+            return response()->json(['error' => 'Product not found'], 404);
+        }
+
+        return response()->json(['product' => $product], 200);
     }
 }
