@@ -275,9 +275,6 @@ $(document).ready(function () {
                     required: true,
                     maxlength: 200,
                 },
-                last_name: {
-                    maxlength: 200,
-                },
                 email: {
                     required: true,
                     email: true,
@@ -286,41 +283,26 @@ $(document).ready(function () {
                 phone: {
                     required: true,
                     digits: true,
-                    minlength: 10,
-                    maxlength: 10,
+                    minlength: 8,
+                    maxlength: 8, // Exactly 8 digits as per backend
                 },
                 postalcode: {
                     required: true,
                     digits: true,
                     minlength: 6,
-                    maxlength: 6,
+                    maxlength: 6, // Exactly 6 digits as per backend
                 },
                 address: {
                     required: true,
-                    maxlength: 200,
-                },
-                state: {
-                    required: true,
-                    maxlength: 200,
-                },
-                city: {
-                    required: true,
-                    maxlength: 200,
                 },
                 type: {
                     required: true,
-                },
-                unit: {
-                    maxlength: 255,
                 },
             },
             messages: {
                 first_name: {
                     required: "Please provide your first name.",
                     maxlength: "First name may not exceed 200 characters.",
-                },
-                last_name: {
-                    maxlength: "Last name may not exceed 200 characters.",
                 },
                 email: {
                     required: "Please provide an email address.",
@@ -329,9 +311,9 @@ $(document).ready(function () {
                 },
                 phone: {
                     required: "Please provide a phone number.",
-                    digits: "Phone number must be exactly 10 digits.",
-                    minlength: "Phone number must be exactly 10 digits.",
-                    maxlength: "Phone number must be exactly 10 digits.",
+                    digits: "Phone number must be exactly 8 digits.",
+                    minlength: "Phone number must be exactly 8 digits.",
+                    maxlength: "Phone number must be exactly 8 digits.",
                 },
                 postalcode: {
                     required: "Please provide a postal code.",
@@ -341,18 +323,6 @@ $(document).ready(function () {
                 },
                 address: {
                     required: "Please provide an address.",
-                    maxlength: "Address may not exceed 200 characters.",
-                },
-                state: {
-                    required: "Please provide your State.",
-                    maxlength: "State may not exceed 200 characters.",
-                },
-                city: {
-                    required: "Please provide your City.",
-                    maxlength: "City may not exceed 200 characters.",
-                },
-                unit: {
-                    maxlength: "Additional Info may not exceed 200 characters.",
                 },
             },
             errorPlacement: function (error, element) {
@@ -436,7 +406,7 @@ $(document).ready(function () {
                                                     } ${
                                 response.address.last_name ?? ""
                             } |
-                                                    <span style="color: #c7c7c7;">&nbsp;+91
+                                                    <span style="color: #c7c7c7;">&nbsp;+65
                                                         ${
                                                             response.address
                                                                 .phone
@@ -446,9 +416,7 @@ $(document).ready(function () {
                                                 <span class="px-2" style="color: #c7c7c7">
                                                     ${
                                                         response.address.address
-                                                    }, ${
-                                response.address.city
-                            }, ${response.address.state} - ${
+                                                    } - ${
                                 response.address.postalcode
                             }.
                                                 </span>
@@ -492,7 +460,7 @@ $(document).ready(function () {
                                 $(
                                     '.modal-body p strong:contains("Phone :")'
                                 ).parent().html(`
-                                    <strong>Phone :</strong> (+91) ${
+                                    <strong>Phone :</strong> (+65) ${
                                         response.address.phone || "--"
                                     }
                                 `);
@@ -502,13 +470,11 @@ $(document).ready(function () {
                                             response.address.first_name
                                         } ${
                                     response.address.last_name ?? ""
-                                } (+91)
+                                } (+65)
                                             ${
                                                 response.address.phone
                                             }</strong>&nbsp;&nbsp;<br>
-                                        ${response.address.address}, ${
-                                    response.address.city
-                                }, ${response.address.state} - ${
+                                        ${response.address.address} - ${
                                     response.address.postalcode
                                 }
                                         <span>
@@ -609,9 +575,6 @@ $(document).ready(function () {
                     required: true,
                     maxlength: 200,
                 },
-                last_name: {
-                    maxlength: 200,
-                },
                 email: {
                     required: true,
                     email: true,
@@ -620,40 +583,26 @@ $(document).ready(function () {
                 phone: {
                     required: true,
                     digits: true,
-                    maxlength: 10,
+                    minlength: 8,
+                    maxlength: 8, // Exactly 8 digits as per backend
                 },
                 postalcode: {
                     required: true,
                     digits: true,
                     minlength: 6,
-                    maxlength: 6,
+                    maxlength: 6, // Exactly 6 digits as per backend
                 },
                 address: {
                     required: true,
-                    maxlength: 200,
-                },
-                state: {
-                    required: true,
-                    maxlength: 200,
-                },
-                city: {
-                    required: true,
-                    maxlength: 200,
                 },
                 type: {
                     required: true,
-                },
-                unit: {
-                    maxlength: 200,
                 },
             },
             messages: {
                 first_name: {
                     required: "Please provide your first name.",
                     maxlength: "First name may not exceed 200 characters.",
-                },
-                last_name: {
-                    maxlength: "Last name may not exceed 200 characters.",
                 },
                 email: {
                     required: "Please provide an email address.",
@@ -663,7 +612,8 @@ $(document).ready(function () {
                 phone: {
                     required: "Please provide a phone number.",
                     digits: "Phone number must be exactly 8 digits.",
-                    maxlength: "Phone number must be exactly 10 digits.",
+                    minlength: "Phone number must be exactly 8 digits.",
+                    maxlength: "Phone number must be exactly 8 digits.",
                 },
                 postalcode: {
                     required: "Please provide a postal code.",
@@ -673,21 +623,9 @@ $(document).ready(function () {
                 },
                 address: {
                     required: "Please provide an address.",
-                    maxlength: "Address may not exceed 200 characters.",
                 },
                 type: {
                     required: "Please provide the address type.",
-                },
-                state: {
-                    required: "Please provide your State.",
-                    maxlength: "State may not exceed 200 characters.",
-                },
-                city: {
-                    required: "Please provide your City.",
-                    maxlength: "City may not exceed 200 characters.",
-                },
-                unit: {
-                    maxlength: "Additional Info may not exceed 200 characters.",
                 },
             },
             errorPlacement: function (error, element) {
@@ -769,16 +707,14 @@ $(document).ready(function () {
                                                     } ${
                                 response.address.last_name ?? ""
                             } |
-                                                    <span style="color: #c7c7c7;">&nbsp;+91 ${
+                                                    <span style="color: #c7c7c7;">&nbsp;+65 ${
                                                         response.address.phone
                                                     }</span>
                                                 </span><br>
                                                 <span class="px-2"
                                                     style="color: #c7c7c7">${
                                                         response.address.address
-                                                    }, ${
-                                response.address.city
-                            }, ${response.address.state} - ${
+                                                    }- ${
                                 response.address.postalcode
                             }.
                                                 </span>
@@ -823,7 +759,7 @@ $(document).ready(function () {
                                 $(
                                     '.modal-body p strong:contains("Phone :")'
                                 ).parent().html(`
-                                    <strong>Phone :</strong> (+91) ${
+                                    <strong>Phone :</strong> (+65) ${
                                         response.address.phone || "--"
                                     }
                                 `);
@@ -833,13 +769,11 @@ $(document).ready(function () {
                                             response.address.first_name
                                         } ${
                                     response.address.last_name ?? ""
-                                } (+91)
+                                } (+65)
                                             ${
                                                 response.address.phone
                                             }</strong>&nbsp;&nbsp;<br>
-                                        ${response.address.address}, ${
-                                    response.address.city
-                                }, ${response.address.state} - ${
+                                        ${response.address.address} - ${
                                     response.address.postalcode
                                 }
                                         <span>
@@ -1037,10 +971,8 @@ $(document).ready(function () {
                     const addressHtml = `
                             <strong>${address.first_name} ${
                         address.last_name ?? ""
-                    } (+91) ${address.phone}</strong><br>
-                            ${address.address}, ${address.city}, ${
-                        address.state
-                    } - ${address.postalcode}
+                    } (+65) ${address.phone}</strong><br>
+                            ${address.address} - ${address.postalcode}
                             ${
                                 address.default
                                     ? '<span class="badge badge_danger py-1">Default</span>'
@@ -1652,12 +1584,12 @@ function showAddress(country) {
     var phoneLink = document.getElementById("phone-link");
     var phoneNumber = document.getElementById("phone-number");
 
-    if (country === "india") {
-        phoneLink.href = "tel:+9188941306";
-        phoneNumber.innerHTML = "+91 8894 1306";
-    } else if (country === "india") {
-        phoneLink.href = "tel:+9188941306";
-        phoneNumber.innerHTML = "+91 8894 1306";
+    if (country === "singapore") {
+        phoneLink.href = "tel:+6588941306";
+        phoneNumber.innerHTML = "+65 8894 1306";
+    } else if (country === "singapore") {
+        phoneLink.href = "tel:+6588941306";
+        phoneNumber.innerHTML = "+65 8894 1306";
     }
 }
 
@@ -1976,7 +1908,7 @@ function handleAddBookmark() {
                         .addClass("remove-bookmark");
                     button.html(`
                         <p style="height:fit-content;cursor:pointer" class="p-1 px-2">
-                            <i class="fa-solid fa-heart bookmark-icon" style="color: #ff0060;"></i>
+                            <i class="fa-solid fa-bookmark bookmark-icon" style="color: #ef4444;"></i>
                         </p>
                     `);
 
@@ -2012,7 +1944,7 @@ function handleRemoveBookmark() {
                         .addClass("add-bookmark");
                     button.html(`
                         <p style="height:fit-content;cursor:pointer" class="p-1 px-2">
-                            <i class="fa-regular fa-heart bookmark-icon" style="color: #ff0060;"></i>
+                            <i class="fa-regular fa-bookmark bookmark-icon" style="color: #ef4444;"></i>
                         </p>
                     `);
 
@@ -2375,7 +2307,7 @@ $(document).ready(function () {
                                         <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
                                             ${productName}
                                         </p>
-                                        <p class="px-1 text_size" style="color: #ff0060">
+                                        <p class="px-1 text_size" style="color: #ef4444">
                                             ₹${parseFloat(
                                                 response.nextItem.discount
                                             ).toFixed(0)}
@@ -2400,7 +2332,7 @@ $(document).ready(function () {
                          <div class="empty-cart col-12 text-center d-flex flex-column align-items-center justify-content-center mt-0">
                              <img src="assets/images/home/cart_empty.webp" alt="Empty Cart"
                                  class="img-fluid empty_cart_img">
-                             <p class="pt-5" style="color: #ff0060;font-size: 22px">Your Cart is Currently Empty</p>
+                             <p class="pt-5" style="color: #ef4444;font-size: 22px">Your Cart is Currently Empty</p>
                              <p class="" style="color: #6C6C6C;font-size: 16px">Looks Like You Have Not Added Anything To </br>
                                  Your Cart. Go Ahead & Explore Top Categories.</p>
                              <a href="/" class="btn showmoreBtn mt-2">Shop More</a>
@@ -2520,7 +2452,7 @@ $(document).ready(function () {
                                                 maximumFractionDigits: 0,
                                             })}
                                         </span>
-                                        <span class="ms-1" style="font-size:18px;font-weight:500;color:#ff0060">
+                                        <span class="ms-1" style="font-size:18px;font-weight:500;color:#ef4444">
                                              ₹${Math.round(
                                                  response.deal.discounted_price
                                              ).toLocaleString("en-IN", {
@@ -2554,7 +2486,7 @@ $(document).ready(function () {
                                 <div class="col-md-4 d-flex flex-column justify-content-end align-items-end mb-3">
                                     <div class="btn-group" role="group">
                                         <button type="button" class="btn remove-cart-btn removeSaveLater"
-                                            style="color: #ff0060;border: none" data-product-id="${
+                                            style="color: #ef4444;border: none" data-product-id="${
                                                 response.deal.id
                                             }">
                                             <div class="d-inline-flex align-items-center gap-2-2">
@@ -2568,7 +2500,7 @@ $(document).ready(function () {
                                             </div>
                                         </button>
                                         <button type="button" class="btn cancel-btn moveToCart"
-                                            style="color: #ff0060;border: none" data-product-id="${
+                                            style="color: #ef4444;border: none" data-product-id="${
                                                 response.deal.id
                                             }">
                                             <div class="d-inline-flex align-items-center gap-2">
@@ -2702,7 +2634,7 @@ $(document).ready(function () {
                                         <p class="text-start px-1 text-wrap m-0 p-0" style="font-size: 12px; white-space: normal;">
                                             ${productName}
                                         </p>
-                                        <p class="px-1 text_size" style="color: #ff0060">
+                                        <p class="px-1 text_size" style="color: #ef4444">
                                             ₹${parseFloat(
                                                 response.nextItem.discount
                                             ).toFixed(0)}
@@ -2727,7 +2659,7 @@ $(document).ready(function () {
                          <div class="empty-cart col-12 text-center d-flex flex-column align-items-center justify-content-center mt-0">
                              <img src="assets/images/home/cart_empty.webp" alt="Empty Cart"
                                  class="img-fluid empty_cart_img">
-                             <p class="pt-5" style="color: #ff0060;font-size: 22px">Your Cart is Currently Empty</p>
+                             <p class="pt-5" style="color: #ef4444;font-size: 22px">Your Cart is Currently Empty</p>
                              <p class="" style="color: #6C6C6C;font-size: 16px">Looks Like You Have Not Added Anything To </br>
                                  Your Cart. Go Ahead & Explore Top Categories.</p>
                              <a href="/" class="btn showmoreBtn mt-2">Shop More</a>
@@ -2791,7 +2723,7 @@ $(document).ready(function () {
                             position: "absolute",
                             top: "16px",
                             right: "5px",
-                            border: "1px solid #ff0060",
+                            border: "1px solid #ef4444",
                         });
                     } else {
                         cartCountElement.attr(
@@ -2809,7 +2741,7 @@ $(document).ready(function () {
                     $(".saved-items").after(`
                         <div class="text-center mb-4 empty-savedItems">
                                 <img src='/assets/images/home/empty_savedItems.png' alt="Empty Cart" class="img-fluid mb-2" style="width: 300px;" />
-                                <h4 style="color: #ff0060;">Your Saved Wishlists are awaiting your selection!</h4>
+                                <h4 style="color: #ef4444;">Your Saved Wishlists are awaiting your selection!</h4>
                             </div>
                         `);
                 }
@@ -2867,7 +2799,7 @@ $(document).ready(function () {
                                     <p class="m-0 p-0 text-start text-wrap px-1" style="font-size: 12px; white-space: normal;">
                                         ${productName}
                                     </p>
-                                    <p class="px-1 text_size" style="color: #ff0060">
+                                    <p class="px-1 text_size" style="color: #ef4444">
                                         ₹${formattedDiscount}
                                     </p>
                                 </div>
@@ -2981,7 +2913,7 @@ $(document).ready(function () {
                     DealsMachi
                 </span>
             </div>
-            <span class="ms-1" style="font-size:18px;font-weight:500;color:#ff0060">
+            <span class="ms-1" style="font-size:18px;font-weight:500;color:#ef4444">
                 ₹${Math.round(
                     response.item.product.discounted_price
                 ).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
@@ -3005,7 +2937,7 @@ $(document).ready(function () {
                         response.item.product.original_price
                     ).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
                 </span>
-                <span class="ms-1" style="font-size:18px;font-weight:500;color:#ff0060">
+                <span class="ms-1" style="font-size:18px;font-weight:500;color:#ef4444">
                     ₹${Math.round(
                         response.item.product.discounted_price
                     ).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
@@ -3069,7 +3001,7 @@ $(document).ready(function () {
         <div class="col-md-6 d-flex justify-content-md-end" style="padding-left: 24px">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="submit" class="btn save-for-later-btn"
-                    style="color: #ff0060; border: none;" data-product-id="${
+                    style="color: #ef4444; border: none;" data-product-id="${
                         response.item.product.id
                     }">
                     <div class="d-inline-flex align-items-center gap-2 buy_later">
@@ -3083,7 +3015,7 @@ $(document).ready(function () {
                     </div>
                 </button>
                 &nbsp;&nbsp;
-                <button type="submit" class="btn cancel-btn cart-remove" style="color: #ff0060;border: none"
+                <button type="submit" class="btn cancel-btn cart-remove" style="color: #ef4444;border: none"
                     data-product-id="${
                         response.item.product.id
                     }" data-cart-id="${response.item.cart_id}">
@@ -3301,7 +3233,7 @@ $(document).ready(function () {
                     $(".saved-items").after(`
                         <div class="text-center mb-4 empty-savedItems">
                                 <img src='/assets/images/home/empty_savedItems.png' alt="Empty Cart" class="img-fluid mb-2" style="width: 300px;" />
-                                <h4 style="color: #ff0060;">Your Saved Wishlists are awaiting your selection!</h4>
+                                <h4 style="color: #ef4444;">Your Saved Wishlists are awaiting your selection!</h4>
                             </div>
                         `);
                 }
@@ -3354,7 +3286,7 @@ $(document).ready(function () {
                     $(".saved-items").after(`
                         <div class="text-center mb-4 empty-savedItems">
                                 <img src='/assets/images/home/empty_savedItems.png' alt="Empty Cart" class="img-fluid mb-2" style="width: 300px;" />
-                                <h4 style="color: #ff0060;">Your Saved Wishlists are awaiting your selection!</h4>
+                                <h4 style="color: #ef4444;">Your Saved Wishlists are awaiting your selection!</h4>
                             </div>
                         `);
                 }

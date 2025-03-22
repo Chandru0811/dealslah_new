@@ -122,12 +122,12 @@
                                                 @endfor
                                             </span>
                                             <p class="px-3 fw-normal truncated-description">{{ $deal->description }}</p>
-                                            <div class="d-flex justify-content-end">
-                                                @if (!empty($deal->shop->is_direct) && $deal->shop->is_direct == 1)
-                                                    @if (!empty($deal->special_price) && $deal->special_price && \Carbon\Carbon::parse($deal->end_date)->isFuture())
-                                                        <div class="px-3">
+                                            @if ($product->deal_type == 1)
+                                                @if (!empty($product->shop->is_direct) && $product->shop->is_direct == 1)
+                                                    @if (!empty($product->special_price) && $product->special_price && \Carbon\Carbon::parse($product->end_date)->isFuture())
+                                                        <div class="px-3 d-flex justify-content-end">
                                                             <button type="button" style="height: fit-content;"
-                                                                id="servicePrice" data-id="{{ $deal->id }}"
+                                                                id="servicePrice" data-id="{{ $product->id }}"
                                                                 class="p-1 text-nowrap special-price">
                                                                 <span>&nbsp;<i class="fa-solid fa-stopwatch-20"></i>&nbsp;
                                                                     &nbsp;Special Price
@@ -137,41 +137,50 @@
                                                         </div>
                                                     @endif
                                                 @endif
-                                            </div>
+                                            @else
+                                            @endif
                                         </div>
                                         <div>
                                             <div class="card-divider"></div>
                                             <p class="ps-3 fw-medium d-flex align-items-center justify-content-between"
                                                 style="color: #ef4444">
                                                 <span>${{ number_format($deal->discounted_price, 2) }}</span>
-                                                @if (!empty($deal->shop->is_direct) && $deal->shop->is_direct == 1)
-                                                    <span class="me-3" id="totalStock">
-                                                        @if (empty($deal->stock) || $deal->stock == 0)
-                                                            <span class="product-out-of-stock">
-                                                                Out of Stock
-                                                            </span>
-                                                        @else
-                                                            <span class="product-stock-badge">
-                                                                In Stock
-                                                            </span>
-                                                        @endif
-                                                    </span>
-                                                @else
-                                                    @if (!empty($deal->coupon_code))
+                                                @if ($product->deal_type == 1)
+                                                    @if (!empty($product->shop->is_direct) && $product->shop->is_direct == 1)
+                                                        <span class="me-3" id="totalStock">
+                                                            @if (empty($product->stock) || $product->stock == 0)
+                                                                <span class="product-out-of-stock">Out of Stock</span>
+                                                            @else
+                                                                <span class="product-stock-badge">In Stock</span>
+                                                            @endif
+                                                        </span>
+                                                    @elseif (!empty($product->coupon_code))
                                                         <span id="mySpan" class="mx-3 px-2 couponBadge"
                                                             onclick="copySpanText(this, event)" data-bs-toggle="tooltip"
                                                             data-bs-placement="bottom" title="Click to Copy"
                                                             style="position:relative;">
-                                                            {{ $deal->coupon_code }}
-                                                            <!-- Tooltip container -->
+                                                            {{ $product->coupon_code }}
                                                             <span class="tooltip-text"
-                                                                style="visibility: hidden; background-color: black; color: #fff; text-align: center;
-                                                                            border-radius: 6px; padding: 5px; position: absolute; z-index: 1;
-                                                                            bottom: 125%; left: 50%; margin-left: -60px;">
+                                                                style="visibility: hidden; background-color: black; color: #fff;
+                                                                        text-align: center; border-radius: 6px; padding: 5px; position: absolute; z-index: 1;
+                                                                        bottom: 125%; left: 50%; margin-left: -60px;">
                                                                 Copied!
                                                             </span>
                                                         </span>
                                                     @endif
+                                                @elseif (!empty($product->coupon_code))
+                                                    <span id="mySpan" class="mx-3 px-2 couponBadge"
+                                                        onclick="copySpanText(this, event)" data-bs-toggle="tooltip"
+                                                        data-bs-placement="bottom" title="Click to Copy"
+                                                        style="position:relative;">
+                                                        {{ $product->coupon_code }}
+                                                        <span class="tooltip-text"
+                                                            style="visibility: hidden; background-color: black; color: #fff;
+                                                    text-align: center; border-radius: 6px; padding: 5px; position: absolute; z-index: 1;
+                                                    bottom: 125%; left: 50%; margin-left: -60px;">
+                                                            Copied!
+                                                        </span>
+                                                    </span>
                                                 @endif
                                                 {{-- @if (!empty($deal->coupon_code))
                                                     <span id="mySpan" class="mx-3 px-2 couponBadge"

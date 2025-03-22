@@ -30,10 +30,10 @@
                     <img src="{{ asset('assets/images/home/Services All.webp') }}" alt="Services All"
                         class="img-fluid p-2 rounded-5 banner_image" />
                 </div>
-                <div class="item">
+                {{-- <div class="item">
                     <img src="{{ asset('assets/images/home/banner1.webp') }}" alt="slider_image1"
                         class="img-fluid p-2 rounded-5 banner_image" />
-                </div>
+                </div> --}}
                 <div class="item">
                     <img src="{{ asset('assets/images/home/banner2.webp') }}" alt="slider_image2"
                         class="img-fluid p-2 rounded-5 banner_image" />
@@ -46,14 +46,14 @@
                     <img src="{{ asset('assets/images/home/banner4.webp') }}" alt="slider_image4"
                         class="img-fluid p-2 rounded-5 banner_image" />
                 </div>
-                <div class="item">
+                {{-- <div class="item">
                     <img src="{{ asset('assets/images/home/banner5.webp') }}" alt="slider_image5"
                         class="img-fluid p-2 rounded-5 banner_image" />
                 </div>
                 <div class="item">
                     <img src="{{ asset('assets/images/home/banner6.webp') }}" alt="slider_image6"
                         class="img-fluid p-2 rounded-5 banner_image" />
-                </div>
+                </div> --}}
 
             </div>
             <h1 class="h1-styling mb-3">Dealslah - Super, Money Saver, Discount Deals in Singapore
