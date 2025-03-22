@@ -114,6 +114,12 @@ class CheckoutController extends Controller
                     $query->whereIn('product_id', $ids);
                 },
             ]);
+            foreach ($cart->items as $item) {
+                $product = Product::find($item->product_id);
+                if ($product && $product->stock < $item->quantity) {
+                    return redirect()->back()->with('error', 'Some products are out of stock.');
+                }
+            }
         }
 
         if (! Auth::check()) {
@@ -135,6 +141,13 @@ class CheckoutController extends Controller
         $cart       = Cart::where('id', $cart_id)->with('items')->first();
         if (! $cart) {
             return redirect()->route('home')->with('error', 'Cart not found.');
+        }
+
+        foreach ($cart->items as $item) {
+            $product = Product::find($item->product_id);
+            if ($product && $product->stock < $item->quantity) {
+                return redirect()->back()->with('error', 'Some products are out of stock.');
+            }
         }
 
         if (! Auth::check()) {
