@@ -15,7 +15,7 @@ class SliderController extends Controller
     public function index()
     {
         $sliders = Slider::orderBy('id', 'desc')->get();
-        return $this->success( 'Sliders Retrieved Successfully!',$sliders);
+        return $this->success('Sliders Retrieved Successfully!', $sliders);
     }
 
     public function store(Request $request)
@@ -100,7 +100,7 @@ class SliderController extends Controller
 
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
-            $imagePath ='assets/images/sliders';
+            $imagePath = 'assets/images/sliders';
 
             if (!file_exists($imagePath)) {
                 mkdir($imagePath, 0755, true);

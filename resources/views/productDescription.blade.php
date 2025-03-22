@@ -171,7 +171,24 @@
             </div>
 
 
-
+            <div class="sub_category_sticky">
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5" id="hotpicks">
+                    @foreach ($subCategories as $subCategory)
+                        <div class="col px-2">
+                            <a href="{{ url('categories/laptops_and_computers') . '?sub_category=' . $subCategory->slug }}"
+                                style="text-decoration: none;">
+                                <div class="topCard_sub_cat card-img-top1">
+                                    <div class="card-body p-0" style="min-height: 30px; position: relative;">
+                                        <img src="{{ asset($subCategory->path) }}" class="img-fluid card-img-top"
+                                            alt="{{ $subCategory->name }}" />
+                                    </div>
+                                </div>
+                                <h2 class="h2-styling mt-1">{{ $subCategory->name }}</h2>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
 
             {{-- Breadcrumb navigate  --}}
             <div class="breadcrumb-nav container mt-3 ps-3">
@@ -318,18 +335,21 @@
                                         @endif
                                     </span>
                                 </p>
-                                @if (!empty($product->shop->is_direct) && $product->shop->is_direct == 1)
-                                    @if (!empty($product->special_price) && $product->special_price && \Carbon\Carbon::parse($product->end_date)->isFuture())
-                                        <div class="px-3">
-                                            <button type="button" style="height: fit-content;" id="servicePrice"
-                                                data-id="{{ $product->id }}" class="p-1 text-nowrap special-price">
-                                                <span>&nbsp;<i class="fa-solid fa-stopwatch-20"></i>&nbsp;
-                                                    &nbsp;Special Price
-                                                    &nbsp; &nbsp;
-                                                </span>
-                                            </button>
-                                        </div>
+                                @if ($product->deal_type == 1)
+                                    @if (!empty($product->shop->is_direct) && $product->shop->is_direct == 1)
+                                        @if (!empty($product->special_price) && $product->special_price && \Carbon\Carbon::parse($product->end_date)->isFuture())
+                                            <div class="px-3">
+                                                <button type="button" style="height: fit-content;" id="servicePrice"
+                                                    data-id="{{ $product->id }}" class="p-1 text-nowrap special-price">
+                                                    <span>&nbsp;<i class="fa-solid fa-stopwatch-20"></i>&nbsp;
+                                                        &nbsp;Special Price
+                                                        &nbsp; &nbsp;
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        @endif
                                     @endif
+                                @else
                                 @endif
 
                             </div>

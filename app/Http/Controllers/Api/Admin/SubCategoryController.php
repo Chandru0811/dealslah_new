@@ -78,7 +78,11 @@ class SubCategoryController extends Controller
 
     public function update(Request $request, $id)
     {
-        $subCategory = SubCategory::findOrFail($id);
+        $subCategory = SubCategory::find($id);
+
+        if (!$subCategory) {
+            return $this->error('Sub Category Not Found.', ['error' => 'Sub Category Not Found']);
+        }
 
         $validator = Validator::make(
             $request->all(),
@@ -114,21 +118,21 @@ class SubCategoryController extends Controller
         $validatedData = $validator->validated();
 
         if ($request->hasFile('image')) {
+            if ($subCategory->path && file_exists($subCategory->path)) {
+                unlink($subCategory->path);
+            }
+
             $image = $request->file('image');
-            $imagePath = public_path('assets/images/subcategories');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $imagePath = 'assets/images/subcategories';
 
             if (!file_exists($imagePath)) {
                 mkdir($imagePath, 0755, true);
             }
 
-            if ($subCategory->path && file_exists(public_path($subCategory->path))) {
-                unlink(public_path($subCategory->path));
-            }
-
-            $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move($imagePath, $imageName);
 
-            $validatedData['path'] = 'assets/images/subcategories/' . $imageName;
+            $validatedData['path'] = $imagePath . "/" . $imageName;
         }
 
         $subCategory->update($validatedData);

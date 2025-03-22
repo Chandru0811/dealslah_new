@@ -149,6 +149,8 @@ class HomeController extends Controller
                     ->pluck('deal_id');
             }
         }
+        $subCategories = SubCategory::where('category_id', $product->category_id)->get();
+        // dd($subCategories);
 
         $url = url()->current(); // Get the current URL
         $title = $product->name . ' | $ ' . $product->discounted_price;
@@ -168,7 +170,7 @@ class HomeController extends Controller
             $pagetitle
         )->facebook()->twitter()->linkedin()->whatsapp()->telegram();
 
-        return view('productDescription', compact('product', 'bookmarkedProducts', 'shareButtons', 'pageurl', 'reviewData', 'pagetitle', 'pagedescription', 'pageimage', 'vedios'));
+        return view('productDescription', compact('product', 'subCategories', 'bookmarkedProducts', 'shareButtons', 'pageurl', 'reviewData', 'pagetitle', 'pagedescription', 'pageimage', 'vedios'));
     }
 
     public function dealcategorybasedproducts($slug, Request $request)

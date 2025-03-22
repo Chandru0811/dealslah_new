@@ -377,6 +377,9 @@
 .card-img-top {
     border-radius: 5px;
 }
+.category_fiter_card {
+    height: 25px !important;
+}
 
 .card-img-top1 {
     border-top-left-radius: 5px;

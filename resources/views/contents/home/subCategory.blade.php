@@ -11,7 +11,7 @@
                                 alt="{{ $subCategory->name }}" />
                         </div>
                     </div>
-                    <h2 class="h2-styling">{{ $subCategory->name }}</h2>
+                    <h2 class="h2-styling mb-1">{{ $subCategory->name }}</h2>
                 </a>
             </div>
         @endforeach
